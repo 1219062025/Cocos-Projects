@@ -174,7 +174,7 @@
       "array": [
         0,
         0,
-        548.1824109327305,
+        509.94466050040086,
         0,
         0,
         0,
@@ -399,6 +399,9 @@
     "_enabled": true,
     "PointPrefab": {
       "__uuid__": "0d149125-5cbe-43fa-afa8-b75861302442"
+    },
+    "LinePrefab": {
+      "__uuid__": "36d2f5c0-5b4d-45b5-a9bb-66928c6ee4c3"
     },
     "_id": "f1V4hyjHhL2rJUQPHFm6lA"
   },

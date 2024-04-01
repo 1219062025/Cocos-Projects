@@ -1,6 +1,7 @@
 import PointControl from './PointControl';
 import { InitialMap, PointWidth, PointHeight, PointGap, InitiaRowCount, InitiaColCount, GameAreaWidth, GameAreaHeight } from './GameConfig';
 import { flat, throttle } from './Utils';
+import LineControl from './LineControl';
 
 const { ccclass, property } = cc._decorator;
 
@@ -9,11 +10,14 @@ export default class Game extends cc.Component {
   @property({ type: cc.Prefab, tooltip: '点的预设体' })
   PointPrefab: cc.Prefab = null;
 
+  @property({ type: cc.Prefab, tooltip: '线的预设体' })
+  LinePrefab: cc.Prefab = null;
+
   /** 至少触摸了一个PointNode、连接PointNode中 */
   InJoinPoint: boolean = false;
 
   /** 当前连线的类型 */
-  SegmentType: number = -1;
+  LineType: number = -1;
 
   /** 所有PointNode，不管有没有被连接 */
   PointNodes: cc.Node[][] = [];
@@ -69,6 +73,7 @@ export default class Game extends cc.Component {
     event.stopPropagation();
   }
 
+  /** 判断是否可以连接 */
   ApplyJoin(PointNode: cc.Node) {
     this.InJoinPoint = true;
     const Point = PointNode.getComponent(PointControl);
@@ -76,23 +81,50 @@ export default class Game extends cc.Component {
     const IsFirst = this.SelectedPointNodes.length === 0;
     /** 是否已经被选中了 */
     const IsSelect = Point.isSelect;
-
     /** 处理第一个选中的节点 */
     if (IsFirst) {
-      this.SegmentType = PointNode.getComponent(PointControl).type;
-      this.SelectedPointNodes.push(PointNode);
-      this.SelectedPointNodeMap.set(Point.id, PointNode);
-      Point.Select();
+      this.LineType = PointNode.getComponent(PointControl).type;
+      this.Join(PointNode);
+      return;
     }
+    // 连线的PointNode是不是和LastPointNode相邻
+    if (!this.IsAdjoinPointNode(PointNode)) return;
+    // 连线的PointNode不是当前连线的类型
+    if (this.LineType !== Point.type) return;
 
     // 如果申请连接的PointNode已经是连接状态时
     if (IsSelect) {
-      if (Point.id === this.BackspacePoint.getComponent(PointControl).id) {
+      if (this.BackspacePoint && Point.id === this.BackspacePoint.getComponent(PointControl).id) {
         /** 处理回退 */
       }
+      return;
     }
-    // 连线的PointNode不是当前连线的类型
-    if (this.SegmentType !== Point.type) return;
+    // 处理连线
+    this.DrawLine(this.LineType, this.LastPointNode, PointNode);
+    this.Join(PointNode);
+  }
+
+  /** 连接PointNode */
+  Join(PointNode: cc.Node) {
+    const Point = PointNode.getComponent(PointControl);
+    this.SelectedPointNodes.push(PointNode);
+    this.SelectedPointNodeMap.set(Point.id, PointNode);
+    Point.Select();
+  }
+
+  /** 画线 */
+  DrawLine(type: number, BeginPointNode: cc.Node, EndPointNode: cc.Node) {
+    const LineNode = cc.instantiate(this.LinePrefab);
+    const Line = LineNode.getComponent(LineControl);
+    Line.Init(type, BeginPointNode, EndPointNode, this.node);
+  }
+
+  /** 是否与最后被选择的PointNode相邻 */
+  IsAdjoinPointNode(PointNode: cc.Node) {
+    const Point = PointNode.getComponent(PointControl);
+    const LastPoint = this.LastPointNode.getComponent(PointControl);
+    const isAdjoin = Math.abs(Point.row + Point.col - (LastPoint.row + LastPoint.col)) === 1;
+    return isAdjoin;
   }
 
   /** 判断触摸位置是否在某个PointNode节点区域内 */
