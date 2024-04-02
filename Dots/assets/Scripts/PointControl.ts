@@ -24,8 +24,12 @@ export default class PointControl extends cc.Component {
     cc.loader.loadRes(`point/${PointType.get(this.type).label}Item`, cc.SpriteFrame, (err, res) => (this.node.getComponent(cc.Sprite).spriteFrame = res));
     if (parent) {
       this.node.setParent(parent);
-      this.PlayFallAnimation(position);
+      this.PlayFallAnimation(position, true);
     }
+  }
+
+  Remove() {
+    this.node.destroy();
   }
 
   Select() {
@@ -37,9 +41,9 @@ export default class PointControl extends cc.Component {
   }
 
   /** 播放下落动画 */
-  PlayFallAnimation(position: cc.Vec2) {
+  PlayFallAnimation(position: cc.Vec2, isInit: boolean = false) {
     this.node.x = position.x;
-    this.node.y = (GameAreaHeight + PointHeight) / 2 + (InitiaRowCount - this.row) * (PointHeight + PointGap);
+    this.node.y = !isInit ? this.node.y : (GameAreaHeight + PointHeight) / 2 + (InitiaRowCount - this.row) * (PointHeight + PointGap);
     return new Promise(resolve => {
       cc.tween(this.node)
         .to(0.25, { position })

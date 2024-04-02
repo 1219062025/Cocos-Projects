@@ -31,6 +31,10 @@ export default class LineControl extends cc.Component {
     }
   }
 
+  Remove() {
+    this.node.destroy();
+  }
+
   /** 设置线段方向 */
   setDirection() {
     /** 从BeginPointNode至EndPointNode的方向单位向量 */

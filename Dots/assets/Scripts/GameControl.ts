@@ -1,6 +1,6 @@
 import PointControl from './PointControl';
 import { InitialMap, PointWidth, PointHeight, PointGap, InitiaRowCount, InitiaColCount, GameAreaWidth, GameAreaHeight } from './GameConfig';
-import { flat, throttle } from './Utils';
+import { flat } from './Utils';
 import LineControl from './LineControl';
 
 const { ccclass, property } = cc._decorator;
@@ -18,6 +18,8 @@ export default class Game extends cc.Component {
 
   /** 当前连线的类型 */
   LineType: number = -1;
+  /** 所有LineNode */
+  LineNodes: cc.Node[] = [];
 
   /** 所有PointNode，不管有没有被连接 */
   PointNodes: cc.Node[][] = [];
@@ -48,7 +50,9 @@ export default class Game extends cc.Component {
     this.node.height = GameAreaHeight;
     this.GeneratePoints(InitialMap);
     this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
-    this.node.on(cc.Node.EventType.TOUCH_MOVE, throttle(this.onTouchMove, 100), this);
+    this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+    this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+    this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
   }
 
   onTouchStart(event: cc.Event.EventTouch) {
@@ -71,6 +75,20 @@ export default class Game extends cc.Component {
       this.ApplyJoin(PointNode);
     }
     event.stopPropagation();
+  }
+
+  onTouchEnd(event: cc.Event.EventTouch) {
+    if (this.SelectedPointNodes.length >= 2) {
+      // 如果此时已经选择的PointNode至少有两个，那么执行消除操作
+      this.Eliminate();
+      this.Reset();
+    } else if (this.SelectedPointNodes.length === 1) {
+      // 如果不满足消除操作的条件，但是又有一个PointNode在里面的话得重置状态
+      this.UnJoin(this.SelectedPointNodes[0]);
+      this.Reset();
+    } else {
+      this.InJoinPoint = false;
+    }
   }
 
   /** 判断是否可以连接 */
@@ -96,6 +114,8 @@ export default class Game extends cc.Component {
     if (IsSelect) {
       if (this.BackspacePoint && Point.id === this.BackspacePoint.getComponent(PointControl).id) {
         /** 处理回退 */
+        this.UnDrawLine(PointNode, this.LastPointNode);
+        this.UnJoin(this.LastPointNode);
       }
       return;
     }
@@ -112,11 +132,132 @@ export default class Game extends cc.Component {
     Point.Select();
   }
 
-  /** 画线 */
+  /** 连接LineNode，画线段 */
   DrawLine(type: number, BeginPointNode: cc.Node, EndPointNode: cc.Node) {
     const LineNode = cc.instantiate(this.LinePrefab);
     const Line = LineNode.getComponent(LineControl);
     Line.Init(type, BeginPointNode, EndPointNode, this.node);
+    this.LineNodes.push(LineNode);
+  }
+
+  /** 回退时取消连接PointNode */
+  UnJoin(PointNode: cc.Node) {
+    const Point = PointNode.getComponent(PointControl);
+    this.SelectedPointNodes.pop();
+    this.SelectedPointNodeMap.delete(Point.id);
+    Point.unSelect();
+  }
+
+  /** 回退时移除线段 */
+  UnDrawLine(BackBeginPointNode: cc.Node, BackEndPointNode: cc.Node) {
+    const LineNode = this.LineNodes.pop();
+    if (LineNode) {
+      const BackBeginPoint = BackBeginPointNode.getComponent(PointControl);
+      const BackEndPoint = BackEndPointNode.getComponent(PointControl);
+      const Line = LineNode.getComponent(LineControl);
+      const BeginPoint = Line.BeginPointNode.getComponent(PointControl);
+      const EndPoint = Line.EndPointNode.getComponent(PointControl);
+      if (BackBeginPoint.id === BeginPoint.id && BackEndPoint.id === EndPoint.id) {
+        Line.Remove();
+      }
+    }
+  }
+
+  /** 执行消除操作 */
+  Eliminate() {
+    this.SelectedPointNodeMap.forEach((PointNode, PointId) => {
+      const Point = PointNode.getComponent(PointControl);
+      this.PointNodes[Point.row][Point.col] = null;
+      this.PointNodeMap.delete(PointId);
+      this.SelectedPointNodeMap.delete(PointId);
+      Point.Remove();
+    });
+    this.SelectedPointNodes.forEach(PointNode => {
+      this.Collapse(PointNode);
+    });
+    this.FillBlank();
+  }
+
+  /** PointNode被消除时，其上所有PointNode往下落，总体逻辑就是：先找到被消除PointNode所处列最低的落点，然后从自己开始往上遍历将所有PointNode下落 */
+  Collapse(PointNode: cc.Node) {
+    const Point = PointNode.getComponent(PointControl);
+    /** 在执行Collapse，所有连接中的PointNode都已经从PointNodes里面Remove掉了，如果这里发现还不为null的话。
+     * 意味着这一列已经完成了Collapse操作，此时这个位置是原本上层的PointNode下落后填补的。那就不需要再往下走了
+     */
+    if (this.PointNodes[Point.row][Point.col] !== null) return;
+
+    /** 当前PointNode所处列应该下落到的最低点的行数 */
+    let collapseRow = Point.row;
+    while (collapseRow + 1 <= InitiaRowCount - 1) {
+      if (this.PointNodes[collapseRow + 1][Point.col] !== null && this.PointNodes[collapseRow][Point.col] === null) {
+        break;
+      }
+      collapseRow++;
+    }
+
+    /** 用来遍历上层的PointNode */
+    let riseRow = Point.row;
+    while (--riseRow >= 0) {
+      // 如果找到了不为null的PointNode，也就意味着这个PointNode需要下落到当前最低点的行数
+      if (this.PointNodes[riseRow][Point.col] !== null) {
+        const CollapsePointNode = this.PointNodes[riseRow][Point.col];
+        const CollapsePoint = CollapsePointNode.getComponent(PointControl);
+
+        // 播放下落动画
+        CollapsePoint.PlayFallAnimation(this.GetPointPos(collapseRow, Point.col));
+        // 下落完成后改变行数
+        CollapsePoint.row = collapseRow;
+        // 将下落前所处的位置，置null
+        this.PointNodes[riseRow][Point.col] = null;
+        // 然后设置到新的位置
+        this.PointNodes[collapseRow][Point.col] = CollapsePointNode;
+        // 最低点行数得往上一行了
+        collapseRow--;
+      }
+    }
+  }
+
+  /** 完成消除操作后填充空白 */
+  FillBlank() {
+    const GeneratePointNodes: number[][] = [];
+    this.PointNodes.forEach((rowPointNodes, row) => {
+      rowPointNodes.forEach((PointNode, col) => {
+        if (GeneratePointNodes[row] === undefined) GeneratePointNodes[row] = [];
+        if (PointNode !== null) {
+          GeneratePointNodes[row][col] = 0;
+        } else {
+          GeneratePointNodes[row][col] = Math.floor(Math.random() * 5 + 1);
+        }
+      });
+    });
+    this.GeneratePoints(GeneratePointNodes);
+  }
+
+  /** 打印当前节点布局 */
+  LogMap() {
+    let map = '';
+    this.PointNodes.forEach((rowPointNodes, row) => {
+      rowPointNodes.forEach((PointNode, col) => {
+        const Tab = PointNode ? PointNode.getComponent(PointControl).type : 'n';
+        map += `${Tab}${col < InitiaColCount - 1 ? ' ' : '\n'}`;
+      });
+    });
+    console.log(map);
+  }
+
+  /** 重置游戏状态 */
+  Reset() {
+    /** 重置PointNode相关 */
+    this.SelectedPointNodes.length = 0;
+    this.SelectedPointNodeMap.clear();
+
+    /** 重置LineNode相关 */
+    this.LineType = -1;
+    this.LineNodes.forEach(LineNode => LineNode.getComponent(LineControl).Remove());
+    this.LineNodes.length = 0;
+
+    /** 处理完所有状态的重置后，放开连线权限 */
+    this.InJoinPoint = false;
   }
 
   /** 是否与最后被选择的PointNode相邻 */
@@ -129,6 +270,7 @@ export default class Game extends cc.Component {
 
   /** 判断触摸位置是否在某个PointNode节点区域内 */
   TouchInPointNodeArea(event: cc.Event.EventTouch, node: cc.Node) {
+    if (node === null) return;
     // 获取触摸点在世界坐标系中的位置
     const touchPos = event.getLocation();
     // 获取节点在世界坐标系中的包围盒

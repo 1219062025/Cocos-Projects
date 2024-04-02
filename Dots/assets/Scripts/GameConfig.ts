@@ -3,7 +3,7 @@ export const InitialMap: number[][] = [
   [5, 3, 2, 1, 2],
   [5, 3, 2, 1, 2],
   [5, 3, 2, 2, 2],
-  [5, 3, 3, 3, 3],
+  [5, 5, 3, 3, 3],
   [5, 5, 5, 5, 5]
 ];
 /** 每个PointNode的宽度 */
@@ -11,7 +11,7 @@ export const PointWidth = 66;
 /** 每个PointNode的高度 */
 export const PointHeight = 66;
 /** 每个PointNode之间的间隔 */
-export const PointGap = 20;
+export const PointGap = 40;
 /** 初始化有多少行 */
 export const InitiaRowCount = 5;
 /** 初始化有多少列 */
