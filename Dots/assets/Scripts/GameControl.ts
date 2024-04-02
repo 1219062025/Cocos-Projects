@@ -87,10 +87,10 @@ export default class Game extends cc.Component {
     event.stopPropagation();
   }
 
-  onTouchEnd(event: cc.Event.EventTouch) {
+  async onTouchEnd(event: cc.Event.EventTouch) {
     if (this.SelectedPointNodes.length >= 2) {
       // 如果此时已经选择的PointNode至少有两个，那么执行消除操作
-      this.Eliminate();
+      await this.Eliminate();
       this.Reset();
     } else if (this.SelectedPointNodes.length === 1) {
       // 如果不满足消除操作的条件，但是又有一个PointNode在里面的话得重置状态
@@ -174,17 +174,24 @@ export default class Game extends cc.Component {
   }
 
   /** 执行消除操作 */
-  Eliminate() {
+  async Eliminate() {
+    const RemovePromises = [];
     this.SelectedPointNodeMap.forEach((PointNode, PointId) => {
       const Point = PointNode.getComponent(PointControl);
       this.PointNodes[Point.row][Point.col] = null;
       this.PointNodeMap.delete(PointId);
       this.SelectedPointNodeMap.delete(PointId);
-      Point.Remove();
+      RemovePromises.push(Point.Remove());
     });
+    // 清空线段
+    this.ClearLine();
+    // 等待PointNode消除动画结束
+    await Promise.all(RemovePromises);
+    // 上层PointNode下落
     this.SelectedPointNodes.forEach(PointNode => {
       this.Collapse(PointNode);
     });
+    // 生成新的PointNode填补空白
     this.FillBlank();
   }
 
@@ -262,12 +269,17 @@ export default class Game extends cc.Component {
     this.SelectedPointNodeMap.clear();
 
     /** 重置LineNode相关 */
-    this.LineType = -1;
-    this.LineNodes.forEach(LineNode => LineNode.getComponent(LineControl).Remove());
-    this.LineNodes.length = 0;
+    this.ClearLine();
 
     /** 处理完所有状态的重置后，放开连线权限 */
     this.InJoinPoint = false;
+  }
+
+  /** 清空线段 */
+  ClearLine() {
+    this.LineType = -1;
+    this.LineNodes.forEach(LineNode => LineNode.getComponent(LineControl).Remove());
+    this.LineNodes.length = 0;
   }
 
   /** 是否与最后被选择的PointNode相邻 */

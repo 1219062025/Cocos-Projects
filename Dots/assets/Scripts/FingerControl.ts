@@ -6,7 +6,8 @@ export default class FingerControl extends cc.Component {
 
   Init(StartPosition: cc.Vec2, EndPosition: cc.Vec2) {
     this.MoveAnimation(StartPosition, EndPosition);
-    cc.find('Canvas').on(cc.Node.EventType.TOUCH_START, this.Remove, this);
+    cc.find('Canvas').on(cc.Node.EventType.TOUCH_START, this.Remove, this, true);
+    cc.find('Canvas').on(cc.Node.EventType.TOUCH_MOVE, this.Remove, this, true);
   }
 
   Remove() {
@@ -27,6 +28,7 @@ export default class FingerControl extends cc.Component {
   }
 
   onDestroy(): void {
-    cc.find('Canvas').off(cc.Node.EventType.TOUCH_START, this.Remove, this);
+    cc.find('Canvas').off(cc.Node.EventType.TOUCH_START, this.Remove, this, true);
+    cc.find('Canvas').off(cc.Node.EventType.TOUCH_MOVE, this.Remove, this, true);
   }
 }
