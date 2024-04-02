@@ -2,6 +2,7 @@ import PointControl from './PointControl';
 import { InitialMap, PointWidth, PointHeight, PointGap, InitiaRowCount, InitiaColCount, GameAreaWidth, GameAreaHeight } from './GameConfig';
 import { flat } from './Utils';
 import LineControl from './LineControl';
+import FingerControl from './FingerControl';
 
 const { ccclass, property } = cc._decorator;
 
@@ -12,6 +13,9 @@ export default class Game extends cc.Component {
 
   @property({ type: cc.Prefab, tooltip: '线的预设体' })
   LinePrefab: cc.Prefab = null;
+
+  @property({ type: FingerControl, tooltip: '手指' })
+  Finger: FingerControl = null;
 
   /** 至少触摸了一个PointNode、连接PointNode中 */
   InJoinPoint: boolean = false;
@@ -43,6 +47,7 @@ export default class Game extends cc.Component {
 
   onLoad() {
     this.CreateGame();
+    this.RunFinger();
   }
 
   CreateGame() {
@@ -53,6 +58,11 @@ export default class Game extends cc.Component {
     this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
     this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
     this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
+  }
+
+  /** 手指划动动画 */
+  RunFinger() {
+    this.Finger.Init(this.GetPointPos(0, 1), this.GetPointPos(3, 1));
   }
 
   onTouchStart(event: cc.Event.EventTouch) {
@@ -107,7 +117,7 @@ export default class Game extends cc.Component {
     }
     // 连线的PointNode是不是和LastPointNode相邻
     if (!this.IsAdjoinPointNode(PointNode)) return;
-    // 连线的PointNode不是当前连线的类型
+    // 连线的PointNode是不是当前连线的类型
     if (this.LineType !== Point.type) return;
 
     // 如果申请连接的PointNode已经是连接状态时
