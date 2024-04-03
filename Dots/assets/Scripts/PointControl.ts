@@ -24,7 +24,7 @@ export default class PointControl extends cc.Component {
     this.row = row;
     this.col = col;
     this.id = Math.floor(Math.random() * (1000000 - 99999) + 99999);
-    cc.loader.loadRes(`point/${PointType.get(this.type).label}Item`, cc.SpriteFrame, (err, res) => {
+    cc.loader.loadRes(`Fortunedots/point/${PointType.get(this.type).label}Item`, cc.SpriteFrame, (err, res) => {
       this.node.width = PointWidth;
       this.node.height = PointHeight;
       this.node.getComponent(cc.Sprite).spriteFrame = res;

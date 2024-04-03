@@ -23,7 +23,7 @@ export const GameAreaWidth = InitiaColCount * PointWidth + (InitiaColCount - 1) 
 /** 游戏区域节点高度 */
 export const GameAreaHeight = InitiaRowCount * PointHeight + (InitiaRowCount - 1) * PointGap;
 /** 线段宽度 */
-export const LineWidth = 20;
+export const LineWidth = 10;
 /** 点类型映射 */
 export const PointType = new Map([
   [1, { label: 'Green', value: '#45989d' }],
