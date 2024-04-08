@@ -17,6 +17,17 @@ export default class DragableBlocControl extends cc.Component {
   /** 有效碰撞距离 */
   EffDistance = Infinity;
 
+  _isPlace = false;
+  /** 方块是否已经放置到格子中了 */
+  get isPlace() {
+    return this._isPlace;
+  }
+  set isPlace(value) {
+    this.node.getComponent(cc.CircleCollider).tag = value ? 2 : 0;
+    this._isPlace = value;
+  }
+  // isPlace = false;
+
   onLoad() {
     // 开启碰撞检测，开启后碰撞不断发生时会持续调用回调函数onCollisionStay
     cc.director.getCollisionManager().enabled = true;
@@ -41,7 +52,7 @@ export default class DragableBlocControl extends cc.Component {
 
   onCollisionStay(other: cc.CircleCollider, self: cc.CircleCollider) {
     // 碰撞到的是格子的话
-    if (other.tag == 1) {
+    if (self.tag == 0 && other.tag == 1) {
       const HexagonCell = other.node.getComponent(FixedCellControl);
       /** 方块与碰撞中的格子的距离（欧式距离） */
       const distance = cc.Vec2.distance(getNodeWorldPosition(other.node), getNodeWorldPosition(self.node));

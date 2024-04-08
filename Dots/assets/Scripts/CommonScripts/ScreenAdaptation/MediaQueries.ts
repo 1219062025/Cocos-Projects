@@ -112,6 +112,10 @@ export default class MediaQueries extends cc.Component {
   _Color = new cc.Color();
   @property
   _Opacity = 255;
+  @property
+  _SpriteFrame = new cc.SpriteFrame();
+  // @property
+  // _Script = null;
   @property({ tooltip: '挂载组件时复制一次节点的信息，之后在编辑器修改属性后不再进行复制' })
   _isCopyNodeInfo = false;
   @property({
@@ -188,6 +192,26 @@ export default class MediaQueries extends cc.Component {
   set Opacity(value) {
     this._Color.a = this._Opacity = value;
   }
+  @property({
+    type: cc.SpriteFrame,
+    tooltip: '满足查询条件后要替换的Sprite Frame资源'
+  })
+  get SpriteFrame() {
+    return this._SpriteFrame;
+  }
+  set SpriteFrame(value) {
+    this._SpriteFrame = value;
+  }
+  // @property({
+  //   type: cc.Event,
+  //   tooltip: '脚本'
+  // })
+  // get Script() {
+  //   return this._Script;
+  // }
+  // set Script(value) {
+  //   this._Script = value;
+  // }
   //#endregion
 
   //#region 组件信息配置
@@ -195,6 +219,37 @@ export default class MediaQueries extends cc.Component {
   mid: number = Infinity;
   //#endregion
 
+  @property(cc.Component)
+  targetScript: cc.Component = null;
+
+  @property
+  targetFunctionName: string = '';
+
+  // @property
+  // getTargetFunctionName(): string[] {
+  //   if (!this.targetScript) return [];
+
+  //   cc.log(Object.getPrototypeOf(this.targetScript));
+  //   // 获取目标脚本中的所有函数名
+  //   // return Object.getOwnPropertyNames(Object.getPrototypeOf(this.targetScript)).filter(name => typeof this.targetScript[name] === 'function');
+  // }
+
+  // @property
+  // getTargetFunction(): string {
+  //   return this.targetFunctionName;
+  // }
+
+  // setTargetFunction(value: string) {
+  //   this.targetFunctionName = value;
+
+  //   if (this.targetScript && this.targetFunctionName) {
+  //     // 获取目标函数并执行
+  //     const targetFunction = this.targetScript[this.targetFunctionName];
+  //     if (typeof targetFunction === 'function') {
+  //       targetFunction.call(this.targetScript);
+  //     }
+  //   }
+  // }
   onLoad() {
     this.CopyNodeInfo(this, true);
     this.Init();
@@ -261,13 +316,16 @@ export default class MediaQueries extends cc.Component {
   /** 挂载组件时复制一次节点的信息，之后在编辑器修改属性后不再进行复制 */
   CopyNodeInfo(out: MediaQueries, once: boolean = false) {
     if (once && this._isCopyNodeInfo) return;
-    this.node.getPosition(out.Position);
+    out.Position = cc.v2(this.node.position);
     out.Rotation = this.node.angle;
-    this.node.getScale(out.Scale);
+    out.Scale = cc.v3(this.node.scaleX, this.node.scaleY, this.node.scaleZ);
     out.Anchor = this.node.getAnchorPoint();
     out.Size = this.node.getContentSize();
     out.Color = this.node.color;
     out.Opacity = this.node.opacity;
+
+    const sprite = this.node.getComponent(cc.Sprite);
+    if (sprite) out.SpriteFrame = sprite.spriteFrame;
     if (once) this._isCopyNodeInfo = true;
   }
 
@@ -280,6 +338,13 @@ export default class MediaQueries extends cc.Component {
     this.node.setContentSize(input.Size);
     this.node.color = input.Color;
     this.node.opacity = input.Opacity;
+
+    const sprite = this.node.getComponent(cc.Sprite);
+    if (sprite) sprite.spriteFrame = input.SpriteFrame;
+  }
+
+  log(msg: any) {
+    if (this.node.name === 'pay') console.log(msg);
   }
 
   /** 是否存在节点信息存档 */

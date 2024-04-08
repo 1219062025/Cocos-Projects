@@ -1,3 +1,4 @@
+import DragableBlocControl from './DragableBlockControl';
 import FixedCellAreaControl from './FixedCellAreaControl';
 import { setsAreEqual } from './Utils';
 const { ccclass, property } = cc._decorator;
@@ -19,8 +20,17 @@ export default class DragableBlockAreaControl extends cc.Component {
   /** 方块个数 */
   count = 0;
 
+  _isPlace = false;
   /** 方块区域是否已经放置到格子中了 */
-  isPlace = false;
+  get isPlace() {
+    return this._isPlace;
+  }
+  set isPlace(value) {
+    this.node.getChildByName('wrap').children.forEach(block => {
+      block.getComponent(DragableBlocControl).isPlace = value;
+    });
+    this._isPlace = value;
+  }
 
   onLoad() {
     // 记录可拖动方块区域的原始状态

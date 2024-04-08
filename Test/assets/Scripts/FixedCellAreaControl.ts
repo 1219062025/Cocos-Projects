@@ -6,7 +6,7 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class FixedCellAreaControl extends cc.Component {
   /** 格子节点集合 */
-  fixedCellNodeList = null;
+  fixedCellNodeList: cc.Node[] = [];
 
   /** 当前成功碰撞的格子的id集合 */
   colliderCellIdList: Set<number> = null;
@@ -47,9 +47,25 @@ export default class FixedCellAreaControl extends cc.Component {
         cell.isFill = true;
       }
     });
+    this.CheckAllFill();
     return true;
   }
 
+  /** 检查是否所有格子都已经被填满了 */
+  CheckAllFill() {
+    const undoneAllFill = this.fixedCellNodeList.some((cellNode: cc.Node) => {
+      const cell = cellNode.getComponent(FixedCellControl);
+      return !cell.isFill;
+    });
+    if (undoneAllFill === false) this.RemoveBlock();
+  }
+
+  /** 所有格子都被填满后移除方块 */
+  RemoveBlock() {
+    console.log('完成');
+  }
+
+  /** 拿起方块 */
   PickUpBlock(cellIdList: Set<number>) {
     this.colliderCellIdList = cellIdList;
     this.fixedCellNodeList.forEach((cellNode: cc.Node, index: number) => {
@@ -80,11 +96,8 @@ export default class FixedCellAreaControl extends cc.Component {
   RemoveGhost() {
     if (this.colliderCellIdList === null) return;
     this.fixedCellNodeList.forEach((cellNode: cc.Node, index: number) => {
-      const cell = cellNode.getComponent(FixedCellControl);
-      if (this.colliderCellIdList.has(cell.id)) {
-        const HexagonGhost = cellNode.getChildByName('hexagon_ghost');
-        HexagonGhost.active = false;
-      }
+      const HexagonGhost = cellNode.getChildByName('hexagon_ghost');
+      HexagonGhost.active = false;
     });
   }
 }

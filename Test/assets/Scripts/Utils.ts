@@ -1,5 +1,5 @@
 /** 获取节点能够包容所有子节点的最小矩形的宽、高 */
-export function calculateBoundingBox(node) {
+export function calculateBoundingBox(node: cc.Node) {
   let children = node.children;
   let minX = Infinity;
   let minY = Infinity;
@@ -30,7 +30,7 @@ export function calculateBoundingBox(node) {
 }
 
 /** 将节点所有的子节点按照原本的布局居中于该节点 */
-export function centerChildren(node) {
+export function centerChildren(node: cc.Node) {
   let children = node.children;
   let parentPosition = node.getPosition();
 
@@ -60,12 +60,12 @@ export function centerChildren(node) {
 }
 
 // 获取节点在世界坐标系中的位置
-export function getNodeWorldPosition(node) {
+export function getNodeWorldPosition(node: cc.Node) {
   return node.parent.convertToWorldSpaceAR(node.position);
 }
 
 // 获取某个世界坐标在节点所处的局部坐标系中相对位置
-export function getNodeParentPosition(node, worldPos) {
+export function getNodeParentPosition(node: cc.Node, worldPos: cc.Vec2 | cc.Vec3) {
   return node.parent.convertToNodeSpaceAR(worldPos);
 }
 

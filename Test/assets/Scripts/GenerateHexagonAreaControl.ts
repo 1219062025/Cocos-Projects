@@ -14,7 +14,7 @@ export default class GenerateHexagonCellAreaControl extends cc.Component {
   @property({ type: [cc.String], tooltip: '字符串类型数组: 每一个元素映射了每一行的六边形数量以及排布。1代表这个位置有六边形，0则相反。奇数行会自动往左偏移一定位置进行贴合' })
   rowHexagonCountString: string[] = [];
 
-  @property({ type: cc.Boolean, tooltip: '是否是固定的六边形格子' })
+  @property({ tooltip: '是否是固定的六边形格子' })
   isFixedCell: boolean = false;
 
   /** 每个新创建出来的六边形，不管格子还是固定可拖动的方块都需要一个id */
