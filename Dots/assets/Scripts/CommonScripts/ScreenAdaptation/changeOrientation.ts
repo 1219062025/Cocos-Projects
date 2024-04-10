@@ -12,6 +12,9 @@ const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class changeOrientation extends cc.Component {
+  @property(cc.Node)
+  targetNode: cc.Node = null;
+
   @property(cc.SpriteFrame)
   bg_h: cc.SpriteFrame = null;
 
@@ -31,50 +34,32 @@ export default class changeOrientation extends cc.Component {
   private layout: cc.Layout = null;
 
   onLoad() {
-    this.bgsp = this.node.getComponent(cc.Sprite);
-    this.layout = this.node.getComponent(cc.Layout);
-    this.paylogo = this.node.getChildByName('pay');
-    this.labelNode = this.node.getChildByName('label');
+    this.bgsp = this.targetNode.getComponent(cc.Sprite);
+    this.layout = this.targetNode.getComponent(cc.Layout);
+    this.paylogo = this.targetNode.getChildByName('pay');
+    this.labelNode = this.targetNode.getChildByName('label');
   }
-
-  //   start() {
-  //     this.AddEvent();
-  //   }
-
-  //   private AddEvent() {
-  //     EventManager.on("LANDSCAPE", this.isHorizontal, this);
-  //     EventManager.on("PORTRAIT", this.isVertical, this);
-  //   }
-
-  //   protected onDestroy(): void {
-  //     this.RemoveEvent();
-  //   }
-
-  //   private RemoveEvent() {
-  //     EventManager.off("LANDSCAPE", this.isHorizontal, this);
-  //     EventManager.off("PORTRAIT", this.isVertical, this);
-  //   }
 
   public isVertical() {
     this.changeSPF(this.bgsp, this.bg);
+    this.targetNode.setContentSize(cc.size(680, 180));
+    this.layout.type = cc.Layout.Type.HORIZONTAL;
     this.paylogo.y = 0;
     this.labelNode.y = 0;
-    this.node.setContentSize(cc.size(680, 180));
-    this.layout.type = cc.Layout.Type.HORIZONTAL;
-    this.layout.resizeMode = cc.Layout.ResizeMode.CHILDREN;
+    this.layout.resizeMode = cc.Layout.ResizeMode.NONE;
     this.layout.paddingLeft = this.layout.paddingRight = 10;
     this.layout.spacingX = 10;
   }
 
   public isHorizontal() {
     this.changeSPF(this.bgsp, this.bg_h);
+    this.targetNode.setContentSize(cc.size(500, 360));
+    this.layout.type = cc.Layout.Type.VERTICAL;
     this.paylogo.x = 0;
     this.labelNode.x = 0;
-    this.node.setContentSize(cc.size(500, 360));
-    this.layout.type = cc.Layout.Type.VERTICAL;
-    this.layout.resizeMode = cc.Layout.ResizeMode.CHILDREN;
+    this.layout.resizeMode = cc.Layout.ResizeMode.NONE;
     this.layout.paddingTop = this.layout.paddingBottom = 15;
-    this.layout.spacingY = 10;
+    this.layout.spacingY = 100;
   }
 
   private changeSPF(sp: cc.Sprite, spf: cc.SpriteFrame) {

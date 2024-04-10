@@ -114,8 +114,8 @@ export default class MediaQueries extends cc.Component {
   _Opacity = 255;
   @property
   _SpriteFrame = new cc.SpriteFrame();
-  // @property
-  // _Script = null;
+  @property
+  _targetFunction: string = '';
   @property({ tooltip: '挂载组件时复制一次节点的信息，之后在编辑器修改属性后不再进行复制' })
   _isCopyNodeInfo = false;
   @property({
@@ -194,7 +194,7 @@ export default class MediaQueries extends cc.Component {
   }
   @property({
     type: cc.SpriteFrame,
-    tooltip: '满足查询条件后要替换的Sprite Frame资源'
+    tooltip: 'i18n:COMPONENT.sprite.sprite_frame'
   })
   get SpriteFrame() {
     return this._SpriteFrame;
@@ -202,16 +202,30 @@ export default class MediaQueries extends cc.Component {
   set SpriteFrame(value) {
     this._SpriteFrame = value;
   }
-  // @property({
-  //   type: cc.Event,
-  //   tooltip: '脚本'
-  // })
-  // get Script() {
-  //   return this._Script;
-  // }
-  // set Script(value) {
-  //   this._Script = value;
-  // }
+  @property({ type: cc.Component, displayName: '目标脚本', tooltip: '满足查询条件后执行脚本中的方法' })
+  targetScript: cc.Component = null;
+  @property({
+    type: [cc.String],
+    tooltip: '脚本中可以执行的方法',
+    visible() {
+      return this.showSelectable;
+    }
+  })
+  get SelectableFunction(): string[] {
+    if (!this.targetScript) return [];
+    // 获取目标脚本中的所有函数名
+    return Object.getOwnPropertyNames(Object.getPrototypeOf(this.targetScript)).filter(name => typeof this.targetScript[name] === 'function');
+  }
+  @property({ displayName: '是否显示可选函数', tooltip: '勾选后会显示出目标脚本中可执行的方法' })
+  showSelectable = false;
+  @property({ type: cc.String, displayName: '目标方法' })
+  get TargetFunction(): string {
+    return this._targetFunction;
+  }
+  set TargetFunction(value: string) {
+    if (this.SelectableFunction.indexOf(value) === -1) value = '';
+    this._targetFunction = value;
+  }
   //#endregion
 
   //#region 组件信息配置
@@ -219,37 +233,6 @@ export default class MediaQueries extends cc.Component {
   mid: number = Infinity;
   //#endregion
 
-  @property(cc.Component)
-  targetScript: cc.Component = null;
-
-  @property
-  targetFunctionName: string = '';
-
-  // @property
-  // getTargetFunctionName(): string[] {
-  //   if (!this.targetScript) return [];
-
-  //   cc.log(Object.getPrototypeOf(this.targetScript));
-  //   // 获取目标脚本中的所有函数名
-  //   // return Object.getOwnPropertyNames(Object.getPrototypeOf(this.targetScript)).filter(name => typeof this.targetScript[name] === 'function');
-  // }
-
-  // @property
-  // getTargetFunction(): string {
-  //   return this.targetFunctionName;
-  // }
-
-  // setTargetFunction(value: string) {
-  //   this.targetFunctionName = value;
-
-  //   if (this.targetScript && this.targetFunctionName) {
-  //     // 获取目标函数并执行
-  //     const targetFunction = this.targetScript[this.targetFunctionName];
-  //     if (typeof targetFunction === 'function') {
-  //       targetFunction.call(this.targetScript);
-  //     }
-  //   }
-  // }
   onLoad() {
     this.CopyNodeInfo(this, true);
     this.Init();
@@ -258,6 +241,17 @@ export default class MediaQueries extends cc.Component {
   Init() {
     this.mid = Math.floor(Math.random() * (1000000 - 99999) + 99999);
     ScreenManager.ins.add(this.node, this);
+  }
+
+  /** 获取CC原生组件的属性参数名字 */
+  GetComponentProps(component: cc.Component) {
+    const componentPrototypeOf = Object.getPrototypeOf(component);
+    const PropertyNames = Object.getOwnPropertyNames(componentPrototypeOf);
+    return PropertyNames.filter(prop => {
+      const PropertyDescriptor = Object.getOwnPropertyDescriptor(componentPrototypeOf, prop);
+      const isCCPropertie = PropertyDescriptor['get'] && PropertyDescriptor['set'];
+      return isCCPropertie;
+    });
   }
 
   /** 执行查询 */
@@ -269,6 +263,7 @@ export default class MediaQueries extends cc.Component {
     if (isValid) {
       this.SaveNodeInfo();
       this.SetNodeInfo(this);
+      this.RunScript();
     } else {
       if (this.hasNodeInfoRecord()) {
         const NodeInfoRecord = this.LoadNodeInfo();
@@ -311,6 +306,16 @@ export default class MediaQueries extends cc.Component {
     const winSize = cc.view.getFrameSize();
     isValid = this.MaxHeight >= winSize.height;
     return isValid;
+  }
+
+  /** 执行脚本 */
+  RunScript() {
+    if (this.targetScript && this.TargetFunction) {
+      const TargetFunction = this.targetScript[this.TargetFunction];
+      if (typeof TargetFunction === 'function') {
+        TargetFunction.call(this.targetScript);
+      }
+    }
   }
 
   /** 挂载组件时复制一次节点的信息，之后在编辑器修改属性后不再进行复制 */
