@@ -1,8 +1,8 @@
 const { ccclass, property } = cc._decorator;
-import { GameAreaWidth, GameAreaHeight, TileWidth, TileHeight, InitiaRowCount, InitiaColCount } from './Config/Game';
+import { GameAreaWidth, GameAreaHeight, TileWidth, TileHeight, InitiaRowCount, InitiaColCount, SwapSite, TouchPos } from './Config/Game';
 import TileControl from './TileControl';
 import Level from './Config/Level';
-import { flat } from './Common/Utils';
+import { InRange, flat } from './Common/Utils';
 
 @ccclass
 export default class CellAreaControl extends cc.Component {
@@ -13,25 +13,251 @@ export default class CellAreaControl extends cc.Component {
   TileNodes: cc.Node[][] = [];
   /** 所有TileNode根据id的映射*/
   TileNodeMap: Map<number, cc.Node> = new Map([]);
+  /** 存储要进行交换的TileNode */
+  SwapSite: SwapSite = new SwapSite();
+  /** 存储触摸相关信息 */
+  TouchPos: TouchPos = new TouchPos();
+  /** 是否通过了交换申请，处于交换动作中 */
+  inSwap: boolean = false;
+  /** 匹配消除的数组中所有节点的行、列 */
+  matchNodePos: number[][] = [];
 
+  /** 初始化 */
   Init() {
-    this.GenerateTile(Level.Level1);
+    this.GenerateTiles(Level.Level1);
     this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+    this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+    this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
   }
 
+  /** 触摸开始 */
   onTouchStart(event: cc.Event.EventTouch) {
     // 查找触摸位置处有没有节点，有的话拿到它进行后续操作
     const TileNode = flat<cc.Node>(this.TileNodes).find(TileNode => {
       return this.TouchTileNodeArea(event, TileNode);
     });
     if (TileNode) {
-      // this.ApplyJoin(PointNode);
+      // 存储触摸开始的位置
+      this.TouchPos.BeginTouch(event.getLocation());
+      // 存储申请交换的TileNode
+      this.SwapSite.apply = TileNode;
+      // 可以开始监听触摸移动了
+      this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
     }
     event.stopPropagation();
   }
 
+  /** 触摸移动中 */
+  async onTouchMove(event: cc.Event.EventTouch) {
+    if (this.inSwap) return;
+    const tagetVector = this.TouchPos.TouchMove(event.getLocation());
+    if (tagetVector) {
+      /** 是否通过了交换申请 */
+      const applySuccessful = this.ApplySwap(tagetVector);
+      if (applySuccessful) {
+        this.inSwap = true;
+        const { apply, target } = this.SwapSite;
+        const applyTile = apply.getComponent(TileControl);
+        const targetTile = target.getComponent(TileControl);
+        // 交换位置
+        await this.Swap(apply, target, tagetVector);
+        // 检查消除
+        const isEliminated = this.InspectAndEliminate([
+          [applyTile.row, applyTile.col],
+          [targetTile.row, targetTile.col]
+        ]);
+        if (isEliminated) return;
+        await this.Swap(apply, target, tagetVector.neg());
+      }
+    }
+  }
+
+  /** 触摸结束后 */
+  onTouchEnd(event: cc.Event.EventTouch) {
+    this.Reset();
+  }
+
+  /** 申请进行交换，如果通过的话做一些预处理 */
+  ApplySwap(tagetVector: cc.Vec2): boolean {
+    this.SwapSite.tagetVector = tagetVector;
+    const Tile = this.SwapSite.apply.getComponent(TileControl);
+    const targetRow = Tile.row - tagetVector.y;
+    const targetCol = Tile.col + tagetVector.x;
+    // 判断交换的目标行、列会不会超出边界
+    if (!InRange(targetRow, 0, InitiaRowCount - 1) || !InRange(targetCol, 0, InitiaColCount - 1)) {
+      this.Reset();
+      return false;
+    }
+    // 存储交换目标的TileNode
+    this.SwapSite.target = this.TileNodes[targetRow][targetCol];
+    return true;
+  }
+
+  /** 交换 */
+  async Swap(from: cc.Node, to: cc.Node, tagetVector: cc.Vec2) {
+    const fromTile = from.getComponent(TileControl);
+    const toTile = to.getComponent(TileControl);
+    await Promise.all([fromTile.SwapTo(tagetVector), toTile.SwapTo(tagetVector.neg())]);
+    this.SwapNodeInMap(from, to);
+  }
+
+  /** 检查指定行、列能否产生消除，如果可以则进行消除操作 */
+  InspectAndEliminate(PosArray: number[][]) {
+    /** 匹配消除的节点数组 */
+    let matchNodes: cc.Node[] = [];
+    for (let [row, col] of PosArray) {
+      const horizontalMatch = this.Inspect({ row, col }, 'horizontal');
+      const verticalMatch = this.Inspect({ row, col }, 'vertical');
+      matchNodes = matchNodes.concat(horizontalMatch, verticalMatch);
+    }
+    /** 如果matchNodes数组是空的意味着没有达成消除的条件 */
+    if (matchNodes.length === 0) return false;
+    this.Eliminate(matchNodes);
+    matchNodes.forEach(TileNode => {
+      this.Collapse(TileNode);
+    });
+    this.scheduleOnce(this.FillBlank, 1);
+    return true;
+  }
+
+  /** 检查是否可以产生消除 */
+  Inspect({ row, col }: { row: number; col: number }, direction: 'horizontal' | 'vertical') {
+    /** 增量 */
+    let inc = 1;
+    /** 匹配的TileNode数组 */
+    const matchNodes = [];
+    /** 当前位置的TileNode */
+    const currentTileNode = this.TileNodes[row][col];
+    const currentTile = currentTileNode.getComponent(TileControl);
+    /** 自身肯定是匹配的 */
+    matchNodes.push(currentTileNode);
+    /** 负方向是否需要继续匹配 */
+    let NegMatch = true;
+    /** 正方向是否需要继续匹配 */
+    let PosMatch = true;
+
+    /** 检查水平方向的匹配情况 */
+    if (direction === 'horizontal') {
+      while (InRange(col - inc, 0, InitiaColCount - 1) || InRange(col + inc, 0, InitiaColCount - 1)) {
+        if (NegMatch && InRange(col - inc, 0, InitiaColCount - 1)) {
+          const isMatch = this.TileNodes[row][col - inc].getComponent(TileControl).type === currentTile.type;
+          isMatch ? matchNodes.push(this.TileNodes[row][col - inc]) : (NegMatch = false);
+        }
+        if (PosMatch && InRange(col + inc, 0, InitiaColCount - 1)) {
+          const isMatch = this.TileNodes[row][col + inc].getComponent(TileControl).type === currentTile.type;
+          isMatch ? matchNodes.push(this.TileNodes[row][col + inc]) : (PosMatch = false);
+        }
+        inc++;
+      }
+    }
+
+    /** 检查垂直方向的匹配情况 */
+    if (direction === 'vertical') {
+      while (InRange(row - inc, 0, InitiaRowCount - 1) || InRange(row + inc, 0, InitiaRowCount - 1)) {
+        if (NegMatch && InRange(row - inc, 0, InitiaRowCount - 1)) {
+          const isMatch = this.TileNodes[row - inc][col].getComponent(TileControl).type === currentTile.type;
+          isMatch ? matchNodes.push(this.TileNodes[row - inc][col]) : (NegMatch = false);
+        }
+        if (PosMatch && InRange(row + inc, 0, InitiaRowCount - 1)) {
+          const isMatch = this.TileNodes[row + inc][col].getComponent(TileControl).type === currentTile.type;
+          isMatch ? matchNodes.push(this.TileNodes[row + inc][col]) : (PosMatch = false);
+        }
+        inc++;
+      }
+    }
+    return matchNodes.length >= 3 ? matchNodes : [];
+  }
+
+  /** 消除 */
+  Eliminate(matchNodes: cc.Node[]) {
+    this.matchNodePos = [];
+    matchNodes.forEach(TileNode => {
+      const Tile = TileNode.getComponent(TileControl);
+      Tile.Remove();
+      this.TileNodes[Tile.row][Tile.col] = null;
+      this.matchNodePos.push([Tile.row, Tile.col]);
+    });
+  }
+
+  /** TileNode被消除时，其上所有TileNode往下落，总体逻辑就是：先找到被消除TileNode所处列最低的落点，然后从自己开始往上遍历将所有TileNode下落 */
+  Collapse(TileNode: cc.Node) {
+    const Tile = TileNode.getComponent(TileControl);
+    /** 在执行Collapse，所有匹配消除的TileNode都已经从TileNodes里面Remove掉了，如果这里发现还不为null的话。
+     * 意味着这一列已经完成了Collapse操作，此时这个位置是原本上层的TileNode下落后填补的。那就不需要再往下走了
+     */
+    if (this.TileNodes[Tile.row][Tile.col] !== null) return;
+
+    /** 当前TileNode所处列应该下落到的最低点的行数 */
+    let collapseRow = Tile.row;
+    while (collapseRow + 1 <= InitiaRowCount - 1) {
+      if (this.TileNodes[collapseRow + 1][Tile.col] !== null && this.TileNodes[collapseRow][Tile.col] === null) {
+        break;
+      }
+      collapseRow++;
+    }
+
+    /** 用来遍历上层的TileNode */
+    let riseRow = Tile.row;
+    while (--riseRow >= 0) {
+      // 如果找到了不为null的TileNode，也就意味着这个TileNode需要下落到当前最低点的行数
+      if (this.TileNodes[riseRow][Tile.col] !== null) {
+        const CollapseTileNode = this.TileNodes[riseRow][Tile.col];
+        const CollapseTile = CollapseTileNode.getComponent(TileControl);
+
+        // 播放下落动画
+        CollapseTile.FallTo(this.GetTilePos(collapseRow, Tile.col));
+        // 下落完成后改变行数
+        CollapseTile.row = collapseRow;
+        // 将下落前所处的位置，置null
+        this.TileNodes[riseRow][Tile.col] = null;
+        // 然后设置到新的位置
+        this.TileNodes[collapseRow][Tile.col] = CollapseTileNode;
+        // 最低点行数得往上一行了
+        collapseRow--;
+      }
+    }
+  }
+
+  /** 完成消除操作后填充空白 */
+  FillBlank() {
+    const GenerateTileNodes: number[][] = [];
+    this.TileNodes.forEach((rowTileNodes, row) => {
+      rowTileNodes.forEach((TileNode, col) => {
+        if (GenerateTileNodes[row] === undefined) GenerateTileNodes[row] = [];
+        if (TileNode !== null) {
+          GenerateTileNodes[row][col] = 0;
+        } else {
+          GenerateTileNodes[row][col] = Math.floor(Math.random() * 3 + 1);
+        }
+      });
+    });
+    this.GenerateTiles(GenerateTileNodes);
+  }
+
+  /** 重置状态 */
+  Reset() {
+    this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+    this.inSwap = false;
+    this.SwapSite.clear();
+    this.TouchPos.clear();
+  }
+
+  /** 交换两个TileNode在映射中的位置 */
+  SwapNodeInMap(from: cc.Node, to: cc.Node) {
+    const fromTile = from.getComponent(TileControl);
+    const toTile = to.getComponent(TileControl);
+    const { row: fromRow, col: fromCol } = fromTile;
+    const { row: toRow, col: toCol } = toTile;
+    this.TileNodes[fromRow][fromCol] = to;
+    this.TileNodes[toRow][toCol] = from;
+    fromTile.row = toRow;
+    fromTile.col = toCol;
+    toTile.row = fromRow;
+    toTile.col = fromCol;
+  }
+
   /** 根据传入的二维number类型数组生成Tile */
-  GenerateTile(Map: number[][]) {
+  GenerateTiles(Map: number[][]) {
     if (Map.length > InitiaRowCount) return '超出行数，不予生成';
     Map.forEach((rowTiles, row) => {
       rowTiles.forEach((type, col) => {
@@ -66,5 +292,17 @@ export default class CellAreaControl extends cc.Component {
     const targetX = BeginX + col * TileWidth;
     const targetY = BeginY - row * TileHeight;
     return cc.v2(targetX, targetY);
+  }
+
+  /** 打印当前节点布局 */
+  LogMap() {
+    let map = '';
+    this.TileNodes.forEach((rowTileNodes, row) => {
+      rowTileNodes.forEach((TileNode, col) => {
+        const Tab = TileNode ? TileNode.getComponent(TileControl).type : 'n';
+        map += `${Tab}${col < InitiaColCount - 1 ? ' ' : '\n'}`;
+      });
+    });
+    console.log(map);
   }
 }
