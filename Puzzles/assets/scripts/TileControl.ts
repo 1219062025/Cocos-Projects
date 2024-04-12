@@ -1,5 +1,6 @@
 const { ccclass, property } = cc._decorator;
-import { TileType, TileHeight, GameAreaHeight, InitiaRowCount } from './Config/Game';
+import { TileType, TileWidth, TileHeight, GameAreaHeight, InitiaRowCount } from './Config/Game';
+import EventManager from './Common/EventManager';
 
 @ccclass
 export default class TileControl extends cc.Component {
@@ -18,19 +19,20 @@ export default class TileControl extends cc.Component {
   /** 是否被选中 */
   isSelect: boolean = false;
 
+  @property(cc.Prefab)
+  ParticlePrefab: cc.Prefab = null;
+
   /** 初始化TileNode */
-  Init(type: number, row: number, col: number, position: cc.Vec2, parent: cc.Node) {
+  Init(type: number, row: number, col: number, parent: cc.Node) {
     this.type = type;
     this.row = row;
     this.col = col;
     this.id = Math.floor(Math.random() * (1000000 - 99999) + 99999);
     cc.loader.loadRes(TileType.get(type).value, cc.SpriteFrame, (err, res) => {
       this.sprite.spriteFrame = res;
-      this.node.setPosition(position);
     });
     if (parent) {
       this.node.setParent(parent);
-      this.FallTo(position, true, 0.7);
     }
   }
 
@@ -47,27 +49,51 @@ export default class TileControl extends cc.Component {
   }
 
   /** 下落到指定位置 */
-  FallTo(position: cc.Vec2, isInit: boolean = false, time: number = 0.25) {
+  FallTo(row: number, col: number, isInit: boolean = false, time: number = 0.5) {
+    const position = this.GetTilePos(row, col);
     this.node.x = position.x;
+    // this.node.y = !isInit ? this.node.y : (GameAreaHeight + TileHeight) / 2;
     this.node.y = !isInit ? this.node.y : (GameAreaHeight + TileHeight) / 2 + (InitiaRowCount - this.row) * TileHeight;
-    return new Promise(resolve => {
+    return new Promise<void>(resolve => {
       cc.tween(this.node)
-        .to(time, { position })
         .call(() => {
-          resolve({ row: this.row, col: this.col });
+          EventManager.emit('SignIn');
+        })
+        .delay(isInit ? 0.1 - 0.00625 * this.row : 0)
+        .to(isInit ? time + 0.0125 * Math.abs(this.row - InitiaRowCount) : time, { position }, { easing: 'sineOut' })
+        .call(() => {
+          resolve();
+          EventManager.emit('SignOut', [this.row, this.col]);
         })
         .start();
     });
   }
 
   Remove() {
-    const particle = this.node.addComponent(cc.ParticleSystem);
     this.sprite.enabled = false;
-    particle.playOnLoad = true;
-    particle.autoRemoveOnFinish = true;
     this.node.zIndex = 100;
-    cc.loader.loadRes('particle/particle_2', cc.ParticleAsset, (err, res) => {
-      particle.file = res;
+    const particleNode = cc.instantiate(this.ParticlePrefab);
+    const particle = particleNode.getComponent(cc.ParticleSystem);
+    cc.loader.loadRes(TileType.get(this.type).value, cc.SpriteFrame, (err, res) => {
+      particle.autoRemoveOnFinish = true;
+      particle.spriteFrame = res;
+      particleNode.setParent(this.node);
+      particleNode.active = true;
+      const IntervalId = setInterval(() => {
+        if (!cc.isValid(particleNode)) {
+          clearInterval(IntervalId);
+          this.node.destroy();
+        }
+      }, 1000);
     });
+  }
+
+  /** 获取指定行、列的TileNode的位置 */
+  GetTilePos(row, col): cc.Vec2 {
+    const BeginX = this.node.parent.x - this.node.parent.width / 2 + TileWidth / 2;
+    const BeginY = this.node.parent.y + this.node.parent.height / 2 - TileHeight / 2;
+    const targetX = BeginX + col * TileWidth;
+    const targetY = BeginY - row * TileHeight;
+    return cc.v2(targetX, targetY);
   }
 }

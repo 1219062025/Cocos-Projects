@@ -13,3 +13,15 @@ export function flat<T>(array): T[] {
 export function InRange(value: number, min: number, max: number) {
   return value >= min && value <= max;
 }
+
+/** 防抖 */
+export function debounce(func, delay) {
+  let timerId;
+
+  return function (...args) {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
