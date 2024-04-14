@@ -14,6 +14,8 @@ export default class CellAreaControl extends cc.Component {
   TileNodes: cc.Node[][] = [];
   /** 所有TileNode根据id的映射*/
   TileNodeMap: Map<number, cc.Node> = new Map([]);
+  /** 管理TileNode的对象池 */
+  TileNodePool: cc.NodePool = new cc.NodePool();
   /** 存储要进行交换的TileNode */
   SwapSite: SwapSite = new SwapSite();
   /** 存储触摸相关信息 */
@@ -22,16 +24,26 @@ export default class CellAreaControl extends cc.Component {
   inSwap: boolean = false;
   /** 匹配消除的数组中所有节点的行、列 */
   MatchNodePos: number[][] = [];
-  FillBlankNodePos: number[][] = [];
+  /** 当前是否可以触摸了 */
   isOpen: boolean = true;
 
   /** 初始化 */
   Init() {
     this.onFallToTween();
+    this.CreatePool(this.TilePrefab, this.TileNodePool, 80);
     this.GenerateTiles(Level.Level1);
     this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
     this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
     this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
+  }
+
+  /** 创建对象池 */
+  CreatePool(prefab: cc.Prefab, pool: cc.NodePool, size: number) {
+    if (!prefab || !pool || !size) return;
+    for (let i = 0; i < size; ++i) {
+      let prefabNode = cc.instantiate(prefab); // 创建节点
+      pool.put(prefabNode); // 通过 put 接口放入对象池
+    }
   }
 
   /** 触摸开始 */
@@ -310,14 +322,19 @@ export default class CellAreaControl extends cc.Component {
   /** 根据传入的二维number类型数组生成Tile */
   GenerateTiles(Map: number[][]): Promise<void>[] {
     const FallToPromises: Promise<void>[] = [];
-    // if (Map.length > InitiaRowCount) return '超出行数，不予生成';
     Map.forEach((rowTiles, row) => {
       rowTiles.forEach((type, col) => {
-        // if (col + 1 > InitiaColCount) return '超出列数，不予生成';
         // type为0意味着这个位置不应该生成Tile
         if (type === 0) return;
-        const TileNode = cc.instantiate(this.TilePrefab);
+        let TileNode: cc.Node = null;
+        // 对象池创建TileNode
+        if (this.TileNodePool.size() > 0) {
+          TileNode = this.TileNodePool.get();
+        } else {
+          TileNode = cc.instantiate(this.TilePrefab);
+        }
         const Tile = TileNode.getComponent(TileControl);
+        Tile.AttachPool(this.TileNodePool);
         Tile.Init(type, row, col, this.node);
         FallToPromises.push(Tile.FallTo(row, col, true));
         if (this.TileNodes[row] === undefined) this.TileNodes[row] = [];

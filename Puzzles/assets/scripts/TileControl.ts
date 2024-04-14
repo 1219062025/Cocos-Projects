@@ -16,8 +16,7 @@ export default class TileControl extends cc.Component {
   row: number = -1;
   /** TileNode在哪列 */
   col: number = -1;
-  /** 是否被选中 */
-  isSelect: boolean = false;
+  TileNodePool: cc.NodePool = null;
 
   @property(cc.Prefab)
   ParticlePrefab: cc.Prefab = null;
@@ -70,22 +69,22 @@ export default class TileControl extends cc.Component {
   }
 
   Remove() {
-    this.sprite.enabled = false;
-    this.node.zIndex = 100;
     const particleNode = cc.instantiate(this.ParticlePrefab);
     const particle = particleNode.getComponent(cc.ParticleSystem);
     cc.loader.loadRes(TileType.get(this.type).value, cc.SpriteFrame, (err, res) => {
       particle.autoRemoveOnFinish = true;
       particle.spriteFrame = res;
-      particleNode.setParent(this.node);
+      particleNode.zIndex = 100;
+      particleNode.setPosition(this.node.position);
+      particleNode.setParent(this.node.parent);
       particleNode.active = true;
-      const IntervalId = setInterval(() => {
-        if (!cc.isValid(particleNode)) {
-          clearInterval(IntervalId);
-          this.node.destroy();
-        }
-      }, 1000);
+      this.TileNodePool.put(this.node);
     });
+  }
+
+  AttachPool(pool: cc.NodePool) {
+    if (!pool) return;
+    this.TileNodePool = pool;
   }
 
   /** 获取指定行、列的TileNode的位置 */
