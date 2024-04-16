@@ -1,12 +1,24 @@
-export const CellWidth = 120;
-export const CellHeight = 120;
+/** Tile的宽度 */
+export const TileWidth = 120;
+/** Tile的高度 */
+export const TileHeight = 120;
+/** 初始化有多少行 */
+export const InitiaRowCount = 6;
+/** 初始化有多少列 */
+export const InitiaColCount = 5;
+/** 初始化有多少个Tile */
+export const InitiaTileCount = InitiaRowCount * InitiaColCount;
+/** 游戏区域节点宽度 */
+export const GameAreaWidth = InitiaColCount * TileWidth;
+/** 游戏区域节点高度 */
+export const GameAreaHeight = InitiaRowCount * TileHeight;
 /** Tile类型Sprite映射 */
 export const TileType = new Map([
-  [1, { maxlevel: 3, label: '1_', type: 1 }],
-  [2, { maxlevel: 3, label: '2_', type: 2 }],
-  [3, { maxlevel: 3, label: '3_', type: 3 }],
-  [4, { maxlevel: 4, label: '4_', type: 4 }],
-  [5, { maxlevel: 2, label: '5_', type: 5 }]
+  [1, { maxLevel: 2, label: '1_', type: 1 }],
+  [2, { maxLevel: 2, label: '2_', type: 2 }],
+  [3, { maxLevel: 2, label: '3_', type: 3 }],
+  [4, { maxLevel: 3, label: '4_', type: 4 }],
+  [5, { maxLevel: 1, label: '5_', type: 5 }]
 ]);
 
 export enum CellType {

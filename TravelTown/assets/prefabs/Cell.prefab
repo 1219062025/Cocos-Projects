@@ -114,7 +114,6 @@
       "__id__": 1
     },
     "_enabled": true,
-    "isLock": false,
     "_id": ""
   },
   {
@@ -123,7 +122,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "4cd7a2e5-abd7-4da2-9be5-98cbd41b0e47"
     },
     "fileId": "b8R5xirS5K8YgRXzFFouJ3",
     "sync": false
