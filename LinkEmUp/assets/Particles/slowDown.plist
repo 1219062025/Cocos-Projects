@@ -71,9 +71,9 @@
     <key>sourcePositionVariancey</key>
     <integer>1</integer>
     <key>sourcePositionx</key>
-    <real>461.39240506329116</real>
+    <real>373.7277526855469</real>
     <key>sourcePositiony</key>
-    <real>1226.5822784810127</real>
+    <real>478.40472412109375</real>
     <key>speed</key>
     <integer>280</integer>
     <key>speedVariance</key>
@@ -102,8 +102,6 @@
     <integer>0</integer>
     <key>tangentialAcceleration</key>
     <integer>0</integer>
-    <key>spriteFrameUuid</key>
-    <string>996a0603-6892-4cd0-b47e-d266227dde1d</string>
     <key>positionType</key>
     <integer>1</integer>
     <key>rotationIsDir</key>
@@ -112,5 +110,7 @@
     <integer>0</integer>
     <key>emissionRate</key>
     <integer>80</integer>
+    <key>spriteFrameUuid</key>
+    <string>996a0603-6892-4cd0-b47e-d266227dde1d</string>
   </dict>
 </plist>

@@ -94,6 +94,7 @@ export default class PointControl extends cc.Component {
     return new Promise<void>(async resolve => {
       const DieParticleNode = cc.instantiate(this.DieParticlePrefab);
       const DieParticle = DieParticleNode.getComponent(cc.ParticleSystem);
+      DieParticle.autoRemoveOnFinish = true;
       DieParticle.spriteFrame = this.spriteFrame;
       DieParticleNode.setParent(this.node.parent);
       DieParticleNode.setPosition(this.node.getPosition());

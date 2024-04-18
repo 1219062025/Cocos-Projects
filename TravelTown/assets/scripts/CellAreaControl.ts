@@ -1,9 +1,10 @@
 import EventManager from './Common/EventManager';
 import CellControl from './CellControl';
 import { TileType, TileWidth, TileHeight, GameAreaHeight, InitiaRowCount } from './Config/Game';
-import Level from './Config/Level';
+import { Level } from './Config/Level';
 import { flat } from './Common/Utils';
 import TileControl from './TileControl';
+import TipsControl from './TipsControl';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -14,6 +15,9 @@ export default class CellAraaControl extends cc.Component {
   @property({ type: cc.Prefab, tooltip: 'TileNode预制体' })
   TilePrefab: cc.Prefab = null;
 
+  @property({ type: cc.Prefab, tooltip: 'TipsNode预制体' })
+  TipsPrefab: cc.Prefab = null;
+
   @property({ type: cc.Node, tooltip: '生产点节点' })
   GeneratingPoint: cc.Node = null;
 
@@ -22,13 +26,15 @@ export default class CellAraaControl extends cc.Component {
   /** 所有可用的(解锁了、未被占据的)格子 */
   get UsableCellNodes() {
     return flat<cc.Node>(this.CellNodes).filter(CellNode => {
-      return !CellNode.getComponent(CellControl).isLock && !CellNode.getComponent(CellControl).isFillIn;
+      const Cell = CellNode.getComponent(CellControl);
+      return !Cell.isLock && !Cell.isFillIn && !Cell.isAward;
     });
   }
   /** 最后一个可用的格子 */
   get LastUsableCellNode() {
     return flat<cc.Node>(this.CellNodes).find(CellNode => {
-      return !CellNode.getComponent(CellControl).isLock && !CellNode.getComponent(CellControl).isFillIn;
+      const Cell = CellNode.getComponent(CellControl);
+      return !Cell.isLock && !Cell.isFillIn && !Cell.isAward;
     });
   }
 
@@ -41,10 +47,10 @@ export default class CellAraaControl extends cc.Component {
 
   /** 所有TileNode */
   TileNodes: cc.Node[][] = [];
-
   /** 当前选中的TileNode */
   CurrentTileNode: cc.Node = null;
 
+  LevelInfo: Level = null;
   TouchStartPos: cc.Vec2 = null;
   TouchEndPos: cc.Vec2 = null;
 
@@ -82,19 +88,32 @@ export default class CellAraaControl extends cc.Component {
     this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
     this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
     this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
-    const TileNodes = flat<cc.Node>(this.TileNodes).filter(TileNode => {
-      return this.CurrentTileNode !== TileNode && this.BoxTileNodeArea(this.CurrentTileNode, TileNode);
+
+    // 获取接触到并且距离最近的一个格子
+    const CellNodes = flat<cc.Node>(this.CellNodes).filter(CellNode => {
+      return this.BoxTileNodeArea(this.CurrentTileNode, CellNode);
     });
-    this.TouchEndPos = event.getLocation();
-    if (TileNodes.length === 1) {
-      // 可进行检查匹配
-      this.InspectMatchCurrent(TileNodes[0]);
-    } else if (this.TouchStartPos.equals(this.TouchEndPos)) {
-      // 不可进行检查匹配，并且只是点击了一下并没有移动
-      this.ResetCurrent(false);
+    const DistanceMap: Map<number, cc.Node> = new Map([]);
+    const Distances: number[] = [];
+    CellNodes.forEach(CellNode => {
+      const Distance = CellNode.position.sub(this.CurrentTileNode.position).mag();
+      if (Distance < CellNode.width * 0.7) {
+        DistanceMap.set(Distance, CellNode);
+        Distances.push(Distance);
+      }
+    });
+    const CellNode = DistanceMap.get(Math.min(...Distances));
+    if (!CellNode) return this.ResetCurrent(true);
+    const Cell = CellNode.getComponent(CellControl);
+    /** 目标格子是否有TileNode占领了 */
+    const hasTileNode = this.TileNodes[Cell.row] && this.TileNodes[Cell.row][Cell.col];
+    if (hasTileNode) {
+      // 有TileNode的话就进行匹配
+      if (this.TouchStartPos.equals(this.TouchEndPos)) return this.ResetCurrent(false);
+      this.InspectMatchCurrent(this.TileNodes[Cell.row][Cell.col]);
     } else {
-      // 不可进行检查匹配，并且进行了一定的移动
-      this.ResetCurrent(true);
+      // 不然看是不是奖励格子
+      this.InspectMatchAward(CellNode);
     }
   }
 
@@ -119,17 +138,36 @@ export default class CellAraaControl extends cc.Component {
     const Tile = TileNode.getComponent(TileControl);
     const CurrentTileNode = this.CurrentTileNode;
     const CurrentTile = CurrentTileNode.getComponent(TileControl);
+    // 检查类型相同，等级相同且没满级
     if (Tile.type === CurrentTile.type && Tile.level === CurrentTile.level && Tile.level !== Tile.maxLevel) {
       const CompositeTileNode = cc.instantiate(this.TilePrefab);
       const CompositeTile = CompositeTileNode.getComponent(TileControl);
       const Cell = this.CellNodes[CurrentTile.row][CurrentTile.col].getComponent(CellControl);
       Cell.isFillIn = false;
+      // 合成，移除两个匹配的两个节点，并生成高一个等级的新节点
       this.TileNodes[CurrentTile.row][CurrentTile.col] = null;
       this.TileNodes[Tile.row][Tile.col] = CompositeTileNode;
       await CompositeTile.Init(Tile.type, Tile.row, Tile.col, this.node, Tile.level + 1);
       CurrentTileNode.destroy();
       TileNode.destroy();
       CompositeTile.Compound();
+      // 弹出Tips
+      const TipsNode = cc.instantiate(this.TipsPrefab);
+      const Tips = TipsNode.getComponent(TipsControl);
+      TipsNode.setParent(this.node);
+      Tips.Init(CompositeTileNode.getPosition());
+    } else {
+      this.ResetCurrent(true);
+    }
+  }
+
+  /** 检查是否匹配奖励格子 */
+  InspectMatchAward(CellNode: cc.Node) {
+    const Cell = CellNode.getComponent(CellControl);
+    const CurrentTile = this.CurrentTileNode.getComponent(TileControl);
+    if (!Cell.isAward) return this.ResetCurrent(true);
+    if (Cell.awardMatch === CurrentTile.type) {
+      console.log(11);
     } else {
       this.ResetCurrent(true);
     }
@@ -137,8 +175,8 @@ export default class CellAraaControl extends cc.Component {
 
   /** 初始化游戏区域 */
   GenerateCellArea(level: number) {
-    const LevelInfo = Level[`Level${level}`];
-    LevelInfo.CellArea.forEach((rowCells, row) => {
+    this.LevelInfo = Level[`Level${level}`];
+    this.LevelInfo.CellArea.forEach((rowCells, row) => {
       rowCells.forEach((type, col) => {
         const CellNode = cc.instantiate(this.CellPrefab);
         const Cell = CellNode.getComponent(CellControl);
@@ -147,7 +185,7 @@ export default class CellAraaControl extends cc.Component {
         this.CellNodes[row][col] = CellNode;
       });
     });
-    this.InitGeneratingPoint(LevelInfo.GeneratingPointRow, LevelInfo.GeneratingPointCol);
+    this.InitGeneratingPoint(this.LevelInfo.GeneratingPointRow, this.LevelInfo.GeneratingPointCol);
   }
 
   /** 初始化生产点节点 */
@@ -167,7 +205,8 @@ export default class CellAraaControl extends cc.Component {
         cc.tween().to(0.1, { scale: 0.8 }).to(0.1, { scale: 1 }),
         cc.tween().call(async () => {
           if (!this.UsableCellNodes.length) return;
-          const type = Math.floor(Math.random() * 5 + 1);
+          const SequenceInit = this.LevelInfo.SequenceInit;
+          const type = SequenceInit.length ? SequenceInit.shift() : Math.floor(Math.random() * 5 + 1);
           const TileNode = cc.instantiate(this.TilePrefab);
           const Tile = TileNode.getComponent(TileControl);
           const LastCell = this.LastUsableCellNode.getComponent(CellControl);

@@ -35,10 +35,18 @@ export default class LineControl extends cc.Component {
     this.node.destroy();
   }
 
+  /** 横屏时由于浮点数计算误差，导致PointNode的位置出现极其小的小数，这时就算进行了归一化normalize处理也无法保证结果准确，所以手动处理一下 */
+  clearFloat(Vec: cc.Vec2) {
+    Vec.x = Math.abs(Vec.x) < 0.0000001 ? 0 : Vec.x;
+    Vec.y = Math.abs(Vec.y) < 0.0000001 ? 0 : Vec.y;
+    return Vec;
+  }
+
   /** 设置线段方向 */
   setDirection() {
     /** 从BeginPointNode至EndPointNode的方向单位向量 */
-    const directionVD = cc.v2(this.EndPointNode.position.sub(this.BeginPointNode.position).normalize());
+    let directionVD = cc.v2(this.EndPointNode.position.sub(this.BeginPointNode.position).normalize());
+    directionVD = this.clearFloat(directionVD);
     /** 根据方向向量得到的锚点位置 */
     const LineInfo = LineInfoMap.get(`${directionVD.x},${directionVD.y}`);
     this.node.anchorX = LineInfo.anchorX;

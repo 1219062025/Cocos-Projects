@@ -1,35 +1,48 @@
 const { ccclass, property } = cc._decorator;
-import { TileType, TileWidth, TileHeight, GameAreaHeight, InitiaRowCount } from './Config/Game';
+import { CellType, TileWidth, TileHeight } from './Config/Game';
 
 @ccclass
 export default class CellControl extends cc.Component {
   /** 格子的id */
   id: number = Infinity;
   /** 格子类型 */
-  type: number = Infinity;
+  type: number = 0;
   /** 格子在哪行 */
   row: number = -1;
   /** 格子在哪列 */
   col: number = -1;
   /** 格子是否处于锁定状态 */
-  isLock: boolean = false;
+  get isLock() {
+    return this.type === -1;
+  }
+  /** 是否是奖励类型的格子 */
+  isAward: boolean = false;
   /** 格子是否被占据了 */
   isFillIn: boolean = false;
+  /** 如果是奖励类型的话匹配那个TileNode类型 */
+  awardMatch: number = Infinity;
 
   Init(type: number, row: number, col: number, parent: cc.Node) {
     this.type = type;
     this.row = row;
     this.col = col;
     this.id = Math.floor(Math.random() * (1000000 - 99999) + 99999);
-    this.isLock = type === -1;
-    const resUrl = this.isLock ? 'cellLock' : 'cell';
-    cc.loader.loadRes(resUrl, cc.SpriteFrame, (err, res) => {
-      if (err) return;
-      this.node.getComponent(cc.Sprite).spriteFrame = res;
-      this.node.setParent(parent);
-      this.node.setPosition(this.GetTilePos(row, col));
-      this.node.setContentSize(120, 120);
-    });
+    this.node.setParent(parent);
+    this.node.setPosition(this.GetTilePos(row, col));
+    this.node.setContentSize(120, 120);
+    // 根据Cell类型生成图片节点
+    if (CellType.has(this.type)) {
+      const CellInfo = CellType.get(this.type);
+      this.isAward = CellInfo.isAward;
+      this.awardMatch = CellInfo.awardMatch;
+      const SpriteFrame = CellInfo.isRandomValue ? CellInfo.value[Math.floor(Math.random() * CellInfo.value.length)] : CellInfo.value;
+      cc.loader.loadRes(`${SpriteFrame}`, cc.SpriteFrame, (err, res) => {
+        if (err) return;
+        const CellContentNode = this.node.getChildByName(`CellContent`);
+        CellContentNode.getComponent(cc.Sprite).spriteFrame = res;
+        CellContentNode.active = true;
+      });
+    }
   }
 
   /** 获取指定行、列的TileNode的位置 */

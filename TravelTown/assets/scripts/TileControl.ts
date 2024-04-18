@@ -21,7 +21,7 @@ export default class TileControl extends cc.Component {
   inAction: boolean = false;
 
   /** 初始化 */
-  Init(type: number, row: number, col: number, parent: cc.Node, level: number = 1) {
+  Init(type: number, row: number, col: number, parent: cc.Node, level: number = 0) {
     this.type = type;
     this.row = row;
     this.col = col;
@@ -60,6 +60,7 @@ export default class TileControl extends cc.Component {
     this.SelectNode.active = false;
   }
 
+  /** 回退到原本的位置 */
   Back() {
     this.inAction = true;
     return new Promise<void>(resolve => {
@@ -73,6 +74,7 @@ export default class TileControl extends cc.Component {
     });
   }
 
+  /** 合成 */
   Compound() {
     this.inAction = true;
     this.node.setPosition(this.GetTilePos(this.row, this.col));
@@ -90,6 +92,8 @@ export default class TileControl extends cc.Component {
         .start();
     });
   }
+
+  TriggerReward(type) {}
 
   /** 初始化时以一定弧度移动到指定位置 */
   MoveTo(BeginPos: cc.Vec2) {

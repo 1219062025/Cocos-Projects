@@ -3,6 +3,9 @@ import { InitialMap, PointWidth, PointHeight, PointGap, InitiaRowCount, InitiaCo
 import { InRange, flat } from './Utils';
 import LineControl from './LineControl';
 import FingerControl from './FingerControl';
+import EffectCtrl from './CommonScripts/EffectCtrl';
+import EventManager from './CommonScripts/EventManager';
+import { DotsEnum } from './CommonScripts/DotsEnum';
 
 const { ccclass, property } = cc._decorator;
 
@@ -16,6 +19,12 @@ export default class Game extends cc.Component {
 
   @property({ type: FingerControl, tooltip: '手指' })
   Finger: FingerControl = null;
+
+  @property({ type: EffectCtrl, tooltip: '控制完成弹窗、金钱增加的脚本' })
+  EffectCtrl: EffectCtrl = null;
+
+  /** 完成消除的次数 */
+  EliminatedCount: number = 0;
 
   /** 至少触摸了一个PointNode、连接PointNode中 */
   InJoinPoint: boolean = false;
@@ -193,6 +202,7 @@ export default class Game extends cc.Component {
     this.ClearLine();
     // 等待PointNode消除动画结束
     await Promise.all(RemovePromises);
+    this.Eliminated();
     // 上层PointNode下落
     Eliminate.forEach(PointNode => {
       this.Collapse(PointNode);
@@ -244,6 +254,16 @@ export default class Game extends cc.Component {
       }
     });
     return matchNodes;
+  }
+
+  /** 节点消除完成后进行一些处理 */
+  Eliminated() {
+    EventManager.emit(DotsEnum.DestoryDotsEvent);
+    this.EffectCtrl.addMoneyCount();
+    if (this.EliminatedCount++ >= 4) {
+      this.InJoinPoint = true;
+      this.EffectCtrl.showEndCard();
+    }
   }
 
   /** PointNode被消除时，其上所有PointNode往下落，总体逻辑就是：先找到被消除PointNode所处列最低的落点，然后从自己开始往上遍历将所有PointNode下落 */
