@@ -47,6 +47,7 @@ export default class CellControl extends cc.Component {
     }
   }
 
+  /** 移除奖励的格子 */
   RemoveAward() {
     this.isAward = false;
     this.awardMatch = Infinity;
@@ -55,6 +56,7 @@ export default class CellControl extends cc.Component {
     CellContentNode.active = false;
   }
 
+  /** 移除锁定的格子 */
   RemoveLock() {
     const CellInfo = CellType.get(this.type);
     const particleNode = cc.instantiate(this.UnLockParticle);

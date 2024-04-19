@@ -98,6 +98,7 @@ export default class CellAraaControl extends cc.Component {
     const CellNodes = flat<cc.Node>(this.CellNodes).filter(CellNode => {
       return this.BoxTileNodeArea(this.CurrentTileNode, CellNode);
     });
+
     const DistanceMap: Map<number, cc.Node> = new Map([]);
     const Distances: number[] = [];
     CellNodes.forEach(CellNode => {
