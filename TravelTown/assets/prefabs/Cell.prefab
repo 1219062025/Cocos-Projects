@@ -225,6 +225,9 @@
       "__id__": 1
     },
     "_enabled": true,
+    "UnLockParticle": {
+      "__uuid__": "510a2a4a-fff5-40a5-9ba2-7cff6a47618d"
+    },
     "_id": ""
   },
   {

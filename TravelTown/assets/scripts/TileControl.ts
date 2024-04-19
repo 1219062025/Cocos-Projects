@@ -19,6 +19,8 @@ export default class TileControl extends cc.Component {
   maxLevel: number = 1;
   /** 是否处于某个缓动中 */
   inAction: boolean = false;
+  /** 是否是奖励类型 */
+  isAward: boolean = false;
 
   /** 初始化 */
   Init(type: number, row: number, col: number, parent: cc.Node, level: number = 0) {
@@ -26,9 +28,11 @@ export default class TileControl extends cc.Component {
     this.row = row;
     this.col = col;
     this.level = level;
-    this.maxLevel = TileType.get(this.type).maxLevel;
+    const TileInfo = TileType.get(this.type);
+    this.maxLevel = TileInfo.maxLevel;
+    this.isAward = TileInfo.isAward;
     this.id = Math.floor(Math.random() * (1000000 - 99999) + 99999);
-    const resUrl = `Tile${TileType.get(this.type).label}${this.level}`;
+    const resUrl = `Tile${TileInfo.label}${this.level}`;
     return new Promise<void>(resolve => {
       cc.loader.loadRes(resUrl, cc.SpriteFrame, (err, res) => {
         if (err) return;

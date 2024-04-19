@@ -5,6 +5,7 @@ import { Level } from './Config/Level';
 import { flat } from './Common/Utils';
 import TileControl from './TileControl';
 import TipsControl from './TipsControl';
+import AwardControl from './AwardControl';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -17,6 +18,9 @@ export default class CellAraaControl extends cc.Component {
 
   @property({ type: cc.Prefab, tooltip: 'TipsNode预制体' })
   TipsPrefab: cc.Prefab = null;
+
+  @property({ type: cc.Prefab, tooltip: 'AwardNode预制体' })
+  AwardPrefab: cc.Prefab = null;
 
   @property({ type: cc.Node, tooltip: '生产点节点' })
   GeneratingPoint: cc.Node = null;
@@ -89,6 +93,7 @@ export default class CellAraaControl extends cc.Component {
     this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
     this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
 
+    if (this.TouchStartPos.equals((this.TouchEndPos = event.getLocation()))) return this.ResetCurrent(false);
     // 获取接触到并且距离最近的一个格子
     const CellNodes = flat<cc.Node>(this.CellNodes).filter(CellNode => {
       return this.BoxTileNodeArea(this.CurrentTileNode, CellNode);
@@ -109,7 +114,7 @@ export default class CellAraaControl extends cc.Component {
     const hasTileNode = this.TileNodes[Cell.row] && this.TileNodes[Cell.row][Cell.col];
     if (hasTileNode) {
       // 有TileNode的话就进行匹配
-      if (this.TouchStartPos.equals(this.TouchEndPos)) return this.ResetCurrent(false);
+      if (this.CurrentTileNode === this.TileNodes[Cell.row][Cell.col]) return this.ResetCurrent(true);
       this.InspectMatchCurrent(this.TileNodes[Cell.row][Cell.col]);
     } else {
       // 不然看是不是奖励格子
@@ -162,12 +167,33 @@ export default class CellAraaControl extends cc.Component {
   }
 
   /** 检查是否匹配奖励格子 */
-  InspectMatchAward(CellNode: cc.Node) {
+  async InspectMatchAward(CellNode: cc.Node) {
     const Cell = CellNode.getComponent(CellControl);
     const CurrentTile = this.CurrentTileNode.getComponent(TileControl);
     if (!Cell.isAward) return this.ResetCurrent(true);
     if (Cell.awardMatch === CurrentTile.type) {
-      console.log(11);
+      const AwardNode = cc.instantiate(this.AwardPrefab);
+      const Award = AwardNode.getComponent(AwardControl);
+      this.TileNodes[CurrentTile.row][CurrentTile.col] = null;
+      this.CellNodes[CurrentTile.row][CurrentTile.col].getComponent(CellControl).isFillIn = false;
+      Cell.RemoveAward();
+      this.CurrentTileNode.destroy();
+      await Award.Init(CurrentTile.type, Cell.row, Cell.col, this.node);
+      Award.Play();
+      [
+        [-1, -1],
+        [-1, 0],
+        [-1, 1],
+        [0, -1],
+        [0, 1],
+        [1, -1],
+        [1, 0],
+        [1, 1]
+      ].forEach(([row, col]) => {
+        const UnLockCellNode = this.CellNodes[Cell.row + row][Cell.col + col];
+        const UnLockCell = UnLockCellNode.getComponent(CellControl);
+        UnLockCell.RemoveLock();
+      });
     } else {
       this.ResetCurrent(true);
     }

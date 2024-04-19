@@ -1,0 +1,77 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "reap",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.375,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "scale": [
+        {
+          "frame": 0,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0.8,
+            "y": 0.9
+          }
+        },
+        {
+          "frame": 0.25,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1.5,
+            "y": 1.5
+          }
+        }
+      ],
+      "anchorX": [
+        {
+          "frame": 0,
+          "value": 0.4
+        },
+        {
+          "frame": 0.125,
+          "value": 0.2
+        }
+      ],
+      "anchorY": [
+        {
+          "frame": 0,
+          "value": 0.6
+        },
+        {
+          "frame": 0.125,
+          "value": 0.8
+        }
+      ],
+      "angle": [
+        {
+          "frame": 0.375,
+          "value": 0
+        },
+        {
+          "frame": 0.75,
+          "value": 30
+        },
+        {
+          "frame": 1.375,
+          "value": -270
+        }
+      ],
+      "opacity": [
+        {
+          "frame": 1.25,
+          "value": 255
+        },
+        {
+          "frame": 1.375,
+          "value": 0
+        }
+      ]
+    }
+  },
+  "events": []
+}

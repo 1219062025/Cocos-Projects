@@ -3,6 +3,8 @@ import { CellType, TileWidth, TileHeight } from './Config/Game';
 
 @ccclass
 export default class CellControl extends cc.Component {
+  @property({ type: cc.Prefab, tooltip: 'UnLockParticle预制体' })
+  UnLockParticle: cc.Prefab = null;
   /** 格子的id */
   id: number = Infinity;
   /** 格子类型 */
@@ -43,6 +45,38 @@ export default class CellControl extends cc.Component {
         CellContentNode.active = true;
       });
     }
+  }
+
+  RemoveAward() {
+    this.isAward = false;
+    this.awardMatch = Infinity;
+    const CellContentNode = this.node.getChildByName(`CellContent`);
+    CellContentNode.getComponent(cc.Sprite).spriteFrame = null;
+    CellContentNode.active = false;
+  }
+
+  RemoveLock() {
+    const CellInfo = CellType.get(this.type);
+    const particleNode = cc.instantiate(this.UnLockParticle);
+    cc.loader.loadRes(`un${CellInfo.value[Math.floor(Math.random() * CellInfo.value.length)]}`, cc.SpriteFrame, (err, res) => {
+      if (err) return;
+      const particle = particleNode.getComponent(cc.ParticleSystem);
+      particle.spriteFrame = res;
+      particleNode.zIndex = 999;
+      particle.autoRemoveOnFinish = true;
+      particleNode.setParent(this.node.parent);
+      particleNode.setPosition(this.node.getPosition());
+      const CellContentNode = this.node.getChildByName(`CellContent`);
+      cc.tween(CellContentNode)
+        .to(0.2, { scale: 0.9 })
+        .to(0.2, { scale: 1 })
+        .call(() => {
+          CellContentNode.getComponent(cc.Sprite).spriteFrame = null;
+          CellContentNode.active = false;
+          this.type = 0;
+        })
+        .start();
+    });
   }
 
   /** 获取指定行、列的TileNode的位置 */
