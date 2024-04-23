@@ -3,6 +3,12 @@ import Level from './Config/Level';
 import { flat } from './CommonScripts/Utils';
 import TileControl from './TileControl';
 import CellControl from './CellControl';
+import NodesControl from './NodesControl';
+import EventManager from './CommonScripts/EventManager';
+import EffectCtrl from './CommonScripts/EffectCtrl';
+import EffectCtrlProgressBarTop from './CommonScripts/EffectCtrlProgressBarTop';
+import { DotsEnum } from './CommonScripts/DotsEnum';
+import FingerControl from './CommonScripts/FingerControl';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -13,6 +19,20 @@ export default class CellAreaControl extends cc.Component {
   @property({ type: cc.Prefab, tooltip: 'CellNode预制体' })
   CellPrefab: cc.Prefab = null;
 
+  @property({ type: EffectCtrl, tooltip: '控制完成弹窗、金钱增加的脚本' })
+  EffectCtrlPlayable: EffectCtrl = null;
+
+  @property({ type: EffectCtrlProgressBarTop, tooltip: '控制完成弹窗、进度条增加的脚本' })
+  EffectCtrlProgress: EffectCtrlProgressBarTop = null;
+
+  @property({ tooltip: '该场景是进度条模式吗?' })
+  isProgress: boolean = false;
+
+  @property({ type: FingerControl, tooltip: '手指' })
+  Finger: FingerControl = null;
+
+  /** 控制脚本，根据isProgress进行赋值 */
+  EffectCtrl: EffectCtrl | EffectCtrlProgressBarTop = null;
   /** 管理TileNode的对象池 */
   TileNodePool: cc.NodePool = new cc.NodePool();
   /** 所有TileNode */
@@ -23,69 +43,38 @@ export default class CellAreaControl extends cc.Component {
   TileNodeMap: Map<number, cc.Node> = new Map([]);
   /** 存储被遍历过的TileNode的队列 */
   TraversalQueue: cc.Node[] = [];
-  /** 遍历的起点TileNode的type */
-  TraversalType: number = 0;
   /** 是否处于某个操作中，如果是的话不能进行其他操作 */
   inAction: boolean = false;
 
+  /** 控制TileNode、CellNode行为的类 */
+  NodesControl: NodesControl = null;
+
   onLoad() {
+    this.onEffectCtrl();
     this.CreatePool(this.TilePrefab, this.TileNodePool, 25);
     this.GenerateCells(Level.Level1);
     this.node.parent.setContentSize(this.node.width + 20, this.node.height + 20);
     this.GenerateTiles(Level.Level1);
     this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+    this.NodesControl = new NodesControl(this);
+    this.RunFinger();
   }
 
   onTouchStart(event: cc.Event.EventTouch) {
+    if (this.inAction) return;
     const TileNode = flat<cc.Node>(this.TileNodes).find(TileNode => {
       return this.TouchTileNodeArea(event, TileNode);
     });
 
     if (TileNode) {
-      const canEliminate = this.InspectEliminate(TileNode);
-      if (canEliminate) this.Eliminate();
+      this.inAction = true;
+      this.NodesControl.MarkersWithEliminate(TileNode);
     }
   }
 
-  /** 检查所触摸的TileNode是否满足消除条件 */
-  InspectEliminate(TileNode: cc.Node) {
-    const Tile = TileNode.getComponent(TileControl);
-    this.DFSTileNode(TileNode, Tile.type);
-    if (this.TraversalQueue.length === 1) this.TraversalQueue.shift();
-    return this.TraversalQueue.length !== 0;
-  }
-
-  Eliminate() {
-    while (this.TraversalQueue.length) {
-      const TileNode = this.TraversalQueue.shift();
-      const Tile = TileNode.getComponent(TileControl);
-      Tile.Remove();
-    }
-  }
-
-  /** 深度优先遍历从起点开始所有连接在一起的TileNode */
-  DFSTileNode(StartTileNode: cc.Node, TraversalType: number) {
-    const StartTile = StartTileNode.getComponent(TileControl);
-    // 不是目标type的TileNode
-    if (StartTile.type !== TraversalType) return;
-    // 被遍历过的就不再遍历
-    if (StartTile.isTraversal) return;
-    const { row, col } = StartTile;
-    StartTile.isTraversal = true;
-    this.TraversalQueue.push(StartTileNode);
-    // 按上、右、下、左的顺序深度优先递归遍历
-    if (row > 0) {
-      this.DFSTileNode(this.TileNodes[row - 1][col], TraversalType);
-    }
-    if (col < InitiaColCount - 1) {
-      this.DFSTileNode(this.TileNodes[row][col + 1], TraversalType);
-    }
-    if (row < InitiaRowCount - 1) {
-      this.DFSTileNode(this.TileNodes[row + 1][col], TraversalType);
-    }
-    if (col > 0) {
-      this.DFSTileNode(this.TileNodes[row][col - 1], TraversalType);
-    }
+  /** 手指划动动画 */
+  RunFinger() {
+    this.Finger.Init(this.GetTilePos(0, 2));
   }
 
   /** 创建对象池 */
@@ -147,5 +136,28 @@ export default class CellAreaControl extends cc.Component {
     const boundingBox = node.getBoundingBoxToWorld();
     // 判断触摸点是否在节点的区域内
     if (boundingBox.contains(touchPos)) return true;
+  }
+
+  /** 处理 EffectCtrl 相关*/
+  onEffectCtrl() {
+    this.EffectCtrl = this.isProgress ? this.EffectCtrlProgress : this.EffectCtrlPlayable;
+    /** 完成消除的次数 */
+    let EliminatedCount = 0;
+    EventManager.on('Eliminated', () => {
+      EventManager.emit(DotsEnum.DestoryDotsEvent);
+      this.EffectCtrl.addMoneyCount();
+      if (EliminatedCount++ >= 4) {
+        this.EffectCtrl.showEndCard();
+      }
+    });
+  }
+
+  /** 获取指定行、列的TileNode的位置 */
+  GetTilePos(row, col): cc.Vec2 {
+    const BeginX = this.node.x - this.node.width / 2 + CellWidth / 2;
+    const BeginY = this.node.y + this.node.height / 2 - CellHeight / 2;
+    const targetX = BeginX + col * CellWidth;
+    const targetY = BeginY - row * CellHeight;
+    return cc.v2(targetX, targetY);
   }
 }

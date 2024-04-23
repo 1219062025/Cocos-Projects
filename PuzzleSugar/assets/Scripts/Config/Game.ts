@@ -27,15 +27,21 @@ export enum Tile {
   VerticalTile = 8,
   ColorTile = 9
 }
+export enum Category {
+  BaseTile = 1,
+  HorizontalTile = 2,
+  VerticalTile = 3,
+  ColorTile = 4
+}
 /** Tile类型Sprite映射 */
 export const TileType = new Map([
-  [Tile.RedTile, { category: 'BaseTile', path: Tile[Tile.RedTile] }],
-  [Tile.OrangeTile, { category: 'BaseTile', path: Tile[Tile.OrangeTile] }],
-  [Tile.YellowTile, { category: 'BaseTile', path: Tile[Tile.YellowTile] }],
-  [Tile.GreenTile, { category: 'BaseTile', path: Tile[Tile.GreenTile] }],
-  [Tile.BlueTile, { category: 'BaseTile', path: Tile[Tile.BlueTile] }],
-  [Tile.PurpleTile, { category: 'BaseTile', path: Tile[Tile.PurpleTile] }],
-  [Tile.HorizontalTile, { category: 'BaseTile', path: Tile[Tile.HorizontalTile] }],
-  [Tile.VerticalTile, { category: 'BaseTile', path: Tile[Tile.VerticalTile] }],
-  [Tile.ColorTile, { category: 'BaseTile', path: Tile[Tile.ColorTile] }]
+  [Tile.RedTile, { category: Category.BaseTile, path: Tile[Tile.RedTile] }],
+  [Tile.OrangeTile, { category: Category.BaseTile, path: Tile[Tile.OrangeTile] }],
+  [Tile.YellowTile, { category: Category.BaseTile, path: Tile[Tile.YellowTile] }],
+  [Tile.GreenTile, { category: Category.BaseTile, path: Tile[Tile.GreenTile] }],
+  [Tile.BlueTile, { category: Category.BaseTile, path: Tile[Tile.BlueTile] }],
+  [Tile.PurpleTile, { category: Category.BaseTile, path: Tile[Tile.PurpleTile] }],
+  [Tile.HorizontalTile, { category: Category.HorizontalTile, path: Tile[Tile.HorizontalTile] }],
+  [Tile.VerticalTile, { category: Category.VerticalTile, path: Tile[Tile.VerticalTile] }],
+  [Tile.ColorTile, { category: Category.ColorTile, path: Tile[Tile.ColorTile] }]
 ]);

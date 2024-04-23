@@ -17,6 +17,7 @@ export enum CountryMoneyCount {
   en = 500 / 5,
   id = 50000 / 5,
   in = 10000 / 5,
+  hi = 10000 / 5,
   pt = 500 / 5,
   ru = 5000 / 5,
   fil = 50000 / 5,

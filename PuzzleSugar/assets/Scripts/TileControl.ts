@@ -36,6 +36,11 @@ export default class TileControl extends cc.Component {
     }
   }
 
+  /** 摇晃 */
+  Shake() {
+    cc.tween(this.node).to(0.05, { angle: -10 }).to(0.05, { angle: 0 }).to(0.05, { angle: 10 }).to(0.05, { angle: 0 }).union().repeat(3).start();
+  }
+
   /** 下落到指定位置 */
   FallTo(row: number, col: number, isInit: boolean = false, time: number = 0.5) {
     const position = this.GetTilePos(row, col);
@@ -68,6 +73,7 @@ export default class TileControl extends cc.Component {
       particleNode.setPosition(this.node.position);
       particleNode.setParent(this.node.parent);
       particleNode.active = true;
+      this.isTraversal = false;
       this.TileNodePool.put(this.node);
     });
   }
