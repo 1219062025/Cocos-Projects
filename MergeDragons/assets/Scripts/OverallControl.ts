@@ -19,6 +19,7 @@ export default class OverallControl extends cc.Component {
   PlotNodes: cc.Node[][] = [];
 
   onLoad() {
+    // this.ctx.node.zIndex = 10000;
     this.GeneratePlot();
   }
 
@@ -36,8 +37,21 @@ export default class OverallControl extends cc.Component {
         // 由于生成地块时是从上到下，从右到左的，也就是RowPlot一整行的元素的列数都被reverse反转了，所以对应存储时也需要将列数反转
         Plot.Init(PlotType, row, RowPlot.length - 1 - col, Level.Level1);
         this.PlotNodes[row][RowPlot.length - 1 - col] = PlotNode;
+        const boundingBox = PlotNode.getBoundingBoxToWorld();
+        this.ctx.rect(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
+        this.ctx.stroke();
       });
     });
+    this.schedule(() => {
+      const winSize = cc.director.getWinSize();
+      console.log(`视图的宽：${winSize.width}，视图的高：${winSize.height}`);
+      const areaSize = this.GameArea.getContentSize();
+      console.log(`区域的宽：${areaSize.width}，区域的高：${areaSize.height}`);
+      // const boundingBox = this.GameArea.getBoundingBoxToWorld();
+      // this.ctx.clear();
+      // this.ctx.rect(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
+      // this.ctx.stroke();
+    }, 1);
     centerChildren(this.GameArea);
   }
 

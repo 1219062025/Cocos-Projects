@@ -20,7 +20,7 @@ export default class PlotControl extends cc.Component {
     const prefix = 'border_';
     const borderNode = this.node.getChildByName('border');
     const LabelNode = this.node.getChildByName('Label');
-    LabelNode.getComponent(cc.Label).string = `${this.row};${this.col}`;
+    LabelNode.getComponent(cc.Label).string = `${this.row + 1};${this.col + 1}`;
     const top = map[row - 1] !== undefined ? map[row - 1][col] : null;
     const bottom = map[row + 1] !== undefined ? map[row + 1][col] : null;
     const left = map[row][col - 1] !== undefined ? map[row][col - 1] : null;
