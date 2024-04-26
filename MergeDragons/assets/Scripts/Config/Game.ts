@@ -4,32 +4,42 @@ export const InitiaRowCount = 20;
 export const InitiaColCount = 15;
 /** 初始化有多少个地块Plot */
 export const InitiaPlotCount = InitiaRowCount * InitiaColCount;
-export enum Plot {
-  RedPlot = 1,
-  OrangePlot = 2,
-  YellowPlot = 3,
-  GreenPlot = 4,
-  BluePlot = 5,
-  PurplePlot = 6,
-  HorizontalPlot = 7,
-  VerticalPlot = 8,
-  ColorPlot = 9
+export enum Unit {
+  item0,
+  item1,
+  item2,
+  item3,
+  item4,
+  item5,
+  adorn0,
+  adorn1,
+  adorn2,
+  adorn3,
+  adorn4,
+  adorn5,
+  adorn6
 }
-export enum Category {
-  BasePlot = 1,
-  HorizontalPlot = 2,
-  VerticalPlot = 3,
-  ColorPlot = 4
+export enum UnitType {
+  Adorn,
+  Item
 }
-/** Plot类型Sprite映射 */
-export const PlotType = new Map([
-  [Plot.RedPlot, { category: Category.BasePlot, path: Plot[Plot.RedPlot] }],
-  [Plot.OrangePlot, { category: Category.BasePlot, path: Plot[Plot.OrangePlot] }],
-  [Plot.YellowPlot, { category: Category.BasePlot, path: Plot[Plot.YellowPlot] }],
-  [Plot.GreenPlot, { category: Category.BasePlot, path: Plot[Plot.GreenPlot] }],
-  [Plot.BluePlot, { category: Category.BasePlot, path: Plot[Plot.BluePlot] }],
-  [Plot.PurplePlot, { category: Category.BasePlot, path: Plot[Plot.PurplePlot] }],
-  [Plot.HorizontalPlot, { category: Category.HorizontalPlot, path: Plot[Plot.HorizontalPlot] }],
-  [Plot.VerticalPlot, { category: Category.VerticalPlot, path: Plot[Plot.VerticalPlot] }],
-  [Plot.ColorPlot, { category: Category.ColorPlot, path: Plot[Plot.ColorPlot] }]
+/** Unit映射 */
+export const UnitInfoMap = new Map([
+  [Unit.item0, { unitType: UnitType.Item, maxLevle: 1, path: Unit[Unit.item0] }],
+  [Unit.item1, { unitType: UnitType.Item, maxLevle: 2, path: Unit[Unit.item1] }],
+  [Unit.item2, { unitType: UnitType.Item, maxLevle: 2, path: Unit[Unit.item2] }],
+  [Unit.item3, { unitType: UnitType.Item, maxLevle: 1, path: Unit[Unit.item3] }],
+  [Unit.item4, { unitType: UnitType.Item, maxLevle: 1, path: Unit[Unit.item4] }],
+  [Unit.item5, { unitType: UnitType.Item, maxLevle: 1, path: Unit[Unit.item5] }],
+  [Unit.adorn0, { unitType: UnitType.Adorn, path: Unit[Unit.adorn0] }],
+  [Unit.adorn1, { unitType: UnitType.Adorn, path: Unit[Unit.adorn1] }],
+  [Unit.adorn2, { unitType: UnitType.Adorn, path: Unit[Unit.adorn2] }],
+  [Unit.adorn3, { unitType: UnitType.Adorn, path: Unit[Unit.adorn3] }],
+  [Unit.adorn4, { unitType: UnitType.Adorn, path: Unit[Unit.adorn4] }],
+  [Unit.adorn5, { unitType: UnitType.Adorn, path: Unit[Unit.adorn5] }],
+  [Unit.adorn6, { unitType: UnitType.Adorn, path: Unit[Unit.adorn6] }]
 ]);
+export enum PlotType {
+  Empty,
+  Base
+}
