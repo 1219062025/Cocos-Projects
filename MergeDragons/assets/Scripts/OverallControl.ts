@@ -5,12 +5,16 @@ import PlotControl from './PlotControl';
 import UnitControl from './UnitControl';
 import ItemUnit from './ItemUnit';
 import AdornUnit from './AdornUnit';
+import EventManager from './CommonScripts/EventManager';
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class OverallControl extends cc.Component {
   @property({ type: cc.Node, tooltip: '游戏区域节点' })
   GameArea: cc.Node = null;
+  @property({ type: cc.Node, tooltip: '提示填充区域节点' })
+  SelectNode: cc.Node = null;
 
   @property({ type: cc.Prefab, tooltip: '地块Plot预制体' })
   PlotPrefab: cc.Prefab = null;
@@ -22,6 +26,19 @@ export default class OverallControl extends cc.Component {
   /** 所有的单位UnitNode集合 */
   UnitNodes: cc.Node[][] = [];
 
+  _CurrentUnitNode: cc.Node = null;
+  get CurrentUnitNode() {
+    return this._CurrentUnitNode;
+  }
+  set CurrentUnitNode(value: cc.Node) {
+    if (value === null) {
+      this._CurrentUnitNode.zIndex = 0;
+    } else {
+      value.zIndex = 100;
+    }
+    this._CurrentUnitNode = value;
+  }
+
   /** ___DEBUG START___ */
   @property(cc.Graphics)
   ctx: cc.Graphics = null;
@@ -30,28 +47,28 @@ export default class OverallControl extends cc.Component {
   onLoad() {
     this.GeneratePlot(Level.Level1.Map);
     this.GenerateUnit(Level.Level1.LevelUnitInfos);
-    this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+    EventManager.on('TouchStart', this.onTouchStart, this);
+    this.GameArea.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+    this.GameArea.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+    this.GameArea.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
   }
 
-  onTouchStart(event: cc.Event.EventTouch) {}
+  onTouchStart({ row, col }) {
+    this.CurrentUnitNode = this.UnitNodes[row][col];
+    const CurrentUnit = this.CurrentUnitNode.getComponent(UnitControl);
+    // this.SelectNode.setPosition(this.GetPlotPos(CurrentUnit.row, CurrentUnit.col));
+    // this.SelectNode.zIndex = 99;
+  }
 
-  TouchInUnitArea(event: cc.Event.EventTouch) {
-    const touchPos = event.getLocation();
-    const MatchUnitNodes = flat<cc.Node>(this.UnitNodes).filter(UnitNode => {
-      const boundingBox = UnitNode.getBoundingBoxToWorld();
-      return boundingBox.contains(touchPos);
-    });
-    MatchUnitNodes.find(UnitNode => {
-      const localPos = UnitNode.convertTouchToNodeSpaceAR(event.touch);
-      const spriteFrame = UnitNode.getComponent(cc.Sprite).spriteFrame;
-      // 获取精灵帧的纹理
-      const texture = spriteFrame.getTexture();
+  onTouchMove(event: cc.Event.EventTouch) {
+    if (this.CurrentUnitNode === null) return;
+    this.CurrentUnitNode.setPosition(this.GameArea.convertToNodeSpaceAR(event.getLocation()));
+  }
 
-      // 获取精灵帧的纹理数据
-      const pixel = new Uint8Array(4);
-      // cc.Texture2D
-      // .getPixels(spriteFrame.getRect(), pixel);
-    });
+  onTouchEnd(event: cc.Event.EventTouch) {
+    if (this.CurrentUnitNode === null) return;
+    this.SelectNode.zIndex = 0;
+    this.CurrentUnitNode = null;
   }
 
   /** 生成地块Plot */
@@ -71,14 +88,6 @@ export default class OverallControl extends cc.Component {
         this.PlotNodes[row][RowPlot.length - 1 - col] = PlotNode;
       });
     });
-    /** ___DEBUG START___ */
-    // this.schedule(() => {
-    //   const winSize = cc.director.getWinSize();
-    //   console.log(`视图的宽：${winSize.width}，视图的高：${winSize.height}`);
-    //   const areaSize = this.GameArea.getContentSize();
-    //   console.log(`区域的宽：${areaSize.width}，区域的高：${areaSize.height}`);
-    // }, 1);
-    /** ___DEBUG END___ */
     centerChildren(this.GameArea);
   }
 
@@ -99,7 +108,8 @@ export default class OverallControl extends cc.Component {
       if (this.UnitNodes[row] === undefined) this.UnitNodes[row] = [];
       this.UnitNodes[row][col] = UnitNode;
       UnitNode.setParent(this.GameArea);
-      UnitNode.setPosition(this.GetPlotPos(row, col));
+      const position = this.GetPlotPos(row, col);
+      UnitNode.setPosition(position.x, position.y);
     });
   }
 
@@ -117,6 +127,7 @@ export default class OverallControl extends cc.Component {
     return TargetPos;
   }
 
+  //#region
   /** ___DEBUG START___ */
   DebugStrokeGameAreaRect() {
     this.schedule(() => {
@@ -181,4 +192,5 @@ export default class OverallControl extends cc.Component {
     });
   }
   /** ___DEBUG END___ */
+  //#endregion
 }

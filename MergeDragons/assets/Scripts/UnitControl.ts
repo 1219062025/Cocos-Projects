@@ -1,3 +1,4 @@
+import EventManager from './CommonScripts/EventManager';
 import { Unit, UnitType, UnitInfoMap } from './Config/Game';
 const { ccclass, property, executeInEditMode } = cc._decorator;
 
@@ -12,6 +13,13 @@ export default class UnitControl extends cc.Component {
     this.type = type;
     this.row = row;
     this.col = col;
+    this.node.on(
+      cc.Node.EventType.TOUCH_START,
+      (event: cc.Event.EventTouch) => {
+        EventManager.emit('TouchStart', { row, col });
+      },
+      this
+    );
   }
 
   GetPlotPos(row: number, col: number) {

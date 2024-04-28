@@ -13,7 +13,9 @@ export default class AdornUnit extends UnitControl {
       if (err) return new Error(`${row + 1}行${col + 1}列的Adorn单位加载资源失败`);
       const sprite = this.node.getComponent(cc.Sprite);
       sprite.spriteFrame = res;
-      this.node.anchorY = 0.1;
+
+      const offsetY = this.node.height * 0.4 * this.node.scaleY;
+      this.node.setPosition(this.node.x, this.node.y + offsetY);
     });
   }
 }

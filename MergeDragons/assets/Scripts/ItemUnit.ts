@@ -17,6 +17,9 @@ export default class ItemUnit extends UnitControl {
       if (err) return new Error(`${row + 1}行${col + 1}列的Item单位加载资源失败`);
       const sprite = this.node.getComponent(cc.Sprite);
       sprite.spriteFrame = res;
+
+      const offsetY = this.node.height * 0.2 * this.node.scaleY;
+      this.node.setPosition(this.node.x, this.node.y + offsetY);
     });
   }
 }
