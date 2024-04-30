@@ -1,0 +1,14 @@
+export default class Point {
+  x: number;
+  y: number;
+
+  constructor(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
+
+  equals(point: Point) {
+    if (!(point instanceof Point)) return false;
+    return this.x === point.x && this.y === point.y;
+  }
+}

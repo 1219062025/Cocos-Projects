@@ -1,11 +1,10 @@
 import Level, { LevelUnitInfo } from './Config/Level';
 import { InitiaRowCount, InitiaColCount, UnitInfoMap, UnitType, Unit } from './Config/Game';
-import { flat, centerChildren } from './CommonScripts/Utils';
+import { flat, centerChildren, InRange } from './CommonScripts/Utils';
 import PlotControl from './PlotControl';
 import UnitControl from './UnitControl';
-import ItemUnit from './ItemUnit';
-import AdornUnit from './AdornUnit';
 import EventManager from './CommonScripts/EventManager';
+import { TouchPosInfo } from './ToolsClass';
 
 const { ccclass, property } = cc._decorator;
 
@@ -26,18 +25,21 @@ export default class OverallControl extends cc.Component {
   /** 所有的单位UnitNode集合 */
   UnitNodes: cc.Node[][] = [];
 
-  _CurrentUnitNode: cc.Node = null;
-  get CurrentUnitNode() {
-    return this._CurrentUnitNode;
+  /** 当前选中的UnitNode */
+  CurrentUnitNode: cc.Node = null;
+
+  _CurrentUnit: UnitControl = null;
+  /** 当前选中的UnitNode的Unit脚本 */
+  get CurrentUnit() {
+    if (this.CurrentUnitNode === null) return null;
+    return this.CurrentUnitNode.getComponent(UnitControl);
   }
-  set CurrentUnitNode(value: cc.Node) {
-    if (value === null) {
-      this._CurrentUnitNode.zIndex = 0;
-    } else {
-      value.zIndex = 100;
-    }
-    this._CurrentUnitNode = value;
-  }
+
+  /** 触摸关系 */
+  TouchPosInfo: TouchPosInfo = null;
+
+  /** 拖动着的UnitNode是否落地到某个地块上了 */
+  isSettle: boolean = false;
 
   /** ___DEBUG START___ */
   @property(cc.Graphics)
@@ -45,30 +47,103 @@ export default class OverallControl extends cc.Component {
   /** ___DEBUG END___ */
 
   onLoad() {
+    this.TouchPosInfo = new TouchPosInfo();
     this.GeneratePlot(Level.Level1.Map);
     this.GenerateUnit(Level.Level1.LevelUnitInfos);
     EventManager.on('TouchStart', this.onTouchStart, this);
     this.GameArea.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
     this.GameArea.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
     this.GameArea.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
+    cc.director.getCollisionManager().enabled = true;
   }
 
-  onTouchStart({ row, col }) {
-    this.CurrentUnitNode = this.UnitNodes[row][col];
-    const CurrentUnit = this.CurrentUnitNode.getComponent(UnitControl);
-    // this.SelectNode.setPosition(this.GetPlotPos(CurrentUnit.row, CurrentUnit.col));
-    // this.SelectNode.zIndex = 99;
+  onTouchStart(event: cc.Event.EventTouch, { row, col }) {
+    const CurrentUnitNode = this.UnitNodes[row][col];
+    const CurrentUnit = CurrentUnitNode.getComponent(UnitControl);
+
+    // 选中的是ItemUnit时才可进行后续操作
+    if (CurrentUnit.unitType === UnitType.Item) {
+      // 设置当前选中的UnitNode
+      this.CurrentUnitNode = CurrentUnitNode;
+
+      const TouchPos = this.GameArea.convertToNodeSpaceAR(event.getLocation());
+
+      // 设置提示区域
+      this.SelectNode.setPosition(this.GetPlotPos(this.CurrentUnit.row, this.CurrentUnit.col));
+      this.SelectNode.zIndex = 1;
+
+      this.TouchPosInfo.BeginTouch(event.getLocation());
+      // 计算触摸点与UnitNode的相对位置
+      this.TouchPosInfo.offsetUnitNode = this.CurrentUnitNode.getPosition().sub(TouchPos);
+      // 计算触摸点与SelectNode的相对位置
+      this.TouchPosInfo.offsetSelect = this.SelectNode.getPosition().sub(TouchPos);
+    }
   }
 
   onTouchMove(event: cc.Event.EventTouch) {
     if (this.CurrentUnitNode === null) return;
-    this.CurrentUnitNode.setPosition(this.GameArea.convertToNodeSpaceAR(event.getLocation()));
+    /** 触摸点在游戏区域GameArea的局部坐标系中的位置 */
+    const InGameAreaPoint = this.GameArea.convertToNodeSpaceAR(event.getLocation());
+
+    // this.scheduleOnce(() => {
+    //   // 保持TouchStart时触摸点与UnitNode的相对位置进行拖动
+    //   this.CurrentUnitNode.setPosition(cc.v2(InGameAreaPoint.x + this.TouchPosInfo.offsetUnitNode.x, InGameAreaPoint.y + this.TouchPosInfo.offsetUnitNode.y));
+    // }, 0.08);
+
+    // // 保持TouchStart时触摸点与Select的相对位置进行拖动
+    // this.SelectNode.setPosition(cc.v2(InGameAreaPoint.x + this.TouchPosInfo.offsetSelect.x, InGameAreaPoint.y + this.TouchPosInfo.offsetSelect.y));
+
+    this.InspectInPlotArea(event);
+  }
+
+  InspectInPlotArea(event: cc.Event.EventTouch) {
+    if (this.CurrentUnitNode === null) return;
+    const TouchPos = event.getLocation();
+    /** 就检查当前所处地块Plot上下左右四个地块 */
+    const Ranks = [
+      [this.CurrentUnit.row, this.CurrentUnit.col - 1],
+      [this.CurrentUnit.row, this.CurrentUnit.col + 1],
+      [this.CurrentUnit.row - 1, this.CurrentUnit.col],
+      [this.CurrentUnit.row + 1, this.CurrentUnit.col]
+    ].find(([inspectRow, inspectCol]) => {
+      if (!InRange(inspectRow, 0, InitiaRowCount - 1) || !InRange(inspectCol, 0, InitiaColCount - 1)) return;
+      if (!this.PlotNodes[inspectRow][inspectCol]) return;
+      // 判断触摸点是否已经进入了其他地块的区域，这里的区域指的是Plot预制体上设置的多边形碰撞组件
+      const PlotNode = this.PlotNodes[inspectRow][inspectCol];
+      const colliderPoints = PlotNode.getComponent(cc.PolygonCollider).points.map(point => {
+        return PlotNode.convertToWorldSpaceAR(point);
+      });
+      return cc.Intersection.pointInPolygon(TouchPos, colliderPoints);
+    });
+
+    if (Ranks) {
+      const [row, col] = Ranks;
+      const UnitNode = this.UnitNodes[row][col];
+      if (UnitNode) {
+        // 如果目标地块已经存在UnitNode时
+      } else {
+        this.SetUnitNodeRanks(this.CurrentUnitNode, row, col);
+        this.CurrentUnit.SetUnitNodePosition(this.GetPlotPos(row, col));
+        this.SelectNode.setPosition(this.GetPlotPos(row, col));
+      }
+    }
   }
 
   onTouchEnd(event: cc.Event.EventTouch) {
     if (this.CurrentUnitNode === null) return;
     this.SelectNode.zIndex = 0;
     this.CurrentUnitNode = null;
+    // 清除所有定时器
+    this.unscheduleAllCallbacks();
+  }
+
+  SetUnitNodeRanks(UnitNode: cc.Node, targetRow: number, targetCol: number) {
+    const Unit = UnitNode.getComponent(UnitControl);
+    const { row: originRow, col: originCol } = Unit;
+    this.UnitNodes[targetRow][targetCol] = UnitNode;
+    this.UnitNodes[originRow][originCol] = null;
+    Unit.row = targetRow;
+    Unit.col = targetCol;
   }
 
   /** 生成地块Plot */
@@ -93,23 +168,25 @@ export default class OverallControl extends cc.Component {
 
   /** 生成单位Unit */
   GenerateUnit(LevelUnitInfos: LevelUnitInfo[]) {
+    for (let i = 0; i < InitiaRowCount; i++) {
+      this.UnitNodes[i] = new Array(InitiaColCount).fill(null);
+    }
     LevelUnitInfos.forEach(LevelUnitInfo => {
       const UnitNode = cc.instantiate(this.UnitPrefab);
       /** 单位Unit在当前关卡的信息 */
       const { type, row, col, level } = LevelUnitInfo;
-      // 根据单位类别unitType调用对应派生类的初始化Init方法
-      if (UnitInfoMap.get(type).unitType === UnitType.Item) {
-        const Item = UnitNode.getComponent(ItemUnit);
-        Item.Init(type, row, col, level);
-      } else {
-        const Adorn = UnitNode.getComponent(AdornUnit);
-        Adorn.Init(type, row, col);
-      }
-      if (this.UnitNodes[row] === undefined) this.UnitNodes[row] = [];
+
+      // 初始化
+      const Unit = UnitNode.getComponent(UnitControl);
+      Unit.Init(type, row, col, level);
+
+      // 存储到UnitNode集合中
       this.UnitNodes[row][col] = UnitNode;
-      UnitNode.setParent(this.GameArea);
+
+      // 设置生成的UnitNode的状态
       const position = this.GetPlotPos(row, col);
-      UnitNode.setPosition(position.x, position.y);
+      UnitNode.setParent(this.GameArea);
+      Unit.SetUnitNodePosition(cc.v2(position.x, position.y));
     });
   }
 
@@ -119,7 +196,7 @@ export default class OverallControl extends cc.Component {
     return PlotNode.getPosition();
   }
 
-  /** 地块Plot初始化时获取其位置 */
+  /** 地块Plot初始化时获取其位置，锚点为最右上角的地块 */
   InitPlotPos(row: number, col: number) {
     const RowPos = cc.v2(0, 0).add(cc.v2(40, -48)).multiply(cc.v2(row, row));
     const ColPos = cc.v2(-95, -20).mul(col);
@@ -156,38 +233,6 @@ export default class OverallControl extends cc.Component {
         const boundingBox = UnitNode.getBoundingBoxToWorld();
         this.ctx.rect(UnitNode.x - boundingBox.width / 2, UnitNode.y - boundingBox.height / 2, boundingBox.width, boundingBox.height);
         this.ctx.stroke();
-      });
-    });
-  }
-
-  te() {
-    const a = [
-      [2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0],
-      [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2],
-      [2, 2, 2, 2, 2, 2, 2, ['obj_1', 3, 2], 2, ['obj_6', 4, 2], 0, ['obj_5', 2, 2], 2, 2, 2],
-      [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2],
-      [2, 2, 2, 2, 2, 2, 2, ['obj_5', 2, 2], 2, ['obj_4', 1, 2], 0, 2, 2, 2, 2],
-      [2, 2, 2, 2, 2, 2, ['obj_3', 3, 2], 2, 2, 2, 0, 2, 2, 2, 2],
-      [2, 2, 2, 2, 2, 2, 2, ['obj_6', 2, 2], 2, 2, 0, 0, 2, 2, 2],
-      [2, 2, 2, 2, 2, ['obj_4', 1, 2], ['obj_6', 2, 2], 2, 2, 2, ['obj_5', 1, 2], 0, 2, 2, 2],
-      [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2],
-      [2, 2, 2, 2, 2, 2, 2, ['obj_4', 1], ['obj_2', 2, 2], 2, 2, 0, 2, 2, 2],
-      [2, 2, 2, 2, 2, 2, ['obj_3', 1, 2], 1, ['obj_1', 1], ['obj_2', 1, 2], 2, 0, 2, 2, 2],
-      [0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 2, 2, 2],
-      [0, 0, 0, ['obj_2', 1, 2], 1, 1, 2, 2, 0, 0, 0, 0, 2, 2, 2],
-      [0, 0, 0, ['obj_1', 2, 2], 1, 1, 1, ['obj_1', 2, 2], 2, 0, 0, 0, 2, 2, 2],
-      [0, 0, ['obj_3', 1, 2], 1, ['obj_1', 1], 1, ['obj_1', 1], 1, 2, 0, 0, 0, 2, 2, 2],
-      [0, 0, 2, 2, 1, 1, 1, ['obj_3', 1, 2], 2, 0, 0, 0, 2, 2, 2],
-      [0, 0, 0, ['obj_5', 1, 2], 2, ['obj_2', 2, 2], ['obj_6', 4], 2, 2, 0, 0, 0, 2, 2, 2],
-      [2, ['obj_2', 1, 2], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [2, ['obj_3', 1, 2], 0, ['obj_6', 1, 2], 2, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0],
-      [2, 0, 0, 2, ['obj_6', 1, 2], 0, 2, 2, 2, 0, 0, 0, 0, 0, 0]
-    ];
-    a.forEach((rowData, row) => {
-      rowData.forEach((data, col) => {
-        if (typeof data !== 'number') {
-          console.log(`{ type: Unit.item0, level: ${(data[1] as number) - 1}, row: ${row}, col: ${col} }`);
-        }
       });
     });
   }

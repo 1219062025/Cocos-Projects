@@ -63,4 +63,13 @@ export default class PlotControl extends cc.Component {
       });
     });
   }
+
+  // /** 设置该地块的UnitNode */
+  // SetUnitNode(UnitNode: cc.Node) {
+  //   this.UnitNode = UnitNode;
+  // }
+
+  // GetUnitNode() {
+  //   return this.UnitNode;
+  // }
 }

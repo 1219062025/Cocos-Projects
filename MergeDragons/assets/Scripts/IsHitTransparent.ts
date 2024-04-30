@@ -51,6 +51,7 @@ export default class IsHitTransparent extends cc.Component {
       // data就是这个texture的rgba值数组
       Camera.targetTexture = rt;
       Camera.render(undefined);
+      2;
       //图集里的图片可能会旋转
       if (spriteFrame.isRotated()) {
         data = rt.readPixels(null, rect.x + pointInRect.y, rect.y + pointInRect.x, 1, 1);
