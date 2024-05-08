@@ -1,10 +1,12 @@
 import Level, { LevelUnitInfo } from './Config/Level';
 import { InitiaRowCount, InitiaColCount, UnitInfoMap, UnitType, Unit } from './Config/Game';
-import { flat, centerChildren, InRange } from './CommonScripts/Utils';
+import { flat, centerChildren, calculateBoundingBox, debounce, InRange } from './CommonScripts/Utils';
 import PlotControl from './PlotControl';
 import UnitControl from './UnitControl';
 import EventManager from './CommonScripts/EventManager';
 import { TouchPosInfo } from './ToolsClass';
+import QuadTree from './QuadTree';
+import QuadNode from './QuadNode';
 
 const { ccclass, property } = cc._decorator;
 
@@ -35,11 +37,33 @@ export default class OverallControl extends cc.Component {
     return this.CurrentUnitNode.getComponent(UnitControl);
   }
 
+  /** 选中的UnitNode拖动到地块上时，如果地块上存在另一个UnitNode，则那个UnitNode存储在PlotUnitNode中 */
+  PlotUnitNode: cc.Node = null;
+  /** PlotUnitNode上的Unit脚本 */
+  _PlotUnit: UnitControl = null;
+  get PlotUnit() {
+    if (this.PlotUnitNode === null) return null;
+    return this.PlotUnitNode.getComponent(UnitControl);
+  }
+
+  /** 拖动当前选中的UnitNode时移动到哪个地块了 */
+  _MoveTargetPlotNode: cc.Node = null;
+  get MoveTargetPlotNode() {
+    return this._MoveTargetPlotNode;
+  }
+
+  set MoveTargetPlotNode(value: cc.Node) {
+    if (value !== null && value !== this._MoveTargetPlotNode) {
+      // this.InspectEqualUnit()
+    }
+    this._MoveTargetPlotNode = value;
+  }
+
   /** 触摸关系 */
   TouchPosInfo: TouchPosInfo = null;
 
-  /** 拖动着的UnitNode是否落地到某个地块上了 */
-  isSettle: boolean = false;
+  /** 地块Plot四叉树 */
+  PlotQuadTree: QuadTree<cc.Node> = null;
 
   /** ___DEBUG START___ */
   @property(cc.Graphics)
@@ -47,9 +71,18 @@ export default class OverallControl extends cc.Component {
   /** ___DEBUG END___ */
 
   onLoad() {
+    // 初始化触摸相关
     this.TouchPosInfo = new TouchPosInfo();
+    // 生成地块Plot
     this.GeneratePlot(Level.Level1.Map);
+    // 生成单位Unit
     this.GenerateUnit(Level.Level1.LevelUnitInfos);
+    // canvas节点居中
+    cc.Canvas.instance.node.setPosition(0, 0);
+    // 初始化四叉树
+    this.InitQuadTree();
+
+    // 挂载事件
     EventManager.on('TouchStart', this.onTouchStart, this);
     this.GameArea.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
     this.GameArea.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
@@ -65,85 +98,173 @@ export default class OverallControl extends cc.Component {
     if (CurrentUnit.unitType === UnitType.Item) {
       // 设置当前选中的UnitNode
       this.CurrentUnitNode = CurrentUnitNode;
-
-      const TouchPos = this.GameArea.convertToNodeSpaceAR(event.getLocation());
-
       // 设置提示区域
-      this.SelectNode.setPosition(this.GetPlotPos(this.CurrentUnit.row, this.CurrentUnit.col));
+      this.SelectNode.setPosition(this.CurrentUnitNode.getPosition());
       this.SelectNode.zIndex = 1;
-
-      this.TouchPosInfo.BeginTouch(event.getLocation());
-      // 计算触摸点与UnitNode的相对位置
-      this.TouchPosInfo.offsetUnitNode = this.CurrentUnitNode.getPosition().sub(TouchPos);
-      // 计算触摸点与SelectNode的相对位置
-      this.TouchPosInfo.offsetSelect = this.SelectNode.getPosition().sub(TouchPos);
+      this.SelectNode.opacity = 255;
     }
   }
 
   onTouchMove(event: cc.Event.EventTouch) {
     if (this.CurrentUnitNode === null) return;
-    /** 触摸点在游戏区域GameArea的局部坐标系中的位置 */
-    const InGameAreaPoint = this.GameArea.convertToNodeSpaceAR(event.getLocation());
+    /** 触摸点当前所在的地块PlotNode */
+    const TargetPlotNode = this.GetPointInPlot(event);
+    // 存在目标地块
+    if (TargetPlotNode) {
+      this.MoveTargetPlotNode = TargetPlotNode;
+      const TargetPlot = TargetPlotNode.getComponent(PlotControl);
+      const { row, col } = TargetPlot;
+      /** 目标地块上的UnitNode */
+      const PlotUnitNode = this.UnitNodes[row][col];
+      /** ___DEBUG START___ */
+      this.TweenSetMoveToPlot(this.CurrentUnitNode, row, col);
+      this.TweenSetMoveToPlot(this.SelectNode, row, col);
+      /** ___DEBUG END___ */
 
-    // this.scheduleOnce(() => {
-    //   // 保持TouchStart时触摸点与UnitNode的相对位置进行拖动
-    //   this.CurrentUnitNode.setPosition(cc.v2(InGameAreaPoint.x + this.TouchPosInfo.offsetUnitNode.x, InGameAreaPoint.y + this.TouchPosInfo.offsetUnitNode.y));
-    // }, 0.08);
-
-    // // 保持TouchStart时触摸点与Select的相对位置进行拖动
-    // this.SelectNode.setPosition(cc.v2(InGameAreaPoint.x + this.TouchPosInfo.offsetSelect.x, InGameAreaPoint.y + this.TouchPosInfo.offsetSelect.y));
-
-    this.InspectInPlotArea(event);
-  }
-
-  InspectInPlotArea(event: cc.Event.EventTouch) {
-    if (this.CurrentUnitNode === null) return;
-    const TouchPos = event.getLocation();
-    /** 就检查当前所处地块Plot上下左右四个地块 */
-    const Ranks = [
-      [this.CurrentUnit.row, this.CurrentUnit.col - 1],
-      [this.CurrentUnit.row, this.CurrentUnit.col + 1],
-      [this.CurrentUnit.row - 1, this.CurrentUnit.col],
-      [this.CurrentUnit.row + 1, this.CurrentUnit.col]
-    ].find(([inspectRow, inspectCol]) => {
-      if (!InRange(inspectRow, 0, InitiaRowCount - 1) || !InRange(inspectCol, 0, InitiaColCount - 1)) return;
-      if (!this.PlotNodes[inspectRow][inspectCol]) return;
-      // 判断触摸点是否已经进入了其他地块的区域，这里的区域指的是Plot预制体上设置的多边形碰撞组件
-      const PlotNode = this.PlotNodes[inspectRow][inspectCol];
-      const colliderPoints = PlotNode.getComponent(cc.PolygonCollider).points.map(point => {
-        return PlotNode.convertToWorldSpaceAR(point);
-      });
-      return cc.Intersection.pointInPolygon(TouchPos, colliderPoints);
-    });
-
-    if (Ranks) {
-      const [row, col] = Ranks;
-      const UnitNode = this.UnitNodes[row][col];
-      if (UnitNode) {
-        // 如果目标地块已经存在UnitNode时
+      // this.CurrentUnitNode.setPosition(this.GetPlotPos(row, col));
+      // this.SelectNode.setPosition(this.GetPlotPos(row, col));
+      if (PlotUnitNode && PlotUnitNode !== this.CurrentUnitNode) {
+        // 如果地块上有单位UnitNode了且不是当前选中的UnitNode时
+        this.CurrentUnit.SetZIndex(row + 1);
       } else {
-        this.SetUnitNodeRanks(this.CurrentUnitNode, row, col);
-        this.CurrentUnit.SetUnitNodePosition(this.GetPlotPos(row, col));
-        this.SelectNode.setPosition(this.GetPlotPos(row, col));
+        this.CurrentUnit.SetZIndex(row);
       }
     }
   }
 
   onTouchEnd(event: cc.Event.EventTouch) {
     if (this.CurrentUnitNode === null) return;
+    /** 当前选中的UnitNode所处位置的地块PlotNode（注意：这里的“所处位置”是指position，而不是行、列） */
+    const TargetPlotNode = this.MoveTargetPlotNode || this.GetPointInPlot(event) || this.GetUnitInPlot(this.CurrentUnitNode);
+    // 存在目标地块
+    if (TargetPlotNode) {
+      const TargetPlot = TargetPlotNode.getComponent(PlotControl);
+      const { row: TargetPlotRow, col: TargetPlotCol } = TargetPlot;
+      const { row: OriginPlotRow, col: OriginPlotCol } = this.CurrentUnit;
+      /** 目标地块上的UnitNode */
+      const PlotUnitNode = this.UnitNodes[TargetPlotRow][TargetPlotCol];
+
+      // 放开触摸时所处地块已经存在UnitNode了那就得进行处理
+      if (PlotUnitNode && PlotUnitNode !== this.CurrentUnitNode) {
+        const PlotUnit = PlotUnitNode.getComponent(UnitControl);
+        /** 相邻空地块的行、列信息，如果不存在相邻空地块时为undefined */
+        const Ranks = this.InspectAdjoinEmptyPlot(PlotUnit.row, PlotUnit.col);
+        if (Ranks) {
+          // 如果所处地块相邻有空地块，那就让原本的UnitNode移动到空地块上，并把当前选中的UnitNode放置到此处
+          const { EmptyPlotRow, EmptyPlotCol } = Ranks;
+          if (EmptyPlotRow === OriginPlotRow && EmptyPlotCol === OriginPlotCol) {
+            // 空地块是当前选中的UnitNode所处的地块，进行交换操作
+            this.SwapUnitNodeRanks(PlotUnitNode, this.CurrentUnitNode);
+          } else {
+            // 先设置原本的UnitNode的行、列为空地块Plot的行、列
+            this.SetUnitNodeRanks(PlotUnitNode, EmptyPlotRow, EmptyPlotCol);
+            // 再放置选中UnitNode
+            this.SetUnitNodeRanks(this.CurrentUnitNode, TargetPlotRow, TargetPlotCol);
+          }
+          // 移动原本的UnitNode以及设置层级
+          this.TweenSetMoveToPlot(PlotUnitNode, EmptyPlotRow, EmptyPlotCol);
+          PlotUnit.SetZIndex(EmptyPlotRow);
+          this.CurrentUnit.SetZIndex(TargetPlotRow);
+        } else {
+          // 如果所处地块相邻没有空地块，那就让当前选中的UnitNode回归之前的位置
+          this.TweenSetMoveToPlot(this.CurrentUnitNode, OriginPlotRow, OriginPlotCol);
+          this.CurrentUnit.SetZIndex(OriginPlotRow);
+        }
+      } else {
+        // 放开触摸时所处地块不存在UnitNode的话就直接设置当前选中的UnitNode到该地块Plot上
+        this.SetUnitNodeRanks(this.CurrentUnitNode, TargetPlotRow, TargetPlotCol);
+      }
+    }
+
     this.SelectNode.zIndex = 0;
+    this.SelectNode.opacity = 0;
     this.CurrentUnitNode = null;
-    // 清除所有定时器
-    this.unscheduleAllCallbacks();
+    this.MoveTargetPlotNode = null;
   }
 
-  SetUnitNodeRanks(UnitNode: cc.Node, targetRow: number, targetCol: number) {
+  /** 平滑缓动的移动UnitNode */
+  TweenSetMoveToPlot(node: cc.Node, row: number, col: number) {
+    const position = this.GetPlotPos(row, col);
+    const tween = (cc.tween() as cc.Tween).to(0.12, { position });
+
+    (cc.tween(node) as cc.Tween)
+      .then(tween)
+      .call(() => {})
+      .start();
+  }
+
+  /** 直接通过UnitNode的位置信息确定其当前所处地块Plot */
+  GetUnitInPlot(UnitNode: cc.Node) {
+    const TargetPlotNode = flat<cc.Node>(this.PlotNodes).find(PlotNode => {
+      return PlotNode.getPosition().equals(UnitNode.getPosition());
+    });
+    return TargetPlotNode;
+  }
+
+  /** 获取触摸点当前所在的地块PlotNode */
+  GetPointInPlot(event: cc.Event.EventTouch) {
+    /** 触摸点在游戏区域GameArea的局部坐标系中的位置 */
+    const InGameAreaPoint = this.GameArea.convertToNodeSpaceAR(event.getLocation());
+    /** 根据触摸点搜索四叉树后得到的触摸点所匹配的子树中所有的数据信息 */
+    const MatchedNodes = this.PlotQuadTree.Search(InGameAreaPoint.x, InGameAreaPoint.y);
+    /** 触摸点与之多边形碰撞组件产生了交点的地块 */
+    return MatchedNodes.find(PlotNode => {
+      const colliderPoints = PlotNode.getComponent(cc.PolygonCollider).points.map(point => {
+        return PlotNode.convertToWorldSpaceAR(point);
+      });
+      return cc.Intersection.pointInPolygon(event.getLocation(), colliderPoints);
+    });
+  }
+
+  /** 检查UnitNdoe相邻位置有无相同的Unit（检测顺序为上、下、左、右） */
+  InspectAdjoinEqualUnit(UnitNode: cc.Node) {}
+
+  /** 检查指定行、列相邻的8个地块有没有空地块 */
+  InspectAdjoinEmptyPlot(row: number, col: number) {
+    const Ranks = [
+      [row - 1, col - 1],
+      [row - 1, col],
+      [row - 1, col + 1],
+      [row, col - 1],
+      [row, col + 1],
+      [row + 1, col - 1],
+      [row + 1, col],
+      [row + 1, col + 1]
+    ].find(([row, col]) => {
+      const PlotNode = this.PlotNodes[row][col];
+      if (!PlotNode) return false;
+      const UnitNode = this.UnitNodes[row][col];
+      if (UnitNode && UnitNode !== this.CurrentUnitNode) return false;
+      return true;
+    });
+
+    return Ranks ? { EmptyPlotRow: Ranks[0], EmptyPlotCol: Ranks[1] } : undefined;
+  }
+
+  /** 设置UnitNode到指定行、列地块Plot的位置，请清除原地块Plot上的信息 */
+  SetUnitNodeRanks(UnitNode: cc.Node, TargetPlotRow: number, TargetPlotCol: number) {
     const Unit = UnitNode.getComponent(UnitControl);
-    const { row: originRow, col: originCol } = Unit;
-    this.UnitNodes[targetRow][targetCol] = UnitNode;
-    this.UnitNodes[originRow][originCol] = null;
-    Unit.row = targetRow;
-    Unit.col = targetCol;
+    /** 原地块的行、列 */
+    const { row: OriginPlotRow, col: OriginPlotCol } = Unit;
+    if (TargetPlotRow === OriginPlotRow && TargetPlotCol === OriginPlotCol) return;
+    this.UnitNodes[TargetPlotRow][TargetPlotCol] = UnitNode;
+    this.UnitNodes[OriginPlotRow][OriginPlotCol] = null;
+    Unit.row = TargetPlotRow;
+    Unit.col = TargetPlotCol;
+  }
+
+  /** 交换两个UnitNode的行、列 */
+  SwapUnitNodeRanks(TargetUnitNode: cc.Node, OriginUnitNode: cc.Node) {
+    const TargetUnit = TargetUnitNode.getComponent(UnitControl);
+    const OriginUnit = OriginUnitNode.getComponent(UnitControl);
+    const { row: TargetUnitRow, col: TargetUnitCol } = TargetUnit;
+    const { row: OriginUnitRow, col: OriginUnitCol } = OriginUnit;
+    this.UnitNodes[TargetUnitRow][TargetUnitCol] = OriginUnitNode;
+    this.UnitNodes[OriginUnitRow][OriginUnitCol] = TargetUnitNode;
+    TargetUnit.row = OriginUnitRow;
+    TargetUnit.col = OriginUnitCol;
+    OriginUnit.row = TargetUnitRow;
+    OriginUnit.col = TargetUnitCol;
   }
 
   /** 生成地块Plot */
@@ -163,6 +284,8 @@ export default class OverallControl extends cc.Component {
         this.PlotNodes[row][RowPlot.length - 1 - col] = PlotNode;
       });
     });
+    const bounds = calculateBoundingBox(this.GameArea);
+    this.GameArea.setContentSize(bounds.width, bounds.height);
     centerChildren(this.GameArea);
   }
 
@@ -184,9 +307,8 @@ export default class OverallControl extends cc.Component {
       this.UnitNodes[row][col] = UnitNode;
 
       // 设置生成的UnitNode的状态
-      const position = this.GetPlotPos(row, col);
       UnitNode.setParent(this.GameArea);
-      Unit.SetUnitNodePosition(cc.v2(position.x, position.y));
+      UnitNode.setPosition(this.GetPlotPos(row, col));
     });
   }
 
@@ -196,9 +318,22 @@ export default class OverallControl extends cc.Component {
     return PlotNode.getPosition();
   }
 
+  /** 初始化四叉树 */
+  InitQuadTree() {
+    const { x: GameAreaX, y: GameAreaY } = this.GameArea.parent.convertToWorldSpaceAR(this.GameArea.getPosition());
+    const { width: GameAreaWidth, height: GameAreaHeight } = calculateBoundingBox(this.GameArea);
+    this.PlotQuadTree = new QuadTree(GameAreaX, GameAreaY, GameAreaWidth, GameAreaHeight, 15, this.ctx);
+
+    flat<cc.Node>(this.PlotNodes).forEach(PlotNode => {
+      const { x: PlotNodeX, y: PlotNodeY } = PlotNode.parent.convertToWorldSpaceAR(PlotNode.getPosition());
+      const Node = new QuadNode<cc.Node>(PlotNodeX, PlotNodeY, PlotNode.width, PlotNode.height, PlotNode);
+      this.PlotQuadTree.Insert(Node);
+    });
+  }
+
   /** 地块Plot初始化时获取其位置，锚点为最右上角的地块 */
   InitPlotPos(row: number, col: number) {
-    const RowPos = cc.v2(0, 0).add(cc.v2(40, -48)).multiply(cc.v2(row, row));
+    const RowPos = cc.v2(40, -48).mul(row);
     const ColPos = cc.v2(-95, -20).mul(col);
     const TargetPos = RowPos.add(ColPos);
     return TargetPos;
@@ -207,16 +342,16 @@ export default class OverallControl extends cc.Component {
   //#region
   /** ___DEBUG START___ */
   DebugStrokeGameAreaRect() {
+    this.ctx.node.zIndex = 10000;
     this.schedule(() => {
-      const boundingBox = this.GameArea.getBoundingBoxToWorld();
-      this.ctx.clear();
+      const boundingBox = calculateBoundingBox(this.GameArea);
       this.ctx.rect(this.GameArea.x - boundingBox.width / 2, this.GameArea.y - boundingBox.height / 2, boundingBox.width, boundingBox.height);
       this.ctx.stroke();
     });
   }
 
-  DebugStrokePlotNodesRect(isTopDraw?: boolean) {
-    if (isTopDraw) this.ctx.node.zIndex = 10000;
+  DebugStrokePlotNodesRect() {
+    this.ctx.node.zIndex = 10000;
     this.schedule(() => {
       flat<cc.Node>(this.PlotNodes).forEach(PlotNode => {
         const boundingBox = PlotNode.getBoundingBoxToWorld();
@@ -226,8 +361,8 @@ export default class OverallControl extends cc.Component {
     });
   }
 
-  DebugStrokeUnitNodesRect(isTopDraw?: boolean) {
-    if (isTopDraw) this.ctx.node.zIndex = 10000;
+  DebugStrokeUnitNodesRect() {
+    this.ctx.node.zIndex = 10000;
     this.schedule(() => {
       flat<cc.Node>(this.UnitNodes).forEach(UnitNode => {
         const boundingBox = UnitNode.getBoundingBoxToWorld();

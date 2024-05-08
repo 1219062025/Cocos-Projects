@@ -55,3 +55,16 @@ export function centerChildren(node: cc.Node) {
     child.setPosition(childPosition.x + offsetX, childPosition.y + offsetY);
   }
 }
+
+/** 获取节点能够包容所有子节点的最小矩形的宽、高 */
+export function calculateBoundingBox(node: cc.Node) {
+  // 获取节点的世界包围框
+  let bounds = node.getBoundingBoxToWorld();
+
+  node.children.forEach(children => {
+    const ChildrenBoundingBox = children.getBoundingBoxToWorld();
+    bounds.union(bounds, ChildrenBoundingBox);
+  });
+
+  return bounds;
+}

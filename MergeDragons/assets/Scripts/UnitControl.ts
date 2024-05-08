@@ -11,16 +11,9 @@ export default class UnitControl extends cc.Component {
   unitType: number = Infinity;
   /** Unit类别 */
   type: number = Infinity;
-  /** UnitNode所处行 */
-  _row: number = -1;
-  get row() {
-    return this._row;
-  }
-  set row(value: number) {
-    this._row = value;
-    this.node.zIndex = value;
-  }
-  /** UnitNode所处列 */
+  /** UnitNode在UnitNodes映射中所处行 */
+  row: number = -1;
+  /** UnitNode在UnitNodes映射中所处列 */
   col: number = -1;
   /** UnitNode的合成等级 */
   level: number = -1;
@@ -29,6 +22,7 @@ export default class UnitControl extends cc.Component {
   /** 图片宽度 */
   fixedWidth: number = 100; // 固定宽度
 
+  /** 初始化Unit */
   Init(type: number, row: number, col: number, level?: number) {
     const UnitInfo = UnitInfoMap.get(type);
     this.row = row;
@@ -54,32 +48,49 @@ export default class UnitControl extends cc.Component {
       this.node.height = this.Sprite.node.height = targetHeight;
 
       const anchorY = this.unitType === UnitType.Item ? 0.2 : 0.4;
+      this.node.setPosition(this.node.x, this.node.y);
       const offsetY = this.node.height * this.node.scaleY * anchorY;
-      this.node.setPosition(this.node.x, this.node.y + offsetY);
+      this.Sprite.node.setPosition(this.Sprite.node.x, this.Sprite.node.y + offsetY);
 
-      this.node.zIndex = this.row;
+      this.node.zIndex = this.row + 10;
 
-      this.Sprite.node.on(
-        cc.Node.EventType.TOUCH_START,
-        (event: cc.Event.EventTouch) => {
-          EventManager.emit('TouchStart', event, { row: this.row, col: this.col });
-        },
-        this
-      );
+      this.onTouch();
     });
   }
 
-  SetUnitNodePosition(position: cc.Vec2) {
-    this.node.setPosition(position);
-    const anchorY = this.unitType === UnitType.Item ? 0.2 : 0.4;
-    const offsetY = this.node.height * this.node.scaleY * anchorY;
-    this.node.setPosition(this.node.x, this.node.y + offsetY);
+  /** 设置Unit的层级 */
+  SetZIndex(value: number) {
+    this.node.zIndex = value + 10;
+  }
+  /** 缓动设置Unit的位置，不用节点的setPosition方法是因为需要额外对子节点进行处理 */
+  TweenSetUnitNodePosition(position: cc.Vec2) {
+    cc.tween(this.node)
+      .to(0.12, { position: cc.v2(position.x, position.y) })
+      .start();
   }
 
-  GetPlotPos(row: number, col: number) {
-    const RowPos = cc.v2(0, 0).add(cc.v2(40, -48)).multiply(cc.v2(row, row));
-    const ColPos = cc.v2(-95, -20).mul(col);
-    const TargetPos = RowPos.add(ColPos);
-    return TargetPos;
+  onTouch() {
+    this.Sprite.node.on(
+      cc.Node.EventType.TOUCH_START,
+      (event: cc.Event.EventTouch) => {
+        cc.tween(this.Sprite.node).to(0.12, { scale: 1.1 }).start();
+        EventManager.emit('TouchStart', event, { row: this.row, col: this.col });
+      },
+      this
+    );
+    this.Sprite.node.on(
+      cc.Node.EventType.TOUCH_END,
+      (event: cc.Event.EventTouch) => {
+        cc.tween(this.Sprite.node).to(0.12, { scale: 1 }).start();
+      },
+      this
+    );
+    this.Sprite.node.on(
+      cc.Node.EventType.TOUCH_CANCEL,
+      (event: cc.Event.EventTouch) => {
+        cc.tween(this.Sprite.node).to(0.12, { scale: 1 }).start();
+      },
+      this
+    );
   }
 }
