@@ -81,12 +81,12 @@ export default class QuadTree<T> {
     });
 
     /** ___DEBUG START___ */
-    this.ctx.node.zIndex = 100000;
-    this.subtree.forEach(tree => {
-      const rect = new cc.Rect(tree.LeftX, tree.BottomY, tree.width, tree.height);
-      this.ctx.rect(rect.x, rect.y, rect.width, rect.height);
-      this.ctx.stroke();
-    });
+    // this.ctx.node.zIndex = 100000;
+    // this.subtree.forEach(tree => {
+    //   const rect = new cc.Rect(tree.LeftX, tree.BottomY, tree.width, tree.height);
+    //   this.ctx.rect(rect.x, rect.y, rect.width, rect.height);
+    //   this.ctx.stroke();
+    // });
     /** ___DEBUG END___ */
   }
 

@@ -96,6 +96,7 @@ export default class OverallControl extends cc.Component {
 
     // 选中的是ItemUnit时才可进行后续操作
     if (CurrentUnit.unitType === UnitType.Item) {
+      this.TouchPosInfo.BeginTouch(event.getLocation());
       // 设置当前选中的UnitNode
       this.CurrentUnitNode = CurrentUnitNode;
       // 设置提示区域
@@ -111,18 +112,15 @@ export default class OverallControl extends cc.Component {
     const TargetPlotNode = this.GetPointInPlot(event);
     // 存在目标地块
     if (TargetPlotNode) {
+      this.TouchPosInfo.TouchMove(event.getLocation());
       this.MoveTargetPlotNode = TargetPlotNode;
       const TargetPlot = TargetPlotNode.getComponent(PlotControl);
       const { row, col } = TargetPlot;
       /** 目标地块上的UnitNode */
       const PlotUnitNode = this.UnitNodes[row][col];
-      /** ___DEBUG START___ */
       this.TweenSetMoveToPlot(this.CurrentUnitNode, row, col);
       this.TweenSetMoveToPlot(this.SelectNode, row, col);
-      /** ___DEBUG END___ */
 
-      // this.CurrentUnitNode.setPosition(this.GetPlotPos(row, col));
-      // this.SelectNode.setPosition(this.GetPlotPos(row, col));
       if (PlotUnitNode && PlotUnitNode !== this.CurrentUnitNode) {
         // 如果地块上有单位UnitNode了且不是当前选中的UnitNode时
         this.CurrentUnit.SetZIndex(row + 1);
@@ -133,8 +131,18 @@ export default class OverallControl extends cc.Component {
   }
 
   onTouchEnd(event: cc.Event.EventTouch) {
+    this.SelectNode.zIndex = 0;
+    this.SelectNode.opacity = 0;
+    // 判断触摸是否有效，必须是触摸并且滑动之后才算是拖动
+    if (this.TouchPosInfo.begin && this.TouchPosInfo.begin.equals(event.getLocation()) && !this.TouchPosInfo.move) return;
+    this.TouchPosInfo.clear();
     if (this.CurrentUnitNode === null) return;
-    /** 当前选中的UnitNode所处位置的地块PlotNode（注意：这里的“所处位置”是指position，而不是行、列） */
+    /**
+     * 当前选中的UnitNode所处位置的地块PlotNode，
+     * 1、this.MoveTargetPlotNode：onTouchMove触发到有效地块时记录的，优先级最高
+     * 2、this.GetPointInPlot(event)：根据触摸点当前所在位置检测是否在哪个地块上就取哪个地块
+     * 3、this.GetUnitInPlot(this.CurrentUnitNode)：直接根据UnitNode当前的位置（注意：这里的“所处位置”是指position，而不是行、列）获取地块，准确性不高
+     * */
     const TargetPlotNode = this.MoveTargetPlotNode || this.GetPointInPlot(event) || this.GetUnitInPlot(this.CurrentUnitNode);
     // 存在目标地块
     if (TargetPlotNode) {
@@ -150,7 +158,7 @@ export default class OverallControl extends cc.Component {
         /** 相邻空地块的行、列信息，如果不存在相邻空地块时为undefined */
         const Ranks = this.InspectAdjoinEmptyPlot(PlotUnit.row, PlotUnit.col);
         if (Ranks) {
-          // 如果所处地块相邻有空地块，那就让原本的UnitNode移动到空地块上，并把当前选中的UnitNode放置到此处
+          // 如果所处地块相邻有空地块（这里的空地块有两种，一种是真的空，还有一种是空地块其实是当前选中的UnitNode所处的地块）。那就移动到空地块，并把当前选中的UnitNode放置到此处
           const { EmptyPlotRow, EmptyPlotCol } = Ranks;
           if (EmptyPlotRow === OriginPlotRow && EmptyPlotCol === OriginPlotCol) {
             // 空地块是当前选中的UnitNode所处的地块，进行交换操作
@@ -164,6 +172,7 @@ export default class OverallControl extends cc.Component {
           // 移动原本的UnitNode以及设置层级
           this.TweenSetMoveToPlot(PlotUnitNode, EmptyPlotRow, EmptyPlotCol);
           PlotUnit.SetZIndex(EmptyPlotRow);
+          // 为当前选中的UnitNode设置层级，位置就不需要设置了，因为在onTouchMove里面已经设置过了
           this.CurrentUnit.SetZIndex(TargetPlotRow);
         } else {
           // 如果所处地块相邻没有空地块，那就让当前选中的UnitNode回归之前的位置
@@ -176,8 +185,6 @@ export default class OverallControl extends cc.Component {
       }
     }
 
-    this.SelectNode.zIndex = 0;
-    this.SelectNode.opacity = 0;
     this.CurrentUnitNode = null;
     this.MoveTargetPlotNode = null;
   }
@@ -185,7 +192,7 @@ export default class OverallControl extends cc.Component {
   /** 平滑缓动的移动UnitNode */
   TweenSetMoveToPlot(node: cc.Node, row: number, col: number) {
     const position = this.GetPlotPos(row, col);
-    const tween = (cc.tween() as cc.Tween).to(0.12, { position });
+    const tween = (cc.tween() as cc.Tween).to(0.08, { position });
 
     (cc.tween(node) as cc.Tween)
       .then(tween)
@@ -309,6 +316,7 @@ export default class OverallControl extends cc.Component {
       // 设置生成的UnitNode的状态
       UnitNode.setParent(this.GameArea);
       UnitNode.setPosition(this.GetPlotPos(row, col));
+      console.log(`${Unit.row + 1}行、${Unit.col + 1}列的元素处于坐标X：${UnitNode.x.toFixed(0)}，Y：${UnitNode.y.toFixed(0)}`);
     });
   }
 
