@@ -47,17 +47,7 @@ export default class OverallControl extends cc.Component {
   }
 
   /** 拖动当前选中的UnitNode时移动到哪个地块了 */
-  _MoveTargetPlotNode: cc.Node = null;
-  get MoveTargetPlotNode() {
-    return this._MoveTargetPlotNode;
-  }
-
-  set MoveTargetPlotNode(value: cc.Node) {
-    if (value !== null && value !== this._MoveTargetPlotNode) {
-      // this.InspectEqualUnit()
-    }
-    this._MoveTargetPlotNode = value;
-  }
+  MoveTargetPlotNode: cc.Node = null;
 
   /** 触摸关系 */
   TouchPosInfo: TouchPosInfo = null;
@@ -65,6 +55,12 @@ export default class OverallControl extends cc.Component {
   /** 地块Plot四叉树 */
   PlotQuadTree: QuadTree<cc.Node> = null;
 
+  /** 当前触发了贴近缓动的UnitNode */
+  AdjoinEqualUnits: Set<cc.Node> = new Set<cc.Node>([]);
+
+  get IsPermitMerge() {
+    return this.AdjoinEqualUnits && this.AdjoinEqualUnits.size === 2;
+  }
   /** ___DEBUG START___ */
   @property(cc.Graphics)
   ctx: cc.Graphics = null;
@@ -111,7 +107,7 @@ export default class OverallControl extends cc.Component {
     /** 触摸点当前所在的地块PlotNode */
     const TargetPlotNode = this.GetPointInPlot(event);
     // 存在目标地块
-    if (TargetPlotNode) {
+    if (TargetPlotNode && this.MoveTargetPlotNode !== TargetPlotNode) {
       this.TouchPosInfo.TouchMove(event.getLocation());
       this.MoveTargetPlotNode = TargetPlotNode;
       const TargetPlot = TargetPlotNode.getComponent(PlotControl);
@@ -120,6 +116,8 @@ export default class OverallControl extends cc.Component {
       const PlotUnitNode = this.UnitNodes[row][col];
       this.TweenSetMoveToPlot(this.CurrentUnitNode, row, col);
       this.TweenSetMoveToPlot(this.SelectNode, row, col);
+      this.CancelTweenAdjoinToUnit();
+      this.TweenAdjoinToUnit(this.CurrentUnitNode, { row, col });
 
       if (PlotUnitNode && PlotUnitNode !== this.CurrentUnitNode) {
         // 如果地块上有单位UnitNode了且不是当前选中的UnitNode时
@@ -141,7 +139,7 @@ export default class OverallControl extends cc.Component {
      * 当前选中的UnitNode所处位置的地块PlotNode，
      * 1、this.MoveTargetPlotNode：onTouchMove触发到有效地块时记录的，优先级最高
      * 2、this.GetPointInPlot(event)：根据触摸点当前所在位置检测是否在哪个地块上就取哪个地块
-     * 3、this.GetUnitInPlot(this.CurrentUnitNode)：直接根据UnitNode当前的位置（注意：这里的“所处位置”是指position，而不是行、列）获取地块，准确性不高
+     * 3、this.GetUnitInPlot(this.CurrentUnitNode)：直接根据UnitNode当前的位置（注意：这里的“所处位置”是指position，而不是行、列）获取地块，准确性不高（因为处于缓动状态时获取不到真实的位置）
      * */
     const TargetPlotNode = this.MoveTargetPlotNode || this.GetPointInPlot(event) || this.GetUnitInPlot(this.CurrentUnitNode);
     // 存在目标地块
@@ -155,11 +153,20 @@ export default class OverallControl extends cc.Component {
       // 放开触摸时所处地块已经存在UnitNode了那就得进行处理
       if (PlotUnitNode && PlotUnitNode !== this.CurrentUnitNode) {
         const PlotUnit = PlotUnitNode.getComponent(UnitControl);
-        /** 相邻空地块的行、列信息，如果不存在相邻空地块时为undefined */
-        const Ranks = this.InspectAdjoinEmptyPlot(PlotUnit.row, PlotUnit.col);
+
+        if (this.IsPermitMerge) {
+          this.node.destroy();
+          this.AdjoinEqualUnits.forEach(UnitNode => {
+            UnitNode.destroy();
+          });
+        }
+
+        /** 空地块的行、列信息，如果不存在空地块时为undefined */
+        const Ranks = this.InspectEmptyPlot(PlotUnit.row, PlotUnit.col);
         if (Ranks) {
-          // 如果所处地块相邻有空地块（这里的空地块有两种，一种是真的空，还有一种是空地块其实是当前选中的UnitNode所处的地块）。那就移动到空地块，并把当前选中的UnitNode放置到此处
+          // 如果存在可以放置的空地块（这里的空地块有两种，一种是真的空，还有一种是空地块其实是当前选中的UnitNode所处的地块）。那就移动到空地块，并把当前选中的UnitNode放置到此处
           const { EmptyPlotRow, EmptyPlotCol } = Ranks;
+
           if (EmptyPlotRow === OriginPlotRow && EmptyPlotCol === OriginPlotCol) {
             // 空地块是当前选中的UnitNode所处的地块，进行交换操作
             this.SwapUnitNodeRanks(PlotUnitNode, this.CurrentUnitNode);
@@ -174,19 +181,55 @@ export default class OverallControl extends cc.Component {
           PlotUnit.SetZIndex(EmptyPlotRow);
           // 为当前选中的UnitNode设置层级，位置就不需要设置了，因为在onTouchMove里面已经设置过了
           this.CurrentUnit.SetZIndex(TargetPlotRow);
-        } else {
-          // 如果所处地块相邻没有空地块，那就让当前选中的UnitNode回归之前的位置
-          this.TweenSetMoveToPlot(this.CurrentUnitNode, OriginPlotRow, OriginPlotCol);
-          this.CurrentUnit.SetZIndex(OriginPlotRow);
+          this.InspectAndMergeToPlot(this.CurrentUnitNode, TargetPlotRow, TargetPlotCol);
         }
+        // else {
+        //   // 如果所处地块相邻没有空地块，那就让当前选中的UnitNode回归之前的位置
+        //   this.TweenSetMoveToPlot(this.CurrentUnitNode, OriginPlotRow, OriginPlotCol);
+        //   this.CurrentUnit.SetZIndex(OriginPlotRow);
+        // }
       } else {
         // 放开触摸时所处地块不存在UnitNode的话就直接设置当前选中的UnitNode到该地块Plot上
         this.SetUnitNodeRanks(this.CurrentUnitNode, TargetPlotRow, TargetPlotCol);
+        this.InspectAndMergeToPlot(this.CurrentUnitNode, TargetPlotRow, TargetPlotCol);
       }
     }
 
     this.CurrentUnitNode = null;
     this.MoveTargetPlotNode = null;
+  }
+
+  /** 检查是否满足合并条件，是的话合成 */
+  InspectAndMergeToPlot(CurrentUnitNode: cc.Node, TargetPlotRow: number, TargetPlotCol: number) {
+    if (this.IsPermitMerge) {
+      this.AdjoinEqualUnits.forEach(UnitNode => {
+        const Unit = UnitNode.getComponent(UnitControl);
+        const tween = Unit.TweenSetUnitNodePosition(this.GetPlotPos(TargetPlotRow, TargetPlotCol)) as cc.Tween;
+        tween
+          .call(() => {
+            this.UnitNodes[Unit.row][Unit.col] = null;
+            this.AdjoinEqualUnits.delete(UnitNode);
+            UnitNode.destroy();
+          })
+          .start();
+      });
+      const UnitNode = cc.instantiate(this.UnitPrefab);
+      const CurrentUnit = CurrentUnitNode.getComponent(UnitControl);
+      // 初始化
+      const Unit = UnitNode.getComponent(UnitControl);
+      Unit.Init(CurrentUnit.type, TargetPlotRow, TargetPlotCol, CurrentUnit.level + 1, true);
+
+      // 存储到UnitNode集合中
+      this.UnitNodes[TargetPlotRow][TargetPlotCol] = UnitNode;
+
+      // 设置生成的UnitNode的状态
+      UnitNode.setParent(this.GameArea);
+      UnitNode.setPosition(this.GetPlotPos(TargetPlotRow, TargetPlotCol));
+      CurrentUnitNode.destroy();
+      // const CurrentUnit = CurrentUnitNode.getComponent(UnitControl);
+      // CurrentUnit.Upgrades();
+      // this.UnitNodes[TargetPlotRow][TargetPlotCol] = CurrentUnitNode;
+    }
   }
 
   /** 平滑缓动的移动UnitNode */
@@ -223,11 +266,78 @@ export default class OverallControl extends cc.Component {
     });
   }
 
-  /** 检查UnitNdoe相邻位置有无相同的Unit（检测顺序为上、下、左、右） */
-  InspectAdjoinEqualUnit(UnitNode: cc.Node) {}
+  /** 匹配的Unit缓动贴近目标Unit的位置 */
+  TweenAdjoinToUnit(UnitNode: cc.Node, { row, col }: Record<string, number>) {
+    this.AdjoinEqualUnits = this.BFSInspectAdjoinEqualUnit(UnitNode, { row, col });
+    if (this.AdjoinEqualUnits) {
+      this.AdjoinEqualUnits.forEach(UnitNode => {
+        const Unit = UnitNode.getComponent(UnitControl);
+        Unit.TweenAdjoinToPos(this.GetPlotPos(row, col));
+      });
+    }
+  }
 
-  /** 检查指定行、列相邻的8个地块有没有空地块 */
-  InspectAdjoinEmptyPlot(row: number, col: number) {
+  /** 取消缓动贴近目标Unit的位置 */
+  CancelTweenAdjoinToUnit() {
+    if (this.AdjoinEqualUnits) {
+      this.AdjoinEqualUnits.forEach(UnitNode => {
+        const Unit = UnitNode.getComponent(UnitControl);
+        Unit.CancelTweenAdjoinToPos();
+      });
+      this.AdjoinEqualUnits = null;
+    }
+  }
+
+  /** 广度遍历检查UnitNdoe所处行、列是否链接了两个相同的Unit（检测顺序为上、右、下、左） */
+  BFSInspectAdjoinEqualUnit(StartUnitNode: cc.Node, { row, col }: Record<string, number>) {
+    /** 待检查队列 */
+    const InspectQueue: Record<string, number>[] = [{ row, col }];
+    /** 相同Unit */
+    const EqualNodes: Set<cc.Node> = new Set<cc.Node>([]);
+    /** 当前检查的UnitNode */
+    let CurrentUnitNode: cc.Node = StartUnitNode;
+
+    // 只要未链接两个相同Unit并且队列里面还有待检查的元素时就循环遍历
+    while (EqualNodes.size < 2 && InspectQueue.length > 0) {
+      const CurrentRanks = InspectQueue.shift();
+
+      const { row: CurrentRow, col: CurrentCol } = CurrentRanks;
+
+      const CurrentUnit = CurrentUnitNode.getComponent(UnitControl);
+      const { unitType: CurrentUnitType, type: CurrentType, level: CurrentLevel } = CurrentUnit;
+
+      /** 相邻的行、列，按上、右、下、左的顺序 */
+      const AdjoinRanks = [
+        [CurrentRow - 1, CurrentCol],
+        [CurrentRow, CurrentCol + 1],
+        [CurrentRow + 1, CurrentCol],
+        [CurrentRow, CurrentCol - 1]
+      ];
+      for (let i = 0; i < AdjoinRanks.length; i++) {
+        const [AdjoinRow, AdjoinCol] = AdjoinRanks[i];
+        if (!InRange(AdjoinRow, 0, InitiaRowCount) || !InRange(AdjoinCol, 0, InitiaColCount)) continue;
+        const UnitNode = this.UnitNodes[AdjoinRow][AdjoinCol];
+
+        // 如果存在相邻Unit并且不是自身时
+        if (UnitNode && UnitNode !== CurrentUnitNode) {
+          const Unit = UnitNode.getComponent(UnitControl);
+          // 类型得相同，等级得相同，还得不是满级Unit
+          if (Unit.unitType === CurrentUnitType && Unit.type === CurrentType && Unit.level === CurrentLevel && Unit.level !== Unit.maxLevel) {
+            EqualNodes.add(UnitNode);
+            if (EqualNodes.size === 2) break;
+            InspectQueue.push({ row: Unit.row, col: Unit.col });
+          }
+        }
+      }
+
+      if (EqualNodes.size === 2) break;
+    }
+
+    return EqualNodes.size === 2 ? EqualNodes : undefined;
+  }
+
+  /** 检查指定行、列是否有地块可以移动 */
+  InspectEmptyPlot(row: number, col: number) {
     const Ranks = [
       [row - 1, col - 1],
       [row - 1, col],
@@ -236,8 +346,10 @@ export default class OverallControl extends cc.Component {
       [row, col + 1],
       [row + 1, col - 1],
       [row + 1, col],
-      [row + 1, col + 1]
+      [row + 1, col + 1],
+      [this.CurrentUnit.row, this.CurrentUnit.col]
     ].find(([row, col]) => {
+      if (!InRange(row, 0, InitiaRowCount) || !InRange(col, 0, InitiaColCount)) return false;
       const PlotNode = this.PlotNodes[row][col];
       if (!PlotNode) return false;
       const UnitNode = this.UnitNodes[row][col];
@@ -316,7 +428,6 @@ export default class OverallControl extends cc.Component {
       // 设置生成的UnitNode的状态
       UnitNode.setParent(this.GameArea);
       UnitNode.setPosition(this.GetPlotPos(row, col));
-      console.log(`${Unit.row + 1}行、${Unit.col + 1}列的元素处于坐标X：${UnitNode.x.toFixed(0)}，Y：${UnitNode.y.toFixed(0)}`);
     });
   }
 

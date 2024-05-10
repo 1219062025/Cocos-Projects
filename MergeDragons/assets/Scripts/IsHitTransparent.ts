@@ -45,7 +45,8 @@ export default class IsHitTransparent extends cc.Component {
         this.node.group = 'camera';
         var rt = new cc.RenderTexture();
         rt.initWithSize(texture.width, texture.height);
-        // rt.drawTextureAt(texture, 0, 0);
+        // @ts-ignore
+        rt.drawTextureAt(texture, 0, 0);
         destory = true;
       }
       // data就是这个texture的rgba值数组

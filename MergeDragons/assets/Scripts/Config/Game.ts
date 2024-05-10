@@ -1,7 +1,7 @@
 /** 初始化有多少行 */
-export const InitiaRowCount = 20;
+export const InitiaRowCount = 18;
 /** 初始化有多少列 */
-export const InitiaColCount = 15;
+export const InitiaColCount = 12;
 /** 初始化有多少个地块Plot */
 export const InitiaPlotCount = InitiaRowCount * InitiaColCount;
 export enum Unit {
