@@ -154,13 +154,6 @@ export default class OverallControl extends cc.Component {
       if (PlotUnitNode && PlotUnitNode !== this.CurrentUnitNode) {
         const PlotUnit = PlotUnitNode.getComponent(UnitControl);
 
-        if (this.IsPermitMerge) {
-          this.node.destroy();
-          this.AdjoinEqualUnits.forEach(UnitNode => {
-            UnitNode.destroy();
-          });
-        }
-
         /** 空地块的行、列信息，如果不存在空地块时为undefined */
         const Ranks = this.InspectEmptyPlot(PlotUnit.row, PlotUnit.col);
         if (Ranks) {
@@ -284,7 +277,7 @@ export default class OverallControl extends cc.Component {
         const Unit = UnitNode.getComponent(UnitControl);
         Unit.CancelTweenAdjoinToPos();
       });
-      this.AdjoinEqualUnits = null;
+      this.AdjoinEqualUnits.clear();
     }
   }
 
@@ -442,7 +435,6 @@ export default class OverallControl extends cc.Component {
     const { x: GameAreaX, y: GameAreaY } = this.GameArea.parent.convertToWorldSpaceAR(this.GameArea.getPosition());
     const { width: GameAreaWidth, height: GameAreaHeight } = calculateBoundingBox(this.GameArea);
     this.PlotQuadTree = new QuadTree(GameAreaX, GameAreaY, GameAreaWidth, GameAreaHeight, 15, this.ctx);
-
     flat<cc.Node>(this.PlotNodes).forEach(PlotNode => {
       const { x: PlotNodeX, y: PlotNodeY } = PlotNode.parent.convertToWorldSpaceAR(PlotNode.getPosition());
       const Node = new QuadNode<cc.Node>(PlotNodeX, PlotNodeY, PlotNode.width, PlotNode.height, PlotNode);

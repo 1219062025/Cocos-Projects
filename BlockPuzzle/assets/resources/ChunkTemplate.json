@@ -1,0 +1,128 @@
+{
+  "0": {
+    "rows": 1,
+    "cols": 1,
+    "blockInfoList": [
+      {
+        "difRows": 0,
+        "difCols": 0
+      }
+    ]
+  },
+  "1": {
+    "rows": 1,
+    "cols": 2,
+    "blockInfoList": [
+      {
+        "difRows": 0,
+        "difCols": 0
+      },
+      {
+        "difRows": 0,
+        "difCols": 1
+      }
+    ]
+  },
+  "2": {
+    "rows": 1,
+    "cols": 3,
+    "blockInfoList": [
+      {
+        "difRows": 0,
+        "difCols": 0
+      },
+      {
+        "difRows": 0,
+        "difCols": 1
+      },
+      {
+        "difRows": 0,
+        "difCols": 2
+      }
+    ]
+  },
+  "3": {
+    "rows": 1,
+    "cols": 5,
+    "blockInfoList": [
+      {
+        "difRows": 0,
+        "difCols": 0
+      },
+      {
+        "difRows": 0,
+        "difCols": 1
+      },
+      {
+        "difRows": 0,
+        "difCols": 2
+      },
+      {
+        "difRows": 0,
+        "difCols": 3
+      },
+      {
+        "difRows": 0,
+        "difCols": 4
+      }
+    ]
+  },
+  "4": {
+    "rows": 2,
+    "cols": 1,
+    "blockInfoList": [
+      {
+        "difRows": 0,
+        "difCols": 0
+      },
+      {
+        "difRows": 1,
+        "difCols": 0
+      }
+    ]
+  },
+  "5": {
+    "rows": 3,
+    "cols": 1,
+    "blockInfoList": [
+      {
+        "difRows": 0,
+        "difCols": 0
+      },
+      {
+        "difRows": 1,
+        "difCols": 0
+      },
+      {
+        "difRows": 2,
+        "difCols": 0
+      }
+    ]
+  },
+  "6": {
+    "rows": 5,
+    "cols": 1,
+    "blockInfoList": [
+      {
+        "difRows": 0,
+        "difCols": 0
+      },
+      {
+        "difRows": 1,
+        "difCols": 0
+      },
+      {
+        "difRows": 2,
+        "difCols": 0
+      },
+      {
+        "difRows": 3,
+        "difCols": 0
+      },
+      {
+        "difRows": 4,
+        "difCols": 0
+      }
+    ]
+  }
+}

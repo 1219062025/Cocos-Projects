@@ -121,20 +121,20 @@ export default class UnitControl extends cc.Component {
         EventManager.emit('TouchStart', event, { row: this.row, col: this.col });
 
         /** ___DEBUG START___ */
-        const pointInNode = this.node.convertToNodeSpaceAR(event.getLocation());
-        /** 图片纹理矩形区域 */
-        const rect = this.Sprite.spriteFrame.getRect();
-        /** 图片纹理偏移量 */
-        const offset = this.Sprite.spriteFrame.getOffset();
-        const texture = this.Sprite.spriteFrame.getTexture();
-        const pointInRect = cc.v2(parseInt(`${pointInNode.x - offset.x + rect.width / 2}`), parseInt(`${pointInNode.y - offset.y + rect.height / 2}`));
-        const rt = new cc.RenderTexture();
-        rt.initWithSize(texture.width, texture.height);
-        // @ts-ignore
-        rt.drawTextureAt(texture, 0, 0);
-        // data就是这个texture的rgba值数组
-        let data = rt.readPixels(null, rect.x + pointInRect.x, rect.y + rect.height - pointInRect.y, 1, 1);
-        console.log(data[3] < 100);
+        // const pointInNode = this.node.convertToNodeSpaceAR(event.getLocation());
+        // /** 图片纹理矩形区域 */
+        // const rect = this.Sprite.spriteFrame.getRect();
+        // /** 图片纹理偏移量 */
+        // const offset = this.Sprite.spriteFrame.getOffset();
+        // const texture = this.Sprite.spriteFrame.getTexture();
+        // const pointInRect = cc.v2(parseInt(`${pointInNode.x - offset.x + rect.width / 2}`), parseInt(`${pointInNode.y - offset.y + rect.height / 2}`));
+        // const rt = new cc.RenderTexture();
+        // rt.initWithSize(texture.width, texture.height);
+        // // @ts-ignore
+        // rt.drawTextureAt(texture, 0, 0);
+        // // data就是这个texture的rgba值数组
+        // let data = rt.readPixels(null, rect.x + pointInRect.x, rect.y + rect.height - pointInRect.y, 1, 1);
+        // console.log(data[3] < 100);
         /** ___DEBUG END___ */
       },
       this

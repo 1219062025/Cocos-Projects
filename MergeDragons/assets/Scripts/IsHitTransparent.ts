@@ -4,7 +4,7 @@ export default class IsHitTransparent extends cc.Component {
   onLoad() {
     // _hitTest实际上是cocos内置的触摸检测，这里对触摸检测进行了重写
     // @ts-ignore
-    // this.node._hitTest = this.IsHitTransparent.bind(this);
+    this.node._hitTest = this.IsHitTransparent.bind(this);
   }
 
   /** 是否点击在图片透明区域内 */
