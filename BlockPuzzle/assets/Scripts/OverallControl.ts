@@ -42,8 +42,6 @@ export class OverallControl extends cc.Component {
 
   /** 当前关卡 */
   CurrentLevelInfo: LevelInfo = null;
-  /** Chunk模板映射 */
-  ChunkTemplateMap = new Map<number, ChunkTemplate>([]);
   /** 格子四叉树 */
   CellQuadTree: QuadTree<cc.Node> = null;
 
@@ -57,21 +55,17 @@ export class OverallControl extends cc.Component {
   /** 匹配当前拖动的方块集合的格子 */
   FitCellNodes: Set<cc.Node> = new Set<cc.Node>([]);
 
-  async onLoad() {
-    await this.InitGameConfig();
-    this.GenerateGameArea(this.Level);
-    this.InitQuadTree();
+  onLoad() {
+    const InitGamePromise = this.InitGameConfig();
 
-    /** ___DEBUG START___ */
-    this.RandomChunk();
-    /** ___DEBUG END___ */
-  }
+    InitGamePromise.then(() => {
+      this.GenerateGameArea(this.Level);
+      this.InitQuadTree();
 
-  RandomChunk() {
-    while (this.ChunkAreaControl.EmptyArea) {
-      const randomKey = Math.floor(Math.random() * this.ChunkTemplateMap.size);
-      this.ChunkAreaControl.GenerateChunk(randomKey);
-    }
+      /** ___DEBUG START___ */
+      this.ChunkAreaControl.RandomChunk();
+      /** ___DEBUG END___ */
+    });
   }
 
   onTouchStart(ChunkNode: cc.Node) {
@@ -101,9 +95,10 @@ export class OverallControl extends cc.Component {
 
   /** 拖动方块集合时检查是否有足够的空位可以放置，如果可以的话保存状态并且设置投影 */
   SaveVacancyState() {
-    const { StartBlockNode, Template } = this.CurrentChunk;
+    const { StartBlockNode } = this.CurrentChunk;
+    /** 起始块的是世界坐标 */
     const WorldPosition = StartBlockNode.convertToWorldSpaceAR(cc.v2(0, 0));
-    /** 四叉树中匹配的节点 */
+    /** 根据坐标匹配四叉树中的节点 */
     const MatchedNodes = this.CellQuadTree.Search(WorldPosition.x, WorldPosition.y);
 
     /** 裁剪值，格子有效区域应该是世界包围盒减掉裁剪值 */
@@ -132,12 +127,12 @@ export class OverallControl extends cc.Component {
     const CurrentChunkNode = this.CurrentChunkNode;
     const CurrentChunk = this.CurrentChunk;
 
-    /** 空位的起始格子的位置 */
+    /** 空位的起始格子*/
     const StartCellNode = this.CellAreaControl.StartCellNode;
-    /** 方块集合起始块的位置 */
-    const StartBlockNode = CurrentChunk.StartBlockNode;
     /** 在格子区域坐标系下的起始位置 */
     const StartPosInCellArea = StartCellNode.getPosition();
+    /** 方块集合起始块 */
+    const StartBlockNode = CurrentChunk.StartBlockNode;
     /** 根据起始块相对于方块集合的位置，推算出此时方块集合应该放到哪里 */
     const TargetPos = StartPosInCellArea.sub(StartBlockNode.getPosition());
 
@@ -145,8 +140,10 @@ export class OverallControl extends cc.Component {
     CurrentChunkNode.setParent(this.CellArea);
     CurrentChunkNode.setPosition(TargetPos);
 
+    // 方块集合的位置设置之后，所有的方块其实就已经在应该在的地方了，只不过所处的坐标系还不是格子区域。
+    // 所以下面只需要切换一下坐标系就可以了
     CurrentChunk.ChunkBlockNodes.forEach(BlockInfo => {
-      const { blockNode: BlockNode, difRows, difCols } = BlockInfo;
+      const { self: BlockNode, difRows, difCols } = BlockInfo;
       const { rows: startRows, cols: startCols } = StartCellNode.getComponent(CellControl);
       if (BlockNode) {
         const TargetRows = startRows + difRows;
@@ -162,13 +159,14 @@ export class OverallControl extends cc.Component {
       }
     });
 
+    // 以防万一，进行一下判断，确保要取消并销毁的是放置了方块的方块集合
     if (this.CurrentChunkNode !== CurrentChunkNode) {
       this.CancelCurrentChunk();
     }
     CurrentChunkNode.destroy();
 
     /** ___DEBUG START___ */
-    this.RandomChunk();
+    this.ChunkAreaControl.RandomChunk();
     /** ___DEBUG END___ */
   }
 
@@ -185,7 +183,6 @@ export class OverallControl extends cc.Component {
     canvas.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
     canvas.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
     canvas.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
-    this.ChunkAreaControl.Init(this.ChunkTemplateMap);
 
     /** 载入动态资源，需要某个资源时使用cc.loader.getRes从缓存获取 */
     const loadSpritePromise = new Promise(resolve => {
@@ -196,22 +193,7 @@ export class OverallControl extends cc.Component {
     });
 
     /** 载入Chunk模板JSON */
-    const loadTemplatePromise = new Promise(resolve => {
-      cc.loader.loadRes('ChunkTemplate', cc.JsonAsset, (err, JsonAsset: cc.JsonAsset) => {
-        if (err) throw new Error(err.message);
-        const ChunkTemplates = JsonAsset.json;
-        for (const key in ChunkTemplates) {
-          if (Object.prototype.hasOwnProperty.call(ChunkTemplates, key)) {
-            const ChunkTemplate = ChunkTemplates[key] as ChunkTemplate;
-            ChunkTemplate.blockInfoList.forEach(BlockInfo => {
-              BlockInfo.category = BlockInfo.category || BlockCategory.BaseBlock;
-            });
-            this.ChunkTemplateMap.set(parseInt(key), ChunkTemplate);
-          }
-        }
-        resolve(true);
-      });
-    });
+    const loadTemplatePromise = this.ChunkAreaControl.Init();
 
     return Promise.all([loadSpritePromise, loadTemplatePromise]);
   }

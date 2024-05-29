@@ -2,7 +2,7 @@ import { BlockControl } from './BlockControl';
 import { ChunkControl } from './ChunkControl';
 import EventManager from './Common/EventManager';
 import { CenterChildren } from './Common/Utils';
-import { BlockHeight, BlockWidth } from './Config/GameConfig';
+import { BlockCategory, BlockHeight, BlockWidth } from './Config/GameConfig';
 import { ChunkTemplate } from './Game';
 
 const { ccclass, property } = cc._decorator;
@@ -21,12 +21,9 @@ export default class NewClass extends cc.Component {
   /** Chunk模板映射 */
   ChunkTemplateMap = new Map<number, ChunkTemplate>([]);
 
+  /** 当前空的区域，按顺序返回 */
   get EmptyArea() {
     return this.AreaList.find(AreaNode => AreaNode.childrenCount === 0);
-  }
-
-  get isAllAreaEmpty() {
-    return this.AreaList.every(AreaNode => AreaNode.childrenCount === 0);
   }
 
   onLoad() {
@@ -45,8 +42,23 @@ export default class NewClass extends cc.Component {
     EventManager.emit('TouchStart', ChunkNode);
   }
 
-  Init(ChunkTemplateMap: Map<number, ChunkTemplate>) {
-    this.ChunkTemplateMap = ChunkTemplateMap;
+  Init() {
+    return new Promise(resolve => {
+      cc.loader.loadRes('ChunkTemplate', cc.JsonAsset, (err, JsonAsset: cc.JsonAsset) => {
+        if (err) throw new Error(err.message);
+        const ChunkTemplates = JsonAsset.json;
+        for (const key in ChunkTemplates) {
+          if (Object.prototype.hasOwnProperty.call(ChunkTemplates, key)) {
+            const ChunkTemplate = ChunkTemplates[key] as ChunkTemplate;
+            ChunkTemplate.blockInfoList.forEach(BlockInfo => {
+              BlockInfo.category = BlockInfo.category || BlockCategory.BaseBlock;
+            });
+            this.ChunkTemplateMap.set(parseInt(key), ChunkTemplate);
+          }
+        }
+        resolve(true);
+      });
+    });
   }
 
   GenerateChunk(key: number) {
@@ -54,6 +66,13 @@ export default class NewClass extends cc.Component {
       const ChunkNode = this.ChunkBuilder(key);
       ChunkNode.setParent(this.EmptyArea);
       ChunkNode.setPosition(0, 0);
+    }
+  }
+
+  RandomChunk() {
+    while (this.EmptyArea) {
+      const randomKey = Math.floor(Math.random() * this.ChunkTemplateMap.size);
+      this.GenerateChunk(randomKey);
     }
   }
 
@@ -81,7 +100,7 @@ export default class NewClass extends cc.Component {
       if (difRows === 0 && difCols === 0) {
         Chunk.Init(ChunkType, BlockNode, ChunkTemplate);
       }
-      Chunk.ChunkBlockNodes.push({ difRows, difCols, blockNode: BlockNode });
+      Chunk.ChunkBlockNodes.push({ difRows, difCols, self: BlockNode });
       ChunkNode.setContentSize(cols * BlockWidth, rows * BlockHeight);
     });
     // 所有方块居中

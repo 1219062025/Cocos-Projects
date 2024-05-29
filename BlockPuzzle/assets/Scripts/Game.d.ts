@@ -33,8 +33,8 @@ export type ChunkBlockInfo = {
   /** 该方块相对于方块集合起始块列的差值 */
   difCols: number;
   /** 方块节点本身 */
-  blockNode?: cc.Node;
-  /** 方块类型 */
+  self?: cc.Node;
+  /** 方块类型（普通的方块不需要有这个属性，跟随ChunkType就行了） */
   goalType?: BlockType;
   /** 方块类别 */
   category?: BlockCategory;

@@ -124,5 +124,23 @@
         "difCols": 0
       }
     ]
+  },
+  "7": {
+    "rows": 2,
+    "cols": 1,
+    "blockInfoList": [
+      {
+        "difRows": 0,
+        "difCols": 0
+      },
+      {
+        "difRows": 1,
+        "difCols": 0
+      },
+      {
+        "difRows": 1,
+        "difCols": -1
+      }
+    ]
   }
 }

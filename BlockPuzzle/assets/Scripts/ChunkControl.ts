@@ -6,6 +6,7 @@ const { ccclass, property } = cc._decorator;
 
 @ccclass
 export class ChunkControl extends cc.Component {
+  /** 方块集合的类型，决定了集合中所有普通格子的类型。决定了匹配消除时匹配的方块应该如何变色 */
   ChunkType: BlockType;
   /** 当前Chunk的起始块 */
   StartBlockNode: cc.Node = null;
