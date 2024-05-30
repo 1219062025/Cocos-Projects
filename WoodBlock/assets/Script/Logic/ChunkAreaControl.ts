@@ -100,56 +100,133 @@ export default class ChunkAreaControl extends cc.Component {
 
   assistanceGenerate(librayType: Libray) {
     const libray = gi.getLibrary(librayType);
-    /** 方块库中可放入的方块 */
-    const placeInfos = this.getPlaceInfos(librayType);
+    // （1） 方块库中可放入的方块
+    const _placeList = this.getCanPlaceChunks(libray);
+    // （2） 可放入的方块中可触发消除的方块
+    const _removeList = this.getCanRemoveChunks(_placeList);
 
-    if (placeInfos.length) {
-      // this.getRemoveInfos(placeInfos);
+    if (_removeList.length) {
+      //（3） 存在可消除的方块
+
+      // a. 记录可消除的方块中可触发消除的行列数，当检测到≥3行列时，停止检测并记录消除行列数为3，遍历棋盘后不足3次则记录实际消除的最大行列数
+      const maxRemovechunks = this.getMaxRemoveChunks(_removeList);
+
+      // b. 在步骤a记录的消除行列数最多的方块种类中，选择面积最大的（面积相同则随机选择）一种方块，确认为方块A
+      const maxAreaChunks = this.getMaxAreaChunks(maxRemovechunks);
+      const index = Math.floor(Math.random() * maxAreaChunks.length);
+      const chunkA = maxAreaChunks.splice(index, 1)[0];
+
+      // c. 去掉方块A，剩下的消除行列数最大的方块种类中，随机选择一种方块，要求在放入方块A后触发消除后能放入，确认为方块B	（去掉方块A无其他可消除方块，则在步骤（1）筛选出的方块种类中，随机一种可放入方块）
+      this.removeChunk(chunkA, _removeList);
+      this.removeChunk(chunkA, _placeList);
+      if (_removeList.length) {
+      } else {
+      }
+    } else {
+      //（4） 不存在可消除的方块
+      const maxAreaChunks = this.getMaxAreaChunks(_placeList);
+      const index = Math.floor(Math.random() * maxAreaChunks.length);
+      const chunkA = maxAreaChunks.splice(index, 1)[0];
     }
-
-    // if (placeInfos.length) {
-    //   placeInfos.forEach(placeInfo => {
-    //     const { cells, chunkData } = placeInfo;
-    //     cells.forEach(cell => {
-    //       const _map = this.board.getAfterPlaceChunkMap(chunkData, cell.row, cell.col, this.board.map);
-    //       const { isCanRemove, removeCount } = this.board.canRemoveBlock(_map);
-    //     });
-    //   });
-    // }
   }
 
-  /** 获取方块库中所有能够放入的块 */
-  getPlaceInfos(librayType: Libray) {
-    const libray = gi.getLibrary(librayType);
-    /** 方块库中可放入的方块 */
-    const placeInfos: gi.PlaceInfo[] = [];
-    libray.forEach(chunkData => {
-      const cells = Array.from(this.board.emptyCells).filter(cell => this.board.canPlaceChunk(chunkData, cell.row, cell.col, this.board.map));
-      if (cells.length) placeInfos.push({ cells, chunkData });
+  removeChunk(chunkData: gi.ChunkData, chunkDataList: gi.ChunkData[]) {
+    const _chunkData = chunkData;
+    const _list = chunkDataList;
+    const index = chunkDataList.findIndex(chunkData => {
+      return _chunkData.id === chunkData.id;
     });
-    return placeInfos;
+    if (index !== -1) return _list.splice(index, 1)[0];
+  }
+
+  /** 获取所有能够放入的块 */
+  getCanPlaceChunks(chunkDataList: gi.ChunkData[]) {
+    if (!chunkDataList.length) return [];
+    const _list = chunkDataList.slice();
+
+    return _list.filter(chunkData => {
+      return Array.from(this.board.emptyCells).some(cell => this.board.canPlaceChunk(chunkData, cell.row, cell.col, this.board.map));
+    });
   }
 
   /** 获取所有能够产生消除的块 */
-  getRemoveInfos(placeInfos: gi.PlaceInfo[]) {
-    const removeInfos = new Set<gi.PlaceInfo>([]);
-    placeInfos.forEach(placeInfo => {
-      const { cells, chunkData } = placeInfo;
-      for (let i = 0; i < cells.length; i++) {
-        const cell = cells[i];
-        const _map = this.board.getAfterPlaceChunkMap(chunkData, cell.row, cell.col, this.board.map);
-        const { isCanRemove, removeCount } = this.board.canRemoveBlock(_map);
-        if (isCanRemove) {
-          removeInfos.add(placeInfo);
-          if (removeCount >= 3) {
-            placeInfo.removeCount = 3;
-          } else {
-            placeInfo.removeCount = Math.max(placeInfo.removeCount, removeCount);
+  getCanRemoveChunks(chunkDataList: gi.ChunkData[]) {
+    if (!chunkDataList.length) return [];
+    const _list = chunkDataList.slice();
+    return _list.filter(chunkData => {
+      return Array.from(this.board.emptyCells).some(cell => {
+        const canPlace = this.board.canPlaceChunk(chunkData, cell.row, cell.col, this.board.map);
+        if (canPlace) {
+          const afterPlaceChunkMap = this.board.getAfterPlaceChunkInfo(chunkData, cell.row, cell.col, this.board.map);
+          return this.board.canRemoveBlock(afterPlaceChunkMap);
+        } else {
+          return false;
+        }
+      });
+    });
+  }
+
+  /** 获取所有最大面积的块 */
+  getMaxAreaChunks(chunkDataList: gi.ChunkData[]) {
+    if (!chunkDataList.length) return [];
+    // 面积从大到小排列
+    const _list = chunkDataList.slice().sort((a, b) => b.area - a.area);
+
+    // 过滤出所有面积最大且相等的块
+    const maxAreaChunklist = _list.filter(chunk => chunk.area === _list[0].area);
+
+    return maxAreaChunklist;
+  }
+
+  /** 获取所有最大消除行列数的块 */
+  getMaxRemoveChunks(chunkDataList: gi.ChunkData[]) {
+    if (!chunkDataList.length) return [];
+    const _list = chunkDataList.slice();
+
+    const temp = _list.map(chunkData => {
+      let res = { count: 0, row: -1, col: -1, chunkData };
+      for (const cell of Array.from(this.board.emptyCells)) {
+        const canPlace = this.board.canPlaceChunk(chunkData, cell.row, cell.col, this.board.map);
+        if (canPlace) {
+          const afterPlaceChunkMap = this.board.getAfterPlaceChunkInfo(chunkData, cell.row, cell.col, this.board.map);
+          if (this.board.canRemoveBlock(afterPlaceChunkMap)) {
+            const removeInfo = this.board.getRemoveBlockInfo(this.board.map);
+            res.count = Math.max(removeInfo.count, res.count);
+            res.row = cell.row;
+            res.col = cell.col;
+            if (res.count >= 3) return { count: 3, row: cell.row, col: cell.col, chunkData };
           }
         }
       }
+      return res;
     });
-    return Array.from(removeInfos);
+
+    const temp1 = temp.slice().sort((a, b) => b.count - a.count);
+    const temp2 = temp1.filter(item => item.count === temp1[0].count);
+    const maxRemoveChunks = temp2.map(item => item.chunkData);
+    return maxRemoveChunks;
+  }
+
+  /** 获取块的最大消除行列数信息 */
+  getMaxRemoveInfo(chunkData: gi.ChunkData) {
+    let res = { count: 0, row: -1, col: -1, chunkData };
+    for (const cell of Array.from(this.board.emptyCells)) {
+      const canPlace = this.board.canPlaceChunk(chunkData, cell.row, cell.col, this.board.map);
+      if (canPlace) {
+        const afterPlaceChunkMap = this.board.getAfterPlaceChunkInfo(chunkData, cell.row, cell.col, this.board.map);
+        if (this.board.canRemoveBlock(afterPlaceChunkMap)) {
+          const removeInfo = this.board.getRemoveBlockInfo(this.board.map);
+          res.count = Math.max(removeInfo.count, res.count);
+          res.row = cell.row;
+          res.col = cell.col;
+          if (res.count >= 3) {
+            res = { count: 3, row: cell.row, col: cell.col, chunkData };
+            break;
+          }
+        }
+      }
+    }
+    return res;
   }
 
   /** 块生成器 */

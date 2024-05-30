@@ -80,7 +80,7 @@ export default class BoardControl extends cc.Component {
   }
 
   /** 获取假设chunk放下后的map映射 */
-  getAfterPlaceChunkMap(chunkData: gi.ChunkData, startRow: number, startCol: number, map: number[][]) {
+  getAfterPlaceChunkInfo(chunkData: gi.ChunkData, startRow: number, startCol: number, map: number[][]) {
     const _map = JSON.parse(JSON.stringify(map)) as number[][];
     for (const blockInfo of chunkData.blocks) {
       const targetRow = startRow + blockInfo.difRows;
@@ -90,33 +90,42 @@ export default class BoardControl extends cc.Component {
     return _map;
   }
 
-  /** 根据传入的map判断当前是否能产生消除，并返回相关信息 */
+  /** 根据传入的map判断当前是否能产生消除 */
   canRemoveBlock(map: number[][]) {
     const _map = map;
-    const removeRows: number[] = [];
-    const removeCols: number[] = [];
     for (let row = 0; row < gi.initiaRowCount; row++) {
-      if (this.isRowAllTarget(_map, row, 1)) removeRows.push(row);
+      if (this.isRowAllTarget(_map, row, 1)) return true;
     }
     for (let col = 0; col < gi.initiaColCount; col++) {
-      if (this.isColumnAllTarget(_map, col, 1)) removeCols.push(col);
+      if (this.isColumnAllTarget(_map, col, 1)) return true;
     }
 
-    const isCanRemove = removeRows.length !== 0 || removeCols.length !== 0;
-    const removeCount = removeRows.length + removeCols.length;
-    return { isCanRemove, removeCount, removeRows, removeCols };
+    return false;
   }
 
-  /** 获取假设消除方块后的map映射 */
-  getAfterRemoveBlockMap(removeRows: number[], removeCols: number[], map: number[][]) {
+  /** 获取假设消除方块后的信息 */
+  getRemoveBlockInfo(map: number[][]) {
+    /** 消除后的map */
     const _map = JSON.parse(JSON.stringify(map)) as number[][];
-    for (const row of removeRows) {
-      this.setRowAllValue(_map, row, 0);
+    /** 消除了哪些行 */
+    const rows: number[] = [];
+    /** 消除了哪些列 */
+    const cols: number[] = [];
+    for (let row = 0; row < gi.initiaRowCount; row++) {
+      if (this.isRowAllTarget(_map, row, 1)) {
+        this.setRowAllValue(_map, row, 0);
+        rows.push(row);
+      }
     }
-    for (const col of removeCols) {
-      this.setColumnAllValue(_map, col, 0);
+    for (let col = 0; col < gi.initiaColCount; col++) {
+      if (this.isColumnAllTarget(_map, col, 1)) {
+        this.setColumnAllValue(_map, col, 0);
+        cols.push(col);
+      }
     }
-    return _map;
+    /** 一共消除了多少行、多少列 */
+    const count = rows.length + cols.length;
+    return { map: _map, rows, cols, count };
   }
 
   /** 放置块 */
@@ -146,16 +155,14 @@ export default class BoardControl extends cc.Component {
       block.node.setPosition(this.boardNode.convertToNodeSpaceAR(worldPos));
     }
 
-    const { isCanRemove, removeRows, removeCols } = this.canRemoveBlock(this.map);
-    if (isCanRemove) {
-      this.removeBlock(removeRows, removeCols);
+    if (this.canRemoveBlock(this.map)) {
+      const removeInfo = this.getRemoveBlockInfo(this.map);
+      this.removeBlock(removeInfo.rows, removeInfo.cols);
     }
   }
 
   /** 消除方块 */
   removeBlock(removeRows: number[], removeCols: number[]) {
-    const removeCount = removeRows.length + removeCols.length;
-
     /** 处理所有行 */
     for (const row of removeRows) {
       this.handleRowAll<BlockControl>(this.blocks, row, block => {
@@ -234,14 +241,14 @@ export default class BoardControl extends cc.Component {
 
   /** 设置变色 */
   setChange(chunk: ChunkControl, startRow: number, startCol: number) {
-    const _map = this.map;
-    /** 假设chunk放下后的map映射 */
-    const afterPlaceChunkMap = this.getAfterPlaceChunkMap(chunk.data, startRow, startCol, _map);
-    const { isCanRemove, removeRows, removeCols } = this.canRemoveBlock(afterPlaceChunkMap);
+    const afterPlaceChunkMap = this.getAfterPlaceChunkInfo(chunk.data, startRow, startCol, this.map);
 
-    if (isCanRemove) {
+    // 如果产生了消除的话
+    if (this.canRemoveBlock(afterPlaceChunkMap)) {
+      // 获取假设放下块之后的消除信息
+      const removeInfo = this.getRemoveBlockInfo(afterPlaceChunkMap);
       /** 处理所有行 */
-      for (const row of removeRows) {
+      for (const row of removeInfo.rows) {
         this.handleRowAll<BlockControl>(this.blocks, row, block => {
           if (block) {
             block.setChange(chunk.type, block.category);
@@ -250,7 +257,7 @@ export default class BoardControl extends cc.Component {
         });
       }
       /** 处理所有列 */
-      for (const col of removeCols) {
+      for (const col of removeInfo.cols) {
         this.handleColumnAll<BlockControl>(this.blocks, col, block => {
           if (block) {
             block.setChange(chunk.type, block.category);

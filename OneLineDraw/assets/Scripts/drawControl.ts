@@ -23,6 +23,10 @@ export default class DrawControl extends cc.Component {
   @property(cc.ProgressBar)
   progress: cc.ProgressBar = null;
 
+  /** 手指引导 */
+  @property(cc.Node)
+  finger: cc.Node = null;
+
   /** 路径 */
   path: gi.Path = null;
 
@@ -44,8 +48,10 @@ export default class DrawControl extends cc.Component {
   /** 起点 */
   startPoint: gi.Point = null;
 
+  /** 当前画线了多少长度 */
   drawLength: number = 0;
 
+  /** 是否试玩结束 */
   isComplete: boolean = false;
 
   _curPoint: gi.Point = null;
@@ -64,14 +70,18 @@ export default class DrawControl extends cc.Component {
       this.nextPoint = this.points[nextIndex];
     }
   }
+  /** 上一个路径点 */
   prePoint: gi.Point = null;
+  /** 下一个路径点 */
   nextPoint: gi.Point = null;
+  /** 指向上一个路径点的向量 */
   get toPreVec() {
     if (!this.prePoint) return null;
     const preVec = cc.v2(this.prePoint.value.x, this.prePoint.value.y);
     const curVec = cc.v2(this.curPoint.value.x, this.curPoint.value.y);
     return preVec.sub(curVec);
   }
+  /** 指向下一个路径点的向量 */
   get toNextVec() {
     if (!this.nextPoint) return null;
     const nextVec = cc.v2(this.nextPoint.value.x, this.nextPoint.value.y);
@@ -98,6 +108,8 @@ export default class DrawControl extends cc.Component {
 
       this.pencil.setPosition(this.curPoint.value.x, this.curPoint.value.y);
       this.pencil.active = true;
+
+      this.finger.active = false;
     }
   }
 
@@ -243,13 +255,15 @@ export default class DrawControl extends cc.Component {
     this.path = pathJson.json;
     this.shapeCtx.clear();
     this.shapeCtx.moveTo(this.path.points[0].x, this.path.points[0].y);
-    console.log(this.path);
+
+    this.finger.active = true;
+    this.finger.setPosition(this.path.points[0].x, this.path.points[0].y);
 
     this.path.points.forEach((pathPoint, index) => {
       const point = { value: pathPoint, index: this.points.length };
+      // 距上一个点距离为0意味着该点为目标点
       if (pathPoint.length === 0) {
         this.targetPoints.add(point);
-        // this.createTag(point);
       }
 
       this.points.push(point);
@@ -257,7 +271,7 @@ export default class DrawControl extends cc.Component {
       this.shapeCtx.stroke();
       this.shapeCtx.moveTo(pathPoint.x, pathPoint.y);
 
-      // 微分法分割出来的路径在接近目标点时会出现数值极其相近的情况，需要将数值跟目标点极其相近的点清除掉。
+      // 微分法分割出来的路径在接近目标点时会出现数值极其相近的情况，需要将数值跟目标点极其相近的点剔除掉。
       if (pathPoint.length !== 0) {
         const prePathPoint = this.path.points[index - 1 < 0 ? this.path.points.length - 1 : index - 1];
         const nexPathtPoint = this.path.points[(index + 1) % this.path.points.length];
@@ -268,6 +282,20 @@ export default class DrawControl extends cc.Component {
         }
       }
     });
+
+    // 手指
+    const fingerTween = cc.tween(this.finger) as cc.Tween;
+    const fingetMoveLength = Math.floor(this.points.length / 2);
+    for (let i = 0; i < fingetMoveLength; i++) {
+      const point = this.points[i];
+      const tween = cc.tween().to(0.03, { position: cc.v2(point.value.x, point.value.y) });
+      fingerTween.then(tween);
+    }
+    fingerTween
+      .to(0.5, { position: cc.v2(this.path.points[0].x, this.path.points[0].y) })
+      .union()
+      .repeatForever()
+      .start();
   }
 
   /** 获取离触摸点最近的目标点 */
@@ -279,15 +307,5 @@ export default class DrawControl extends cc.Component {
       if (curDistance < minDistance) res = point;
     });
     return res;
-  }
-
-  createTag(point: gi.Point) {
-    const node = new cc.Node('tag');
-    const label = node.addComponent(cc.Label);
-    label.string = `${point.index}`;
-    label.fontSize = 46;
-    node.color = cc.Color.RED;
-    node.setParent(this.node);
-    node.setPosition(point.value.x, point.value.y);
   }
 }
