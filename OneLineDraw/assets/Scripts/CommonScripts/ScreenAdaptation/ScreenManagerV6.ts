@@ -31,9 +31,7 @@ export default class ScreenManagerV6 extends cc.Component {
     let h = winSize.height / GameCointainerSize.height;
     let w = winSize.width / 2 / GameCointainerSize.width;
     scale = Math.min(h, w);
-    cc.log('scale:', scale);
-    this.GameContainer.scale = scale;
-    this.progress.scale = this.h_button.scale = scale;
+    this.GameContainer.scale = this.progress.scale = this.h_button.scale = scale;
   }
 
   /** 屏幕方向变为竖屏 */
@@ -43,9 +41,7 @@ export default class ScreenManagerV6 extends cc.Component {
     const GameCointainerSize: cc.Size = new cc.Size(1080, 1080);
     this.progress.setPosition(cc.v2(0, winSize.height / 2 + this.progress.height - GameCointainerSize.height / 3));
     this.GameContainer.setPosition(cc.v2(0, 0));
-    cc.log('scale:', scale);
-    this.GameContainer.scale = 1;
     this.h_button.setPosition(cc.v2(0, -winSize.height / 2 + this.h_button.height));
-    this.progress.scale = this.h_button.scale = scale;
+    this.GameContainer.scale = this.progress.scale = this.h_button.scale = scale;
   }
 }

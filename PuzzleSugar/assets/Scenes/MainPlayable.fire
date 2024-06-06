@@ -192,7 +192,7 @@
       "array": [
         0,
         0,
-        544.7184302613867,
+        545.0818018006994,
         0,
         0,
         0,
@@ -4132,7 +4132,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 343,
+      "width": 341,
       "height": 201
     },
     "_anchorPoint": {
@@ -4243,7 +4243,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 745,
+      "width": 744,
       "height": 237
     },
     "_anchorPoint": {
@@ -4900,7 +4900,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 122,
+      "width": 120,
       "height": 176
     },
     "_anchorPoint": {

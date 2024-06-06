@@ -25,9 +25,9 @@ export enum BlockCategory {
 /** 基础方块 */
 export enum BaseBlock {
   RED,
-  ORANGE,
-  YELLOW,
   GREEN,
+  YELLOW,
+  ORANGE,
   BLUE,
   PURPLE,
   SKYBLUE

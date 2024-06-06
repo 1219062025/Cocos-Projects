@@ -711,11 +711,11 @@
         "difCols": 2
       },
       {
-        "difRows": -1,
+        "difRows": 1,
         "difCols": 0
       },
       {
-        "difRows": -2,
+        "difRows": 2,
         "difCols": 0
       }
     ],
@@ -837,6 +837,122 @@
     ],
     "rotations": {
       "90": 27
+    }
+  },
+  {
+    "id": 29,
+    "rows": 2,
+    "cols": 3,
+    "area": 6,
+    "shape": "TRIANGLE",
+    "count": 4,
+    "blocks": [
+      {
+        "difRows": 0,
+        "difCols": 0
+      },
+      {
+        "difRows": 0,
+        "difCols": 1
+      },
+      {
+        "difRows": -1,
+        "difCols": 1
+      },
+      {
+        "difRows": 0,
+        "difCols": 2
+      }
+    ],
+    "rotations": {
+      "90": 30
+    }
+  },
+  {
+    "id": 30,
+    "rows": 3,
+    "cols": 2,
+    "area": 6,
+    "shape": "TRIANGLE",
+    "count": 4,
+    "blocks": [
+      {
+        "difRows": 0,
+        "difCols": 0
+      },
+      {
+        "difRows": 1,
+        "difCols": 0
+      },
+      {
+        "difRows": 1,
+        "difCols": 1
+      },
+      {
+        "difRows": 2,
+        "difCols": 0
+      }
+    ],
+    "rotations": {
+      "90": 31
+    }
+  },
+  {
+    "id": 31,
+    "rows": 2,
+    "cols": 3,
+    "area": 6,
+    "shape": "TRIANGLE",
+    "count": 4,
+    "blocks": [
+      {
+        "difRows": 0,
+        "difCols": 0
+      },
+      {
+        "difRows": 0,
+        "difCols": 1
+      },
+      {
+        "difRows": 1,
+        "difCols": 1
+      },
+      {
+        "difRows": 0,
+        "difCols": 2
+      }
+    ],
+    "rotations": {
+      "90": 32
+    }
+  },
+  {
+    "id": 32,
+    "rows": 3,
+    "cols": 2,
+    "area": 6,
+    "shape": "TRIANGLE",
+    "count": 4,
+    "blocks": [
+      {
+        "difRows": 0,
+        "difCols": 0
+      },
+      {
+        "difRows": 1,
+        "difCols": 0
+      },
+      {
+        "difRows": 1,
+        "difCols": -1
+      },
+      {
+        "difRows": 2,
+        "difCols": 0
+      }
+    ],
+    "rotations": {
+      "90": 29
     }
   }
 ]

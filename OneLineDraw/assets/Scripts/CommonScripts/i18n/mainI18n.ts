@@ -44,7 +44,7 @@ export default class mainI18n extends cc.Component {
       i18nMgr.ins.setLanguage(Language[this.lan]);
     }
 
-    this.initShowLanguage();
+    // this.initShowLanguage();
   }
 
   private initShowLanguage() {

@@ -2,19 +2,14 @@
 declare namespace gi {
   /** 游戏得分 */
   var score: number;
-  /** 历史最高分 */
-  var bestScore: number;
   /** Block的宽度 */
   var blockWidth: number;
   /** Block的高度 */
   var blockHeight: number;
-  /** Cell的宽度 */
-  var cellWidth: number;
-  /** Cell的高度 */
-  var cellHeight: number;
-  /** 初始化有多少行 */
-  var initiaRowCount: number;
-  /** 初始化有多少列 */
+  /** Block的宽度 */
+  var areablockWidth: number;
+  /** Block的高度 */
+  var areablockHeight: number;
   var initiaColCount: number;
   /** 游戏区域节点宽度 */
   var gameAreaWidth: number;

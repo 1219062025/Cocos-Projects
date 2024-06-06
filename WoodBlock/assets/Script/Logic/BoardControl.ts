@@ -87,7 +87,7 @@ export default class BoardControl extends cc.Component {
       const targetCol = startCol + blockInfo.difCols;
       _map[targetRow][targetCol] = 1;
     }
-    return _map;
+    return { map: _map };
   }
 
   /** 根据传入的map判断当前是否能产生消除 */
@@ -104,7 +104,7 @@ export default class BoardControl extends cc.Component {
   }
 
   /** 获取假设消除方块后的信息 */
-  getRemoveBlockInfo(map: number[][]) {
+  getAfterRemoveBlockInfo(map: number[][]) {
     /** 消除后的map */
     const _map = JSON.parse(JSON.stringify(map)) as number[][];
     /** 消除了哪些行 */
@@ -126,6 +126,20 @@ export default class BoardControl extends cc.Component {
     /** 一共消除了多少行、多少列 */
     const count = rows.length + cols.length;
     return { map: _map, rows, cols, count };
+  }
+
+  /** 块是否可以放入并且产生消除 */
+  canPlaceAndRemove(chunkData: gi.ChunkData, startRow: number, startCol: number, map: number[][]) {
+    let _map = map;
+    if (!this.canPlaceChunk(chunkData, startRow, startCol, _map)) return false;
+    const { map: afterPlaceChunkMap } = this.getAfterPlaceChunkInfo(chunkData, startRow, startCol, _map);
+    return this.canRemoveBlock(afterPlaceChunkMap);
+  }
+
+  getAfterPlaceAndRemove(chunkData: gi.ChunkData, startRow: number, startCol: number, map: number[][]) {
+    let _map = map;
+    const { map: afterPlaceChunkMap } = this.getAfterPlaceChunkInfo(chunkData, startRow, startCol, _map);
+    return this.getAfterRemoveBlockInfo(afterPlaceChunkMap);
   }
 
   /** 放置块 */
@@ -156,7 +170,7 @@ export default class BoardControl extends cc.Component {
     }
 
     if (this.canRemoveBlock(this.map)) {
-      const removeInfo = this.getRemoveBlockInfo(this.map);
+      const removeInfo = this.getAfterRemoveBlockInfo(this.map);
       this.removeBlock(removeInfo.rows, removeInfo.cols);
     }
   }
@@ -241,12 +255,12 @@ export default class BoardControl extends cc.Component {
 
   /** 设置变色 */
   setChange(chunk: ChunkControl, startRow: number, startCol: number) {
-    const afterPlaceChunkMap = this.getAfterPlaceChunkInfo(chunk.data, startRow, startCol, this.map);
+    const { map: afterPlaceChunkMap } = this.getAfterPlaceChunkInfo(chunk.data, startRow, startCol, this.map);
 
     // 如果产生了消除的话
     if (this.canRemoveBlock(afterPlaceChunkMap)) {
       // 获取假设放下块之后的消除信息
-      const removeInfo = this.getRemoveBlockInfo(afterPlaceChunkMap);
+      const removeInfo = this.getAfterRemoveBlockInfo(afterPlaceChunkMap);
       /** 处理所有行 */
       for (const row of removeInfo.rows) {
         this.handleRowAll<BlockControl>(this.blocks, row, block => {
