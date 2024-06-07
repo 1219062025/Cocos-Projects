@@ -24,8 +24,16 @@ export default class BlockControl extends cc.Component {
     const spriteFrame = cc.loader.getRes(path, cc.SpriteFrame) as cc.SpriteFrame;
     this.blockSprite.spriteFrame = spriteFrame;
 
-    this.node.setContentSize(gi.blockWidth, gi.blockHeight);
-    this.blockSprite.node.setContentSize(gi.blockWidth, gi.blockHeight);
+    this.node.setContentSize(gi.BLOCKWIDTH, gi.BLOCKHEIGHT);
+    this.blockSprite.node.setContentSize(gi.BLOCKWIDTH, gi.BLOCKHEIGHT);
+  }
+
+  setType(type: number) {
+    this.type = type;
+    const categoryName = BlockCategory[this.category];
+    const path = `${categoryName}/${this.type}`;
+    const spriteFrame = cc.loader.getRes(path, cc.SpriteFrame) as cc.SpriteFrame;
+    this.blockSprite.spriteFrame = spriteFrame;
   }
 
   setRanks({ row, col }: gi.Ranks) {

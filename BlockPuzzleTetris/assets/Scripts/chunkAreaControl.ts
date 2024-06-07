@@ -12,20 +12,6 @@ export default class BlockAreaControl extends cc.Component {
   @property({ type: cc.Prefab, tooltip: '方块集合预制体' })
   chunkPrefab: cc.Prefab = null;
 
-  onLoad() {}
-
-  /** 生成块 */
-  generate() {
-    /** 获取当前出块逻辑 */
-    const logic = gi.getLogic();
-
-    switch (logic) {
-      case Logic.EASY:
-        this.easyGenerate(Libray.GLOBAL);
-        break;
-    }
-  }
-
   /** 生成简易方块 */
   easyGenerate(librayType: Libray) {
     while (this.hasEmptyArea()) {
@@ -65,7 +51,6 @@ export default class BlockAreaControl extends cc.Component {
 
   shiftChunk() {
     const areaNode = this.areaList.find(area => area.childrenCount !== 0);
-
     const chunkNode = areaNode.getChildByName('chunk');
     const chunk = chunkNode.getComponent(ChunkControl);
     return chunk;

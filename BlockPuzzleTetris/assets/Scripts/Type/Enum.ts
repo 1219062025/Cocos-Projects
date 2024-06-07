@@ -24,13 +24,13 @@ export enum BlockCategory {
 }
 /** 基础方块 */
 export enum BaseBlock {
-  RED,
-  GREEN,
-  YELLOW,
-  ORANGE,
-  BLUE,
-  PURPLE,
-  SKYBLUE
+  RED = 1,
+  GREEN = 2,
+  YELLOW = 3,
+  ORANGE = 4,
+  BLUE = 5,
+  PURPLE = 6,
+  SKYBLUE = 7
 }
 /** 得分方块 */
 export enum GoalBlock {

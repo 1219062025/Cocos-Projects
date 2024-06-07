@@ -17,15 +17,15 @@ export default class ChunkControl extends cc.Component {
   /** 初始化块 */
   init(chunkData: gi.ChunkData) {
     const { rows, cols, blocks } = chunkData;
-    this.type = Math.floor(Math.random() * gi.baseBlockCount);
+    this.type = Math.floor(Math.random() * gi.BASEBLOCKCOUNT) + 1;
 
     // 遍历生成方块
     blocks.forEach(blockInfo => {
       const { difRows, difCols } = blockInfo;
       const block = this.blockBuilder(this.type);
       // 根据行、列的差值计算坐标
-      const x = difCols * gi.blockWidth;
-      const y = -difRows * gi.blockHeight;
+      const x = difCols * gi.BLOCKWIDTH;
+      const y = -difRows * gi.BLOCKHEIGHT;
       // 设置坐标系、坐标
       block.node.setParent(this.node);
       block.node.setPosition(x, y);
@@ -41,7 +41,7 @@ export default class ChunkControl extends cc.Component {
     });
 
     this.data = chunkData;
-    this.node.setContentSize(cols * gi.blockWidth, rows * gi.blockHeight);
+    this.node.setContentSize(cols * gi.BLOCKWIDTH, rows * gi.BLOCKHEIGHT);
     // 居中
     centerChildren(this.node);
   }

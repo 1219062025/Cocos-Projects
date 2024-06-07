@@ -1,28 +1,31 @@
 /** 全局命名空间 */
 declare namespace gi {
-  /** 游戏得分 */
-  var score: number;
   /** Block的宽度 */
-  var blockWidth: number;
+  var BLOCKWIDTH: number;
   /** Block的高度 */
-  var blockHeight: number;
-  /** Block的宽度 */
-  var areablockWidth: number;
-  /** Block的高度 */
-  var areablockHeight: number;
-  var initiaColCount: number;
+  var BLOCKHEIGHT: number;
+  /** 网格行数 */
+  var MAPROWS: number;
+  /** 网格列数 */
+  var MAPCOLS: number;
   /** 游戏区域节点宽度 */
-  var gameAreaWidth: number;
+  var MAPWIDTH: number;
   /** 游戏区域节点高度 */
-  var gameAreaHeight: number;
+  var MAPHEIGHT: number;
   /** 基础方块有多少种 */
-  var baseBlockCount;
+  var BASEBLOCKCOUNT;
 
   /** 设置游戏模式 */
   function setMode(mode: Mode): void;
 
   /** 获取游戏模式 */
   function getMode(): Mode;
+
+  /** 设置当前关卡 */
+  function setLevel(value: number): void;
+
+  /** 获取当前关卡 */
+  function getLevel(): number;
 
   /** 获取当前使用的方块库 */
   function getLibrary(librayType: Libray): ChunkData[];
