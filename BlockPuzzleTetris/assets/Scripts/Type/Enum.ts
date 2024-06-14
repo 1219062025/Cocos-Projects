@@ -30,7 +30,8 @@ export enum BaseBlock {
   ORANGE = 4,
   BLUE = 5,
   PURPLE = 6,
-  SKYBLUE = 7
+  SKYBLUE = 7,
+  GREY = 8
 }
 /** 得分方块 */
 export enum GoalBlock {

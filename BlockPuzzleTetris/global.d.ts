@@ -13,7 +13,7 @@ declare namespace gi {
   /** 游戏区域节点高度 */
   var MAPHEIGHT: number;
   /** 基础方块有多少种 */
-  var BASEBLOCKCOUNT;
+  var BASEBLOCKCOUNT: number;
 
   /** 设置游戏模式 */
   function setMode(mode: Mode): void;
@@ -38,6 +38,14 @@ declare namespace gi {
 
   /** 获取方块spriteFrame */
   function getBlockSprite(type: number, category: number): cc.SpriteFrame;
+
+  /** 预制体生成器 */
+  function prefabBuilder<T extends cc.Component>(
+    prefab: cc.Prefab,
+    control: {
+      prototype: T;
+    }
+  ): { node: cc.Node; ctrl: T };
 
   /** 行、列数 */
   interface Ranks {

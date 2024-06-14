@@ -14,12 +14,16 @@ export default class BlockAreaControl extends cc.Component {
 
   /** 生成简易方块 */
   easyGenerate(librayType: Libray) {
+    const indexs = [1, 4, 6, 1, 5];
     while (this.hasEmptyArea()) {
       const area = this.chooseEmptyArea();
       /** 方块库 */
       const libray = gi.getLibrary(librayType);
-      const index = Math.floor(Math.random() * libray.length);
-      const chunk = this.chunkBuilder(libray[index]);
+      // const index = 1;
+      const index = indexs.shift();
+      // const index = Math.floor(Math.random() * libray.length);
+      const chunk = this.chunkBuilder(libray[index]).ctrl;
+      chunk.node.setScale(0.6);
       chunk.node.setParent(area);
       chunk.node.setPosition(0, 0);
     }
@@ -58,9 +62,8 @@ export default class BlockAreaControl extends cc.Component {
 
   /** 块生成器 */
   chunkBuilder(chunkData: gi.ChunkData) {
-    const chunkNode = cc.instantiate(this.chunkPrefab);
-    const chunk = chunkNode.getComponent(ChunkControl);
-    chunk.init(chunkData);
-    return chunk;
+    const res = gi.prefabBuilder(this.chunkPrefab, ChunkControl);
+    res.ctrl.init(chunkData);
+    return res;
   }
 }

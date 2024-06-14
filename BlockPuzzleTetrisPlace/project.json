@@ -1,0 +1,8 @@
+{
+  "engine": "cocos-creator-js",
+  "packages": "packages",
+  "name": "BlockPuzzleTetrisPlace",
+  "id": "c1b9741b-2298-4607-96c2-f2aefc737ab0",
+  "version": "2.3.4",
+  "isNew": false
+}

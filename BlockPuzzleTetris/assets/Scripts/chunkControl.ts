@@ -1,4 +1,4 @@
-import { centerChildren } from './Common/Utils';
+import { centerChildren } from './CommonScripts/Utils';
 import BlockControl from './blockControl';
 
 const { ccclass, property } = cc._decorator;
@@ -22,7 +22,7 @@ export default class ChunkControl extends cc.Component {
     // 遍历生成方块
     blocks.forEach(blockInfo => {
       const { difRows, difCols } = blockInfo;
-      const block = this.blockBuilder(this.type);
+      const block = this.blockBuilder(this.type).ctrl;
       // 根据行、列的差值计算坐标
       const x = difCols * gi.BLOCKWIDTH;
       const y = -difRows * gi.BLOCKHEIGHT;
@@ -46,11 +46,18 @@ export default class ChunkControl extends cc.Component {
     centerChildren(this.node);
   }
 
+  setType(type: number) {
+    this.type = type;
+    this.data.blocks.forEach(blockInfo => {
+      const block = blockInfo.self.getComponent(BlockControl);
+      block.setType(8);
+    });
+  }
+
   /** 方块生成器 */
   blockBuilder(type: number) {
-    const blockNode = cc.instantiate(this.blockPrefab);
-    const block = blockNode.getComponent(BlockControl);
-    block.init(type);
-    return block;
+    const res = gi.prefabBuilder(this.blockPrefab, BlockControl);
+    res.ctrl.init(type);
+    return res;
   }
 }
