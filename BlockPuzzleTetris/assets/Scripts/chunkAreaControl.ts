@@ -14,15 +14,14 @@ export default class BlockAreaControl extends cc.Component {
 
   /** 生成简易方块 */
   easyGenerate(librayType: Libray) {
-    const indexs = [1, 4, 6, 1, 5];
+    const indexs = [31, 1, 4, 1, 9];
     while (this.hasEmptyArea()) {
-      const area = this.chooseEmptyArea();
+      const area = this.sequenceEmptyArea();
       /** 方块库 */
       const libray = gi.getLibrary(librayType);
       // const index = 1;
       const index = indexs.shift();
-      // const index = Math.floor(Math.random() * libray.length);
-      const chunk = this.chunkBuilder(libray[index]).ctrl;
+      const chunk = this.chunkBuilder(libray.find(chunkData => chunkData.id === index)).ctrl;
       chunk.node.setScale(0.6);
       chunk.node.setParent(area);
       chunk.node.setPosition(0, 0);
@@ -46,6 +45,12 @@ export default class BlockAreaControl extends cc.Component {
       const index = Math.floor(Math.random() * emptyAreaList.length);
       return emptyAreaList[index];
     }
+  }
+
+  /** 按顺序获取第一个空区域 */
+  sequenceEmptyArea() {
+    const emptyArea = this.areaList.find(areaNode => areaNode.childrenCount === 0);
+    return emptyArea;
   }
 
   /** 获取所有块 */

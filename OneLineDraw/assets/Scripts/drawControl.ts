@@ -6,6 +6,9 @@ export default class DrawControl extends cc.Component {
   @property({ type: [cc.JsonAsset] })
   pathJson: cc.JsonAsset[] = [];
 
+  @property({ type: cc.Node, tooltip: '结束弹窗' })
+  pop: cc.Node = null;
+
   pathJsonIndex: number = 0;
 
   /** 铅笔节点 */
@@ -229,8 +232,8 @@ export default class DrawControl extends cc.Component {
       this.pathJsonIndex++;
     } else {
       this.isComplete = true;
-      // @ts-ignore
-      linkToStore();
+      this.pop.active = true;
+      (cc.tween(this.pop) as cc.Tween).to(1, { opacity: 255 }).start();
     }
   }
 

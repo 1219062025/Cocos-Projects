@@ -90,11 +90,9 @@
     "_dstBlendFactor": 771,
     "_custom": true,
     "_file": {
-      "__uuid__": "b2cfdfb9-a0ab-407e-9101-aa5f1b0b0bd4"
+      "__uuid__": "1832c259-581c-47c5-9a4d-16d4e5cb9e8d"
     },
-    "_spriteFrame": {
-      "__uuid__": "eb2a8eeb-4374-40a8-8a19-32ca6e8b1594"
-    },
+    "_spriteFrame": null,
     "_texture": null,
     "_stopped": true,
     "playOnLoad": true,

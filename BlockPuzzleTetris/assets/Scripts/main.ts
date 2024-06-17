@@ -140,10 +140,15 @@ export default class Main extends cc.Component {
   onRemove(rows: number) {
     const total = 10;
     const value = rows / total;
-    this.progress.progress += value;
-    if (this.progress.progress >= 1) {
-      this.end();
-    }
+    this.shake();
+    (cc.tween(this.progress) as cc.Tween)
+      .to(0.4, { progress: this.progress.progress + value }, { easing: 'sineInOut' })
+      .call(() => {
+        if (this.progress.progress >= 1) {
+          this.end();
+        }
+      })
+      .start();
   }
 
   async inspectRemoveAndCollapse(map: number[][]) {
@@ -240,7 +245,7 @@ export default class Main extends cc.Component {
     if (this.isRun) {
       /** 每一帧移动的距离 */
       const ydt = 50 * dt;
-      // const ydt = 550 * dt;
+      // const ydt = 250 * dt;
       /** 到达下一行前移动的距离 */
       const distance = ydt + this.totalDistance;
       /** 关卡信息 */
@@ -255,6 +260,7 @@ export default class Main extends cc.Component {
         // 到顶了，游戏结束
         if (this.hasTopRowBlock) {
           return this.end();
+          // return this.stop();
         }
 
         // 关卡里面取行数据或者随机生成
@@ -328,6 +334,33 @@ export default class Main extends cc.Component {
     this.guide.active = false;
     this.pop.active = true;
     (cc.tween(this.pop) as cc.Tween).to(1, { opacity: 255 }).start();
+  }
+
+  shake() {
+    const camera = cc.Camera.main;
+
+    if (camera) {
+      const originalPosition = camera.node.position;
+      const amplitude = 10; // 振动幅度
+      const duration = 0.5; // 振动总时间
+      const frequency = 0.05; // 振动频率
+
+      let elapsedTime = 0;
+      let shakeTime = 0;
+
+      this.schedule(() => {
+        shakeTime += frequency;
+        if (shakeTime > duration) {
+          camera.node.setPosition(originalPosition); // 振动结束后恢复原位
+          this.unscheduleAllCallbacks();
+          return;
+        }
+
+        const offsetX = (Math.random() - 0.5) * amplitude * 2;
+        const offsetY = (Math.random() - 0.5) * amplitude * 2;
+        camera.node.setPosition(originalPosition.add(cc.v3(offsetX, offsetY, 0)));
+      }, frequency);
+    }
   }
 
   /** 初始化网格 */

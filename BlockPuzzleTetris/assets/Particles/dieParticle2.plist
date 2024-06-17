@@ -5,7 +5,7 @@
     <key>angle</key>
     <integer>90</integer>
     <key>angleVariance</key>
-    <integer>90</integer>
+    <integer>45</integer>
     <key>blendFuncDestination</key>
     <integer>771</integer>
     <key>blendFuncSource</key>
@@ -67,17 +67,17 @@
     <key>rotationStartVariance</key>
     <integer>360</integer>
     <key>sourcePositionVariancex</key>
-    <integer>60</integer>
+    <integer>0</integer>
     <key>sourcePositionVariancey</key>
-    <integer>60</integer>
+    <integer>0</integer>
     <key>sourcePositionx</key>
     <real>373.7277526855469</real>
     <key>sourcePositiony</key>
     <real>478.40472412109375</real>
     <key>speed</key>
-    <integer>500</integer>
+    <integer>300</integer>
     <key>speedVariance</key>
-    <integer>0</integer>
+    <integer>700</integer>
     <key>startColorAlpha</key>
     <integer>1</integer>
     <key>startColorBlue</key>
@@ -97,7 +97,7 @@
     <key>startParticleSize</key>
     <integer>30</integer>
     <key>startParticleSizeVariance</key>
-    <integer>10</integer>
+    <integer>15</integer>
     <key>tangentialAccelVariance</key>
     <integer>0</integer>
     <key>tangentialAcceleration</key>
@@ -109,8 +109,8 @@
     <key>minRadiusVariance</key>
     <integer>0</integer>
     <key>emissionRate</key>
-    <integer>200</integer>
+    <integer>100</integer>
     <key>spriteFrameUuid</key>
-    <string>3214140e-593a-4aa7-8400-af0ac001f86a</string>
+    <string></string>
   </dict>
 </plist>

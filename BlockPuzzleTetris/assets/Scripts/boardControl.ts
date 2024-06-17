@@ -158,11 +158,15 @@ export default class BoardControl extends cc.Component {
       // 切换块的坐标系之后再设置位置
       // chunk.node.setPosition(targetPos);
       // chunk.node.setParent(this.boardNode);
-      const time = (pos.len() / gi.BLOCKHEIGHT) * 0.02;
+      const time = (pos.len() / gi.BLOCKHEIGHT) * 0.01;
       (cc.tween(chunk.node) as cc.Tween)
         .to(time, { position: pos }, { easing: 'cubicIn' })
         .call(() => {
           for (const blockInfo of chunk.data.blocks) {
+            // 由于缓动下落动画结束后，棋盘可能已经升起了一行了，需要找到最新的startRow
+            while (this.blocks[startRow + blockInfo.difRows][startCol + blockInfo.difCols]) {
+              startRow--;
+            }
             const targetRow = startRow + blockInfo.difRows;
             const targetCol = startCol + blockInfo.difCols;
 
@@ -171,9 +175,10 @@ export default class BoardControl extends cc.Component {
             this.updateMap(Action.ADD, targetRow, targetCol, block);
 
             /** 切换坐标系 */
-            const worldPos = block.node.convertToWorldSpaceAR(cc.v2(0, 0));
             block.node.setParent(this.boardNode);
             block.node.setPosition(this.getBlockPos({ row: targetRow, col: targetCol }));
+
+            block.shadowSprite.node.active = false;
           }
           resolve(true);
         })

@@ -1,4 +1,4 @@
-import { BlockCategory } from './Type/Enum';
+import { BaseBlock, BlockCategory } from './Type/Enum';
 
 const { ccclass, property } = cc._decorator;
 
@@ -7,8 +7,8 @@ export default class BlockControl extends cc.Component {
   @property({ type: cc.Sprite, tooltip: '方块Sprite' })
   blockSprite: cc.Sprite = null;
 
-  @property({ type: cc.Sprite, tooltip: '投影Sprite' })
-  projectionSprite: cc.Sprite = null;
+  @property({ type: cc.Sprite, tooltip: '阴影Sprite' })
+  shadowSprite: cc.Sprite = null;
 
   @property({ type: cc.Prefab, tooltip: '消除粒子预制体' })
   ParticlePrefab: cc.Prefab = null;
@@ -40,6 +40,9 @@ export default class BlockControl extends cc.Component {
     const path = `${categoryName}/${this.type}`;
     const spriteFrame = cc.loader.getRes(path, cc.SpriteFrame) as cc.SpriteFrame;
     this.blockSprite.spriteFrame = spriteFrame;
+    if (this.type === BaseBlock.GREY) {
+      this.shadowSprite.node.active = false;
+    }
   }
 
   setRanks({ row, col }: gi.Ranks) {
