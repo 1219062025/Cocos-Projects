@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "0eabd28b-5b37-41ed-99c6-b6e28c983dfe",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 40,
+  "height": 28,
+  "platformSettings": {},
+  "subMetas": {
+    "trembling_woman1": {
+      "ver": "1.0.4",
+      "uuid": "ca2b0722-979b-4b51-a6e9-0f0edb0fc156",
+      "rawTextureUuid": "0eabd28b-5b37-41ed-99c6-b6e28c983dfe",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 39,
+      "height": 26,
+      "rawWidth": 40,
+      "rawHeight": 28,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

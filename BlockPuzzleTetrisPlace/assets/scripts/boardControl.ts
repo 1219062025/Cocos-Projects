@@ -26,6 +26,12 @@ export default class BoardControl extends cc.Component {
   /** Board中的所有方块，以一维Set形式表示 */
   flatBlocks: Set<BlockControl> = new Set([]);
 
+  /** 顶部行是否存在block */
+  get hasTopRowBlock() {
+    const topRowBlock = this.blocks[0].find(block => block);
+    return Boolean(topRowBlock);
+  }
+
   initBoard(level: number) {
     this.boardNode.setContentSize(gi.MAPWIDTH, gi.MAPHEIGHT);
     const levelInfo = LevelList[level];

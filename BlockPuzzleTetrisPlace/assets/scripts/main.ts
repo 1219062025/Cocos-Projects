@@ -33,13 +33,7 @@ export default class Main extends cc.Component {
   /** 到达下一行前的上升距离 */
   totalDistance: number = 0;
 
-  /** 顶部行是否存在block */
-  get hasTopRowBlock() {
-    const topRowBlock = this.board.blocks[0].find(block => block);
-    return Boolean(topRowBlock);
-  }
-
-  async onLoad() {
+  onLoad() {
     gi.loadGameRes().then(() => {
       gi.loadGameConfig();
       this.initGame();
@@ -85,7 +79,7 @@ export default class Main extends cc.Component {
         this.totalDistance = 0;
 
         // 到顶了，游戏结束
-        if (this.hasTopRowBlock) {
+        if (this.board.hasTopRowBlock) {
         }
 
         // 拉回整个棋盘
@@ -118,7 +112,6 @@ export default class Main extends cc.Component {
     this.board.map = this.createMap<number>(gi.MAPROWS, gi.MAPCOLS, 0);
     this.board.blocks = this.createMap<BlockControl>(gi.MAPROWS, gi.MAPCOLS, null);
     const levelInfo = LevelList[gi.getLevel()];
-
     // while (this.currentLevelRow <= 10) {
     //   const rowData = levelInfo.Map[this.currentLevelRow];
     //   this.board.incRow(rowData, this.board.map);

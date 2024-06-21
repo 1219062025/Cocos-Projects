@@ -1,0 +1,8 @@
+{
+  "engine": "cocos-creator-js",
+  "packages": "packages",
+  "name": "BlockPuzzleRotate",
+  "id": "6fd44410-443c-4fa8-9ed7-bb4db14d7e57",
+  "version": "2.3.4",
+  "isNew": false
+}

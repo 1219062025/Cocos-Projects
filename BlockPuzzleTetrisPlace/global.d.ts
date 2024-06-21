@@ -36,6 +36,45 @@ declare namespace gi {
   /** 获取当前使用的出块逻辑 */
   function getLogic(): string;
 
+  /** x、y坐标需要传入中点坐标而不是左下角坐标。maxLen代表一个子树所能容纳的最大数据量 */
+  function createQuadTree<T>(name: string, options: { x: number; y: number; width: number; height: number; maxLen: number; ctx?: cc.Graphics }): void;
+
+  /** 获取四叉树 */
+  function getQuadTree<T>(name: string): QuadTree<T>;
+
+  /** 四叉树插入节点，x、y坐标传入节点坐标，data传入该节点保存的数据 */
+  function treeInsert<T>(name: string, options: { x: number; y: number; width: number; height: number; data: T }): void;
+
+  /** 四叉树搜索节点，x、y坐标传入节点坐标，返回数据数组 */
+  function treeSearch<T>(name: string, x: number, y: number): T[];
+
+  /** 创建对象池 */
+  function createPool(
+    name: string,
+    size: number,
+    obj: cc.Node,
+    poolHandlerComp?:
+      | string
+      | {
+          prototype: cc.Component;
+        }
+  ): void;
+
+  /** 获取对象池 */
+  function getPool(name: string): cc.NodePool;
+
+  /** 获取对象池大小 */
+  function getPoolSize(name: string): number;
+
+  /** 清空对象池 */
+  function clearPool(name: string): boolean;
+
+  /** 对象池Put */
+  function poolPut(name: string, obj: cc.Node): void;
+
+  /** 对象池Get */
+  function poolGet(name: string): cc.Node;
+
   /** 获取方块spriteFrame */
   function getBlockSprite(type: number, category: string): cc.SpriteFrame;
 
@@ -154,5 +193,23 @@ declare namespace gi {
     self?: cc.Node;
     /** 方块类型 */
     type?: BlockCategory;
+  }
+
+  /** 工具类 */
+  class Utils {
+    /** 扁平化数组 */
+    static flat<T>(array): T[];
+
+    /** 判断传入的值是否在某个数字闭区间内 */
+    static inRange(value: number, min: number, max: number): boolean;
+
+    /** 防抖 */
+    static debounce(func, delay): (...args: any[]) => void;
+
+    /** 将节点所有的子节点按照原本的布局居中于该节点 */
+    static centerChildren(node: cc.Node): void;
+
+    /** 获取节点能够包容所有子节点的最小矩形的宽、高 */
+    static calculateBoundingBox(node: cc.Node): cc.Rect;
   }
 }
