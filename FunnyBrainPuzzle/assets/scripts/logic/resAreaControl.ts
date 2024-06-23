@@ -1,7 +1,7 @@
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class MoneyAreaControl extends cc.Component {
+export default class ResAreaControl extends cc.Component {
   /** 整个游戏区域 */
   @property({ type: cc.Node, tooltip: '整个游戏区域' })
   wrap: cc.Node = null;
@@ -12,7 +12,7 @@ export default class MoneyAreaControl extends cc.Component {
   /** 当前选中的资源 */
   curRes: cc.Node = null;
 
-  onLoad() {
+  init() {
     gi.Event.on('touchRes', this.onTouchStart, this);
 
     this.node.children.forEach(resNode => {
@@ -43,7 +43,7 @@ export default class MoneyAreaControl extends cc.Component {
   }
 
   onTouchEnd(event: cc.Event.EventTouch) {
-    this.cancleCurRes();
+    gi.Event.emit('touchEnd', event);
   }
 
   /** 设置当前资源 */
