@@ -1,6 +1,6 @@
 {
   "ver": "2.3.4",
-  "uuid": "71450944-c407-4193-b7f8-9fba230056e1",
+  "uuid": "1a05d97e-7f16-4cdf-9f6c-691a29ab8bb0",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,8 +13,8 @@
   "subMetas": {
     "snowboots": {
       "ver": "1.0.4",
-      "uuid": "59b64f82-e6f4-4b57-bbe4-bd61e81db94b",
-      "rawTextureUuid": "71450944-c407-4193-b7f8-9fba230056e1",
+      "uuid": "26702ce9-6ec2-4355-93e1-f512816500c3",
+      "rawTextureUuid": "1a05d97e-7f16-4cdf-9f6c-691a29ab8bb0",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

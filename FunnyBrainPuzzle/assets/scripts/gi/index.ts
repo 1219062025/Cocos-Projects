@@ -9,8 +9,6 @@ class GI {
   private _level = 0;
   /** 当前使用的游戏模式 */
   private _mode: string = '';
-  /** 当前使用的出块逻辑 */
-  private _logic: string = '';
 
   /** ___DEBUG START___ */
   /** 得分 */
@@ -19,33 +17,12 @@ class GI {
   scale = 1;
   /** ___DEBUG END___ */
 
-  /** Block的宽度 */
-  BLOCKWIDTH = 124;
-  /** Block的高度 */
-  BLOCKHEIGHT = 124;
-  /** Cell的宽度 */
-  CELLWIDTH = 124;
-  /** Cell的高度 */
-  CELLHEIGHT = 124;
-  /** 网格行数 */
-  MAPROWS = 8;
-  /** 网格列数 */
-  MAPCOLS = 8;
-  /** 游戏区域节点宽度 */
-  MAPWIDTH = this.BLOCKWIDTH * this.MAPCOLS;
-  /** 游戏区域节点高度 */
-  MAPHEIGHT = this.BLOCKHEIGHT * this.MAPROWS;
-  /** 基础方块有多少种 */
-  BASEBLOCKCOUNT = 7;
-  /** 块初始化时的缩放 */
-  CHUNKSCALE = 0.4;
-
-  /** 设置出块逻辑 */
+  /** 设置游戏模式 */
   setMode(mode: string) {
     this._mode = mode;
   }
 
-  /** 设置出块逻辑 */
+  /** 获取游戏模式 */
   getMode() {
     return this._mode;
   }
@@ -58,55 +35,6 @@ class GI {
   /** 获取当前关卡 */
   getLevel() {
     return this._level;
-  }
-
-  /** 获取当前使用的方块库 */
-  getLibrary() {
-    const logic = this.getLogic();
-    let librayType;
-
-    switch (logic) {
-      case gi.Logic.EASY:
-        librayType = gi.Libray.GLOBAL;
-        break;
-      case gi.Logic.ASSISTANCE:
-        librayType = gi.Libray.GLOBAL;
-        break;
-      default:
-        break;
-    }
-    const library = (cc.loader.getRes(`chunklibrary/${librayType}`, cc.JsonAsset) as cc.JsonAsset).json;
-    /** 深拷贝 */
-    return JSON.parse(JSON.stringify(library));
-  }
-
-  /** 根据id获取方块库中的块，如果不传入哪个方块库默认使用当前方块库 */
-  getChunk(id: number, librayType?: string) {
-    if (librayType) {
-      const library = (cc.loader.getRes(`chunklibrary/${librayType}`, cc.JsonAsset) as cc.JsonAsset).json;
-      const chunk = library.find(chunkData => chunkData.id === id);
-      return JSON.parse(JSON.stringify(chunk));
-    } else {
-      const library = this.getLibrary();
-      const chunk = library.find(chunkData => chunkData.id === id);
-      return JSON.parse(JSON.stringify(chunk));
-    }
-  }
-
-  /** 设置出块逻辑 */
-  setLogic(logic: string) {
-    this._logic = logic;
-  }
-
-  /** 获取当前使用的出块逻辑 */
-  getLogic() {
-    return this._logic;
-  }
-
-  /** 获取方块spriteFrame */
-  getBlockSprite(type: number, category: string) {
-    const path = `${category}/${type}`;
-    return cc.loader.getRes(path, cc.SpriteFrame) as cc.SpriteFrame;
   }
 
   /** 载入游戏资源 */
@@ -131,10 +59,7 @@ class GI {
   }
 
   /** 载入、设置游戏配置 */
-  loadGameConfig() {
-    gi.setLogic(gi.Logic.ASSISTANCE);
-    // gi.setLogic(gi.Logic.EASY);
-  }
+  loadGameConfig() {}
 
   /** 预制体生成器 */
   prefabBuilder<T extends cc.Component>(

@@ -1,6 +1,6 @@
 {
   "ver": "2.3.4",
-  "uuid": "39b946c2-bad1-4db9-ba87-05bc26f96773",
+  "uuid": "e2798f57-6e1a-4486-88be-9d0d82af3be3",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,8 +13,8 @@
   "subMetas": {
     "trembling_woman2": {
       "ver": "1.0.4",
-      "uuid": "ebc6527a-e092-4571-8e30-9bd57c7442d1",
-      "rawTextureUuid": "39b946c2-bad1-4db9-ba87-05bc26f96773",
+      "uuid": "ae8c648c-0568-4a8e-9310-da625ed3ae68",
+      "rawTextureUuid": "e2798f57-6e1a-4486-88be-9d0d82af3be3",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

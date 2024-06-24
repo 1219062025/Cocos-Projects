@@ -1,6 +1,6 @@
 {
   "ver": "2.3.4",
-  "uuid": "66629ab6-55ac-46c2-99be-7993a60f9f24",
+  "uuid": "a79897e8-3d8d-4bd3-b0b4-47366c960cf6",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,8 +13,8 @@
   "subMetas": {
     "walllamp": {
       "ver": "1.0.4",
-      "uuid": "62c4d300-cf0c-4da6-b20e-23739580a351",
-      "rawTextureUuid": "66629ab6-55ac-46c2-99be-7993a60f9f24",
+      "uuid": "1d831a44-6f9b-4d95-9dc8-cb935985e73a",
+      "rawTextureUuid": "a79897e8-3d8d-4bd3-b0b4-47366c960cf6",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

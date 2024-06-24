@@ -1,0 +1,23 @@
+{
+  "__type__": "cc.Material",
+  "_name": "snowflakes",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "0e84574a-0f3b-43b4-bfae-d6951ecfc48f"
+  },
+  "_techniqueIndex": 0,
+  "_techniqueData": {
+    "0": {
+      "defines": {},
+      "props": {
+        "iResolution": {
+          "__type__": "cc.Vec2",
+          "x": 200,
+          "y": 200
+        },
+        "iTime": 500
+      }
+    }
+  }
+}

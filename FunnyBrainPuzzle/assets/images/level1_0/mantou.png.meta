@@ -1,6 +1,6 @@
 {
   "ver": "2.3.4",
-  "uuid": "55b25b16-ca23-486e-bcdf-f4c6ad209073",
+  "uuid": "a10c24b0-9cba-42e6-b7e8-870365e8792d",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,8 +13,8 @@
   "subMetas": {
     "mantou": {
       "ver": "1.0.4",
-      "uuid": "a213742d-e60d-42c3-af64-ffef6985a80f",
-      "rawTextureUuid": "55b25b16-ca23-486e-bcdf-f4c6ad209073",
+      "uuid": "052ad572-967b-456c-8261-a6967ac21df7",
+      "rawTextureUuid": "a10c24b0-9cba-42e6-b7e8-870365e8792d",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

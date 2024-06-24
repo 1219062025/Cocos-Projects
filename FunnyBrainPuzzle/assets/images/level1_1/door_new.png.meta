@@ -1,6 +1,6 @@
 {
   "ver": "2.3.4",
-  "uuid": "e7b2d142-37ad-4926-8207-005d51a2f509",
+  "uuid": "3b41509e-7475-4b1c-9263-ff22fcabe013",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -13,8 +13,8 @@
   "subMetas": {
     "door_new": {
       "ver": "1.0.4",
-      "uuid": "274d51f8-58f8-458c-8966-a56794905795",
-      "rawTextureUuid": "e7b2d142-37ad-4926-8207-005d51a2f509",
+      "uuid": "7485fbc7-9849-46f1-86f8-259faf3b80a2",
+      "rawTextureUuid": "3b41509e-7475-4b1c-9263-ff22fcabe013",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

@@ -6,11 +6,11 @@ export default class ResAreaControl extends cc.Component {
   @property({ type: cc.Node, tooltip: '整个游戏区域' })
   wrap: cc.Node = null;
 
-  @property({ type: [cc.Node], tooltip: '资源' })
-  resNodes: cc.Node[] = [];
-
   /** 当前选中的资源 */
   curRes: cc.Node = null;
+
+  /** 当前选中的资源源位置 */
+  curResOriPos: cc.Vec2 = cc.v2(0, 0);
 
   init() {
     gi.Event.on('touchRes', this.onTouchStart, this);
@@ -31,7 +31,8 @@ export default class ResAreaControl extends cc.Component {
   }
 
   onTouchStart({ event, resNode }: { event: cc.Event.EventTouch; resNode: cc.Node }) {
-    const _curRes = this.resNodes.find(resNode => cc.isValid(resNode));
+    const copyArray = this.node.children.slice();
+    const _curRes = copyArray.reverse().find(resNode => cc.isValid(resNode));
 
     this.setCurRes(_curRes);
   }
@@ -46,14 +47,22 @@ export default class ResAreaControl extends cc.Component {
     gi.Event.emit('touchEnd', event);
   }
 
+  decRes() {
+    this.curRes.destroy();
+  }
+
   /** 设置当前资源 */
   setCurRes(node: cc.Node) {
     this.curRes = node;
+    this.curResOriPos = this.curRes.getPosition();
   }
 
   /** 取消选中的资源 */
   cancleCurRes() {
-    this.curRes.setPosition(0, 0);
-    this.curRes = null;
+    if (cc.isValid(this.curRes)) {
+      (cc.tween(this.curRes) as cc.Tween).to(0.2, { position: this.curResOriPos }).start();
+      this.curRes = null;
+      this.curResOriPos = cc.v2(0, 0);
+    }
   }
 }
