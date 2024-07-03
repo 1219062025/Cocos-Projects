@@ -11,7 +11,7 @@
       "ja": "祖父母一家の生活環境を改善する",
       "ko": "할아버지 할머니 가족의 생활 조건을 개선하다"
     },
-    "textMap": [
+    "tipsMap": [
       {
         "key": "wall_top",
         "default": "房顶可算不会漏水了",
@@ -203,6 +203,200 @@
         "vi": "Cải tạo nhà cũ",
         "ja": "古い家をリフォームする",
         "ko": "오래된 집을 리모델링한다"
+      }
+    ],
+    "guideMap": [
+      {
+        "key": "wall_top",
+        "default": "拖动钱到房顶",
+        "en": "Drag the money to the roof",
+        "th": "ลากเงินไปที่หลังคา",
+        "id": "Seret uang ke atap",
+        "tw": "拖動錢到房頂",
+        "ms": "Seret wang ke bumbung",
+        "vi": "Kéo tiền đến mái nhà",
+        "ja": "お金を屋根にドラッグ",
+        "ko": "돈을 지붕으로 끌어다 놓기"
+      },
+      {
+        "key": "washboard",
+        "default": "拖动钱到床旁边的洗衣板上",
+        "en": "Drag the money to the washboard next to the bed",
+        "th": "ลากเงินไปที่กระดานซักผ้าข้างเตียง",
+        "id": "Seret uang ke papan cuci di samping tempat tidur",
+        "tw": "拖動錢到床旁邊的洗衣板上",
+        "ms": "Seret wang ke papan basuh di sebelah katil",
+        "vi": "Kéo tiền đến bảng giặt cạnh giường",
+        "ja": "お金をベッドの横にある洗濯板にドラッグ",
+        "ko": "돈을 침대 옆 빨래판으로 끌어다 놓기"
+      },
+      {
+        "key": "woman",
+        "default": "拖动钱到老奶奶上",
+        "en": "Drag the money to the old lady",
+        "th": "ลากเงินไปที่คุณยาย",
+        "id": "Seret uang ke nenek tua",
+        "tw": "拖動錢到老奶奶上",
+        "ms": "Seret wang ke nenek tua",
+        "vi": "Kéo tiền đến bà già",
+        "ja": "お金をおばあさんにドラッグ",
+        "ko": "돈을 할머니에게 끌어다 놓기"
+      },
+      {
+        "key": "bed",
+        "default": "拖动钱到床上",
+        "en": "Drag the money to the bed",
+        "th": "ลากเงินไปที่เตียง",
+        "id": "Seret uang ke tempat tidur",
+        "tw": "拖動錢到床上",
+        "ms": "Seret wang ke katil",
+        "vi": "Kéo tiền đến giường",
+        "ja": "お金をベッドにドラッグ",
+        "ko": "돈을 침대로 끌어다 놓기"
+      },
+      {
+        "key": "photo",
+        "default": "拖动钱到照片上",
+        "en": "Drag the money to the photo",
+        "th": "ลากเงินไปที่รูปถ่าย",
+        "id": "Seret uang ke foto",
+        "tw": "拖動錢到照片上",
+        "ms": "Seret wang ke gambar",
+        "vi": "Kéo tiền đến ảnh",
+        "ja": "お金を写真にドラッグ",
+        "ko": "돈을 사진으로 끌어다 놓기"
+      },
+      {
+        "key": "broom",
+        "default": "拖动钱到扫把上",
+        "en": "Drag the money to the broom",
+        "th": "ลากเงินไปที่ไม้กวาด",
+        "id": "Seret uang ke sapu",
+        "tw": "拖動錢到掃把上",
+        "ms": "Seret wang ke penyapu",
+        "vi": "Kéo tiền đến chổi",
+        "ja": "お金をほうきにドラッグ",
+        "ko": "돈을 빗자루로 끌어다 놓기"
+      },
+      {
+        "key": "calendar",
+        "default": "拖动钱到日历上",
+        "en": "Drag the money to the calendar",
+        "th": "ลากเงินไปที่ปฏิทิน",
+        "id": "Seret uang ke kalender",
+        "tw": "拖動錢到日曆上",
+        "ms": "Seret wang ke kalendar",
+        "vi": "Kéo tiền đến lịch",
+        "ja": "お金をカレンダーにドラッグ",
+        "ko": "돈을 달력으로 끌어다 놓기"
+      },
+      {
+        "key": "Candle",
+        "default": "拖动钱到蜡烛上",
+        "en": "Drag the money to the candle",
+        "th": "ลากเงินไปที่เทียน",
+        "id": "Seret uang ke lilin",
+        "tw": "拖動錢到蠟燭上",
+        "ms": "Seret wang ke lilin",
+        "vi": "Kéo tiền đến nến",
+        "ja": "お金をろうそくにドラッグ",
+        "ko": "돈을 양초로 끌어다 놓기"
+      },
+      {
+        "key": "table",
+        "default": "拖动钱至桌子",
+        "en": "Drag the money to the table",
+        "th": "ลากเงินไปที่โต๊ะ",
+        "id": "Seret uang ke meja",
+        "tw": "拖動錢至桌子",
+        "ms": "Seret wang ke meja",
+        "vi": "Kéo tiền đến bàn",
+        "ja": "お金をテーブルにドラッグ",
+        "ko": "돈을 책상으로 끌어다 놓기"
+      },
+      {
+        "key": "firewood",
+        "default": "拖动钱到火堆上",
+        "en": "Drag the money to the fire pit",
+        "th": "ลากเงินไปที่กองไฟ",
+        "id": "Seret uang ke perapian",
+        "tw": "拖動錢到火堆上",
+        "ms": "Seret wang ke unggun api",
+        "vi": "Kéo tiền đến đống lửa",
+        "ja": "お金を焚き火にドラッグ",
+        "ko": "돈을 모닥불로 끌어다 놓기"
+      },
+      {
+        "key": "door_open",
+        "default": "拖动钱到门上",
+        "en": "Drag the money to the door",
+        "th": "ลากเงินไปที่ประตู",
+        "id": "Seret uang ke pintu",
+        "tw": "拖動錢到門上",
+        "ms": "Seret wang ke pintu",
+        "vi": "Kéo tiền đến cửa",
+        "ja": "お金をドアにドラッグ",
+        "ko": "돈을 문으로 끌어다 놓기"
+      },
+      {
+        "key": "dog",
+        "default": "拖动钱到门外的狗狗上（需要在门修复前）",
+        "en": "Drag the money to the dog outside the door (before the door is fixed)",
+        "th": "ลากเงินไปที่สุนัขนอกประตู (ก่อนที่ประตูจะซ่อมเสร็จ)",
+        "id": "Seret uang ke anjing di luar pintu (sebelum pintu diperbaiki)",
+        "tw": "拖動錢到門外的狗狗上（需要在門修復前）",
+        "ms": "Seret wang ke anjing di luar pintu (sebelum pintu dibaiki)",
+        "vi": "Kéo tiền đến con chó ngoài cửa (trước khi sửa cửa)",
+        "ja": "修理する前にお金を外の犬にドラッグ",
+        "ko": "문이 수리되기 전에 돈을 밖의 개에게 끌어다 놓기"
+      },
+      {
+        "key": "slippers",
+        "default": "拖动钱到鞋子上",
+        "en": "Drag the money to the shoes",
+        "th": "ลากเงินไปที่รองเท้า",
+        "id": "Seret uang ke sepatu",
+        "tw": "拖動錢到鞋子上",
+        "ms": "Seret wang ke kasut",
+        "vi": "Kéo tiền đến giày",
+        "ja": "お金を靴にドラッグ",
+        "ko": "돈을 신발로 끌어다 놓기"
+      },
+      {
+        "key": "window",
+        "default": "拖动钱至窗户上",
+        "en": "Drag the money to the window",
+        "th": "ลากเงินไปที่หน้าต่าง",
+        "id": "Seret uang ke jendela",
+        "tw": "拖動錢至窗戶上",
+        "ms": "Seret wang ke tingkap",
+        "vi": "Kéo tiền đến cửa sổ",
+        "ja": "お金を窓にドラッグ",
+        "ko": "돈을 창문으로 끌어다 놓기"
+      },
+      {
+        "key": "man",
+        "default": "拖动钱到老爷爷上",
+        "en": "Drag the money to the old man",
+        "th": "ลากเงินไปที่คุณตา",
+        "id": "Seret uang ke kakek tua",
+        "tw": "拖動錢到老爺爺上",
+        "ms": "Seret wang ke datuk tua",
+        "vi": "Kéo tiền đến ông già",
+        "ja": "お金をおじいさんにドラッグ",
+        "ko": "돈을 할아버지에게 끌어다 놓기"
+      },
+      {
+        "key": "wall",
+        "default": "拖动钱至地板或墙上",
+        "en": "Drag the money to the floor or wall",
+        "th": "ลากเงินไปที่พื้นหรือผนัง",
+        "id": "Seret uang ke lantai atau dinding",
+        "tw": "拖動錢至地板或牆上",
+        "ms": "Seret wang ke lantai atau dinding",
+        "vi": "Kéo tiền đến sàn hoặc tường",
+        "ja": "お金を床または壁にドラッグ",
+        "ko": "돈을 바닥이나 벽으로 끌어다 놓기"
       }
     ]
   }

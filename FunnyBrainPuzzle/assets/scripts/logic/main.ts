@@ -1,4 +1,5 @@
 import ResAreaControl from './resAreaControl';
+import GuideControl from './guideControl';
 import TriggerControl from './triggerControl';
 import SubscriptionControl from './subscriptions/subscriptionControl';
 
@@ -30,6 +31,10 @@ export default class Main extends cc.Component {
   @property({ type: cc.Node, tooltip: '提示控制脚本' })
   tipsNode: cc.Node = null;
 
+  /** 引导控制脚本 */
+  @property({ type: GuideControl, tooltip: '引导控制脚本' })
+  guide: GuideControl = null;
+
   /** 结束弹窗节点 */
   @property({ type: cc.Node, tooltip: '结束弹窗' })
   pop: cc.Node = null;
@@ -54,6 +59,8 @@ export default class Main extends cc.Component {
 
     // 初始化资源
     this.resArea.init();
+    // 在资源初始化之后初始化引导
+    this.guide.init();
 
     // 订阅动作
     new SubscriptionControl(0);
@@ -91,6 +98,7 @@ export default class Main extends cc.Component {
     if (this.upgradeTimes === 0) {
       this.pop.active = true;
       (cc.tween(this.pop) as cc.Tween).to(1, { opacity: 255 }).start();
+      gi.Event.emit('gameover');
     }
   }
 

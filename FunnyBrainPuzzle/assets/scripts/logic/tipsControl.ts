@@ -10,10 +10,10 @@ export default class TipsControl extends cc.Component {
       'showTips',
       (key: string) => {
         if (!key) return;
-        const levelInfo = gi.getLevelInfo();
 
         const lan = gi.getLanguage() || 'default';
-        const item = levelInfo.textMap.find(item => item.key === key)[lan];
+        const levelInfo = gi.getLevelInfo();
+        const item = levelInfo.tipsMap.find(item => item.key === key)[lan];
 
         if (item) {
           this.node.stopAllActions();

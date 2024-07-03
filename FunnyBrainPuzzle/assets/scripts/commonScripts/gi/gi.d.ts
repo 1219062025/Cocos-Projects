@@ -57,15 +57,33 @@ declare namespace gi {
   interface TextInfo {
     /** 关键词 */
     key: string;
-    /** 文本 */
-    value: string;
+    /** 默认中文 */
+    default: string;
+    /** 英语 */
+    en: string;
+    /** 泰语 */
+    th: string;
+    /** 印尼语 */
+    id: string;
+    /** 繁体中文 */
+    tw: string;
+    /** 马来西亚语 */
+    ms: string;
+    /** 越南语 */
+    vi: string;
+    /** 日语 */
+    ja: string;
+    /** 韩语 */
+    ko: string;
   }
 
   interface LevelInfo {
     /** 关卡标题 */
     title: string;
     /** 关卡文本映射 */
-    textMap: TextInfo[];
+    tipsMap: TextInfo[];
+    /** 关卡引导文本映射 */
+    guideMap: TextInfo[];
   }
 
   /** 游戏模式 */
@@ -100,12 +118,39 @@ declare namespace gi {
     static shake(options?: { node?: cc.Node; amplitude?: number; frequency?: number; durtion?: number });
   }
 
+  interface MoveOptions {
+    /** 单次移动时间 */
+    time: number;
+    /** 引导节点 */
+    guide: cc.Node;
+    /** 移动时附带的节点 */
+    node?: cc.Node;
+  }
+
   /** 引导 */
   class Guide {
-    /** 当前引导的步骤 */
-    static step: number;
-    /** 是否还处于引导阶段 */
-    static inGuide: boolean;
+    /** 设置当前引导步骤 */
+    static setStep(step: number): void;
+
+    /** 获取当前引导步骤 */
+    static getStep(step: number): number;
+
+    /**
+     * 得到一个从位置from移动到位置to的缓动
+     * @param {cc.Vec2} from 起始位置
+     * @param {cc.Vec2} to 终点位置
+     */
+    static fromToPos(from: cc.Vec2, to: cc.Vec2, options: MoveOptions): cc.Tween;
+
+    /**
+     * 得到一个从节点from的位置移动到节点to的位置的缓动
+     * @param {cc.Node} from 起始节点
+     * @param {cc.Node} to 终点节点
+     */
+    static fromToNode(fromNode: cc.Node, toNode: cc.Node, options: MoveOptions): cc.Tween;
+
+    /** 销毁附带的节点 */
+    static destroyCopyNode(): void;
   }
 
   /** 全局事件订阅 */

@@ -31,9 +31,9 @@ export default class ResAreaControl extends cc.Component {
   }
 
   onTouchStart({ event, resNode }: { event: cc.Event.EventTouch; resNode: cc.Node }) {
-    const copyArray = this.node.children.slice();
-    const _curRes = copyArray.reverse().find(resNode => cc.isValid(resNode));
+    const _curRes = this.getEffectiveResNode();
     this.setCurRes(_curRes);
+    gi.Event.emit('touchStart', event);
   }
 
   onTouchMove(event: cc.Event.EventTouch) {
@@ -44,6 +44,13 @@ export default class ResAreaControl extends cc.Component {
 
   onTouchEnd(event: cc.Event.EventTouch) {
     gi.Event.emit('touchEnd', event);
+  }
+
+  /** 获取一个场上还可以拖动的资源节点 */
+  getEffectiveResNode() {
+    const copyArray = this.node.children.slice();
+    const _curRes = copyArray.reverse().find(resNode => cc.isValid(resNode));
+    return _curRes;
   }
 
   /** 设置选中的资源 */
