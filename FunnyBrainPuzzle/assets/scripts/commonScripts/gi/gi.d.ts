@@ -19,11 +19,20 @@ declare namespace gi {
   /** 获取当前关卡 */
   function getLevel(): number;
 
+  /** 获取当前关卡信息 */
+  function getLevelInfo(): LevelInfo;
+
   /** 载入游戏资源 */
   function loadGameRes(): Promise<[unknown, unknown]>;
 
   /** 载入游戏配置 */
   function loadGameConfig(): void;
+
+  /** 设置当前语言 */
+  function setLanguage(l: string): void;
+
+  /** 获取当前语言 */
+  function getLanguage(): string;
 
   /** 预制体生成器 */
   function prefabBuilder<T extends cc.Component>(
@@ -43,6 +52,20 @@ declare namespace gi {
     nodes: cc.Node[];
     /** 附带的位置数组 */
     positions: string[];
+  }
+
+  interface TextInfo {
+    /** 关键词 */
+    key: string;
+    /** 文本 */
+    value: string;
+  }
+
+  interface LevelInfo {
+    /** 关卡标题 */
+    title: string;
+    /** 关卡文本映射 */
+    textMap: TextInfo[];
   }
 
   /** 游戏模式 */

@@ -9,15 +9,8 @@
   "_techniqueIndex": 0,
   "_techniqueData": {
     "0": {
-      "defines": {},
-      "props": {
-        "iResolution": {
-          "__type__": "cc.Vec2",
-          "x": 200,
-          "y": 200
-        },
-        "iTime": 500
-      }
+      "props": {},
+      "defines": {}
     }
   }
 }

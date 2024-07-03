@@ -1,5 +1,5 @@
-import Guide from './guide/guide';
 import Utils from './utils/utils';
+import Guide from './guide/guide';
 import Event from './event/event';
 import QuadTree from './quadtree/quadtree';
 import Pool from './pool/pool';
@@ -15,6 +15,8 @@ class GI {
   score = 0;
   /** 全局缩放 */
   scale = 1;
+  /** 当前语言缩写 */
+  language = '';
   /** ___DEBUG END___ */
 
   /** 设置游戏模式 */
@@ -35,6 +37,13 @@ class GI {
   /** 获取当前关卡 */
   getLevel() {
     return this._level;
+  }
+
+  /** 获取当前关卡信息 */
+  getLevelInfo() {
+    const levle = this.getLevel();
+    const infos = (cc.loader.getRes('levelinfos', cc.JsonAsset) as cc.JsonAsset).json;
+    return infos[levle] as gi.LevelInfo;
   }
 
   /** 载入游戏资源 */
@@ -60,6 +69,17 @@ class GI {
 
   /** 载入、设置游戏配置 */
   loadGameConfig() {}
+
+  /** 设置当前语言 */
+  setLanguage(l: string) {
+    this.language = l;
+    gi.Event.emit('setLanguage', this.language);
+  }
+
+  /** 获取当前语言 */
+  getLanguage() {
+    return this.language;
+  }
 
   /** 预制体生成器 */
   prefabBuilder<T extends cc.Component>(

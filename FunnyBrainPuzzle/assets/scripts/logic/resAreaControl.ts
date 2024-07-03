@@ -33,7 +33,6 @@ export default class ResAreaControl extends cc.Component {
   onTouchStart({ event, resNode }: { event: cc.Event.EventTouch; resNode: cc.Node }) {
     const copyArray = this.node.children.slice();
     const _curRes = copyArray.reverse().find(resNode => cc.isValid(resNode));
-
     this.setCurRes(_curRes);
   }
 
@@ -47,22 +46,26 @@ export default class ResAreaControl extends cc.Component {
     gi.Event.emit('touchEnd', event);
   }
 
-  decRes() {
-    this.curRes.destroy();
-  }
-
-  /** 设置当前资源 */
+  /** 设置选中的资源 */
   setCurRes(node: cc.Node) {
     this.curRes = node;
     this.curResOriPos = this.curRes.getPosition();
+  }
+
+  /** 销毁选中的资源 */
+  destroyCurRes() {
+    if (cc.isValid(this.curRes)) {
+      this.curRes.destroy();
+    }
   }
 
   /** 取消选中的资源 */
   cancleCurRes() {
     if (cc.isValid(this.curRes)) {
       (cc.tween(this.curRes) as cc.Tween).to(0.2, { position: this.curResOriPos }).start();
-      this.curRes = null;
-      this.curResOriPos = cc.v2(0, 0);
     }
+
+    this.curResOriPos = cc.v2(0, 0);
+    this.curRes = null;
   }
 }

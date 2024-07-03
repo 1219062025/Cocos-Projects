@@ -1,0 +1,209 @@
+{
+  "1": {
+    "title": {
+      "default": "改善爷爷奶奶一家的生活条件",
+      "en": "Improve the living conditions of grandparents' family",
+      "th": "ปรับปรุงสภาพความเป็นอยู่ของครอบครัวปู่ย่าตายาย",
+      "id": "Meningkatkan kondisi hidup keluarga kakek nenek",
+      "tw": "改善爺爺奶奶一家的生活條件",
+      "ms": "Membaiki keadaan hidup keluarga datuk dan nenek",
+      "vi": "Cải thiện điều kiện sống của gia đình ông bà",
+      "ja": "祖父母一家の生活環境を改善する",
+      "ko": "할아버지 할머니 가족의 생활 조건을 개선하다"
+    },
+    "textMap": [
+      {
+        "key": "wall_top",
+        "default": "房顶可算不会漏水了",
+        "en": "The roof finally won't leak anymore.",
+        "th": "หลังคาไม่รั่วอีกแล้ว",
+        "id": "Atap akhirnya tidak bocor lagi",
+        "tw": "房頂可算不會漏水了",
+        "ms": "Bumbung akhirnya tidak bocor lagi",
+        "vi": "Mái nhà cuối cùng không còn dột nữa",
+        "ja": "屋根がやっと漏れなくなった",
+        "ko": "지붕이 드디어 새지 않는다"
+      },
+      {
+        "key": "washboard",
+        "default": "再也不用在冬天手洗衣服了",
+        "en": "No more hand washing clothes in winter.",
+        "th": "ไม่ต้องซักผ้าด้วยมือในหน้าหนาวแล้ว",
+        "id": "Tidak perlu mencuci pakaian dengan tangan di musim dingin lagi",
+        "tw": "再也不用在冬天手洗衣服了",
+        "ms": "Tidak perlu mencuci pakaian dengan tangan pada musim sejuk lagi",
+        "vi": "Không cần giặt quần áo bằng tay vào mùa đông nữa",
+        "ja": "もう冬に手洗いしなくていい",
+        "ko": "이제 겨울에 손으로 빨래하지 않아도 된다"
+      },
+      {
+        "key": "woman",
+        "default": "大棉被就是温暖",
+        "en": "The big quilt is really warm.",
+        "th": "ผ้าห่มผืนใหญ่ให้ความอบอุ่น",
+        "id": "Selimut besar benar-benar hangat",
+        "tw": "大棉被就是溫暖",
+        "ms": "Selimut besar memang hangat",
+        "vi": "Chăn lớn thật ấm áp",
+        "ja": "大きな布団は本当に暖かい",
+        "ko": "큰 이불이 정말 따뜻하다"
+      },
+      {
+        "key": "bed",
+        "default": "床板没那么硬了",
+        "en": "The bed board isn't so hard anymore.",
+        "th": "แผ่นเตียงไม่นอนแข็งแล้ว",
+        "id": "Papan tempat tidur tidak terlalu keras lagi",
+        "tw": "床板沒那麼硬了",
+        "ms": "Papan katil tidak terlalu keras lagi",
+        "vi": "Ván giường không còn cứng nữa",
+        "ja": "ベッドの板がそんなに硬くなくなった",
+        "ko": "침대판이 그렇게 딱딱하지 않다"
+      },
+      {
+        "key": "photo",
+        "default": "爷爷奶奶我来看你们了",
+        "en": "Grandpa and Grandma, I'm here to see you.",
+        "th": "คุณปู่คุณย่า ผมมาหาคุณแล้ว",
+        "id": "Kakek nenek, aku datang menemui kalian",
+        "tw": "爺爺奶奶，我來看你們了",
+        "ms": "Datuk dan nenek, saya datang untuk melihat kamu",
+        "vi": "Ông bà, con đến thăm các bạn đây",
+        "ja": "おじいちゃんおばあちゃん、会いに来たよ",
+        "ko": "할아버지 할머니, 보러 왔어요"
+      },
+      {
+        "key": "broom",
+        "default": "不用自己扫地了",
+        "en": "No need to sweep the floor myself anymore.",
+        "th": "ไม่ต้องกวาดพื้นเองแล้ว",
+        "id": "Tidak perlu menyapu lantai sendiri lagi",
+        "tw": "不用自己掃地了",
+        "ms": "Tidak perlu menyapu lantai sendiri lagi",
+        "vi": "Không cần tự quét nhà nữa",
+        "ja": "自分で掃除する必要がなくなった",
+        "ko": "자신이 청소할 필요가 없다"
+      },
+      {
+        "key": "calendar",
+        "default": "这个看时间方便多了",
+        "en": "This one is much more convenient for checking the time.",
+        "th": "อันนี้ดูเวลาได้สะดวกขึ้น",
+        "id": "Ini jauh lebih nyaman untuk melihat waktu",
+        "tw": "這個看時間方便多了",
+        "ms": "Ini lebih mudah untuk melihat masa",
+        "vi": "Cái này tiện hơn nhiều để xem giờ",
+        "ja": "これは時間を見るのがずっと便利になった",
+        "ko": "이것은 시간을 확인하기가 훨씬 편리하다"
+      },
+      {
+        "key": "Candle",
+        "default": "不用经常换蜡烛了",
+        "en": "No need to change candles often anymore.",
+        "th": "ไม่ต้องเปลี่ยนเทียนบ่อยแล้ว",
+        "id": "Tidak perlu sering mengganti lilin lagi",
+        "tw": "不用經常換蠟燭了",
+        "ms": "Tidak perlu sering menukar lilin lagi",
+        "vi": "Không cần thay nến thường xuyên nữa",
+        "ja": "もうしょっちゅうろうそくを変える必要がない",
+        "ko": "더 이상 자주 촛불을 교체할 필요가 없다"
+      },
+      {
+        "key": "table",
+        "default": "一家人一起吃顿好的",
+        "en": "The whole family can have a good meal together.",
+        "th": "ครอบครัวได้กินมื้อดีๆ ด้วยกัน",
+        "id": "Keluarga bisa makan bersama yang enak",
+        "tw": "一家人一起吃頓好的",
+        "ms": "Keluarga boleh makan bersama yang enak",
+        "vi": "Cả gia đình có thể ăn một bữa ngon cùng nhau",
+        "ja": "家族みんなでいい食事をする",
+        "ko": "가족이 함께 좋은 음식을 먹는다"
+      },
+      {
+        "key": "firewood",
+        "default": "屋子暖和多了",
+        "en": "The house is much warmer.",
+        "th": "บ้านอุ่นขึ้นมาก",
+        "id": "Rumah jauh lebih hangat",
+        "tw": "屋子暖和多了",
+        "ms": "Rumah jauh lebih hangat",
+        "vi": "Nhà ấm hơn nhiều",
+        "ja": "部屋がずっと暖かくなった",
+        "ko": "집이 훨씬 따뜻해졌다"
+      },
+      {
+        "key": "door_open",
+        "default": "这破门终于能关上了",
+        "en": "This broken door can finally close.",
+        "th": "ประตูที่พังนี้ปิดได้แล้ว",
+        "id": "Pintu rusak ini akhirnya bisa ditutup",
+        "tw": "這破門終於能關上了",
+        "ms": "Pintu rosak ini akhirnya boleh ditutup",
+        "vi": "Cửa hỏng này cuối cùng đã có thể đóng lại",
+        "ja": "この壊れたドアがやっと閉まるようになった",
+        "ko": "이 망가진 문을 드디어 닫을 수 있다"
+      },
+      {
+        "key": "dog",
+        "default": "这下大黄也不冷了",
+        "en": "This way, the dog won't be cold.",
+        "th": "ตอนนี้น้องหมาไม่หนาวแล้ว",
+        "id": "Sekarang anjing tidak kedinginan lagi",
+        "tw": "這下狗狗不冷了",
+        "ms": "Sekarang anjing tidak sejuk lagi",
+        "vi": "Bây giờ chó không còn lạnh nữa",
+        "ja": "これで犬も寒くない",
+        "ko": "이제 강아지가 춥지 않다"
+      },
+      {
+        "key": "slippers",
+        "default": "出门不会冻到脚了",
+        "en": "Going out won't freeze my feet anymore.",
+        "th": "ออกไปข้างนอกเท้าไม่เย็นแล้ว",
+        "id": "Keluar tidak akan membeku kaki lagi",
+        "tw": "房顶可算出門不會凍到腳了不会漏水了",
+        "ms": "Keluar tidak akan membeku kaki lagi",
+        "vi": "Ra ngoài không bị lạnh chân nữa",
+        "ja": "外に出ても足が凍えない",
+        "ko": "나가도 발이 얼지 않는다"
+      },
+      {
+        "key": "window",
+        "default": "窗户终于不漏风了",
+        "en": "The window finally doesn't leak air.",
+        "th": "หน้าต่างไม่รั่วลมอีกแล้ว",
+        "id": "Jendela akhirnya tidak bocor udara lagi",
+        "tw": "窗戶終於不漏風了",
+        "ms": "Tingkap akhirnya tidak bocor udara lagi",
+        "vi": "Cửa sổ cuối cùng cũng không còn rò gió nữa",
+        "ja": "窓がやっと風を漏らさなくなった",
+        "ko": "창문이 드디어 바람이 새지 않는다"
+      },
+      {
+        "key": "man",
+        "default": "还是这套衣服暖和",
+        "en": "This set of clothes is still warm.",
+        "th": "ชุดนี้อบอุ่นที่สุด",
+        "id": "Setelan ini tetap hangat",
+        "tw": "還是這套衣服暖和",
+        "ms": "Set pakaian ini tetap hangat",
+        "vi": "Bộ quần áo này vẫn ấm",
+        "ja": "この服がやっぱり暖かい",
+        "ko": "이 옷이 역시 따뜻하다"
+      },
+      {
+        "key": "wall",
+        "default": "装修一下老房子",
+        "en": "Renovating the old house.",
+        "th": "ซ่อมแซมบ้านเก่า",
+        "id": "Merenovasi rumah tua",
+        "tw": "裝修一下老房子",
+        "ms": "Mengubah suai rumah lama",
+        "vi": "Cải tạo nhà cũ",
+        "ja": "古い家をリフォームする",
+        "ko": "오래된 집을 리모델링한다"
+      }
+    ]
+  }
+}
