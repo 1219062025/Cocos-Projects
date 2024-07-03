@@ -1,0 +1,110 @@
+<ui-box-container class="layout vertical" style="height: 100%">
+  <!-- 操作 -->
+  <div class="form-block">
+    <div class="form-prefix">操作:</div>
+    <div class="form-content">
+      <ui-button class="h-20" @confirm="removeConfig">清空配置缓存</ui-button>
+    </div>
+  </div>
+
+  <!-- 广告平台选择 -->
+  <div class="form-block">
+    <div class="form-prefix">广告平台:</div>
+    <div class="form-content">
+      <ui-checkbox class="margin-r-20 margin-b-10 checkBox" v-for="(index, item) in adPlatforms" @confirm="onCheckPlatForms" :id="item" :checked="config.adPlatforms.includes(item)">{{item}}</ui-checkbox>
+    </div>
+  </div>
+
+  <!-- 方向选择 -->
+  <div class="form-block" v-if="showOrientationOptions">
+    <div class="form-prefix">支持方向:</div>
+    <div class="form-content">
+      <ui-checkbox class="margin-r-20 margin-b-10 checkBox" @confirm="onCheckOrientation" id="Portrait" :checked="orientationOptions.Portrait.checked">Portrait-竖屏</ui-checkbox>
+      <ui-checkbox class="margin-r-20 margin-b-10 checkBox" @confirm="onCheckOrientation" id="Landscape" :checked="orientationOptions.Landscape.checked">Landscape-横屏</ui-checkbox>
+    </div>
+  </div>
+
+  <!-- Tiktok支持的语言 -->
+  <div class="form-block" v-if="showLanguagesOptions">
+    <div class="form-prefix">Tiktok支持语言:</div>
+    <div class="form-content">
+      <ui-checkbox class="margin-r-20 margin-b-10 checkBox" v-for="(index,item) in languagesOptions" @confirm="onCheckLanguages" :id="item.abbr" :checked="config.languages.includes(item.abbr)">{{item.label}}-{{item.abbr}}</ui-checkbox>
+    </div>
+  </div>
+
+  <!-- MTG支持的语言 -->
+  <div class="form-block" v-if="showMTGLanguagesOptions">
+    <div class="form-prefix">MTG支持语言:</div>
+    <div class="form-content">
+      <ui-checkbox class="margin-r-20 margin-b-10 checkBox" v-for="(index,item) in mtg_languagesOptions" @confirm="onCheckMTGLanguages" :id="item.abbr" :checked="config.mtg_languages.includes(item.abbr)">{{item.label}}-{{item.abbr}}</ui-checkbox>
+    </div>
+  </div>
+
+  <!-- 模板选择 -->
+  <div class="form-block">
+    <div class="form-prefix">基于模板:</div>
+    <div class="form-content">
+      <ui-checkbox class="checkBox" @confirm="onCheckTemplate" :checked="config.isTemplate"></ui-checkbox>
+    </div>
+  </div>
+
+  <div class="form-block" v-if="showProductOptions">
+    <div class="form-prefix">选择产品模板:</div>
+    <div class="form-content">
+      <div class="flex-column productList">
+        <ui-checkbox class="margin-5 checkbox" @confirm="onAllSelected" :checked="config.allSelected">
+          <span class="margin-l-10">全选</span>
+        </ui-checkbox>
+        <ui-checkbox class="margin-5 checkbox" v-for="(index, item) in productList" :class="{ active: config.productList.includes(item) }" :checked="config.productList.includes(item)" :id="item" @confirm="onCheckProduct">
+          <span class="margin-l-10">{{item}}</span>
+        </ui-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <!-- 替换产品URL -->
+  <div class="form-block" v-if="showReplaceUrl">
+    <div class="form-prefix">替换产品URL:</div>
+    <div class="form-content">
+      <ui-checkbox class="checkBox" @confirm="onCheckReplaceUrl" :checked="config.replaceUrl"></ui-checkbox>
+    </div>
+  </div>
+
+  <!-- 项目构建包的路径 -->
+  <div class="form-block">
+    <div class="form-prefix">构建路径:</div>
+    <div class="form-content flex">
+      <ui-input id="in-url" class="flex-1 h-20" :value="config.input" @confirm="onInputChange"></ui-input>
+      <ui-button id="in-btn" class="h-20" @confirm="onSelectFolder">...</ui-button>
+      <ui-button id="in-btn" class="h-20" @confirm="onOpenResourceWin">打开</ui-button>
+    </div>
+  </div>
+
+  <!-- 打包后输出路径 -->
+  <div class="form-block">
+    <div class="form-prefix">输出路径:</div>
+    <div class="form-content flex">
+      <ui-input id="out-url" class="flex-1 h-20" :value="config.output" @confirm="onInputChange"></ui-input>
+      <ui-button id="out-btn" class="h-20" @confirm="onSelectFolder">...</ui-button>
+      <ui-button id="out-btn" class="h-20" @confirm="onOpenResourceWin">打开</ui-button>
+    </div>
+  </div>
+
+  <!-- 进度条 -->
+  <div class="form-block">
+    <div class="flex-column items-center" style="width: 100%">
+      <div style="font-size: 15px">
+        <span v-if="!isPackage">未开始，</span>
+        <span v-if="isPackage && progress !== 100">打包中，</span>
+        <span v-if="progress === 100">已完成，</span>
+        进度:
+        <span style="display: inline-block; width: 38px">{{progress}}%</span>
+      </div>
+      <ui-progress :value="progress" class="tiny label progress"></ui-progress>
+      <div style="font-size: 10px">{{tips}}</div>
+    </div>
+  </div>
+
+  <!-- 打包按钮 -->
+  <ui-button id="packageBtn" style="position: relative; margin: 20px auto; width: 50%; height: 40px" class="margin green" @confirm="onClickBuild">开始打包</ui-button>
+</ui-box-container>

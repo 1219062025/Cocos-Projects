@@ -1,0 +1,27 @@
+{
+  "name": "ad-build",
+  "version": "0.0.1",
+  "description": "试玩广告打包工具",
+  "author": "smallstep",
+  "main": "main.js",
+  "main-menu": {
+    "ad-build/面板": {
+      "message": "ad-build:open-build-panel"
+    }
+  },
+  "panel": {
+    "name": "build",
+    "main": "src/build/panel/index.js",
+    "type": "dockable",
+    "title": "试玩广告打包配置面板",
+    "width": 650,
+    "height": 650
+  },
+  "devDependencies": {
+    "clean-css": "^4.2.3",
+    "imagemin": "^7.0.1",
+    "uglify-es": "^3.3.9",
+    "uglify-js": "^3.10.0",
+    "zip-local": "^0.3.4"
+  }
+}

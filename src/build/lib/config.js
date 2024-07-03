@@ -1,0 +1,4 @@
+var APPLE_URL = '#APPLE_URL';
+var GOOGLE_URL = '#GOOGLE_URL';
+var APP_NAME = '#APP_NAME';
+var APP_ICON = '#APP_ICON';

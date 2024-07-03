@@ -1,0 +1,129 @@
+/* 表单块 */
+.form-block {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* 表单项前缀 */
+.form-prefix {
+  display: inline-flex;
+  justify-content: flex-end;
+  width: 15%;
+  min-width: 55px;
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+/* 表单项内容 */
+.form-content {
+  width: 85%;
+}
+/* 表单项内容 */
+.form-content-column {
+  display: inline-flex;
+  flex-direction: column;
+  width: 85%;
+}
+
+.flex {
+  display: inline-flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-column {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+/* 主轴居中 */
+.justify-center {
+  justify-content: center;
+}
+
+/* 次轴居中 */
+.items-center {
+  align-items: center;
+}
+
+/* 强制文本一行显示 */
+.no-wrap {
+  white-space: nowrap;
+}
+
+/* 外边距 */
+.margin-10 {
+  margin: 10px;
+}
+
+/* 外边距 */
+.margin-5 {
+  margin: 5px;
+}
+
+/* 上下外边距 */
+.margin-y-10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* 左右外边距 */
+.margin-x-10 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* 上外边距 */
+.margin-t-10 {
+  margin-top: 10px;
+}
+
+/* 下外边距 */
+.margin-b-10 {
+  margin-bottom: 10px;
+}
+
+/* 右外边距 */
+.margin-r-20 {
+  margin-right: 20px;
+}
+
+/* 右外边距 */
+.margin-r-10 {
+  margin-right: 10px;
+}
+
+/* 左外边距 */
+.margin-l-10 {
+  margin-left: 10px;
+}
+
+.h-20 {
+  height: 20px;
+}
+
+.checkBox {
+  min-width: 60px;
+  width: 18%;
+}
+
+.progress {
+  width: 100%;
+}
+
+.productList {
+  border-radius: 2px;
+  background: #333;
+  width: 80%;
+  min-height: 200px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.active {
+  color: #a6ff00;
+}
