@@ -177,7 +177,7 @@
       "array": [
         0,
         0,
-        435.8949426891894,
+        443.75682955792,
         0,
         0,
         0,
@@ -413,6 +413,9 @@
       "__id__": 8
     },
     "_enabled": true,
+    "tilePrefab": {
+      "__uuid__": "d75f05dc-859a-4ba6-a0e5-0a1a00fead5f"
+    },
     "_id": "a8roAiF1dE5qoXM+ggHJrL"
   },
   {
@@ -622,6 +625,7 @@
       "__id__": 13
     },
     "_enabled": true,
+    "currentLevel": 0,
     "table": {
       "__id__": 9
     },

@@ -1,4 +1,3 @@
-import Config from './config/config';
 import Utils from './utils/utils';
 import Guide from './guide/guide';
 import Event from './event/event';
@@ -6,6 +5,25 @@ import QuadTree from './quadtree/quadtree';
 import Pool from './pool/pool';
 
 class GI {
+  /** Tile之间的间隔 */
+  TILE_SPACE = -20;
+  /** Tile的宽度 */
+  TILE_WIDTH = 196;
+  /** Tile的高度 */
+  TILE_HEIGHT = 236;
+  /** x轴上的偏移 */
+  OFFSET_X = 90;
+  /** y轴上的偏移 */
+  OFFSET_Y = 106;
+  /** 层级在x轴上的偏移 */
+  TIER_OFFSET_X = -10;
+  /** 层级在y轴上的偏移 */
+  TIER_OFFSET_Y = 12;
+  /** 游戏区域宽度 */
+  GAME_WIDTH = 880;
+  /** 游戏区域高度 */
+  GAME_HEIGHT = 1416;
+
   /** 当前关卡 */
   private _level = 0;
   /** 当前使用的游戏模式 */
@@ -18,6 +36,7 @@ class GI {
   scale = 1;
   /** 当前语言缩写 */
   language = '';
+  tileScale = 1;
   /** ___DEBUG END___ */
 
   /** 设置游戏模式 */
@@ -32,6 +51,7 @@ class GI {
 
   /** 设置当前关卡 */
   setLevel(value: number) {
+    if (value < 0) throw new Error('关卡数不能小于0');
     this._level = value;
   }
 
@@ -113,4 +133,3 @@ _global['gi']['Guide'] = Guide;
 _global['gi']['Event'] = Event;
 _global['gi']['QuadTree'] = QuadTree;
 _global['gi']['Pool'] = Pool;
-_global['gi']['Config'] = Config;

@@ -169,7 +169,7 @@
       "__uuid__": "6af81db1-3462-48f9-b81f-57b01fdc0a01"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -276,7 +276,7 @@
       "__uuid__": "dc73df3d-cfbc-4197-9d91-f6b34065943e"
     },
     "_type": 0,
-    "_sizeMode": 2,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -383,7 +383,7 @@
       "__uuid__": "9ba368b2-e2bd-4b8c-bafd-13db27b6d551"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -490,7 +490,7 @@
       "__uuid__": "b1e416da-ca6f-4085-8165-90951779001b"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -522,8 +522,9 @@
       "__id__": 1
     },
     "_enabled": true,
-    "label": null,
-    "text": "hello",
+    "tileSprite": {
+      "__id__": 6
+    },
     "_id": ""
   },
   {

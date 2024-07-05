@@ -1,10 +1,30 @@
 /** 全局命名空间 */
 declare namespace gi {
+  /** Tile之间的间隔 */
+  var TILE_SPACE: number;
+  /** Tile的宽度 */
+  var TILE_WIDTH: number;
+  /** Tile的高度 */
+  var TILE_HEIGHT: number;
+  /** x轴上的偏移 */
+  var OFFSET_X: number;
+  /** y轴上的偏移 */
+  var OFFSET_Y: number;
+  /** 层级在x轴上的偏移 */
+  var TIER_OFFSET_X: number;
+  /** 层级在y轴上的偏移 */
+  var TIER_OFFSET_Y: number;
+  /** 游戏区域宽度 */
+  var GAME_WIDTH: number;
+  /** 游戏区域高度 */
+  var GAME_HEIGHT: number;
+
   /** ___DEBUG START___ */
   /** 得分 */
   var score: number;
   /** 全局缩放 */
   var scale: number;
+  var tileScale: number;
   /** ___DEBUG END___ */
 
   /** 设置游戏模式 */
@@ -54,36 +74,11 @@ declare namespace gi {
     positions: string[];
   }
 
-  interface TextInfo {
-    /** 关键词 */
-    key: string;
-    /** 默认中文 */
-    default: string;
-    /** 英语 */
-    en: string;
-    /** 泰语 */
-    th: string;
-    /** 印尼语 */
-    id: string;
-    /** 繁体中文 */
-    tw: string;
-    /** 马来西亚语 */
-    ms: string;
-    /** 越南语 */
-    vi: string;
-    /** 日语 */
-    ja: string;
-    /** 韩语 */
-    ko: string;
-  }
-
   interface LevelInfo {
-    /** 关卡标题 */
-    title: string;
-    /** 关卡文本映射 */
-    tipsMap: TextInfo[];
-    /** 关卡引导文本映射 */
-    guideMap: TextInfo[];
+    /** 当前关卡映射 */
+    map: (number | number[])[][];
+    /** 当前关卡有多少层 */
+    maxLevel: number;
   }
 
   /** 游戏模式 */
@@ -125,28 +120,6 @@ declare namespace gi {
     guide: cc.Node;
     /** 移动时附带的节点 */
     node?: cc.Node;
-  }
-
-  /** 游戏配置类 */
-  class Config {
-    /** Tile之间的间隔 */
-    static TILE_SPACE: number;
-    /** Tile的宽度 */
-    static TILE_WIDTH: number;
-    /** Tile的高度 */
-    static TILE_HEIGHT: number;
-    /** x轴上的偏移 */
-    static OFFSET_X: number;
-    /** y轴上的偏移 */
-    static OFFSET_Y: number;
-    /** 层级在x轴上的偏移 */
-    static TIER_OFFSET_X: number;
-    /** 层级在y轴上的偏移 */
-    static TIER_OFFSET_Y: number;
-    /** 游戏区域宽度 */
-    static GAME_WIDTH: number;
-    /** 游戏区域高度 */
-    static GAME_HEIGHT: number;
   }
 
   /** 引导 */
