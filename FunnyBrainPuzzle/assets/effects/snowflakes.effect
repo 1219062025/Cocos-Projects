@@ -1,6 +1,7 @@
+
 CCEffect %{
   techniques:
-  - name: "snowflakes"
+  - name: snowflakes
     passes:
     - vert: vs
       frag: fs
@@ -9,7 +10,7 @@ CCEffect %{
           - blend: true
       properties:
         texture: {value: white}
-        iResolution: { value: [1, 1] }
+        iResolution: { value: [500, 500] }
         iTime: { value: 0 }
         _SnowflakeAmount: { value: 200 }
         _BlizardFactor: { value: 0.2 }
@@ -26,18 +27,20 @@ CCProgram vs %{
     gl_Position = cc_matViewProj * vec4(a_position, 1.0);
     v_uv = a_uv0;
   }
-}%
+}% 
 
 CCProgram fs %{
   precision highp float;
+
+
   #include <cc-global>
+  #include <texture>
+
+
   in vec2 v_uv;
   out vec4 fragColor;
 
   #if USE_TEXTURE
-  // uniform ：一致变量。在着色器执行期间一致变量的值是不变的
-  // 与const常量不同的是，这个值在编译时期是未知的是由着色器外部初始化的
-  // 一致变量在顶点着色器和片段着色器之间是共享的。它也只能在全局范围进行声明。
   uniform sampler2D texture;
   #endif
 
@@ -48,6 +51,7 @@ CCProgram fs %{
     float _BlizardFactor;
   };
 
+  const int maxvalue = 3000;
   vec2 uv;
 
   float rnd(float x) {
@@ -59,15 +63,16 @@ CCProgram fs %{
   }
 
   void main () { 
-    uv = v_uv;
-    fragColor = vec4(0.808, 0.89, 0.918, 1.0);
+    uv = v_uv * iResolution.xy / iResolution.y;
+    fragColor = vec4(0.808, 0.89, 0.918, 0);
     float j;
 
-    for (int i = 0; i < int(_SnowflakeAmount); i++) {
-      j = float(i);
-      float speed = 0.3 + rnd(cos(j)) * (0.7 + 0.5 * cos(j / (float(_SnowflakeAmount) * 0.25)));
-      vec2 center = vec2((0.25 - uv.y) * _BlizardFactor + rnd(j) + 0.1 * cos(iTime + sin(j)), mod(sin(j) - speed * (iTime * 1.5 * (0.1 + _BlizardFactor)), 0.65));
-      fragColor += vec4(0.09 * drawCircle(center, 0.001 + speed * 0.012));
+
+    for (int i = 0; i < maxvalue; i++) {
+      j = float(i); 
+      float speed = 0.001 + rnd(cos(j)) * (0.7 + 0.5 * cos(j / (float(maxvalue) * 0.25)));
+      vec2 center = vec2((0.25-uv.y) * _BlizardFactor + rnd(j) + 0.0 * cos(iTime + sin(j)), mod(sin(j) - speed * (iTime * 1.5 * (0.1 + _BlizardFactor)), 0.615));
+      fragColor += vec4(1.0 * drawCircle(center, 0.001 + 0.1 * 0.012));
     }
   }
 }%

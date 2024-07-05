@@ -1,10 +1,10 @@
 export type LevelInfo = {
-  Map: number[][];
+  Map: Record<string, number[][]>;
 };
 
 const LevelList: LevelInfo[] = [
   {
-    Map: []
+    Map: {}
   }
 ];
 
