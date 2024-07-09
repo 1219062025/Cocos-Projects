@@ -76,15 +76,32 @@ declare namespace gi {
 
   interface LevelInfo {
     /** 当前关卡映射 */
-    map: (number | number[])[][];
+    map: (number | string)[][];
     /** 当前关卡有多少层 */
-    maxLevel: number;
+    tiers: number;
   }
 
   /** 游戏模式 */
   class Mode {
     /** 经典模式 */
     static CLASSICS: string;
+  }
+
+  class Action {
+    static ADD: string;
+    static REMOVE: string;
+    static UPDATE: string;
+  }
+
+  interface ShakeOptions {
+    /** 振动的节点，如果不填则是屏幕振动 */
+    node?: cc.Node;
+    /** 振动幅度，默认20偏移 */
+    amplitude?: number;
+    /** 振动频率，默认0.05 */
+    frequency?: number;
+    /** 振动用时，默认2 */
+    duration?: number;
   }
   /** 工具类 */
   class Utils {
@@ -95,7 +112,10 @@ declare namespace gi {
     static inRange(value: number, min: number, max: number): boolean;
 
     /** 防抖 */
-    static debounce(func, delay): (...args: any[]) => void;
+    static debounce(func: Function, delay: number): (...args: any[]) => void;
+
+    /** 节流 */
+    static throttle(func: Function, wait: number): (...args: any[]) => void;
 
     /** 将节点所有的子节点按照原本的布局居中于该节点 */
     static centerChildren(node: cc.Node): void;
@@ -104,13 +124,13 @@ declare namespace gi {
     static calculateBoundingBox(node: cc.Node): cc.Rect;
 
     /**
-     * 屏幕振动
+     * 节点振动
      * @param node 振动节点
      * @param amplitude 振动幅度
      * @param frequency 振动频率
-     * @param durtion 振动总时间
+     * @param duration 振动总时间
      */
-    static shake(options?: { node?: cc.Node; amplitude?: number; frequency?: number; durtion?: number });
+    static shake(options?: ShakeOptions): Promise<unknown>;
   }
 
   interface MoveOptions {

@@ -16,7 +16,7 @@ export default class Utils {
   }
 
   /** 防抖 */
-  static debounce(func, delay) {
+  static debounce(func: Function, delay: number) {
     let timerId;
 
     return function (...args) {
@@ -24,6 +24,19 @@ export default class Utils {
       timerId = setTimeout(() => {
         func.apply(this, args);
       }, delay);
+    };
+  }
+
+  /** 节流 */
+  static throttle(func: Function, wait: number) {
+    let lastTime = 0;
+
+    return function (...args: any[]) {
+      const now = Date.now();
+      if (now - lastTime >= wait) {
+        lastTime = now;
+        func.apply(this, args);
+      }
     };
   }
 
@@ -71,34 +84,37 @@ export default class Utils {
   }
 
   /**
-   * 屏幕振动
-   * @param node 振动节点
+   * 节点振动
+   * @param node 振动的节点，如果不填则是屏幕振动
    * @param amplitude 振动幅度
    * @param frequency 振动频率
-   * @param durtion 振动总时间
+   * @param duration 振动用时
    */
-  static shake(options?: { node?: cc.Node; amplitude?: number; frequency?: number; durtion?: number }) {
-    const node = (options && options.node) || cc.Camera.main.node;
+  static shake(options?: { node?: cc.Node; amplitude?: number; frequency?: number; duration?: number }) {
+    return new Promise(resolve => {
+      const node = (options && options.node) || cc.Camera.main.node;
+      const amplitude = (options && options.amplitude) || 20;
+      const frequency = (options && options.frequency) || 0.05;
+      const duration = (options && options.duration) || 2;
 
-    if (node) {
-      const originalPosition = node.position;
-      const amplitude = (options && options.amplitude) || 20; // 振动幅度
-      const frequency = (options && options.frequency) || 0.05; // 振动频率
-      const duration = (options && options.durtion) || 2; // 振动总时间
+      const originalPosition = node.position.clone();
+      const shakesNum = Math.floor(duration / frequency);
 
-      let shakeTime = 0;
-      const timeout = setInterval(() => {
-        shakeTime += frequency;
-        if (shakeTime > duration) {
-          node.setPosition(originalPosition); // 振动结束后恢复原位
-          clearInterval(timeout);
-          return;
-        }
+      let tweenSequence = cc.tween(node) as cc.Tween;
 
-        const offsetX = (Math.random() - 0.5) * amplitude * 2;
-        const offsetY = (Math.random() - 0.5) * amplitude * 2;
-        node.setPosition(originalPosition.add(cc.v3(offsetX, offsetY, 0)));
-      }, frequency);
-    }
+      for (let i = 0; i < shakesNum; i++) {
+        const offsetX = (Math.random() - 0.5) * amplitude;
+        const offsetY = (Math.random() - 0.5) * amplitude;
+        const shakeAction = cc.tween().by(frequency, { position: cc.v2(offsetX, offsetY) }) as cc.Tween;
+        tweenSequence = tweenSequence.then(shakeAction);
+      }
+
+      tweenSequence
+        .call(() => {
+          node.position = originalPosition; // 重置节点位置
+          resolve(true);
+        })
+        .start();
+    });
   }
 }

@@ -446,8 +446,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -8,
-        8.5,
+        -6,
+        9,
         0,
         0,
         0,
@@ -524,6 +524,12 @@
     "_enabled": true,
     "tileSprite": {
       "__id__": 6
+    },
+    "tileMask": {
+      "__id__": 9
+    },
+    "tileSelected": {
+      "__id__": 12
     },
     "_id": ""
   },

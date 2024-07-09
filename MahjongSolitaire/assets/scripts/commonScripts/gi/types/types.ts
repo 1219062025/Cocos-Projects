@@ -1,4 +1,5 @@
 import * as tileType from './tile';
+import * as otherType from './other';
 import * as configType from './config';
 
 /** 全局类型 */
@@ -59,6 +60,7 @@ function value(obj: object, prop: string, value: any, writable?: boolean, enumer
 }
 
 setEnum(tileType);
+setEnum(otherType);
 setEnum(configType);
 
 export default gt;

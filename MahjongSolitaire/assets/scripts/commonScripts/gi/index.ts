@@ -6,7 +6,7 @@ import Pool from './pool/pool';
 
 class GI {
   /** Tile之间的间隔 */
-  TILE_SPACE = -20;
+  TILE_SPACE = 12;
   /** Tile的宽度 */
   TILE_WIDTH = 196;
   /** Tile的高度 */
@@ -14,11 +14,11 @@ class GI {
   /** x轴上的偏移 */
   OFFSET_X = 90;
   /** y轴上的偏移 */
-  OFFSET_Y = 106;
+  OFFSET_Y = 108;
   /** 层级在x轴上的偏移 */
-  TIER_OFFSET_X = -10;
+  TIER_OFFSET_X = -16;
   /** 层级在y轴上的偏移 */
-  TIER_OFFSET_Y = 12;
+  TIER_OFFSET_Y = 16;
   /** 游戏区域宽度 */
   GAME_WIDTH = 880;
   /** 游戏区域高度 */

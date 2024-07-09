@@ -1,0 +1,43 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "ring",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.5,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "d40b65b7-44c6-4eda-911d-4fcc826fc1e6"
+            }
+          },
+          {
+            "frame": 0.125,
+            "value": {
+              "__uuid__": "ea3a88b5-d28e-421b-8a1a-328d9c7727e8"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "4bb16aae-4aec-494f-8499-cec6a112e8e5"
+            }
+          },
+          {
+            "frame": 0.375,
+            "value": {
+              "__uuid__": "03265927-6d08-4c0e-9614-fab1b81f8822"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}
