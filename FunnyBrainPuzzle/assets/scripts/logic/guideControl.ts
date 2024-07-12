@@ -1,4 +1,5 @@
-import ResAreaControl from './resAreaControl';
+import ResAreaControl from './res/resAreaControl';
+import ResControl from './res/resControl';
 import TriggerControl from './triggerControl';
 
 const { ccclass, property } = cc._decorator;
@@ -59,18 +60,22 @@ export default class GuideControl extends cc.Component {
 
   /** 运行引导 */
   run() {
-    const trigger = this.getEffectiveTrigger();
+    const resNode = this.resArea.getRandomEffectiveResNode();
+
+    if (!resNode) return;
+
+    const res = resNode.getComponent(ResControl);
+    const trigger = this.getEffectiveTrigger(res);
 
     if (!trigger) return;
 
-    const key = trigger.keys[trigger.level];
+    const key = trigger.key;
     const lan = gi.getLanguage() || 'default';
     const levelInfo = gi.getLevelInfo();
 
     const text = levelInfo.guideMap.find(item => item.key === key)[lan];
-    const resNode = this.resArea.getEffectiveResNode();
 
-    if (!resNode || !text) return;
+    if (!text) return;
 
     this.guideTextNode.stopAllActions();
     (cc.tween(this.guideTextNode) as cc.Tween)
@@ -88,11 +93,13 @@ export default class GuideControl extends cc.Component {
   }
 
   /** 得到一个场上还可以触发升级的触发器 */
-  getEffectiveTrigger() {
-    while (true) {
+  getEffectiveTrigger(res: ResControl) {
+    let limitedCount = 100;
+    while (limitedCount) {
       const randomIndex = Math.floor(Math.random() * this.triggerRootNode.childrenCount);
       const trigger = this.triggerRootNode.children[randomIndex].getComponent(TriggerControl);
-      if (trigger.canUpgrade()) return trigger;
+      if (trigger.node.active && trigger.key && trigger.canTriggerOff(res.tag)) return trigger;
+      limitedCount--;
     }
   }
 }

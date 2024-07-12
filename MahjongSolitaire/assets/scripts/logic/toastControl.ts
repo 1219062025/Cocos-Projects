@@ -1,7 +1,7 @@
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class ToastControl extends cc.Component {
   onLoad() {
     gi.Event.on('toast', this.onToast, this);
   }

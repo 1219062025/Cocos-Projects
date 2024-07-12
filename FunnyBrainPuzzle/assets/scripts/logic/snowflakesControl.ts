@@ -8,7 +8,6 @@ export default class SnowflakeEffect extends cc.Component {
 
   protected onLoad(): void {
     this.material = this.getComponent(cc.Sprite).getMaterial(0);
-    console.log(this.material);
     this.time = Number(this.material.getProperty('iTime', 0));
   }
 

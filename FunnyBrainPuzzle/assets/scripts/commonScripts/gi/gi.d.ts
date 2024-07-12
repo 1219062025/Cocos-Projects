@@ -7,6 +7,12 @@ declare namespace gi {
   var scale: number;
   /** ___DEBUG END___ */
 
+  /** 设置游戏结束 */
+  function end(): void;
+
+  /** 获取游戏是否结束了 */
+  function isEnd(): boolean;
+
   /** 设置游戏模式 */
   function setMode(mode: string): void;
 
@@ -86,11 +92,6 @@ declare namespace gi {
     guideMap: TextInfo[];
   }
 
-  /** 游戏模式 */
-  class Mode {
-    /** 经典模式 */
-    static CLASSICS: string;
-  }
   /** 工具类 */
   class Utils {
     /** 扁平化数组 */
@@ -247,5 +248,42 @@ declare namespace gi {
 
     /** 对象池Get */
     static poolGet(name: string): cc.Node;
+  }
+
+  interface SwipeOptions {
+    /** 滑动方向 */
+    direction: number | number[];
+    /** 滑动阈值 */
+    threshold?: number;
+  }
+
+  /** 滑动类 */
+  class Swipe {
+    static Direction = {
+      /** 上滑 */
+      UP: 1,
+      /** 右滑 */
+      RIGHT: 2,
+      /** 下滑 */
+      BOTTOM: 3,
+      /** 左滑 */
+      LEFT: 4
+    };
+
+    /**
+     * 监听节点上的滑动操作，会覆盖节点上的TOUCH_START、TOUCH_END、TOUCH_CANCEL事件
+     * @param node 需要监听的节点
+     * @param options.direction 滑动方向，传入number或者number[]，值参考gi.Swipe.Direction
+     * @param options.threshold 滑动阈值，传入number
+     * @param callback 回调函数，接收参数：滑动起始点位置，结束点位置，此次滑动的方向（参考gi.Swipe.Direction）
+     * @param target 调用回调函数this值
+     */
+    static on(node: cc.Node, options: SwipeOptions, callback: Function, target?: any): void;
+
+    /** 监听一次节点上的滑动操作，详情参考gi.Swipe.on */
+    static once(node: cc.Node, options: SwipeOptions, callback: Function, target?: any): void;
+
+    /** 取消监听节点滑动 */
+    static off(node: cc.Node);
   }
 }

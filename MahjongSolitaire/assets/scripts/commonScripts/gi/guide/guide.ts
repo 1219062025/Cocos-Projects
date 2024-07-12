@@ -11,6 +11,9 @@ export default class Guide {
   /** 当前引导步骤 */
   private static _step: number = 1;
 
+  /** 当前是否处于引导中 */
+  static inGuide: boolean = false;
+
   /** 引导时携带的节点 */
   private static _copyNode: cc.Node = null;
 
@@ -20,9 +23,15 @@ export default class Guide {
   }
 
   /** 获取当前引导步骤 */
-  static getStep(step: number) {
+  static getStep() {
     return this._step;
   }
+
+  /** 下一步引导 */
+  static nextStep() {
+    this._step++;
+  }
+
   /**
    * 得到一个从位置from移动到位置to的缓动
    * @param {cc.Vec2} from 起始位置
@@ -57,14 +66,15 @@ export default class Guide {
       .call(() => {
         options.guide.setPosition(from);
         options.guide.active = true;
+        if (this._copyNode) {
+          this._copyNode.active = true;
+        }
       })
       .to(options.time, { position: to })
       .call(() => {
-        this._copyNode.active = false;
-      })
-      .to(options.time / 3, { position: from })
-      .call(() => {
-        this._copyNode.active = true;
+        if (this._copyNode) {
+          this._copyNode.active = false;
+        }
       });
 
     return (cc.tween(options.guide) as cc.Tween).then(moveTween);

@@ -9,7 +9,9 @@ export default class ScreenManagerV6 extends cc.Component {
   @property(cc.Node)
   btn: cc.Node = null;
   @property(cc.Node)
-  pop: cc.Node = null;
+  successPop: cc.Node = null;
+  @property(cc.Node)
+  failPop: cc.Node = null;
 
   onLoad() {
     // 监听屏幕方向变化
@@ -28,7 +30,7 @@ export default class ScreenManagerV6 extends cc.Component {
     let w = winSize.width / 2 / gameCointainerSize.width;
     gi.scale = Math.min(h, w);
 
-    this.pop.scale = this.title.scale = this.btn.scale = gi.scale;
+    this.failPop.scale = this.successPop.scale = this.title.scale = this.btn.scale = gi.scale;
 
     const gameWrapRect = this.gameWrap.getBoundingBoxToWorld();
     const titleRect = this.title.getBoundingBoxToWorld();
@@ -54,7 +56,7 @@ export default class ScreenManagerV6 extends cc.Component {
     // this.gameWrap.setContentSize(this.gameWrap.width * gi.scale, this.gameWrap.height * gi.scale);
     // this.title.setContentSize(this.title.width * gi.scale, this.title.height * gi.scale);
     this.btn.setContentSize(424, 152);
-    this.pop.scale = this.title.scale = this.btn.scale = gi.scale;
+    this.failPop.scale = this.successPop.scale = this.title.scale = this.btn.scale = gi.scale;
 
     const gameWrapPos = cc.v2(0, 0);
     const titlePos = cc.v2(0, 832.051);

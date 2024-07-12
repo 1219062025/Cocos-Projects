@@ -1,7 +1,9 @@
-import * as subscription0 from './subscription0';
+import * as subscription1 from './subscription1';
+import * as subscription6 from './subscription6';
 
 const levelsId = {
-  0: subscription0
+  1: subscription1,
+  6: subscription6
 };
 
 export default class SubscriptionControl {

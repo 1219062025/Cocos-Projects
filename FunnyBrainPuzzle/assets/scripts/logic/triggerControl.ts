@@ -1,79 +1,80 @@
-import TriggerGroup from './triggerGroup';
-
 const { ccclass, property, requireComponent } = cc._decorator;
-
-/**
- * 挂载触发器组脚本TriggerGroup时需要设置level级别以及与该级别关联的sprite，每次升级都会展示与之级别相关联的sprite；
- * 挂载碰撞器组件BoxCollider需要设置tag的值，tag值与该碰撞器想要触发的那个触发器TriggerGroup的level相同
- */
 
 @ccclass
 @requireComponent(cc.BoxCollider)
 export default class TriggerControl extends cc.Component {
   /** 关键词 */
-  @property({ type: [cc.String], tooltip: '触发器升级时展示Tips的关键词，数组的每项下标对应触发器级别' })
-  keys: string[] = [];
+  @property({ tooltip: '触发器运行时展示Tips的关键词' })
+  key: string = '';
 
-  /** 触发器组 */
-  groups: TriggerGroup[] = [];
+  /** 该组触发器关联的需要隐藏的图片节点 */
+  @property({ type: [cc.Node], tooltip: '该组触发器关联的需要隐藏的图片节点' })
+  hiddenNodes: cc.Node[] = [];
 
-  /** 碰撞器组 */
-  colliders: cc.BoxCollider[] = [];
+  /** 该组触发器关联的需要显示的图片节点 */
+  @property({ type: [cc.Node], tooltip: '该组触发器关联的需要显示的图片节点' })
+  displayNodes: cc.Node[] = [];
 
-  /** 该触发器最大等级 */
-  maxLevel: number = 0;
+  /** 该组触发器是否得分 */
+  @property({ tooltip: '该组触发器是否得分' })
+  isEffective: boolean = true;
 
-  /** 触发器当前级别 */
-  level: number = 0;
+  /** 得分数 */
+  @property({
+    visible: function () {
+      return this.isEffective;
+    },
+    tooltip: '得分数'
+  })
+  score: number = 1;
+
+  /** 碰撞器 */
+  collider: cc.BoxCollider = null;
+
+  /** 是否已经触发过了 */
+  isTriggerOff: boolean = false;
 
   onLoad() {
-    this.groups = this.node.getComponents(TriggerGroup);
-    this.colliders = this.node.getComponents(cc.BoxCollider);
-
-    if (!this.colliders.length) throw new Error(`碰撞器组不得为空，节点uuid：${this.node.uuid}`);
-
-    this.maxLevel = this.groups.length - 1;
+    this.collider = this.node.getComponent(cc.BoxCollider);
+    if (!this.collider) throw new Error(`碰撞器不得为空，节点uuid：${this.node.uuid}`);
   }
 
-  /** 是否可以升级 */
-  canUpgrade() {
-    return this.level < this.maxLevel;
+  /** 是否可以运行触发器 */
+  canTriggerOff(tag?: number) {
+    const isMatchTag = this.collider.tag !== undefined ? this.collider.tag === tag : true;
+    return isMatchTag && this.isTriggerOff !== true;
   }
 
-  /** 升级 */
-  upgrade() {
-    const curLevel = this.level;
-    const curGroup = this.groups.find(group => group.level === curLevel);
-    for (const node of curGroup.nodes) {
+  /** 运行触发器 */
+  triggerOff() {
+    if (this.isTriggerOff) return;
+
+    for (const node of this.hiddenNodes) {
       node.active = false;
     }
 
-    const nextLevel = ++this.level;
-    const nextGroup = this.groups.find(group => group.level === nextLevel);
-    for (const node of nextGroup.nodes) {
+    for (const node of this.displayNodes) {
       node.active = true;
     }
-  }
 
-  /** 是否可以展示提示 */
-  canShowTips() {
-    return this.keys.length !== 0;
+    if (this.isEffective) {
+      gi.Event.emit('score', this.score);
+    }
+
+    this.isTriggerOff = true;
   }
 
   /** 展示提示 */
   showTips() {
-    gi.Event.emit('showTips', this.keys[this.level]);
+    gi.Event.emit('showTips', this.key);
   }
 
-  /** 坐标点是否触发了该触发器 */
+  /** 坐标点是否处于该触发器的触发范围 */
   isHit(pos: cc.Vec2) {
     if (this.node.active) {
-      for (const collider of this.colliders) {
-        if (collider.tag !== this.level) continue;
-        // @ts-ignore
-        if (cc.Intersection.pointInPolygon(pos, collider.world.points)) {
-          return true;
-        }
+      // @ts-ignore
+      if (cc.Intersection.pointInPolygon(pos, this.collider.world.points)) {
+        return true;
       }
     }
   }

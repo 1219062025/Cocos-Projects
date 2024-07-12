@@ -1,4 +1,3 @@
-import * as blockType from './block';
 import * as configType from './config';
 
 /** 全局类型 */
@@ -58,7 +57,6 @@ function value(obj: object, prop: string, value: any, writable?: boolean, enumer
   tmpValueDesc.value = undefined;
 }
 
-setEnum(blockType);
 setEnum(configType);
 
 export default gt;

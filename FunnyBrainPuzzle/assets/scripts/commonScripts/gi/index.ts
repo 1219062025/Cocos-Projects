@@ -3,12 +3,15 @@ import Guide from './guide/guide';
 import Event from './event/event';
 import QuadTree from './quadtree/quadtree';
 import Pool from './pool/pool';
+import Swipe from './swipe/swipe';
 
 class GI {
   /** 当前关卡 */
   private _level = 0;
   /** 当前使用的游戏模式 */
   private _mode: string = '';
+  /** 游戏是否结束了 */
+  private _isEnd: boolean = false;
 
   /** ___DEBUG START___ */
   /** 得分 */
@@ -18,6 +21,16 @@ class GI {
   /** 当前语言缩写 */
   language = '';
   /** ___DEBUG END___ */
+
+  /** 设置游戏结束 */
+  end() {
+    this._isEnd = true;
+  }
+
+  /** 获取游戏是否结束了 */
+  isEnd() {
+    return this._isEnd;
+  }
 
   /** 设置游戏模式 */
   setMode(mode: string) {
@@ -112,3 +125,4 @@ _global['gi']['Guide'] = Guide;
 _global['gi']['Event'] = Event;
 _global['gi']['QuadTree'] = QuadTree;
 _global['gi']['Pool'] = Pool;
+_global['gi']['Swipe'] = Swipe;

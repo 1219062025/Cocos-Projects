@@ -144,11 +144,17 @@ declare namespace gi {
 
   /** 引导 */
   class Guide {
+    /** 当前是否处于引导中 */
+    static inGuide: boolean;
+
     /** 设置当前引导步骤 */
     static setStep(step: number): void;
 
     /** 获取当前引导步骤 */
-    static getStep(step: number): number;
+    static getStep(): number;
+
+    /** 下一步引导 */
+    static nextStep(): void;
 
     /**
      * 得到一个从位置from移动到位置to的缓动
@@ -221,7 +227,7 @@ declare namespace gi {
 
   /** 四叉树 */
   class QuadTree {
-    /** x、y坐标需要传入中点坐标而不是左下角坐标。maxLen代表一个子树所能容纳的最大数据量 */
+    /** x、y坐标需要传入中点坐标而不是左下角坐标。maxLen代表一个子树所能容纳的最大数据量，之后的树操作都根据创建树时使用的坐标系 */
     static createQuadTree<T>(name: string, options: { x: number; y: number; width: number; height: number; maxLen: number; ctx?: cc.Graphics }): void;
 
     /** 获取四叉树 */

@@ -3,7 +3,7 @@ import TileControl from './tileControl';
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class Table extends cc.Component {
+export default class TableControl extends cc.Component {
   @property({ type: cc.Prefab, tooltip: 'Tile预制体' })
   tilePrefab: cc.Prefab = null;
 
@@ -109,7 +109,6 @@ export default class Table extends cc.Component {
     const duration1 = 0.3;
     const duration2 = 0.1;
     const duration3 = 0.2;
-    const duration4 = 0.05;
 
     const scale = 0.5;
 
@@ -169,6 +168,7 @@ export default class Table extends cc.Component {
         this.flatTiles.delete(_tile);
         const removeSet = this.tileMap.get(_tile.id);
         removeSet.delete(_tile);
+        if (removeSet.size === 0) this.tileMap.delete(_tile.id);
         break;
       case gi.Action.ADD:
         this.map[tier][row][col] = 1;
