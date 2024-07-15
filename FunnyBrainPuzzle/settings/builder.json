@@ -1,8 +1,10 @@
 {
   "title": "FunnyBrainPuzzle",
   "packageName": "org.cocos2d.demo",
-  "startScene": "f572dc5c-73e6-481f-845d-4fef93e27eab",
-  "excludeScenes": [],
+  "startScene": "591aaa6c-bac2-4c05-8360-02b02531717e",
+  "excludeScenes": [
+    "f572dc5c-73e6-481f-845d-4fef93e27eab"
+  ],
   "includeSDKBox": false,
   "orientation": {
     "landscapeLeft": true,

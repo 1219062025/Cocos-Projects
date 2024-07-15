@@ -15,6 +15,10 @@ export default class Main extends cc.Component {
   @property({ type: cc.Integer, tooltip: '目标得分' })
   targetScore: number = 0;
 
+  /** 最大扣分数 */
+  @property({ type: cc.Integer, tooltip: '最大扣分数，如果关卡不需要扣分填0' })
+  targetDeductScore: number = 0;
+
   /** 通关限时/s */
   @property({ type: cc.Integer, tooltip: '通关限时/s' })
   limitedTime: number = 60;
@@ -22,6 +26,9 @@ export default class Main extends cc.Component {
   /** 无响应限时/s */
   @property({ type: cc.Integer, tooltip: '无响应限时/s' })
   responseTime: number = 15;
+
+  @property({ tooltip: '该关卡是否运行引导' })
+  isRunGuide: boolean = true;
 
   /** 标题Label */
   @property({ type: cc.Label, tooltip: '标题Label' })
@@ -75,7 +82,9 @@ export default class Main extends cc.Component {
     // 初始化资源
     this.resArea.init();
     // 在资源初始化之后初始化引导
-    this.guide.init();
+    if (this.isRunGuide) {
+      this.guide.init();
+    }
 
     // 订阅动作
     new SubscriptionControl(this.levle);
@@ -89,13 +98,9 @@ export default class Main extends cc.Component {
       this.titleLabel.string = title[lan] || title['default'];
     });
     /** 监听得分 */
-    gi.Event.on(
-      'score',
-      (score: number) => {
-        gi.score += score;
-      },
-      this
-    );
+    gi.Event.on('score', this.inspectScore, this);
+    /** 监听扣分 */
+    gi.Event.on('deductScore', this.inspectDeductScore, this);
     /** 监听所有资源用完 */
     gi.Event.on('notHaveRes', this.inspectGameOver, this);
 
@@ -136,40 +141,82 @@ export default class Main extends cc.Component {
   }
 
   onTouchEnd(event: cc.Event.EventTouch) {
-    const trigger = this.getTrigger(event.getLocation());
+    const triggers = this.getTriggers(event.getLocation());
 
-    if (!trigger) return this.resArea.cancleCurRes();
+    if (!triggers.length) return this.resArea.cancleCurRes();
 
     const tag = this.resArea.curRes.tag;
-    if (trigger.canTriggerOff(tag)) {
-      // 运行触发器
-      trigger.showTips();
-      trigger.triggerOff();
-      this.resArea.destroyCurRes();
-    } else {
-      this.resArea.cancleCurRes();
+
+    for (const trigger of triggers) {
+      if (trigger.canTriggerOff(tag)) {
+        // 运行触发器
+        trigger.showTips();
+        trigger.triggerOff();
+        this.resArea.destroyCurRes();
+        return;
+      }
+    }
+    this.resArea.cancleCurRes();
+  }
+
+  /** 展示通关成功弹窗，结束游戏 */
+  showSuccessPop() {
+    if (gi.isEnd()) return;
+
+    this.successPop.active = true;
+    (cc.tween(this.successPop) as cc.Tween).to(1, { opacity: 255 }).start();
+    gi.Event.emit('成功通关');
+    gi.end();
+    return this.unscheduleAllCallbacks();
+  }
+
+  /** 展示通关失败弹窗，结束游戏 */
+  showFailPop() {
+    if (gi.isEnd()) return;
+
+    this.failPop.active = true;
+    (cc.tween(this.failPop) as cc.Tween).to(1, { opacity: 255 }).start();
+    gi.Event.emit('通关失败');
+    gi.end();
+    return this.unscheduleAllCallbacks();
+  }
+
+  /** 检测得分是否足够是否通关 */
+  inspectScore(score: number) {
+    if (gi.isEnd()) return;
+
+    gi.score += score;
+    if (this.targetScore === gi.score) {
+      this.showSuccessPop();
+    }
+  }
+
+  /** 检测扣分是否已经等于最大扣分数 */
+  inspectDeductScore(deductScore: number) {
+    if (gi.isEnd()) return;
+
+    gi.deductScore += deductScore;
+    if (this.targetDeductScore !== 0 && this.targetDeductScore === gi.deductScore) {
+      this.showFailPop();
     }
   }
 
   /** 检测游戏是否通关 */
   inspectGameOver() {
-    if (this.targetScore === gi.score) {
-      this.successPop.active = true;
-      (cc.tween(this.successPop) as cc.Tween).to(1, { opacity: 255 }).start();
-      gi.Event.emit('成功通关');
-      gi.end();
-      return this.unscheduleAllCallbacks();
+    if (gi.isEnd()) return;
+
+    if (this.targetDeductScore !== 0 && this.targetDeductScore === gi.deductScore) {
+      this.showFailPop();
+    } else if (this.targetScore === gi.score) {
+      this.showSuccessPop();
     } else {
-      this.failPop.active = true;
-      (cc.tween(this.failPop) as cc.Tween).to(1, { opacity: 255 }).start();
-      gi.Event.emit('通关失败');
-      gi.end();
-      return this.unscheduleAllCallbacks();
+      this.showFailPop();
     }
   }
 
-  /** 获取位置pos处于哪个触发器的触发范围内 */
-  getTrigger(pos: cc.Vec2) {
+  /** 获取位置pos处于哪些触发器的触发范围内 */
+  getTriggers(pos: cc.Vec2) {
+    const triggers: TriggerControl[] = [];
     let _trigger: TriggerControl;
 
     for (const node of this.triggerRootNode.children) {
@@ -179,10 +226,10 @@ export default class Main extends cc.Component {
 
       if (trigger && trigger.isHit(pos)) {
         _trigger = trigger;
-        break;
+        triggers.push(trigger);
       }
     }
 
-    return _trigger;
+    return triggers;
   }
 }

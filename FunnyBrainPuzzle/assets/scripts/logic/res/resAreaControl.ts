@@ -56,7 +56,7 @@ export default class ResAreaControl extends cc.Component {
   getEffectiveResNode(tag: number) {
     const copyArray = this.node.children.slice();
     const _curResNode = copyArray.reverse().find(resNode => {
-      return cc.isValid(resNode) && resNode.getComponent(ResControl).tag === tag;
+      return cc.isValid(resNode) && resNode.active && resNode.getComponent(ResControl).tag === tag;
     });
     return _curResNode;
   }
@@ -64,7 +64,7 @@ export default class ResAreaControl extends cc.Component {
   /** 获取随机一个还可以拖动的资源节点 */
   getRandomEffectiveResNode() {
     const copyArray = this.node.children.slice();
-    const _curResNode = copyArray.reverse().find(resNode => cc.isValid(resNode));
+    const _curResNode = copyArray.reverse().find(resNode => cc.isValid(resNode) && resNode.active);
     return _curResNode;
   }
 

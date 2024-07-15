@@ -88,6 +88,7 @@ export default class GuideControl extends cc.Component {
       .start();
 
     this.guideIcon.stopAllActions();
+    this.guideIcon.active = true;
     const copyNode = cc.instantiate(resNode);
     gi.Guide.fromToNode(resNode, trigger.node, { time: 2, guide: this.guideIcon, node: copyNode }).union().repeatForever().start();
   }

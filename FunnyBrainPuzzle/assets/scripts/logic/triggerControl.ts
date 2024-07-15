@@ -15,18 +15,13 @@ export default class TriggerControl extends cc.Component {
   @property({ type: [cc.Node], tooltip: '该组触发器关联的需要显示的图片节点' })
   displayNodes: cc.Node[] = [];
 
-  /** 该组触发器是否得分 */
-  @property({ tooltip: '该组触发器是否得分' })
-  isEffective: boolean = true;
-
   /** 得分数 */
-  @property({
-    visible: function () {
-      return this.isEffective;
-    },
-    tooltip: '得分数'
-  })
+  @property({ tooltip: '得分数，如果不用得分设为0' })
   score: number = 1;
+
+  /** 扣分数 */
+  @property({ tooltip: '扣分数，如果不用扣分设为0' })
+  deductScore: number = 0;
 
   /** 碰撞器 */
   collider: cc.BoxCollider = null;
@@ -57,8 +52,12 @@ export default class TriggerControl extends cc.Component {
       node.active = true;
     }
 
-    if (this.isEffective) {
+    if (this.score) {
       gi.Event.emit('score', this.score);
+    }
+
+    if (this.deductScore) {
+      gi.Event.emit('deductScore', this.deductScore);
     }
 
     this.isTriggerOff = true;

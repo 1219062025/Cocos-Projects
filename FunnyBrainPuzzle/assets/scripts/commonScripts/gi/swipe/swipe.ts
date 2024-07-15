@@ -99,7 +99,7 @@ export default class Swipe {
 
   /** 处理滑动 */
   private static handleSwipe(node: cc.Node, touchStartPos: cc.Vec2, touchEndPos: cc.Vec2, options: SwipeOptions, callback: Function, target: Object, isOnce?: boolean) {
-    const threshold: number = options.threshold || 50;
+    const threshold: number = options.threshold || 30;
     const direction: number[] = typeof options.direction === 'number' ? [options.direction] : options.direction;
 
     if (!touchStartPos || !touchEndPos || !direction || !node) {

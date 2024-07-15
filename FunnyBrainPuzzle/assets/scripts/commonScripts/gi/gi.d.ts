@@ -3,6 +3,8 @@ declare namespace gi {
   /** ___DEBUG START___ */
   /** 得分 */
   var score: number;
+  /** 扣分 */
+  var deductScore: number;
   /** 全局缩放 */
   var scale: number;
   /** ___DEBUG END___ */

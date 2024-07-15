@@ -16,6 +16,8 @@ class GI {
   /** ___DEBUG START___ */
   /** 得分 */
   score = 0;
+  /** 扣分 */
+  deductScore = 0;
   /** 全局缩放 */
   scale = 1;
   /** 当前语言缩写 */
