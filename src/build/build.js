@@ -28,6 +28,12 @@ async function run(event, args) {
   GI.config = JSON.parse(args);
   // 初始化全局常量
   GI.cs = new Constant(GI.config);
+  // 重置变量
+  publicHtml = '';
+  splitHtml = '';
+  resjs = '';
+  curProgress = 0;
+  overSizeFileInfo = [];
 
   // 存在cocos2d-js-min.js的话才开始运行构建
   if (!fs.existsSync(path.join(GI.cs.BASE_PATH, 'cocos2d-js-min.js'))) {
