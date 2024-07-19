@@ -1,3 +1,4 @@
+/** 奶奶动作1 */
 export function woman1(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -10,6 +11,7 @@ export function woman1(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 奶奶动作2 */
 export function woman2(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -22,6 +24,7 @@ export function woman2(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 奶奶动作3 */
 export function woman3(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -34,6 +37,7 @@ export function woman3(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 小孩动作1 */
 export function girl1(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -46,6 +50,7 @@ export function girl1(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 小孩动作2 */
 export function girl2(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -58,6 +63,7 @@ export function girl2(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 小孩动作3 */
 export function girl3(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -70,6 +76,7 @@ export function girl3(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 爷爷动作1 */
 export function oldman1(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -82,6 +89,7 @@ export function oldman1(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 爷爷动作2 */
 export function oldman2(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -94,6 +102,7 @@ export function oldman2(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 爷爷动作3 */
 export function oldman3(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -106,6 +115,7 @@ export function oldman3(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 狗狗动作1 */
 export function dog1(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -118,6 +128,7 @@ export function dog1(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 狗狗动作2 */
 export function dog2(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -130,6 +141,7 @@ export function dog2(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 狗狗拿钱回来 */
 export function dog3(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -161,6 +173,7 @@ export function dog3(options: gi.SubscriptionOptions) {
   });
 }
 
+/** 狗狗身体动作 */
 export function dogBody(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -173,6 +186,7 @@ export function dogBody(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 狗狗左手动作 */
 export function dogLeftHand(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -185,6 +199,7 @@ export function dogLeftHand(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 狗狗右手动作 */
 export function dogRightHand(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -197,6 +212,7 @@ export function dogRightHand(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 狗狗扫把 */
 export function broom(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -209,6 +225,7 @@ export function broom(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 狗狗尾巴 */
 export function tail(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -221,6 +238,7 @@ export function tail(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 狗狗遗照 */
 export function dog4(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -244,6 +262,7 @@ export function dog4(options: gi.SubscriptionOptions) {
   });
 }
 
+/** 女孩遗照 */
 export function girl4(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -267,6 +286,7 @@ export function girl4(options: gi.SubscriptionOptions) {
   });
 }
 
+/** 奶奶遗照 */
 export function woman4(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -290,6 +310,7 @@ export function woman4(options: gi.SubscriptionOptions) {
   });
 }
 
+/** 爷爷遗照 */
 export function oldman4(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 

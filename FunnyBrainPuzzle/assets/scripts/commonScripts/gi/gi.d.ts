@@ -1,13 +1,16 @@
 /** 全局命名空间 */
 declare namespace gi {
-  /** ___DEBUG START___ */
   /** 得分 */
   var score: number;
   /** 扣分 */
   var deductScore: number;
   /** 全局缩放 */
   var scale: number;
-  /** ___DEBUG END___ */
+  /** 当前关卡已经完成了的动作的key */
+  var finishedActionKeys: Set<string>;
+
+  /** 记录指定动作已完成 */
+  function completedAction(key: string): void;
 
   /** 设置游戏结束 */
   function end(): void;
@@ -50,6 +53,10 @@ declare namespace gi {
     }
   ): { node: cc.Node; ctrl: T };
 
+  interface GuideActionOptions {
+    resArea: ResAreaControl;
+  }
+
   /** 订阅信息 */
   interface SubscriptionOptions {
     /** 动作名 */
@@ -62,7 +69,7 @@ declare namespace gi {
     positions: string[];
   }
 
-  interface TextInfo {
+  interface TipsInfo {
     /** 关键词 */
     key: string;
     /** 默认中文 */
@@ -85,13 +92,18 @@ declare namespace gi {
     ko: string;
   }
 
+  type GuideInfo = TipsInfo & {
+    /** 引导类型 */
+    type: number;
+  };
+
   interface LevelInfo {
     /** 关卡标题 */
     title: string;
     /** 关卡文本映射 */
-    tipsMap: TextInfo[];
+    tipsMap: TipsInfo[];
     /** 关卡引导文本映射 */
-    guideMap: TextInfo[];
+    guideMap: GuideInfo[];
   }
 
   /** 工具类 */
@@ -103,7 +115,10 @@ declare namespace gi {
     static inRange(value: number, min: number, max: number): boolean;
 
     /** 防抖 */
-    static debounce(func, delay): (...args: any[]) => void;
+    static debounce(func: Function, delay: number): (...args: any[]) => void;
+
+    /** 节流 */
+    static throttle(func: Function, wait: number): (...args: any[]) => void;
 
     /** 将节点所有的子节点按照原本的布局居中于该节点 */
     static centerChildren(node: cc.Node): void;
@@ -132,6 +147,23 @@ declare namespace gi {
 
   /** 引导 */
   class Guide {
+    static Type: {
+      /** 拖动引导 */
+      Drag: number;
+      /** 点击 */
+      Click: number;
+      /** 文本引导 */
+      Text: number;
+      /** 上滑引导 */
+      UP: number;
+      /** 左滑引导 */
+      Left: number;
+      /** 右滑引导 */
+      Right: number;
+      /** 下滑引导 */
+      Down: number;
+    };
+
     /** 设置当前引导步骤 */
     static setStep(step: number): void;
 

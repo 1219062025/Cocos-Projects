@@ -14,6 +14,23 @@ export default class Guide {
   /** 引导时携带的节点 */
   private static _copyNode: cc.Node = null;
 
+  static Type = {
+    /** 拖动引导 */
+    Drag: 0,
+    /** 点击引导 */
+    Click: 1,
+    /** 文本引导 */
+    Text: 2,
+    /** 上滑引导 */
+    UP: 3,
+    /** 左滑引导 */
+    Left: 4,
+    /** 右滑引导 */
+    Right: 5,
+    /** 下滑引导 */
+    Down: 6
+  };
+
   /** 设置当前引导步骤 */
   static setStep(step: number) {
     this._step = step;
@@ -60,11 +77,11 @@ export default class Guide {
       })
       .to(options.time, { position: to })
       .call(() => {
-        this._copyNode.active = false;
+        this._copyNode && (this._copyNode.active = false);
       })
       .to(options.time / 3, { position: from })
       .call(() => {
-        this._copyNode.active = true;
+        this._copyNode && (this._copyNode.active = true);
       });
 
     return (cc.tween(options.guide) as cc.Tween).then(moveTween);

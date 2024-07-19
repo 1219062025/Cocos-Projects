@@ -59,7 +59,7 @@ export default class TriggerControl extends cc.Component {
     if (this.deductScore) {
       gi.Event.emit('deductScore', this.deductScore);
     }
-
+    gi.completedAction(this.key);
     this.isTriggerOff = true;
   }
 

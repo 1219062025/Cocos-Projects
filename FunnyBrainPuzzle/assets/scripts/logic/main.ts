@@ -1,5 +1,5 @@
 import ResAreaControl from './res/resAreaControl';
-import GuideControl from './guideControl';
+import GuideManager from './guide/guideManager';
 import TriggerControl from './triggerControl';
 import SubscriptionControl from './subscriptions/subscriptionControl';
 
@@ -47,8 +47,8 @@ export default class Main extends cc.Component {
   tipsNode: cc.Node = null;
 
   /** 引导控制脚本 */
-  @property({ type: GuideControl, tooltip: '引导控制脚本' })
-  guide: GuideControl = null;
+  @property({ type: GuideManager, tooltip: '引导控制脚本' })
+  guideMgr: GuideManager = null;
 
   /** 成功通关弹窗 */
   @property({ type: cc.Node, tooltip: '成功通关弹窗' })
@@ -83,7 +83,7 @@ export default class Main extends cc.Component {
     this.resArea.init();
     // 在资源初始化之后初始化引导
     if (this.isRunGuide) {
-      this.guide.init();
+      this.guideMgr.init();
     }
 
     // 订阅动作
@@ -109,26 +109,19 @@ export default class Main extends cc.Component {
 
   /** 运行时间检测 */
   runTimeDetection() {
-    // 限时limitedTime
+    // 限时limitedTime完成，否则弹出通关失败弹窗
     this.schedule(() => {
       if (this.limitedTime === 0 && !gi.isEnd()) {
-        this.failPop.active = true;
-        (cc.tween(this.failPop) as cc.Tween).to(1, { opacity: 255 }).start();
-        gi.Event.emit('通关失败');
-        gi.end();
-        return this.unscheduleAllCallbacks();
+        this.showFailPop();
       } else {
         this.limitedTime--;
       }
     }, 1);
 
+    // 超过responseTime无响应弹出通关失败弹窗
     this.responseFunc = gi.Utils.debounce(() => {
       if (!gi.isEnd()) {
-        this.failPop.active = true;
-        (cc.tween(this.failPop) as cc.Tween).to(1, { opacity: 255 }).start();
-        gi.Event.emit('通关失败');
-        gi.end();
-        return this.unscheduleAllCallbacks();
+        this.showFailPop();
       }
     }, this.responseTime * 1000);
 
@@ -165,7 +158,6 @@ export default class Main extends cc.Component {
 
     this.successPop.active = true;
     (cc.tween(this.successPop) as cc.Tween).to(1, { opacity: 255 }).start();
-    gi.Event.emit('成功通关');
     gi.end();
     return this.unscheduleAllCallbacks();
   }
@@ -176,7 +168,6 @@ export default class Main extends cc.Component {
 
     this.failPop.active = true;
     (cc.tween(this.failPop) as cc.Tween).to(1, { opacity: 255 }).start();
-    gi.Event.emit('通关失败');
     gi.end();
     return this.unscheduleAllCallbacks();
   }

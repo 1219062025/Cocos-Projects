@@ -13,7 +13,6 @@ class GI {
   /** 游戏是否结束了 */
   private _isEnd: boolean = false;
 
-  /** ___DEBUG START___ */
   /** 得分 */
   score = 0;
   /** 扣分 */
@@ -22,7 +21,14 @@ class GI {
   scale = 1;
   /** 当前语言缩写 */
   language = '';
-  /** ___DEBUG END___ */
+  /** 当前关卡已经完成了的动作的key */
+  finishedActionKeys: Set<string> = new Set([]);
+
+  /** 记录指定动作已完成 */
+  completedAction(key: string) {
+    this.finishedActionKeys.add(key);
+    gi.Event.emit('completedAction');
+  }
 
   /** 设置游戏结束 */
   end() {

@@ -1,4 +1,5 @@
 let canChangeTV = false;
+/** 打开电视 */
 export function openTV(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -9,11 +10,13 @@ export function openTV(options: gi.SubscriptionOptions) {
       options.nodes[0].active = true;
       options.nodes[1].active = true;
       canChangeTV = true;
+      gi.completedAction('clicktelevision');
     },
     options.target
   );
 }
 
+/** 换台 */
 export function changeTV(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -28,12 +31,14 @@ export function changeTV(options: gi.SubscriptionOptions) {
         options.nodes[2].active = false;
         options.nodes[3].active = true;
         canChangeTV = false;
+        gi.completedAction('clickbtn');
       }
     },
     options.target
   );
 }
 
+/** 打开门 */
 export function openDoor(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -41,9 +46,11 @@ export function openDoor(options: gi.SubscriptionOptions) {
     options.target.active = false;
     options.nodes[0].active = true;
     options.nodes[1].active = true;
+    gi.completedAction('clickdoor');
   });
 }
 
+/** 打开厕所里面窗户 */
 export function openToiletWindow(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -53,9 +60,11 @@ export function openToiletWindow(options: gi.SubscriptionOptions) {
     options.nodes[1].active = true;
     options.nodes[2].active = true;
     gi.Event.emit('showTips', 'wcwindow');
+    gi.completedAction('wcwindow');
   });
 }
 
+/** 打开客厅里的窗口 */
 export function openWindow(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -66,9 +75,11 @@ export function openWindow(options: gi.SubscriptionOptions) {
     options.nodes[2].active = true;
     options.nodes[3].active = true;
     options.nodes[4].active = true;
+    gi.completedAction('clickwindow');
   });
 }
 
+/** 小狗动作 */
 export function dog(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -81,6 +92,7 @@ export function dog(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 小猫动作 */
 export function cat1(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -93,6 +105,7 @@ export function cat1(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 男人动作 */
 export function man(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -105,6 +118,7 @@ export function man(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 女人动作 */
 export function woman(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -129,6 +143,7 @@ export function woman(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 衣架上宝宝摇晃 */
 export function clip(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -141,6 +156,7 @@ export function clip(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 跷跷板 */
 export function seesaw(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -161,6 +177,7 @@ export function seesaw(options: gi.SubscriptionOptions) {
           .call(() => {})
           .to(0.8, { angle: -10 })
           .start();
+        gi.completedAction('seesaw_right');
       } else {
         (cc.tween(options.target) as cc.Tween)
           .call(() => {})
@@ -169,6 +186,7 @@ export function seesaw(options: gi.SubscriptionOptions) {
           .union()
           .repeatForever()
           .start();
+        gi.completedAction('seesaw');
         clearInterval(timeoutLeft);
       }
       clearInterval(timeoutRight);
@@ -184,6 +202,7 @@ export function seesaw(options: gi.SubscriptionOptions) {
           .call(() => {})
           .to(0.8, { angle: 10 })
           .start();
+        gi.completedAction('seesaw_left');
       } else {
         (cc.tween(options.target) as cc.Tween)
           .call(() => {})
@@ -192,6 +211,7 @@ export function seesaw(options: gi.SubscriptionOptions) {
           .union()
           .repeatForever()
           .start();
+        gi.completedAction('seesaw');
         clearInterval(timeoutRight);
       }
       clearInterval(timeoutLeft);
@@ -199,6 +219,7 @@ export function seesaw(options: gi.SubscriptionOptions) {
   });
 }
 
+/** 马桶水动作 */
 export function water(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -211,6 +232,7 @@ export function water(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 默认宝宝动作 */
 export function defaultAction(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 
@@ -223,6 +245,7 @@ export function defaultAction(options: gi.SubscriptionOptions) {
     .start();
 }
 
+/** 小猫动作2 */
 export function cat2(options: gi.SubscriptionOptions) {
   options.target.stopAllActions();
 

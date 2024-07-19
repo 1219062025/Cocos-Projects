@@ -1,5 +1,3 @@
-import * as configType from './config';
-
 /** 全局类型 */
 const gt: Record<string, Record<string, string | number>> = {};
 
@@ -56,7 +54,5 @@ function value(obj: object, prop: string, value: any, writable?: boolean, enumer
   Object.defineProperty(obj, prop, tmpValueDesc);
   tmpValueDesc.value = undefined;
 }
-
-setEnum(configType);
 
 export default gt;

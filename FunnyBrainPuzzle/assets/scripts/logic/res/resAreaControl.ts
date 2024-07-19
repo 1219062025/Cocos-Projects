@@ -34,6 +34,8 @@ export default class ResAreaControl extends cc.Component {
   }
 
   onTouchStart({ event, res }: { event: cc.Event.EventTouch; res: ResControl }) {
+    if (this.curRes) return;
+
     const _curResNode = res.unique ? res.node : this.getEffectiveResNode(res.tag);
     if (_curResNode) {
       this.setCurRes(_curResNode.getComponent(ResControl));
@@ -42,6 +44,8 @@ export default class ResAreaControl extends cc.Component {
   }
 
   onTouchMove(event: cc.Event.EventTouch) {
+    if (!this.curRes) return;
+
     const touchPos = event.getLocation();
     const pos = this.node.convertToNodeSpaceAR(touchPos);
     this.curRes.node.setPosition(pos);
@@ -49,6 +53,8 @@ export default class ResAreaControl extends cc.Component {
   }
 
   onTouchEnd(event: cc.Event.EventTouch) {
+    if (!this.curRes) return;
+
     gi.Event.emit('touchEnd', event);
   }
 
@@ -79,7 +85,8 @@ export default class ResAreaControl extends cc.Component {
     if (cc.isValid(this.curRes.node)) {
       this.node.removeChild(this.curRes.node);
       this.curRes.node.destroy();
-      console.log(this.node.childrenCount);
+      this.curResOriPos = cc.v2(0, 0);
+      this.curRes = null;
       if (this.node.childrenCount === 0) {
         gi.Event.emit('notHaveRes');
       }
@@ -89,10 +96,13 @@ export default class ResAreaControl extends cc.Component {
   /** 取消选中的资源 */
   cancleCurRes() {
     if (cc.isValid(this.curRes.node)) {
-      (cc.tween(this.curRes.node) as cc.Tween).to(0.2, { position: this.curResOriPos }).start();
+      (cc.tween(this.curRes.node) as cc.Tween)
+        .to(0.2, { position: this.curResOriPos })
+        .call(() => {
+          this.curResOriPos = cc.v2(0, 0);
+          this.curRes = null;
+        })
+        .start();
     }
-
-    this.curResOriPos = cc.v2(0, 0);
-    this.curRes = null;
   }
 }

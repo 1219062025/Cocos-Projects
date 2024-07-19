@@ -27,6 +27,19 @@ export default class Utils {
     };
   }
 
+  /** 节流 */
+  static throttle(func: Function, wait: number) {
+    let lastTime = 0;
+
+    return function (...args: any[]) {
+      const now = Date.now();
+      if (now - lastTime >= wait) {
+        lastTime = now;
+        func.apply(this, args);
+      }
+    };
+  }
+
   /** 将节点所有的子节点按照原本的布局居中于该节点 */
   static centerChildren(node: cc.Node) {
     let children = node.children;
