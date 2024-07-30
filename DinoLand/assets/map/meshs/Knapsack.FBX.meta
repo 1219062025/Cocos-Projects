@@ -1,0 +1,119 @@
+{
+  "ver": "2.3.13",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "ebefd60f-ebcd-4380-bf0c-f30f5c2988f0",
+  "files": [],
+  "subMetas": {
+    "01273": {
+      "importer": "gltf-mesh",
+      "uuid": "ebefd60f-ebcd-4380-bf0c-f30f5c2988f0@01273",
+      "displayName": "",
+      "id": "01273",
+      "name": "Knapsack_A.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 610
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "75a28": {
+      "importer": "gltf-mesh",
+      "uuid": "ebefd60f-ebcd-4380-bf0c-f30f5c2988f0@75a28",
+      "displayName": "",
+      "id": "75a28",
+      "name": "Knapsack.mesh",
+      "userData": {
+        "gltfIndex": 1,
+        "triangleCount": 884
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "808ae": {
+      "importer": "gltf-material",
+      "uuid": "ebefd60f-ebcd-4380-bf0c-f30f5c2988f0@808ae",
+      "displayName": "",
+      "id": "808ae",
+      "name": "15 - Default.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "a032f": {
+      "importer": "gltf-scene",
+      "uuid": "ebefd60f-ebcd-4380-bf0c-f30f5c2988f0@a032f",
+      "displayName": "",
+      "id": "a032f",
+      "name": "Knapsack.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": false,
+    "allowMeshDataAccess": true,
+    "fbx": {
+      "smartMaterialEnabled": false,
+      "matchMeshNames": false
+    },
+    "assetFinder": {
+      "meshes": [
+        "ebefd60f-ebcd-4380-bf0c-f30f5c2988f0@01273",
+        "ebefd60f-ebcd-4380-bf0c-f30f5c2988f0@75a28"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "ebefd60f-ebcd-4380-bf0c-f30f5c2988f0@808ae"
+      ],
+      "scenes": [
+        "ebefd60f-ebcd-4380-bf0c-f30f5c2988f0@a032f"
+      ]
+    },
+    "promoteSingleRootNode": true,
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    }
+  }
+}

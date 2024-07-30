@@ -1,0 +1,100 @@
+{
+  "ver": "2.3.13",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "099f1cc4-36eb-4033-bc53-0b5b7c55d8b8",
+  "files": [],
+  "subMetas": {
+    "d82fb": {
+      "importer": "gltf-mesh",
+      "uuid": "099f1cc4-36eb-4033-bc53-0b5b7c55d8b8@d82fb",
+      "displayName": "",
+      "id": "d82fb",
+      "name": "TreasureChest.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 1672
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d90a4": {
+      "importer": "gltf-material",
+      "uuid": "099f1cc4-36eb-4033-bc53-0b5b7c55d8b8@d90a4",
+      "displayName": "",
+      "id": "d90a4",
+      "name": "01 - Default.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "0ef5b": {
+      "importer": "gltf-scene",
+      "uuid": "099f1cc4-36eb-4033-bc53-0b5b7c55d8b8@0ef5b",
+      "displayName": "",
+      "id": "0ef5b",
+      "name": "TreasureChest.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": false,
+    "allowMeshDataAccess": true,
+    "fbx": {
+      "smartMaterialEnabled": false,
+      "matchMeshNames": false
+    },
+    "assetFinder": {
+      "meshes": [
+        "099f1cc4-36eb-4033-bc53-0b5b7c55d8b8@d82fb"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "099f1cc4-36eb-4033-bc53-0b5b7c55d8b8@d90a4"
+      ],
+      "scenes": [
+        "099f1cc4-36eb-4033-bc53-0b5b7c55d8b8@0ef5b"
+      ]
+    },
+    "promoteSingleRootNode": true,
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    }
+  }
+}

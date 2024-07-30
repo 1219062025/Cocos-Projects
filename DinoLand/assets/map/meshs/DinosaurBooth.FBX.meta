@@ -1,0 +1,119 @@
+{
+  "ver": "2.3.13",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "689040fe-f17e-4bc9-9c38-13905a5ef2d4",
+  "files": [],
+  "subMetas": {
+    "dade5": {
+      "importer": "gltf-mesh",
+      "uuid": "689040fe-f17e-4bc9-9c38-13905a5ef2d4@dade5",
+      "displayName": "",
+      "id": "dade5",
+      "name": "DinosaurBooth.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 853
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d3449": {
+      "importer": "gltf-mesh",
+      "uuid": "689040fe-f17e-4bc9-9c38-13905a5ef2d4@d3449",
+      "displayName": "",
+      "id": "d3449",
+      "name": "Dinosaur_B.mesh",
+      "userData": {
+        "gltfIndex": 1,
+        "triangleCount": 240
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "c4114": {
+      "importer": "gltf-material",
+      "uuid": "689040fe-f17e-4bc9-9c38-13905a5ef2d4@c4114",
+      "displayName": "",
+      "id": "c4114",
+      "name": "07 - Default.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "ebcc8": {
+      "importer": "gltf-scene",
+      "uuid": "689040fe-f17e-4bc9-9c38-13905a5ef2d4@ebcc8",
+      "displayName": "",
+      "id": "ebcc8",
+      "name": "DinosaurBooth.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": false,
+    "allowMeshDataAccess": true,
+    "fbx": {
+      "smartMaterialEnabled": false,
+      "matchMeshNames": false
+    },
+    "assetFinder": {
+      "meshes": [
+        "689040fe-f17e-4bc9-9c38-13905a5ef2d4@dade5",
+        "689040fe-f17e-4bc9-9c38-13905a5ef2d4@d3449"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "689040fe-f17e-4bc9-9c38-13905a5ef2d4@c4114"
+      ],
+      "scenes": [
+        "689040fe-f17e-4bc9-9c38-13905a5ef2d4@ebcc8"
+      ]
+    },
+    "promoteSingleRootNode": true,
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    }
+  }
+}

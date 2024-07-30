@@ -1,0 +1,100 @@
+{
+  "ver": "2.3.13",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "0e200061-a566-44fc-8bd8-9ff1f13c9855",
+  "files": [],
+  "subMetas": {
+    "ba015": {
+      "importer": "gltf-mesh",
+      "uuid": "0e200061-a566-44fc-8bd8-9ff1f13c9855@ba015",
+      "displayName": "",
+      "id": "ba015",
+      "name": "DinosaurEgg_6.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 396
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "47ad3": {
+      "importer": "gltf-material",
+      "uuid": "0e200061-a566-44fc-8bd8-9ff1f13c9855@47ad3",
+      "displayName": "",
+      "id": "47ad3",
+      "name": "04 - Default.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "914f8": {
+      "importer": "gltf-scene",
+      "uuid": "0e200061-a566-44fc-8bd8-9ff1f13c9855@914f8",
+      "displayName": "",
+      "id": "914f8",
+      "name": "DinosaurEgg_6.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": false,
+    "allowMeshDataAccess": true,
+    "fbx": {
+      "smartMaterialEnabled": false,
+      "matchMeshNames": false
+    },
+    "assetFinder": {
+      "meshes": [
+        "0e200061-a566-44fc-8bd8-9ff1f13c9855@ba015"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "0e200061-a566-44fc-8bd8-9ff1f13c9855@47ad3"
+      ],
+      "scenes": [
+        "0e200061-a566-44fc-8bd8-9ff1f13c9855@914f8"
+      ]
+    },
+    "promoteSingleRootNode": true,
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    }
+  }
+}

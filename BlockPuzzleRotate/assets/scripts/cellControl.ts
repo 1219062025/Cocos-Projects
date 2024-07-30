@@ -14,6 +14,7 @@ export default class CellControl extends cc.Component {
     const spriteFrame = gi.getBlockSprite(type, category);
     this.ghostingSprite.spriteFrame = spriteFrame;
     this.ghostingSprite.node.active = true;
+    this.ghostingSprite.node.setContentSize(gi.BLOCKWIDTH, gi.BLOCKHEIGHT);
   }
 
   cancleProjection() {

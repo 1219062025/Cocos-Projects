@@ -26,13 +26,14 @@ class GI {
   /** ___DEBUG END___ */
 
   /** Block的宽度 */
-  BLOCKWIDTH = 90;
+  BLOCKWIDTH = 124;
+  // BLOCKWIDTH = 90;
   /** Block的高度 */
-  BLOCKHEIGHT = 90;
+  BLOCKHEIGHT = 124;
   /** 网格行数 */
-  MAPROWS = 15;
+  MAPROWS = 8;
   /** 网格列数 */
-  MAPCOLS = 11;
+  MAPCOLS = 8;
   /** 游戏区域节点宽度 */
   MAPWIDTH = this.BLOCKWIDTH * this.MAPCOLS;
   /** 游戏区域节点高度 */

@@ -1,0 +1,119 @@
+{
+  "ver": "2.3.13",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "5f8c7acc-4cdc-4298-ad17-c3535a17ff63",
+  "files": [],
+  "subMetas": {
+    "699ad": {
+      "importer": "gltf-mesh",
+      "uuid": "5f8c7acc-4cdc-4298-ad17-c3535a17ff63@699ad",
+      "displayName": "",
+      "id": "699ad",
+      "name": "Door_a.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f2af8": {
+      "importer": "gltf-mesh",
+      "uuid": "5f8c7acc-4cdc-4298-ad17-c3535a17ff63@f2af8",
+      "displayName": "",
+      "id": "f2af8",
+      "name": "Door_b.mesh",
+      "userData": {
+        "gltfIndex": 1,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d90a4": {
+      "importer": "gltf-material",
+      "uuid": "5f8c7acc-4cdc-4298-ad17-c3535a17ff63@d90a4",
+      "displayName": "",
+      "id": "d90a4",
+      "name": "01 - Default.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "0a8c4": {
+      "importer": "gltf-scene",
+      "uuid": "5f8c7acc-4cdc-4298-ad17-c3535a17ff63@0a8c4",
+      "displayName": "",
+      "id": "0a8c4",
+      "name": "Door_Fengsuo.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": false,
+    "allowMeshDataAccess": true,
+    "fbx": {
+      "smartMaterialEnabled": false,
+      "matchMeshNames": false
+    },
+    "assetFinder": {
+      "meshes": [
+        "5f8c7acc-4cdc-4298-ad17-c3535a17ff63@699ad",
+        "5f8c7acc-4cdc-4298-ad17-c3535a17ff63@f2af8"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "5f8c7acc-4cdc-4298-ad17-c3535a17ff63@d90a4"
+      ],
+      "scenes": [
+        "5f8c7acc-4cdc-4298-ad17-c3535a17ff63@0a8c4"
+      ]
+    },
+    "promoteSingleRootNode": true,
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    }
+  }
+}

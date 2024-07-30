@@ -76,7 +76,7 @@ export default class Main extends cc.Component {
   onRemoveBlock(chunkPos: cc.Vec2) {
     this.counter.by(100);
     gi.score += 100;
-    if (gi.score >= 400) {
+    if (gi.score >= 600) {
       this.end();
     }
     this.shake();
@@ -143,7 +143,7 @@ export default class Main extends cc.Component {
       copyChunk.setType(type);
 
       const fromNode1 = this.chunkArea.areaList[0].node;
-      const toNode1 = this.board.cells[1][4].node;
+      const toNode1 = this.board.cells[6][0].node;
       const moveTween = this.guideIcon.moveNode(fromNode1, toNode1, { time: 1.5, node: copyChunk.node });
       gi.Guide.currentTween = moveTween.union().repeatForever();
       gi.Guide.currentTween.start();
@@ -192,7 +192,7 @@ export default class Main extends cc.Component {
       copyChunk.setType(type);
 
       const fromNode1 = this.chunkArea.areaList[1].node;
-      const toNode1 = this.board.cells[4][4].node;
+      const toNode1 = this.board.cells[5][4].node;
       const moveTween = this.guideIcon.moveNode(fromNode1, toNode1, { time: 1.5, node: copyChunk.node });
       gi.Guide.currentTween = moveTween.union().repeatForever();
       gi.Guide.currentTween.start();
@@ -210,11 +210,11 @@ export default class Main extends cc.Component {
     if (!gi.Guide.inGuide) return true;
 
     if (gi.Guide.step === 1) {
-      if (row !== 0 || col !== 4) return false;
+      if (row !== 5 || col !== 0) return false;
     }
 
     if (gi.Guide.step === 5) {
-      if (row !== 3 || col !== 3) return false;
+      if (row !== 5 || col !== 3) return false;
     }
     return true;
   }
@@ -295,7 +295,7 @@ export default class Main extends cc.Component {
         this.currentChunk = null;
 
         gi.handleCount++;
-        if (gi.handleCount >= 6) {
+        if (gi.handleCount >= 10) {
           this.end();
           return;
         }

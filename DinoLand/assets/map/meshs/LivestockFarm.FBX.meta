@@ -1,0 +1,100 @@
+{
+  "ver": "2.3.13",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "67df0a76-6685-4d4d-8426-0614ffba67c1",
+  "files": [],
+  "subMetas": {
+    "30188": {
+      "importer": "gltf-mesh",
+      "uuid": "67df0a76-6685-4d4d-8426-0614ffba67c1@30188",
+      "displayName": "",
+      "id": "30188",
+      "name": "LivestockFarm.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 1066
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "62489": {
+      "importer": "gltf-scene",
+      "uuid": "67df0a76-6685-4d4d-8426-0614ffba67c1@62489",
+      "displayName": "",
+      "id": "62489",
+      "name": "LivestockFarm.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "d90a4": {
+      "importer": "gltf-material",
+      "uuid": "67df0a76-6685-4d4d-8426-0614ffba67c1@d90a4",
+      "displayName": "",
+      "id": "d90a4",
+      "name": "01 - Default.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": false,
+    "allowMeshDataAccess": true,
+    "fbx": {
+      "smartMaterialEnabled": false,
+      "matchMeshNames": false
+    },
+    "assetFinder": {
+      "meshes": [
+        "67df0a76-6685-4d4d-8426-0614ffba67c1@30188"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "67df0a76-6685-4d4d-8426-0614ffba67c1@d90a4"
+      ],
+      "scenes": [
+        "67df0a76-6685-4d4d-8426-0614ffba67c1@62489"
+      ]
+    },
+    "promoteSingleRootNode": true,
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    }
+  }
+}

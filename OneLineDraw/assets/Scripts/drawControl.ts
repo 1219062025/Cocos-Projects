@@ -36,6 +36,14 @@ export default class DrawControl extends cc.Component {
   /** 所有点 */
   points: gi.Point[] = [];
 
+  /** 所有点的Map形式，用以筛选掉相同坐标的点 */
+  pointsMap: Map<string, gi.Point> = new Map([]);
+
+  /** 触摸移动到下一个触摸点的最小触摸距离 */
+  minDistance: number = Infinity;
+  /** 触摸移动到下一个触摸点的最大触摸距离 */
+  maxDistance: number = 0;
+
   /** 目标点 */
   targetPoints: Set<gi.Point> = new Set([]);
 
@@ -57,6 +65,12 @@ export default class DrawControl extends cc.Component {
   /** 是否试玩结束 */
   isComplete: boolean = false;
 
+  /** 当前画着的路径点所在的贝塞尔曲线 */
+  curBezier: gi.Bezier = null;
+
+  /** 每段贝塞尔曲线包含的点映射 */
+  bezierPointsMap: Map<string, gi.Point[]> = new Map([]);
+
   _curPoint: gi.Point = null;
   /** 当前选中的路径点 */
   get curPoint() {
@@ -65,6 +79,7 @@ export default class DrawControl extends cc.Component {
   set curPoint(value) {
     this._curPoint = value;
     if (value !== null) {
+      this.curBezier = value.value.bezier;
       const pointsCount = this.points.length;
       const curIndex = this._curPoint.index;
       const preIndex = this._curPoint.index === 0 ? pointsCount - 1 : curIndex - 1;
@@ -108,6 +123,7 @@ export default class DrawControl extends cc.Component {
       this.curPoint = this.getNearestPoint(touchPos);
       this.startPoint = this.curPoint;
       this.visitedTargetPoints.add(this.startPoint);
+      this.visitedPoints.add(this.startPoint);
 
       this.pencil.setPosition(this.curPoint.value.x, this.curPoint.value.y);
       this.pencil.active = true;
@@ -123,30 +139,55 @@ export default class DrawControl extends cc.Component {
       /** 触点位置 */
       const curTouch = this.node.convertToNodeSpaceAR(event.getLocation());
       /** 触摸移动方向上的下一个路径点 */
-      const moveNextPoint = this.getMoveNextPoint(curTouch.sub(preTouch));
+      const nextPoints = this.getMoveNextPoint(curTouch.sub(preTouch));
+
+      const moveNextPoint = nextPoints[0] || null;
+
+      if (this.visitedTargetPoints.size === this.targetPoints.size && this.points.length - this.visitedPoints.size < 10) {
+        this.nextLevel();
+        // console.log('通关');
+        return;
+      }
+
+      if (this.isFail()) {
+        // console.log('失败');
+        this.isComplete = true;
+        this.pop.active = true;
+        (cc.tween(this.pop) as cc.Tween).to(1, { opacity: 255 }).start();
+      }
+
       if (moveNextPoint) {
-        if (this.startPoint === moveNextPoint && this.visitedTargetPoints.size === this.targetPoints.size) {
-          this.nextLevel();
-          return;
-        }
         if (!this.isVisitedTargetPoint(moveNextPoint) && !this.isVisitedPoint(moveNextPoint)) {
           // -------------画线以及处理画线后相关的状态更改---------------
-          if (this.isTargetPoint(moveNextPoint)) this.visitedTargetPoints.add(moveNextPoint);
-          const id = `${this.curPoint.index}->${moveNextPoint.index}`;
           this.draw(this.curPoint, moveNextPoint);
           this.visitedPoints.add(moveNextPoint);
-          this.visitedLine.set(id, { to: moveNextPoint, from: this.curPoint });
-          this.curPoint = moveNextPoint;
-        } else if (!this.isVisitedTargetPoint(moveNextPoint) && !this.isVisitedTargetPoint(this.curPoint) && this.isVisitedPoint(moveNextPoint)) {
-          // -----------擦除以及处理擦除后相关的状态更改-------------
-          const id = `${moveNextPoint.index}->${this.curPoint.index}`;
-          this.erase(id);
-          this.visitedPoints.delete(this.curPoint);
-          this.visitedLine.delete(id);
+          if (this.targetPoints.has(moveNextPoint)) this.visitedTargetPoints.add(moveNextPoint);
           this.curPoint = moveNextPoint;
         }
       }
     }
+  }
+
+  isFail() {
+    for (let i = 0; i < this.points.length; i++) {
+      if (i !== this.curPoint.index) {
+        const point = this.points[i];
+        const direction = cc.v2(point.value.x - this.curPoint.value.x, point.value.y - this.curPoint.value.y);
+        const distance = direction.mag();
+        if (distance < this.maxDistance && this.isDirectionMatching(direction, direction) && !this.visitedPoints.has(point) && !this.visitedTargetPoints.has(point)) {
+          /**
+           * 如果当前点是目标点，下一个选择不检查
+           * 如果当前点不是目标点，但下一个选择是目标点不检查
+           * 其他都需要检查是否处于相同的贝塞尔曲线
+           */
+          if (!this.targetPoints.has(this.curPoint) && !this.targetPoints.has(point)) {
+            if (this.curBezier.str !== point.value.bezier.str) continue;
+          }
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   /** 画线 */
@@ -201,13 +242,59 @@ export default class DrawControl extends cc.Component {
      *  -1 < Cos(x) < 0时，基本相反；
      *  Cos(x) === -1时，完全相反；
      */
-    const cosPre = toMoveVec.normalize().dot(this.toPreVec.normalize());
-    const cosNext = toMoveVec.normalize().dot(this.toNextVec.normalize());
-    if (Math.max(cosPre, cosNext) > 0.6) {
-      return cosPre > cosNext ? this.prePoint : this.nextPoint;
-    } else {
-      return null;
+
+    let pointIndexs: number[] = [];
+
+    for (let i = 0; i < this.points.length; i++) {
+      if (i !== this.curPoint.index) {
+        const point = this.points[i];
+        const direction = cc.v2(point.value.x - this.curPoint.value.x, point.value.y - this.curPoint.value.y);
+        const distance = direction.mag();
+
+        if (distance < this.maxDistance && this.isDirectionMatching(toMoveVec, direction)) {
+          /**
+           * 如果当前点是目标点，下一个选择不检查
+           * 如果当前点不是目标点，但下一个选择是目标点不检查
+           * 其他都需要检查是否处于相同的贝塞尔曲线
+           */
+          if (!this.targetPoints.has(this.curPoint) && !this.targetPoints.has(point)) {
+            if (this.curBezier.str !== point.value.bezier.str) continue;
+          }
+          pointIndexs.push(i);
+        }
+      }
     }
+
+    // 过滤掉不可访问的点
+    const points =
+      pointIndexs
+        .filter(index => {
+          return !this.visitedPoints.has(this.points[index]);
+        })
+        .map(index => this.points[index]) || [];
+
+    // 找出距离最近的
+    points.sort((a, b) => {
+      const directionA = cc.v2(a.value.x - this.curPoint.value.x, a.value.y - this.curPoint.value.y);
+      const distanceA = directionA.mag();
+      const directionB = cc.v2(b.value.x - this.curPoint.value.x, b.value.y - this.curPoint.value.y);
+      const distanceB = directionB.mag();
+
+      if (distanceA < distanceB) {
+        return -1;
+      } else if (distanceA > distanceB) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
+    return points;
+  }
+
+  isDirectionMatching(toMoveVec: cc.Vec2, direction: cc.Vec2): boolean {
+    const dotProduct = toMoveVec.normalize().dot(direction.normalize());
+    return dotProduct > 0.4; // 判断方向是否一致
   }
 
   /** 下一关或者结束游戏 */
@@ -244,6 +331,7 @@ export default class DrawControl extends cc.Component {
     }
     this.lineCtx.lineJoin = this.shapeCtx.lineJoin = cc.Graphics.LineJoin.ROUND;
     this.lineCtx.lineCap = this.shapeCtx.lineCap = cc.Graphics.LineCap.ROUND;
+    // this.lineCtx.lineWidth = this.shapeCtx.lineWidth = 1;
     this.lineCtx.lineWidth = this.shapeCtx.lineWidth = 40;
     this.shapeCtx.strokeColor = cc.color(190, 190, 190);
     this.lineCtx.strokeColor = cc.color(43, 94, 241);
@@ -264,27 +352,49 @@ export default class DrawControl extends cc.Component {
 
     this.path.points.forEach((pathPoint, index) => {
       const point = { value: pathPoint, index: this.points.length };
-      // 距上一个点距离为0意味着该点为目标点
-      if (pathPoint.length === 0) {
-        this.targetPoints.add(point);
-      }
 
-      this.points.push(point);
-      this.shapeCtx.lineTo(pathPoint.x, pathPoint.y);
-      this.shapeCtx.stroke();
-      this.shapeCtx.moveTo(pathPoint.x, pathPoint.y);
+      this.maxDistance = Math.max(this.maxDistance, pathPoint.length);
+      this.minDistance = pathPoint.length ? Math.min(this.minDistance, pathPoint.length) : this.minDistance;
 
       // 微分法分割出来的路径在接近目标点时会出现数值极其相近的情况，需要将数值跟目标点极其相近的点剔除掉。
-      if (pathPoint.length !== 0) {
+      if (pathPoint.length !== 0 && index !== this.path.points.length - 1) {
         const prePathPoint = this.path.points[index - 1 < 0 ? this.path.points.length - 1 : index - 1];
         const nexPathtPoint = this.path.points[(index + 1) % this.path.points.length];
         const preDistance = cc.v2(prePathPoint.x, prePathPoint.y).sub(cc.v2(pathPoint.x, pathPoint.y)).len();
         const nextDistance = cc.v2(nexPathtPoint.x, nexPathtPoint.y).sub(cc.v2(pathPoint.x, pathPoint.y)).len();
-        if (preDistance < 0.0000001 || nextDistance < 0.0000001) {
-          this.points.pop();
+        if (preDistance >= 0.0000001 && nextDistance >= 0.0000001) {
+          this.points.push(point);
+          this.shapeCtx.lineTo(pathPoint.x, pathPoint.y);
+          this.shapeCtx.stroke();
+          this.shapeCtx.moveTo(pathPoint.x, pathPoint.y);
         }
+      } else {
+        // 距上一个点距离为0意味着该点为目标点
+        // if (!this.pointsMap.has(`${pathPoint.originX}_${pathPoint.originY}`)) {
+        //   this.targetPoints.add(point);
+        //   this.points.push(point);
+        //   this.pointsMap.set(`${pathPoint.originX}_${pathPoint.originY}`, point);
+        //   this.shapeCtx.lineTo(pathPoint.x, pathPoint.y);
+        //   this.shapeCtx.stroke();
+        //   this.shapeCtx.moveTo(pathPoint.x, pathPoint.y);
+        // }
+
+        this.targetPoints.add(point);
+        this.points.push(point);
+        this.shapeCtx.lineTo(pathPoint.x, pathPoint.y);
+        this.shapeCtx.stroke();
+        this.shapeCtx.moveTo(pathPoint.x, pathPoint.y);
+      }
+
+      if (!this.bezierPointsMap.has(point.value.bezier.str)) {
+        this.bezierPointsMap.set(point.value.bezier.str, [point]);
+      } else {
+        this.bezierPointsMap.get(point.value.bezier.str).push(point);
       }
     });
+    console.log(this.bezierPointsMap);
+
+    this.maxDistance = this.maxDistance * 2;
 
     // 手指
     const fingerTween = cc.tween(this.finger) as cc.Tween;

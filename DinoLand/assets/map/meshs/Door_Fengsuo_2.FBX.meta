@@ -1,0 +1,138 @@
+{
+  "ver": "2.3.13",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "0a26b418-d74d-4faa-9138-4de3068e0c44",
+  "files": [],
+  "subMetas": {
+    "f2af8": {
+      "importer": "gltf-mesh",
+      "uuid": "0a26b418-d74d-4faa-9138-4de3068e0c44@f2af8",
+      "displayName": "",
+      "id": "f2af8",
+      "name": "Door_b.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "699ad": {
+      "importer": "gltf-mesh",
+      "uuid": "0a26b418-d74d-4faa-9138-4de3068e0c44@699ad",
+      "displayName": "",
+      "id": "699ad",
+      "name": "Door_a.mesh",
+      "userData": {
+        "gltfIndex": 1,
+        "triangleCount": 68
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "2e69c": {
+      "importer": "gltf-mesh",
+      "uuid": "0a26b418-d74d-4faa-9138-4de3068e0c44@2e69c",
+      "displayName": "",
+      "id": "2e69c",
+      "name": "lock.mesh",
+      "userData": {
+        "gltfIndex": 2,
+        "triangleCount": 110
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "5de44": {
+      "importer": "gltf-material",
+      "uuid": "0a26b418-d74d-4faa-9138-4de3068e0c44@5de44",
+      "displayName": "",
+      "id": "5de44",
+      "name": "05 - Default.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f365e": {
+      "importer": "gltf-scene",
+      "uuid": "0a26b418-d74d-4faa-9138-4de3068e0c44@f365e",
+      "displayName": "",
+      "id": "f365e",
+      "name": "Door_Fengsuo_2.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": false,
+    "allowMeshDataAccess": true,
+    "fbx": {
+      "smartMaterialEnabled": false,
+      "matchMeshNames": false
+    },
+    "assetFinder": {
+      "meshes": [
+        "0a26b418-d74d-4faa-9138-4de3068e0c44@f2af8",
+        "0a26b418-d74d-4faa-9138-4de3068e0c44@699ad",
+        "0a26b418-d74d-4faa-9138-4de3068e0c44@2e69c"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "0a26b418-d74d-4faa-9138-4de3068e0c44@5de44"
+      ],
+      "scenes": [
+        "0a26b418-d74d-4faa-9138-4de3068e0c44@f365e"
+      ]
+    },
+    "promoteSingleRootNode": true,
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    }
+  }
+}
