@@ -12,7 +12,11 @@ export default class SubscribeTween extends cc.Component {
   positions: string[] = [];
 
   onLoad() {
-    gi.Event.on('initSubcribed', this.run, this);
+    if(gi.initSubcribed) {
+      this.run()
+    } else {
+      gi.Event.on('initSubcribed', this.run, this);
+    }
   }
 
   run() {

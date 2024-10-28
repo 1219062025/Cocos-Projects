@@ -1,0 +1,48 @@
+
+Level24_Cat.png
+size: 388,524
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Cat-1
+  rotate: false
+  xy: 2, 33
+  size: 286, 152
+  orig: 288, 152
+  offset: 1, 0
+  index: -1
+Cat-3
+  rotate: true
+  xy: 290, 89
+  size: 120, 92
+  orig: 120, 92
+  offset: 0, 0
+  index: -1
+Cat-3(1)
+  rotate: false
+  xy: 2, 187
+  size: 212, 332
+  orig: 212, 332
+  offset: 0, 0
+  index: -1
+Cat3-shadow
+  rotate: false
+  xy: 216, 211
+  size: 168, 54
+  orig: 168, 56
+  offset: 0, 1
+  index: -1
+Scratch
+  rotate: false
+  xy: 2, 2
+  size: 16, 29
+  orig: 16, 32
+  offset: 0, 2
+  index: -1
+cat-2
+  rotate: true
+  xy: 216, 267
+  size: 252, 168
+  orig: 252, 168
+  offset: 0, 0
+  index: -1

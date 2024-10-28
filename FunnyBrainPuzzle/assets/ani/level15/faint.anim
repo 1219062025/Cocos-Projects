@@ -1,0 +1,73 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "faint",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.25,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            -472,
+            -429
+          ],
+          "motionPath": [
+            [
+              -455,
+              -258,
+              -472,
+              -323,
+              -443,
+              -207
+            ]
+          ]
+        },
+        {
+          "frame": 0.625,
+          "value": [
+            -414,
+            -191
+          ],
+          "motionPath": [
+            [
+              -341,
+              -252,
+              -362,
+              -190,
+              -320,
+              -320
+            ]
+          ]
+        },
+        {
+          "frame": 1.25,
+          "value": [
+            -330,
+            -452
+          ],
+          "motionPath": []
+        }
+      ],
+      "angle": [
+        {
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "frame": 0.625,
+          "value": -360
+        },
+        {
+          "frame": 1.25,
+          "value": -1080
+        }
+      ]
+    }
+  },
+  "events": []
+}

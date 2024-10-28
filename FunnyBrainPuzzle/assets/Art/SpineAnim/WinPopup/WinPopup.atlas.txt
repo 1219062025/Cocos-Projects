@@ -1,0 +1,62 @@
+
+WinPopup.png
+size: 1428,1020
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Braid
+  rotate: false
+  xy: 1331, 215
+  size: 84, 329
+  orig: 84, 329
+  offset: 0, 0
+  index: -1
+Cloud1
+  rotate: true
+  xy: 1192, 202
+  size: 342, 137
+  orig: 342, 137
+  offset: 0, 0
+  index: -1
+Cloud2
+  rotate: false
+  xy: 1192, 100
+  size: 232, 100
+  orig: 232, 100
+  offset: 0, 0
+  index: -1
+Cloud3
+  rotate: false
+  xy: 1192, 2
+  size: 203, 96
+  orig: 203, 96
+  offset: 0, 0
+  index: -1
+Fan
+  rotate: true
+  xy: 1192, 546
+  size: 471, 228
+  orig: 471, 228
+  offset: 0, 0
+  index: -1
+Reel_Red
+  rotate: false
+  xy: 2, 97
+  size: 938, 920
+  orig: 938, 920
+  offset: 0, 0
+  index: -1
+Smoke
+  rotate: false
+  xy: 2, 43
+  size: 329, 52
+  orig: 330, 52
+  offset: 0, 0
+  index: -1
+Title
+  rotate: true
+  xy: 942, 47
+  size: 970, 248
+  orig: 970, 248
+  offset: 0, 0
+  index: -1

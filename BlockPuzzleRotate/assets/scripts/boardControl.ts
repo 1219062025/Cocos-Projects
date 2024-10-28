@@ -56,7 +56,7 @@ export default class BoardControl extends cc.Component {
     this.renderCell(cellMap);
     this.renderMap(map);
 
-    gi.Utils.centerChildren(this.boardNode);
+    // gi.Utils.centerChildren(this.boardNode);
 
     this.initQuadTree();
   }

@@ -1,0 +1,41 @@
+
+Level19_CeilingWonman.png
+size: 884,1136
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Women-1
+  rotate: true
+  xy: 356, 723
+  size: 408, 476
+  orig: 408, 476
+  offset: 0, 0
+  index: -1
+Women-2
+  rotate: true
+  xy: 356, 369
+  size: 352, 524
+  orig: 352, 524
+  offset: 0, 0
+  index: -1
+Women-2(1)
+  rotate: true
+  xy: 356, 176
+  size: 191, 184
+  orig: 196, 184
+  offset: 5, 0
+  index: -1
+branches
+  rotate: true
+  xy: 2, 2
+  size: 121, 873
+  orig: 124, 876
+  offset: 1, 2
+  index: -1
+cloth
+  rotate: true
+  xy: 2, 125
+  size: 1006, 352
+  orig: 1006, 360
+  offset: 0, 0
+  index: -1

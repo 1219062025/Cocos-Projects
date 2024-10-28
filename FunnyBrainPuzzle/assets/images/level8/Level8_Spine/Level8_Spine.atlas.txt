@@ -1,0 +1,69 @@
+
+Level8_Spine.png
+size: 1452,240
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Dog1
+  rotate: true
+  xy: 986, 83
+  size: 152, 298
+  orig: 152, 298
+  offset: 0, 0
+  index: -1
+Dog2
+  rotate: true
+  xy: 714, 51
+  size: 184, 270
+  orig: 184, 270
+  offset: 0, 0
+  index: -1
+Dogleg1
+  rotate: true
+  xy: 986, 5
+  size: 76, 119
+  orig: 76, 119
+  offset: 0, 0
+  index: -1
+Dogleg2
+  rotate: false
+  xy: 1388, 135
+  size: 62, 100
+  orig: 62, 100
+  offset: 0, 0
+  index: -1
+Man1
+  rotate: true
+  xy: 2, 2
+  size: 233, 710
+  orig: 233, 710
+  offset: 0, 0
+  index: -1
+Shou
+  rotate: false
+  xy: 1286, 8
+  size: 100, 227
+  orig: 100, 227
+  offset: 0, 0
+  index: -1
+Tail1
+  rotate: false
+  xy: 1388, 38
+  size: 59, 95
+  orig: 59, 95
+  offset: 0, 0
+  index: -1
+Tail2
+  rotate: true
+  xy: 1107, 26
+  size: 55, 93
+  orig: 55, 95
+  offset: 0, 2
+  index: -1
+aixin
+  rotate: false
+  xy: 1202, 28
+  size: 60, 53
+  orig: 64, 64
+  offset: 2, 6
+  index: -1

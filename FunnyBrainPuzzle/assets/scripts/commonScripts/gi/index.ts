@@ -13,6 +13,37 @@ class GI {
   /** 游戏是否结束了 */
   private _isEnd: boolean = false;
 
+  /** 此时页面是否可以操作 */
+  _isClick: boolean = true;
+  _BlockLayer: cc.Node = null;
+
+  get isClick() {
+    return this._isClick;
+  }
+  set isClick(value: boolean) {
+    if (value === false && this._isClick !== false) {
+      if (!this._BlockLayer) {
+        this._BlockLayer = new cc.Node('BlockLayer');
+        const widget = this._BlockLayer.addComponent(cc.Widget);
+        widget.isAlignLeft = true;
+        widget.isAlignRight = true;
+        widget.isAlignTop = true;
+        widget.isAlignBottom = true;
+        widget.left = 0;
+        widget.right = 0;
+        widget.top = 0;
+        widget.bottom = 0;
+        this._BlockLayer.addComponent(cc.BlockInputEvents);
+        this._BlockLayer.setParent(cc.Canvas.instance.node);
+        this._BlockLayer.setSiblingIndex(-1);
+      }
+      this._BlockLayer.active = true;
+    } else if (value === true && this._isClick !== true) {
+      this._BlockLayer.active = false;
+    }
+    this._isClick = value;
+  }
+
   /** 得分 */
   score = 0;
   /** 扣分 */
@@ -23,6 +54,7 @@ class GI {
   language = '';
   /** 当前关卡已经完成了的动作的key */
   finishedActionKeys: Set<string> = new Set([]);
+  initSubcribed: boolean = false;
 
   /** 记录指定动作已完成 */
   completedAction(key: string) {

@@ -1,0 +1,20 @@
+
+Level22_Woman.png
+size: 592,348
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Hair
+  rotate: false
+  xy: 428, 40
+  size: 159, 306
+  orig: 160, 308
+  offset: 1, 1
+  index: -1
+Woman
+  rotate: false
+  xy: 2, 2
+  size: 424, 344
+  orig: 424, 344
+  offset: 0, 0
+  index: -1

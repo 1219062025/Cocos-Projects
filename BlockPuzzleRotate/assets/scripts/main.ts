@@ -60,6 +60,15 @@ export default class Main extends cc.Component {
     gi.EventManager.on('placeChunk', this.onPlaceChunk, this);
     gi.EventManager.on('removeBlock', this.onRemoveBlock, this);
     gi.EventManager.on('touchStart', this.onTouchStart, this);
+    gi.EventManager.on(
+      'resize',
+      () => {
+        this.scheduleOnce(() => {
+          this.runGuide(gi.Guide.step);
+        });
+      },
+      this
+    );
     canvas.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
     canvas.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
     canvas.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);

@@ -19,6 +19,7 @@ export default class ScreenManagerV6 extends cc.Component {
 
   /** 屏幕方向变为横屏 */
   landscape() {
+    gi.EventManager.emit('resize');
     gi.scale = 1;
     const winSize = cc.winSize;
 
@@ -60,12 +61,13 @@ export default class ScreenManagerV6 extends cc.Component {
 
   /** 屏幕方向变为竖屏 */
   portrait() {
+    gi.EventManager.emit('resize');
     gi.scale = 1;
     const winSize = cc.winSize;
 
     const gameCointainerSize: cc.Size = new cc.Size(990, 1320);
 
-    const boardWrapPos = cc.v2(0, -187.444);
+    const boardWrapPos = cc.v2(0, 110.042);
 
     this.boardWrap.setPosition(boardWrapPos);
 
@@ -81,9 +83,9 @@ export default class ScreenManagerV6 extends cc.Component {
       area.y = 0;
     });
 
-    const chunkAreaPos = cc.v2(0, 695.305);
-    const rotateCheckPos = cc.v2(-350.121, 441.131);
-    const scoreBgPos = cc.v2(337.422, 445.701);
+    const chunkAreaPos = cc.v2(0, -611.372);
+    const rotateCheckPos = cc.v2(-350.121, 723.554);
+    const scoreBgPos = cc.v2(337.422, 728.124);
 
     this.chunkArea.setPosition(chunkAreaPos);
     this.rotateCheck.setPosition(rotateCheckPos);

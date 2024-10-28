@@ -114,4 +114,21 @@ export default class Utils {
       }, frequency);
     }
   }
+
+  /**
+   * 判断两个数组是否有交集
+   */
+  static hasIntersection<T>(array1: T[], array2: T[]): boolean {
+    // 将第一个数组转换为 Set
+    const set1 = new Set(array1);
+
+    // 遍历第二个数组，检查每个元素是否存在于 Set 中
+    for (const item of array2) {
+      if (set1.has(item)) {
+        return true; // 如果找到交集，返回 true
+      }
+    }
+
+    return false; // 如果没有交集，返回 false
+  }
 }

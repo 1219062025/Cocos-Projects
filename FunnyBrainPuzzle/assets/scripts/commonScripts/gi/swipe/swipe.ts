@@ -119,7 +119,7 @@ export default class Swipe {
         callback.call(target || null, touchStartPos, touchEndPos, gi.Swipe.Direction.RIGHT);
         if (isOnce) this.off(node);
         return;
-      } else if (direction.includes(gi.Swipe.Direction.LEFT)) {
+      } else if (deltaX < 0 && direction.includes(gi.Swipe.Direction.LEFT)) {
         // 左滑
         callback.call(target || null, touchStartPos, touchEndPos, gi.Swipe.Direction.LEFT);
         if (isOnce) this.off(node);
@@ -137,7 +137,7 @@ export default class Swipe {
         callback.call(target || null, touchStartPos, touchEndPos, gi.Swipe.Direction.UP);
         if (isOnce) this.off(node);
         return;
-      } else if (direction.includes(gi.Swipe.Direction.BOTTOM)) {
+      } else if (deltaY < 0 && direction.includes(gi.Swipe.Direction.BOTTOM)) {
         // 下滑
         callback.call(target || null, touchStartPos, touchEndPos, gi.Swipe.Direction.BOTTOM);
         if (isOnce) this.off(node);

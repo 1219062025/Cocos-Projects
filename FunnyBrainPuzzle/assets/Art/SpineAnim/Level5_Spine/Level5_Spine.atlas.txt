@@ -1,0 +1,97 @@
+
+Level5_Spine.png
+size: 1100,568
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Cat_1
+  rotate: false
+  xy: 742, 113
+  size: 100, 236
+  orig: 100, 236
+  offset: 0, 0
+  index: -1
+Child_1
+  rotate: true
+  xy: 507, 2
+  size: 92, 316
+  orig: 92, 316
+  offset: 0, 0
+  index: -1
+Child_2
+  rotate: false
+  xy: 892, 29
+  size: 104, 320
+  orig: 104, 320
+  offset: 0, 0
+  index: -1
+Dog
+  rotate: false
+  xy: 998, 213
+  size: 96, 136
+  orig: 96, 136
+  offset: 0, 0
+  index: -1
+Dog2
+  rotate: false
+  xy: 998, 75
+  size: 96, 136
+  orig: 96, 136
+  offset: 0, 0
+  index: -1
+Oldman_1
+  rotate: false
+  xy: 430, 96
+  size: 204, 468
+  orig: 204, 468
+  offset: 0, 0
+  index: -1
+Oldman_2
+  rotate: true
+  xy: 636, 351
+  size: 213, 460
+  orig: 213, 460
+  offset: 0, 0
+  index: -1
+Woman
+  rotate: false
+  xy: 228, 84
+  size: 200, 480
+  orig: 200, 480
+  offset: 0, 0
+  index: -1
+Woman_1
+  rotate: false
+  xy: 2, 40
+  size: 224, 524
+  orig: 224, 524
+  offset: 0, 0
+  index: -1
+cat2
+  rotate: false
+  xy: 636, 97
+  size: 104, 252
+  orig: 111, 252
+  offset: 7, 0
+  index: -1
+chanzi
+  rotate: false
+  xy: 228, 9
+  size: 171, 73
+  orig: 171, 73
+  offset: 0, 0
+  index: -1
+shou_L
+  rotate: true
+  xy: 401, 13
+  size: 69, 104
+  orig: 69, 104
+  offset: 0, 0
+  index: -1
+shou_R
+  rotate: false
+  xy: 825, 10
+  size: 65, 101
+  orig: 65, 101
+  offset: 0, 0
+  index: -1

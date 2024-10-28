@@ -1,0 +1,51 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "throw",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.875,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            -404,
+            301
+          ],
+          "motionPath": [
+            [
+              -295,
+              444,
+              -317,
+              590,
+              -263,
+              232
+            ]
+          ]
+        },
+        {
+          "frame": 0.875,
+          "value": [
+            -292,
+            -439
+          ]
+        }
+      ],
+      "angle": [
+        {
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "frame": 0.875,
+          "value": -720
+        }
+      ]
+    }
+  },
+  "events": []
+}

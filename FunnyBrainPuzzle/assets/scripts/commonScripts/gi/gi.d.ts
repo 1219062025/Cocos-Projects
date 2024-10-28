@@ -8,6 +8,9 @@ declare namespace gi {
   var scale: number;
   /** 当前关卡已经完成了的动作的key */
   var finishedActionKeys: Set<string>;
+  /** 此时页面是否可以操作 */
+  var isClick: boolean;
+  var initSubcribed: boolean;
 
   /** 记录指定动作已完成 */
   function completedAction(key: string): void;
@@ -63,6 +66,21 @@ declare namespace gi {
     key: string;
     /** 目标 */
     target: cc.Node;
+    /** 附带的节点数组 */
+    nodes: cc.Node[];
+    /** 附带的位置数组 */
+    positions: string[];
+  }
+
+  interface TriggerOffCbOptions {
+    /** 动作名 */
+    key: string;
+    /** 挂载回调脚本的节点 */
+    target: cc.Node;
+    /** 触发了触发器的资源节点上挂载的资源控制脚本 */
+    res: ResControl;
+    /** 该触发器的控制脚本 */
+    trigger: TriggerControl;
     /** 附带的节点数组 */
     nodes: cc.Node[];
     /** 附带的位置数组 */
@@ -134,6 +152,11 @@ declare namespace gi {
      * @param durtion 振动总时间
      */
     static shake(options?: { node?: cc.Node; amplitude?: number; frequency?: number; durtion?: number });
+
+    /**
+     * 判断两个数组是否有交集
+     */
+    static hasIntersection<T>(array1: T[], array2: T[]): boolean;
   }
 
   interface MoveOptions {

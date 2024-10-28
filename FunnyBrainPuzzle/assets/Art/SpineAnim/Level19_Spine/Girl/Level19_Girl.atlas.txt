@@ -1,0 +1,20 @@
+
+Level19_Girl.png
+size: 472,340
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Girl-1
+  rotate: false
+  xy: 248, 30
+  size: 220, 308
+  orig: 220, 308
+  offset: 0, 0
+  index: -1
+Girl-2
+  rotate: false
+  xy: 2, 2
+  size: 244, 336
+  orig: 244, 336
+  offset: 0, 0
+  index: -1

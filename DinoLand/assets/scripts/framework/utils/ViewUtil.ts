@@ -1,4 +1,4 @@
-import { Animation, AnimationClip, EventTouch, instantiate, Node, Prefab, Size, UITransform, v3, Vec3 } from 'cc';
+import { Animation, AnimationClip, EventTouch, instantiate, Node, Prefab, Size, UITransform, v3, Vec3, Widget } from 'cc';
 import { App } from '../App';
 
 export class ViewUtil {
@@ -113,5 +113,14 @@ export class ViewUtil {
     }
     anim.createState(clip, clip!.name);
     anim.play(clip!.name);
+  }
+
+  /** 设置节点铺满整个屏幕 */
+  public static nodeFullAlign(node: Node) {
+    let widget: Widget = node.addComponent(Widget);
+    widget.isAlignLeft = widget.isAlignRight = widget.isAlignTop = widget.isAlignBottom = true;
+    widget.left = widget.right = widget.top = widget.bottom = 0;
+    widget.alignMode = Widget.AlignMode.ON_WINDOW_RESIZE;
+    widget.enabled = true;
   }
 }

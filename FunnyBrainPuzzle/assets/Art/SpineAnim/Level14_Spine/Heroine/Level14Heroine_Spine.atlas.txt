@@ -1,0 +1,48 @@
+
+Level14Heroine_Spine.png
+size: 320,332
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body
+  rotate: false
+  xy: 2, 106
+  size: 136, 222
+  orig: 136, 291
+  offset: 0, 0
+  index: -1
+Hand-L
+  rotate: true
+  xy: 2, 20
+  size: 84, 138
+  orig: 84, 138
+  offset: 0, 0
+  index: -1
+Hand-R
+  rotate: false
+  xy: 224, 2
+  size: 76, 135
+  orig: 76, 135
+  offset: 0, 0
+  index: -1
+Head
+  rotate: false
+  xy: 142, 17
+  size: 76, 91
+  orig: 80, 91
+  offset: 4, 0
+  index: -1
+Leg-L
+  rotate: false
+  xy: 140, 110
+  size: 82, 218
+  orig: 82, 218
+  offset: 0, 0
+  index: -1
+Leg-R
+  rotate: false
+  xy: 224, 139
+  size: 91, 189
+  orig: 91, 189
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,115 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "fall",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.875,
+  "sample": 8,
+  "speed": 3,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            19,
+            -113
+          ],
+          "motionPath": [
+            [
+              66,
+              61,
+              10,
+              19,
+              113,
+              96
+            ]
+          ]
+        },
+        {
+          "frame": 0.375,
+          "value": [
+            175,
+            122
+          ],
+          "motionPath": [
+            [
+              314,
+              60,
+              294,
+              89,
+              334,
+              33
+            ]
+          ]
+        },
+        {
+          "frame": 0.75,
+          "value": [
+            342,
+            -76
+          ],
+          "motionPath": [
+            [
+              323,
+              -193,
+              348,
+              -134,
+              299,
+              -248
+            ]
+          ]
+        },
+        {
+          "frame": 1.125,
+          "value": [
+            242,
+            -303
+          ]
+        },
+        {
+          "frame": 1.5,
+          "value": [
+            42,
+            -463
+          ]
+        },
+        {
+          "frame": 1.875,
+          "value": [
+            -187,
+            -494
+          ]
+        }
+      ],
+      "angle": [
+        {
+          "frame": 0,
+          "value": -50
+        },
+        {
+          "frame": 0.375,
+          "value": -128.163
+        },
+        {
+          "frame": 0.75,
+          "value": -203.126
+        },
+        {
+          "frame": 1.125,
+          "value": -254.922
+        },
+        {
+          "frame": 1.5,
+          "value": -315.973
+        },
+        {
+          "frame": 1.875,
+          "value": -364.57800000000003
+        }
+      ]
+    }
+  },
+  "events": []
+}

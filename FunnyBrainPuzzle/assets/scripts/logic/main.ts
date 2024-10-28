@@ -1,7 +1,9 @@
 import ResAreaControl from './res/resAreaControl';
 import GuideManager from './guide/guideManager';
-import TriggerControl from './triggerControl';
+import TriggerControl from './trigger/triggerControl';
 import SubscriptionControl from './subscriptions/subscriptionControl';
+import TriggerOffCbManager from './triggerOffCbs/triggerOffCbManager';
+import TriggerManager from './trigger/triggerManager';
 
 const { ccclass, property } = cc._decorator;
 
@@ -38,9 +40,13 @@ export default class Main extends cc.Component {
   @property({ type: ResAreaControl, tooltip: '资源控制脚本' })
   resArea: ResAreaControl = null;
 
-  /** 所有触发器根节点 */
-  @property({ type: cc.Node, tooltip: '触发器根节点' })
-  triggerRootNode: cc.Node = null;
+  // /** 所有触发器根节点 */
+  // @property({ type: cc.Node, tooltip: '触发器根节点' })
+  // triggerRootNode: cc.Node = null;
+
+  /** 触发器控制脚本 */
+  @property({ type: TriggerManager, tooltip: '触发器控制脚本' })
+  triggerManager: TriggerManager = null;
 
   /** 提示控制脚本 */
   @property({ type: cc.Node, tooltip: '提示控制脚本' })
@@ -80,7 +86,7 @@ export default class Main extends cc.Component {
     this.titleLabel.string = title[lan] || title['default'];
 
     // 初始化资源
-    this.resArea.init();
+    // this.resArea.init();
     // 在资源初始化之后初始化引导
     if (this.isRunGuide) {
       this.guideMgr.init();
@@ -88,8 +94,10 @@ export default class Main extends cc.Component {
 
     // 订阅动作
     new SubscriptionControl(this.levle);
+    TriggerOffCbManager.instance.init(this.levle);
 
     // 监听事件
+    cc.Canvas.instance.node.on(cc.Node.EventType.TOUCH_START, this.onAction, this);
     gi.Event.on('touchStart', this.onAction, this);
     gi.Event.on('touchMove', this.onAction, this);
     gi.Event.on('touchEnd', this.onTouchEnd, this);
@@ -102,7 +110,11 @@ export default class Main extends cc.Component {
     /** 监听扣分 */
     gi.Event.on('deductScore', this.inspectDeductScore, this);
     /** 监听所有资源用完 */
-    gi.Event.on('notHaveRes', this.inspectGameOver, this);
+    // gi.Event.on('notHaveRes', this.inspectGameOver, this);
+    /** 监听游戏失败事件 */
+    gi.Event.on('gameover', this.showFailPop, this);
+    /** 监听游戏成功事件 */
+    gi.Event.on('clearance', this.showSuccessPop, this);
 
     this.runTimeDetection();
   }
@@ -125,7 +137,7 @@ export default class Main extends cc.Component {
       }
     }, this.responseTime * 1000);
 
-    this.responseFunc();
+    // this.responseFunc();
   }
 
   /** 监听用户操作并重置无响应限时的计时 */
@@ -138,14 +150,18 @@ export default class Main extends cc.Component {
 
     if (!triggers.length) return this.resArea.cancleCurRes();
 
-    const tag = this.resArea.curRes.tag;
+    const tags = this.resArea.curRes.tags;
 
     for (const trigger of triggers) {
-      if (trigger.canTriggerOff(tag)) {
+      if (trigger.canTriggerOff(tags)) {
         // 运行触发器
         trigger.showTips();
-        trigger.triggerOff();
-        this.resArea.destroyCurRes();
+        trigger.triggerOff(this.resArea.curRes);
+        if (!this.resArea.curRes.isRepeatUse) {
+          this.resArea.destroyCurRes();
+        } else {
+          this.resArea.cancleCurRes();
+        }
         return;
       }
     }
@@ -194,6 +210,7 @@ export default class Main extends cc.Component {
 
   /** 检测游戏是否通关 */
   inspectGameOver() {
+    console.log('inspectGameOver', gi.score);
     if (gi.isEnd()) return;
 
     if (this.targetDeductScore !== 0 && this.targetDeductScore === gi.deductScore) {
@@ -210,8 +227,8 @@ export default class Main extends cc.Component {
     const triggers: TriggerControl[] = [];
     let _trigger: TriggerControl;
 
-    for (const node of this.triggerRootNode.children) {
-      if (node.active === false) continue;
+    for (const node of this.triggerManager.children) {
+      if (!cc.isValid(node) || node.active === false) continue;
 
       const trigger = node.getComponent(TriggerControl);
 

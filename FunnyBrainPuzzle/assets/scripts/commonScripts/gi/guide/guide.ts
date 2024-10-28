@@ -40,6 +40,7 @@ export default class Guide {
   static getStep(step: number) {
     return this._step;
   }
+
   /**
    * 得到一个从位置from移动到位置to的缓动
    * @param {cc.Vec2} from 起始位置

@@ -7,6 +7,7 @@ import { TimerManager } from './common/manager/TimerManager';
 import { NextFunction } from './types';
 import { ResourceManager } from './common/manager/ResourceManager';
 import { AudioManager } from './common/audio/AudioManager';
+import { LayerManager } from './gui/layer/LayerManager';
 
 const { ccclass, property } = _decorator;
 
@@ -19,6 +20,8 @@ export class App extends Component {
   static resMgr: ResourceManager;
   /** 全局音频管理器实例 */
   static audio: AudioManager;
+  /** 全局UI管理器实例 */
+  static gui: LayerManager;
 
   /** 框架配置信息 */
   static config: AppConfig;
@@ -36,6 +39,7 @@ export class App extends Component {
     App.timer = new TimerManager(root);
     App.resMgr = new ResourceManager();
     App.audio = AudioManager.instance;
+    App.gui = new LayerManager(root.gui);
   }
 }
 

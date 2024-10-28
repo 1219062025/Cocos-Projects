@@ -47,7 +47,7 @@ export interface UIConfig {
   animation?: number;
 }
 
-/*** 回调参数对象定义 */
+/*** UI节点回调参数对象定义 */
 export interface UICallbacks {
   /** 节点添加到层级以后的回调 */
   onAdded?: (node: Node, params: any) => void;
@@ -68,8 +68,8 @@ export interface UICallbacks {
   onBeforeRemove?: (node: Node, next: Function) => void;
 }
 
-/** gui.popup.add 弹框层回调对象定义 */
-export interface PopViewParams extends UICallbacks {
+/** 弹出框层回调对象定义 */
+export interface PopUICallBacks extends UICallbacks {
   /** 是否显示暗色背景 */
   modal?: boolean;
 
@@ -91,7 +91,8 @@ interface ViewParamsOptions {
   node?: Node | null;
 }
 
-export class ViewParams {
+/** UI界面信息参数类 */
+export class ViewParam {
   /** 界面唯一标识 */
   public uuid!: string;
   /** 预制路径 */
@@ -114,12 +115,12 @@ export class ViewParams {
    * @param options.valid [?是否在使用状态，默认为true]
    * @param options.node [?界面根节点]
    */
-  constructor(uuid: string, prefabPath: string, options: ViewParamsOptions) {
+  constructor(uuid: string, prefabPath: string, options?: ViewParamsOptions) {
     this.uuid = uuid;
     this.prefabPath = prefabPath;
-    this.params = options.params || {};
-    this.callbacks = options.callbacks || {};
-    this.valid = options.valid || true;
-    this.node = options.node || null;
+    this.params = options?.params || {};
+    this.callbacks = options?.callbacks || {};
+    this.valid = options?.valid || true;
+    this.node = options?.node || null;
   }
 }
