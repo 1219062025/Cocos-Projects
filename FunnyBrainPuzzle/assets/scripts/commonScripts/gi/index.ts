@@ -1,21 +1,23 @@
-import Utils from './utils/utils';
-import Guide from './guide/guide';
-import Event from './event/event';
-import QuadTree from './quadtree/quadtree';
-import Pool from './pool/pool';
-import Swipe from './swipe/swipe';
+import Utils from "./utils/utils";
+import Guide from "./guide/guide";
+import Event from "./event/event";
+import QuadTree from "./quadtree/quadtree";
+import Pool from "./pool/pool";
+import Swipe from "./swipe/swipe";
 
 class GI {
   /** 当前关卡 */
   private _level = 0;
   /** 当前使用的游戏模式 */
-  private _mode: string = '';
+  private _mode: string = "";
   /** 游戏是否结束了 */
   private _isEnd: boolean = false;
 
   /** 此时页面是否可以操作 */
   _isClick: boolean = true;
   _BlockLayer: cc.Node = null;
+  soundSource: cc.AudioSource = null;
+  bgmSource: cc.AudioSource = null;
 
   get isClick() {
     return this._isClick;
@@ -23,7 +25,7 @@ class GI {
   set isClick(value: boolean) {
     if (value === false && this._isClick !== false) {
       if (!this._BlockLayer) {
-        this._BlockLayer = new cc.Node('BlockLayer');
+        this._BlockLayer = new cc.Node("BlockLayer");
         const widget = this._BlockLayer.addComponent(cc.Widget);
         widget.isAlignLeft = true;
         widget.isAlignRight = true;
@@ -51,7 +53,7 @@ class GI {
   /** 全局缩放 */
   scale = 1;
   /** 当前语言缩写 */
-  language = '';
+  language = "";
   /** 当前关卡已经完成了的动作的key */
   finishedActionKeys: Set<string> = new Set([]);
   initSubcribed: boolean = false;
@@ -59,7 +61,7 @@ class GI {
   /** 记录指定动作已完成 */
   completedAction(key: string) {
     this.finishedActionKeys.add(key);
-    gi.Event.emit('completedAction');
+    gi.Event.emit("completedAction");
   }
 
   /** 设置游戏结束 */
@@ -95,23 +97,24 @@ class GI {
   /** 获取当前关卡信息 */
   getLevelInfo() {
     const levle = this.getLevel();
-    const infos = (cc.loader.getRes('levelinfos', cc.JsonAsset) as cc.JsonAsset).json;
+    const infos = (cc.loader.getRes("levelinfos", cc.JsonAsset) as cc.JsonAsset)
+      .json;
     return infos[levle] as gi.LevelInfo;
   }
 
   /** 载入游戏资源 */
   loadGameRes() {
     /** 提前载入SpriteFrame资源，需要时使用cc.loader.getRes获取 */
-    const loadSpritePromise = new Promise(resolve => {
-      cc.loader.loadResDir('./', cc.SpriteFrame, (err, assets) => {
+    const loadSpritePromise = new Promise((resolve) => {
+      cc.loader.loadResDir("./", cc.SpriteFrame, (err, assets) => {
         if (err) throw new Error(err.message);
         resolve(true);
       });
     });
 
     /** 提前载入Json资源，需要时使用cc.loader.getRes获取 */
-    const loadJsonPromise = new Promise(resolve => {
-      cc.loader.loadResDir('./', cc.JsonAsset, (err, assets) => {
+    const loadJsonPromise = new Promise((resolve) => {
+      cc.loader.loadResDir("./", cc.JsonAsset, (err, assets) => {
         if (err) throw new Error(err.message);
         resolve(true);
       });
@@ -126,12 +129,43 @@ class GI {
   /** 设置当前语言 */
   setLanguage(l: string) {
     this.language = l;
-    gi.Event.emit('setLanguage', this.language);
+    gi.Event.emit("setLanguage", this.language);
   }
 
   /** 获取当前语言 */
   getLanguage() {
     return this.language;
+  }
+
+  playAudio() {
+    if (this.soundSource === null) {
+      const node = new cc.Node("AudioManager");
+      this.soundSource = node.addComponent(cc.AudioSource);
+    }
+
+    cc.loader.loadRes(
+      "Audio/Interactive",
+      cc.AudioClip,
+      (err, res: cc.AudioClip) => {
+        if (err) return;
+        this.soundSource.clip = res;
+        this.soundSource.play();
+      }
+    );
+  }
+
+  playBgm() {
+    if (this.bgmSource === null) {
+      const node = new cc.Node("AudioManager");
+      this.bgmSource = node.addComponent(cc.AudioSource);
+    }
+
+    cc.loader.loadRes("Audio/bgm", cc.AudioClip, (err, res: cc.AudioClip) => {
+      if (err) return;
+      this.bgmSource.clip = res;
+      this.bgmSource.loop = true;
+      this.bgmSource.play();
+    });
   }
 
   /** 预制体生成器 */
@@ -147,22 +181,22 @@ class GI {
   }
 }
 
-const _global = typeof window === 'undefined' ? globalThis : window;
+const _global = typeof window === "undefined" ? globalThis : window;
 // @ts-ignore
-_global['gi'] = _global.gi || new GI() || {};
+_global["gi"] = _global.gi || new GI() || {};
 
 // 挂载全局类型
-import('./types/types').then(value => {
+import("./types/types").then((value) => {
   for (const key in value.default) {
     if (Object.prototype.hasOwnProperty.call(value.default, key)) {
-      _global['gi'][key] = value.default[key];
+      _global["gi"][key] = value.default[key];
     }
   }
 });
 
-_global['gi']['Utils'] = Utils;
-_global['gi']['Guide'] = Guide;
-_global['gi']['Event'] = Event;
-_global['gi']['QuadTree'] = QuadTree;
-_global['gi']['Pool'] = Pool;
-_global['gi']['Swipe'] = Swipe;
+_global["gi"]["Utils"] = Utils;
+_global["gi"]["Guide"] = Guide;
+_global["gi"]["Event"] = Event;
+_global["gi"]["QuadTree"] = QuadTree;
+_global["gi"]["Pool"] = Pool;
+_global["gi"]["Swipe"] = Swipe;

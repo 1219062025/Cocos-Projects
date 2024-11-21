@@ -1,0 +1,20 @@
+
+Level35_ManBody.png
+size: 852,908
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Man_clothing-3
+  rotate: false
+  xy: 426, 2
+  size: 422, 904
+  orig: 422, 918
+  offset: 0, 14
+  index: -1
+Man_clothing-5
+  rotate: false
+  xy: 2, 2
+  size: 422, 904
+  orig: 422, 918
+  offset: 0, 14
+  index: -1

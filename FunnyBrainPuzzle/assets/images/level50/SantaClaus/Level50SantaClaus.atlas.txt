@@ -1,0 +1,125 @@
+
+Level50SantaClaus.png
+size: 1708,400
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ClothesRod
+  rotate: true
+  xy: 1165, 64
+  size: 68, 140
+  orig: 68, 140
+  offset: 0, 0
+  index: -1
+ClothesRod(1)
+  rotate: false
+  xy: 1055, 80
+  size: 108, 304
+  orig: 108, 304
+  offset: 0, 0
+  index: -1
+Pipe
+  rotate: false
+  xy: 785, 2
+  size: 455, 60
+  orig: 456, 60
+  offset: 0, 0
+  index: -1
+Rod
+  rotate: true
+  xy: 2, 8
+  size: 16, 484
+  orig: 16, 484
+  offset: 0, 0
+  index: -1
+Rope
+  rotate: false
+  xy: 506, 386
+  size: 596, 12
+  orig: 596, 12
+  offset: 0, 0
+  index: -1
+SantaClaus
+  rotate: false
+  xy: 2, 26
+  size: 256, 372
+  orig: 256, 372
+  offset: 0, 0
+  index: -1
+SantaClaus_Balloon(1)
+  rotate: true
+  xy: 1307, 75
+  size: 84, 232
+  orig: 84, 232
+  offset: 0, 0
+  index: -1
+SantaClaus_Bird-1
+  rotate: false
+  xy: 1536, 197
+  size: 157, 95
+  orig: 160, 120
+  offset: 2, 18
+  index: -1
+SantaClaus_Bird-2
+  rotate: false
+  xy: 1541, 105
+  size: 158, 90
+  orig: 160, 120
+  offset: 1, 20
+  index: -1
+SantaClaus_Bird-3
+  rotate: false
+  xy: 1525, 294
+  size: 158, 104
+  orig: 160, 120
+  offset: 1, 9
+  index: -1
+SantaClaus_Pipe
+  rotate: false
+  xy: 785, 64
+  size: 268, 320
+  orig: 268, 320
+  offset: 0, 0
+  index: -1
+SantaClaus_PipeA
+  rotate: false
+  xy: 1307, 269
+  size: 216, 129
+  orig: 216, 132
+  offset: 0, 2
+  index: -1
+SantaClaus_PipeB
+  rotate: false
+  xy: 1307, 161
+  size: 227, 106
+  orig: 228, 108
+  offset: 0, 1
+  index: -1
+SantaClaus_PogoStick(2)
+  rotate: false
+  xy: 1165, 134
+  size: 140, 264
+  orig: 140, 264
+  offset: 0, 0
+  index: -1
+SantaClaus_Rope
+  rotate: false
+  xy: 506, 56
+  size: 277, 328
+  orig: 277, 328
+  offset: 0, 0
+  index: -1
+SantaClaus_Suger(2)
+  rotate: true
+  xy: 1541, 31
+  size: 72, 164
+  orig: 72, 164
+  offset: 0, 0
+  index: -1
+SantaClaus_Suger(3)
+  rotate: false
+  xy: 260, 26
+  size: 244, 372
+  orig: 256, 372
+  offset: 12, 0
+  index: -1

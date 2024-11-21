@@ -1,0 +1,230 @@
+
+Level46_Child.png
+size: 2696,400
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Balloon_Child
+  rotate: false
+  xy: 1617, 133
+  size: 204, 264
+  orig: 204, 264
+  offset: 0, 0
+  index: -1
+Balloon_Child(1)
+  rotate: true
+  xy: 1490, 11
+  size: 112, 223
+  orig: 112, 224
+  offset: 0, 1
+  index: -1
+Cat_Child
+  rotate: true
+  xy: 1715, 3
+  size: 128, 175
+  orig: 160, 180
+  offset: 0, 5
+  index: -1
+Cat_Child2
+  rotate: true
+  xy: 2177, 143
+  size: 45, 101
+  orig: 45, 101
+  offset: 0, 0
+  index: -1
+Child-A
+  rotate: false
+  xy: 1823, 138
+  size: 149, 259
+  orig: 156, 260
+  offset: 0, 1
+  index: -1
+Child-B1
+  rotate: true
+  xy: 2, 2
+  size: 93, 166
+  orig: 128, 168
+  offset: 1, 0
+  index: -1
+Child-B2
+  rotate: true
+  xy: 564, 39
+  size: 56, 96
+  orig: 56, 96
+  offset: 0, 0
+  index: -1
+Child-C2
+  rotate: true
+  xy: 2384, 147
+  size: 56, 96
+  orig: 56, 96
+  offset: 0, 0
+  index: -1
+Child-D
+  rotate: false
+  xy: 1134, 125
+  size: 208, 272
+  orig: 208, 272
+  offset: 0, 0
+  index: -1
+Child-E1
+  rotate: false
+  xy: 2177, 190
+  size: 205, 207
+  orig: 205, 207
+  offset: 0, 0
+  index: -1
+Child-E2
+  rotate: true
+  xy: 434, 38
+  size: 57, 128
+  orig: 57, 128
+  offset: 0, 0
+  index: -1
+Child-E3
+  rotate: true
+  xy: 2593, 290
+  size: 107, 97
+  orig: 107, 97
+  offset: 0, 0
+  index: -1
+Child-F1
+  rotate: false
+  xy: 2481, 221
+  size: 110, 176
+  orig: 132, 176
+  offset: 7, 0
+  index: -1
+Child-F2
+  rotate: false
+  xy: 170, 3
+  size: 30, 92
+  orig: 32, 92
+  offset: 0, 0
+  index: -1
+Child-F3
+  rotate: true
+  xy: 309, 35
+  size: 60, 123
+  orig: 60, 128
+  offset: 0, 5
+  index: -1
+Child-Gmianhua
+  rotate: false
+  xy: 258, 3
+  size: 21, 15
+  orig: 21, 15
+  offset: 0, 0
+  index: -1
+Child-Gshenti
+  rotate: false
+  xy: 2384, 205
+  size: 95, 192
+  orig: 139, 194
+  offset: 4, 0
+  index: -1
+Child-Gtou
+  rotate: true
+  xy: 662, 2
+  size: 114, 109
+  orig: 114, 109
+  offset: 0, 0
+  index: -1
+Child-Gyoushou
+  rotate: true
+  xy: 258, 20
+  size: 75, 49
+  orig: 75, 49
+  offset: 0, 0
+  index: -1
+Child-Gzuoshou
+  rotate: false
+  xy: 202, 6
+  size: 54, 89
+  orig: 54, 89
+  offset: 0, 0
+  index: -1
+Child-H1
+  rotate: true
+  xy: 1219, 2
+  size: 121, 269
+  orig: 126, 270
+  offset: 0, 1
+  index: -1
+Child-H2
+  rotate: false
+  xy: 568, 118
+  size: 175, 279
+  orig: 176, 281
+  offset: 1, 0
+  index: -1
+Child-H3
+  rotate: false
+  xy: 745, 118
+  size: 145, 279
+  orig: 152, 279
+  offset: 7, 0
+  index: -1
+Child-H4
+  rotate: true
+  xy: 773, 3
+  size: 113, 274
+  orig: 128, 276
+  offset: 14, 2
+  index: -1
+Child-H5
+  rotate: false
+  xy: 1344, 125
+  size: 137, 272
+  orig: 141, 276
+  offset: 3, 1
+  index: -1
+Child-H6
+  rotate: false
+  xy: 1483, 125
+  size: 132, 272
+  orig: 135, 276
+  offset: 2, 2
+  index: -1
+Clothes_Child
+  rotate: false
+  xy: 892, 123
+  size: 240, 274
+  orig: 240, 276
+  offset: 0, 1
+  index: -1
+Curtains
+  rotate: true
+  xy: 1892, 4
+  size: 132, 676
+  orig: 132, 676
+  offset: 0, 0
+  index: -1
+Curtains_Child
+  rotate: true
+  xy: 2570, 51
+  size: 168, 124
+  orig: 168, 124
+  offset: 0, 0
+  index: -1
+Curtains_Child(1)
+  rotate: false
+  xy: 1974, 142
+  size: 201, 255
+  orig: 201, 255
+  offset: 0, 0
+  index: -1
+MagicLamp
+  rotate: false
+  xy: 1049, 5
+  size: 168, 116
+  orig: 168, 116
+  offset: 0, 0
+  index: -1
+Woman
+  rotate: true
+  xy: 2, 97
+  size: 300, 564
+  orig: 300, 564
+  offset: 0, 0
+  index: -1

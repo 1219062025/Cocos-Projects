@@ -1,0 +1,139 @@
+
+Level18-Student-Spine.png
+size: 324,1816
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Aunt-2
+  rotate: false
+  xy: 192, 540
+  size: 120, 324
+  orig: 124, 324
+  offset: 0, 0
+  index: -1
+Balloon
+  rotate: true
+  xy: 2, 1124
+  size: 84, 232
+  orig: 84, 232
+  offset: 0, 0
+  index: -1
+Balloon_Student
+  rotate: false
+  xy: 189, 2
+  size: 132, 536
+  orig: 132, 536
+  offset: 0, 0
+  index: -1
+Clothes-2
+  rotate: true
+  xy: 2, 1492
+  size: 124, 296
+  orig: 124, 296
+  offset: 0, 0
+  index: -1
+Clothes-Lhand
+  rotate: true
+  xy: 2, 459
+  size: 40, 180
+  orig: 40, 184
+  offset: 0, 3
+  index: -1
+Clothes-Rhand
+  rotate: true
+  xy: 2, 926
+  size: 50, 190
+  orig: 52, 192
+  offset: 1, 2
+  index: -1
+Hole
+  rotate: true
+  xy: 2, 550
+  size: 374, 188
+  orig: 412, 216
+  offset: 6, 28
+  index: -1
+Hole_Top
+  rotate: true
+  xy: 2, 47
+  size: 410, 170
+  orig: 412, 216
+  offset: 1, 0
+  index: -1
+Lfoot
+  rotate: true
+  xy: 2, 1028
+  size: 48, 208
+  orig: 48, 208
+  offset: 0, 0
+  index: -1
+Lhand
+  rotate: true
+  xy: 2, 5
+  size: 40, 168
+  orig: 44, 176
+  offset: 0, 8
+  index: -1
+Rfoot
+  rotate: true
+  xy: 2, 1078
+  size: 44, 212
+  orig: 44, 212
+  offset: 0, 0
+  index: -1
+Rhand
+  rotate: true
+  xy: 2, 501
+  size: 47, 185
+  orig: 48, 188
+  offset: 0, 2
+  index: -1
+Shovel-2
+  rotate: false
+  xy: 244, 1044
+  size: 69, 324
+  orig: 69, 324
+  offset: 0, 0
+  index: -1
+Shovel_Lfoot
+  rotate: true
+  xy: 2, 1210
+  size: 96, 232
+  orig: 96, 232
+  offset: 0, 0
+  index: -1
+Shovel_Lhand
+  rotate: false
+  xy: 212, 866
+  size: 108, 176
+  orig: 108, 176
+  offset: 0, 0
+  index: -1
+Shovel_Rfoot
+  rotate: true
+  xy: 2, 1308
+  size: 60, 240
+  orig: 60, 240
+  offset: 0, 0
+  index: -1
+Shovel_Rhand
+  rotate: true
+  xy: 2, 978
+  size: 48, 200
+  orig: 48, 200
+  offset: 0, 0
+  index: -1
+Shovel_Student
+  rotate: true
+  xy: 2, 1618
+  size: 196, 299
+  orig: 196, 300
+  offset: 0, 1
+  index: -1
+Student-1
+  rotate: true
+  xy: 2, 1370
+  size: 120, 288
+  orig: 120, 288
+  offset: 0, 0
+  index: -1

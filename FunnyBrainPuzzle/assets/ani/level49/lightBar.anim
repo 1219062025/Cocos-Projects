@@ -1,0 +1,37 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "lightBar",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.125,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "205adbc4-b71e-419c-9dbc-a64396b8321a"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "e09d93b0-56c0-4e31-bf5e-8d7ac78c0846"
+            }
+          },
+          {
+            "frame": 1,
+            "value": {
+              "__uuid__": "205adbc4-b71e-419c-9dbc-a64396b8321a"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

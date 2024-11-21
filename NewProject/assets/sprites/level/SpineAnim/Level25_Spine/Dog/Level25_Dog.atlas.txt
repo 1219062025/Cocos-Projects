@@ -1,0 +1,181 @@
+
+Level25_Dog.png
+size: 516,1044
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Dog-1
+  rotate: true
+  xy: 362, 430
+  size: 148, 152
+  orig: 148, 152
+  offset: 0, 0
+  index: -1
+Dog-1-L-hand
+  rotate: true
+  xy: 2, 2
+  size: 80, 68
+  orig: 80, 68
+  offset: 0, 0
+  index: -1
+Dog-1-L-leg  
+  rotate: false
+  xy: 333, 82
+  size: 40, 116
+  orig: 40, 116
+  offset: 0, 0
+  index: -1
+Dog-1-R-hand
+  rotate: true
+  xy: 218, 14
+  size: 56, 112
+  orig: 56, 112
+  offset: 0, 0
+  index: -1
+Dog-1-R-leg  
+  rotate: true
+  xy: 184, 534
+  size: 44, 100
+  orig: 44, 100
+  offset: 0, 0
+  index: -1
+Dog-1-shadow
+  rotate: false
+  xy: 416, 42
+  size: 96, 40
+  orig: 96, 40
+  offset: 0, 0
+  index: -1
+Dog-1-tail
+  rotate: false
+  xy: 332, 32
+  size: 40, 48
+  orig: 40, 48
+  offset: 0, 0
+  index: -1
+Dog-2
+  rotate: false
+  xy: 184, 770
+  size: 264, 272
+  orig: 264, 272
+  offset: 0, 0
+  index: -1
+Dog-2-L-hand
+  rotate: false
+  xy: 2, 84
+  size: 160, 60
+  orig: 160, 60
+  offset: 0, 0
+  index: -1
+Dog-2-L-leg  
+  rotate: true
+  xy: 168, 142
+  size: 56, 163
+  orig: 56, 164
+  offset: 0, 1
+  index: -1
+Dog-2-R-hand
+  rotate: false
+  xy: 375, 70
+  size: 39, 132
+  orig: 40, 132
+  offset: 0, 0
+  index: -1
+Dog-2-R-leg  
+  rotate: true
+  xy: 72, 6
+  size: 64, 144
+  orig: 64, 144
+  offset: 0, 0
+  index: -1
+Dog-2-tail
+  rotate: false
+  xy: 450, 784
+  size: 56, 68
+  orig: 56, 68
+  offset: 0, 0
+  index: -1
+Dog-3
+  rotate: true
+  xy: 184, 580
+  size: 188, 304
+  orig: 188, 304
+  offset: 0, 0
+  index: -1
+Dog-4
+  rotate: true
+  xy: 168, 200
+  size: 332, 192
+  orig: 332, 192
+  offset: 0, 0
+  index: -1
+Dog-5
+  rotate: false
+  xy: 2, 534
+  size: 180, 508
+  orig: 180, 508
+  offset: 0, 0
+  index: -1
+Dog-6
+  rotate: false
+  xy: 2, 146
+  size: 164, 386
+  orig: 164, 520
+  offset: 0, 134
+  index: -1
+Dog-6-L-hand
+  rotate: false
+  xy: 362, 204
+  size: 68, 224
+  orig: 68, 224
+  offset: 0, 0
+  index: -1
+Dog-6-L-leg  
+  rotate: false
+  xy: 432, 232
+  size: 60, 196
+  orig: 60, 196
+  offset: 0, 0
+  index: -1
+Dog-6-R-hand
+  rotate: true
+  xy: 164, 72
+  size: 68, 148
+  orig: 68, 148
+  offset: 0, 0
+  index: -1
+Dog-6-R-leg  
+  rotate: false
+  xy: 450, 854
+  size: 64, 188
+  orig: 64, 188
+  offset: 0, 0
+  index: -1
+Head-1
+  rotate: false
+  xy: 416, 84
+  size: 92, 116
+  orig: 92, 116
+  offset: 0, 0
+  index: -1
+waste-1
+  rotate: true
+  xy: 374, 16
+  size: 52, 36
+  orig: 52, 36
+  offset: 0, 0
+  index: -1
+waste-2
+  rotate: false
+  xy: 432, 202
+  size: 60, 28
+  orig: 60, 28
+  offset: 0, 0
+  index: -1
+waste-3
+  rotate: true
+  xy: 286, 534
+  size: 44, 36
+  orig: 44, 36
+  offset: 0, 0
+  index: -1

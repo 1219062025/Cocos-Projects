@@ -1,0 +1,48 @@
+
+Level9_Spine.png
+size: 736,628
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Grandpa_1
+  rotate: false
+  xy: 200, 20
+  size: 193, 606
+  orig: 211, 606
+  offset: 0, 0
+  index: -1
+Grandpa_2
+  rotate: false
+  xy: 2, 2
+  size: 196, 624
+  orig: 196, 624
+  offset: 0, 0
+  index: -1
+nainai
+  rotate: false
+  xy: 395, 131
+  size: 289, 495
+  orig: 289, 495
+  offset: 0, 0
+  index: -1
+shou
+  rotate: true
+  xy: 395, 34
+  size: 95, 151
+  orig: 95, 151
+  offset: 0, 0
+  index: -1
+shou1
+  rotate: false
+  xy: 686, 260
+  size: 47, 177
+  orig: 47, 177
+  offset: 0, 0
+  index: -1
+shou2
+  rotate: false
+  xy: 686, 439
+  size: 47, 187
+  orig: 47, 187
+  offset: 0, 0
+  index: -1

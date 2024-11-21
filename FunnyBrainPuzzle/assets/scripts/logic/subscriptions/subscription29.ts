@@ -1,28 +1,38 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
+/** 腿摇摆 */
+export function leg(options: gi.SubscriptionOptions) {
+  (cc.tween(options.target) as cc.Tween)
+    .to(0.5, { angle: 8 })
+    .to(0.5, { angle: 0 })
+    .union()
+    .repeatForever()
+    .start();
+}
 
-const {ccclass, property} = cc._decorator;
+/** 慢速待机 */
+export function idle(options: gi.SubscriptionOptions) {
+  (cc.tween(options.target) as cc.Tween)
+    .to(0.8, { scaleY: 0.98 })
+    .to(0.8, { scaleY: 1 })
+    .union()
+    .repeatForever()
+    .start();
+}
 
-@ccclass
-export default class NewClass extends cc.Component {
+/** 快速待机 */
+export function idleFast(options: gi.SubscriptionOptions) {
+  (cc.tween(options.target) as cc.Tween)
+    .to(0.1, { scaleY: 0.98 })
+    .to(0.1, { scaleY: 1 })
+    .union()
+    .repeatForever()
+    .start();
+}
 
-    @property(cc.Label)
-    label: cc.Label = null;
-
-    @property
-    text: string = 'hello';
-
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {}
-
-    start () {
-
-    }
-
-    // update (dt) {}
+export function door(options: gi.SubscriptionOptions) {
+  gi.Swipe.once(options.target, { direction: gi.Swipe.Direction.RIGHT }, () => {
+    options.target.active = false;
+    options.nodes[0].active = true;
+    options.nodes[1].active = true;
+    options.nodes[2].active = true;
+  });
 }

@@ -1,0 +1,69 @@
+
+Level40_Princess.png
+size: 2252,428
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Princess-1
+  rotate: false
+  xy: 1754, 2
+  size: 304, 424
+  orig: 304, 424
+  offset: 0, 0
+  index: -1
+Princess-2
+  rotate: true
+  xy: 2, 62
+  size: 364, 848
+  orig: 364, 848
+  offset: 0, 0
+  index: -1
+Princess-3
+  rotate: true
+  xy: 852, 126
+  size: 300, 900
+  orig: 300, 900
+  offset: 0, 0
+  index: -1
+Princess-hand-L
+  rotate: true
+  xy: 1258, 40
+  size: 84, 348
+  orig: 84, 348
+  offset: 0, 0
+  index: -1
+Princess-hand-R
+  rotate: false
+  xy: 1608, 11
+  size: 87, 113
+  orig: 108, 144
+  offset: 21, 0
+  index: -1
+Princess-hand-R(1)
+  rotate: true
+  xy: 2, 4
+  size: 56, 152
+  orig: 56, 152
+  offset: 0, 0
+  index: -1
+Princess-head
+  rotate: false
+  xy: 2060, 230
+  size: 188, 196
+  orig: 188, 196
+  offset: 0, 0
+  index: -1
+Princess-leg-L
+  rotate: true
+  xy: 852, 12
+  size: 112, 404
+  orig: 112, 404
+  offset: 0, 0
+  index: -1
+Princess-leg-R
+  rotate: true
+  xy: 852, 12
+  size: 112, 404
+  orig: 112, 404
+  offset: 0, 0
+  index: -1

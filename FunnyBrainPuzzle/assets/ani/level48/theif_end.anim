@@ -1,0 +1,85 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "theif_end",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.5,
+  "sample": 12,
+  "speed": 0.13,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            876,
+            -66
+          ],
+          "motionPath": [
+            [
+              450,
+              -258,
+              626,
+              -211,
+              251,
+              -311
+            ]
+          ]
+        },
+        {
+          "frame": 0.4166666666666667,
+          "value": [
+            123,
+            -268
+          ],
+          "motionPath": []
+        }
+      ]
+    },
+    "paths": {
+      "Thief2": {
+        "props": {
+          "position": [
+            {
+              "frame": 0.4166666666666667,
+              "value": [
+                -104,
+                263
+              ],
+              "motionPath": [
+                [
+                  -580,
+                  489,
+                  -343,
+                  497,
+                  -806,
+                  481
+                ]
+              ]
+            },
+            {
+              "frame": 0.5,
+              "value": [
+                -1082.663,
+                403.969,
+                0
+              ]
+            }
+          ],
+          "angle": [
+            {
+              "frame": 0.4166666666666667,
+              "value": 0
+            },
+            {
+              "frame": 0.5,
+              "value": 720
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

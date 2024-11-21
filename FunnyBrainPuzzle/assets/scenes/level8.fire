@@ -189,7 +189,7 @@
       "array": [
         0,
         0,
-        471.37492095048316,
+        534.2750564388109,
         0,
         0,
         0,
@@ -7887,7 +7887,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "guideControl",
+    "_name": "7",
     "_objFlags": 0,
     "_parent": {
       "__id__": 186
@@ -7966,7 +7966,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "7",
+    "_name": "8",
     "_objFlags": 0,
     "_parent": {
       "__id__": 186
@@ -8045,7 +8045,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "8",
+    "_name": "9",
     "_objFlags": 0,
     "_parent": {
       "__id__": 186
@@ -8124,7 +8124,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "9",
+    "_name": "11",
     "_objFlags": 0,
     "_parent": {
       "__id__": 186
@@ -8203,7 +8203,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "11",
+    "_name": "10",
     "_objFlags": 0,
     "_parent": {
       "__id__": 186
@@ -9292,7 +9292,7 @@
     "_is3DNode": false,
     "_groupIndex": 0,
     "groupIndex": 0,
-    "_id": "85SBv+1xlBqqu/RVjXtbBs"
+    "_id": "075VO1Ew5FTKXr3Cuz+zMI"
   },
   {
     "__type__": "cc.Sprite",
@@ -9324,7 +9324,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": null,
-    "_id": "26IBEq2mtE0rdoQ4Jq40Tl"
+    "_id": "dcn61n/AZAbrE1mSbKhjkb"
   },
   {
     "__type__": "cc.Node",
@@ -9386,7 +9386,7 @@
     "_is3DNode": false,
     "_groupIndex": 0,
     "groupIndex": 0,
-    "_id": "a7TYb89zJAX7BACvLNl4vI"
+    "_id": "48Q8Filz5NQKDlJbUqKkk5"
   },
   {
     "__type__": "cc.ParticleSystem",
@@ -9487,7 +9487,7 @@
     "rotatePerS": 0,
     "rotatePerSVar": 0,
     "_N$preview": true,
-    "_id": "4ayqUn/pNJ/LCtUx0UoXTg"
+    "_id": "aa7gLyr5RPyIVEE9WmFc7/"
   },
   {
     "__type__": "cc.Node",
@@ -9549,7 +9549,7 @@
     "_is3DNode": false,
     "_groupIndex": 0,
     "groupIndex": 0,
-    "_id": "7aIM7ymsNO0ZfR5zvx47eO"
+    "_id": "f3GmaVodZGL7G5AhkqZVbZ"
   },
   {
     "__type__": "cc.Sprite",
@@ -9581,7 +9581,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": null,
-    "_id": "acspF/rwdJlrIe5ttxLQio"
+    "_id": "feIo8QA9pKzLflThBoVMzh"
   },
   {
     "__type__": "cc.Node",

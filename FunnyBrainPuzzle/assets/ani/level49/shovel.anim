@@ -1,0 +1,76 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "shovel",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            83.5,
+            -383.3
+          ],
+          "motionPath": []
+        },
+        {
+          "frame": 0.375,
+          "value": [
+            96.1,
+            -359.5
+          ],
+          "motionPath": [
+            [
+              109.5,
+              -407.4,
+              113.4,
+              -385,
+              105.7,
+              -429
+            ]
+          ]
+        },
+        {
+          "frame": 0.75,
+          "value": [
+            80.7,
+            -447.5
+          ],
+          "motionPath": []
+        },
+        {
+          "frame": 1,
+          "value": [
+            83.5,
+            -383.3,
+            0
+          ]
+        }
+      ],
+      "angle": [
+        {
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "frame": 0.375,
+          "value": 7
+        },
+        {
+          "frame": 0.75,
+          "value": -20
+        },
+        {
+          "frame": 1,
+          "value": 0
+        }
+      ]
+    }
+  },
+  "events": []
+}

@@ -1,0 +1,62 @@
+
+Level49_SantaClaus.png
+size: 688,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+SantaClaus
+  rotate: false
+  xy: 494, 123
+  size: 96, 128
+  orig: 96, 128
+  offset: 0, 0
+  index: -1
+SantaClaus(1)
+  rotate: false
+  xy: 333, 2
+  size: 91, 80
+  orig: 92, 80
+  offset: 0, 0
+  index: -1
+SantaClaus(2)
+  rotate: true
+  xy: 592, 132
+  size: 119, 92
+  orig: 120, 92
+  offset: 0, 0
+  index: -1
+SantaClaus(3)
+  rotate: true
+  xy: 500, 25
+  size: 96, 128
+  orig: 96, 128
+  offset: 0, 0
+  index: -1
+SantaClaus(4)
+  rotate: true
+  xy: 212, 84
+  size: 167, 280
+  orig: 168, 280
+  offset: 1, 0
+  index: -1
+SantaClaus(5)
+  rotate: false
+  xy: 2, 3
+  size: 208, 248
+  orig: 208, 248
+  offset: 0, 0
+  index: -1
+SantaClaus(6)
+  rotate: true
+  xy: 426, 6
+  size: 76, 72
+  orig: 76, 72
+  offset: 0, 0
+  index: -1
+SantaClaus(7)
+  rotate: true
+  xy: 212, 6
+  size: 76, 119
+  orig: 76, 124
+  offset: 0, 0
+  index: -1

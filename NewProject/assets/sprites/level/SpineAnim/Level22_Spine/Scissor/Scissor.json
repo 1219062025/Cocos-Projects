@@ -1,0 +1,78 @@
+{
+"skeleton": {
+	"hash": "xJGBTdB8syuJ+OdavT+9Da+YI+A",
+	"spine": "3.8.99",
+	"x": -52,
+	"y": -48,
+	"width": 119,
+	"height": 75,
+	"images": "./images/",
+	"audio": "G:/小步项目/spine源文件/解密剧情游戏/FunnyBrainPuzzle/FunnyBrainPuzzleSpine动画/第22关角色动画/22关剪刀"
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "Scissor", "parent": "root", "color": "0099ffff" },
+	{
+		"name": "jiaodao2",
+		"parent": "Scissor",
+		"length": 50.52,
+		"rotation": -171.97,
+		"x": -0.16,
+		"y": 0.33,
+		"color": "ff0000ff"
+	},
+	{
+		"name": "jiaodao1",
+		"parent": "Scissor",
+		"length": 49.88,
+		"rotation": 152.46,
+		"x": -0.29,
+		"y": 0.33,
+		"color": "5bff00ff"
+	}
+],
+"slots": [
+	{ "name": "jiaodao1", "bone": "jiaodao1", "attachment": "jiaodao1" },
+	{ "name": "jiaodao2", "bone": "jiaodao2", "attachment": "jiaodao2" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"jiaodao1": {
+				"jiaodao1": { "x": -7.04, "y": 8.54, "rotation": -152.46, "width": 96, "height": 75 }
+			},
+			"jiaodao2": {
+				"jiaodao2": { "x": -8.38, "y": -4.55, "rotation": 171.97, "width": 119, "height": 40 }
+			}
+		}
+	}
+],
+"animations": {
+	"Scissor": {
+		"bones": {
+			"jiaodao1": {
+				"rotate": [
+					{ "angle": -7.92, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.1333, "angle": 22.62, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.2667, "angle": -7.92 }
+				]
+			},
+			"jiaodao2": {
+				"rotate": [
+					{ "angle": 6.46, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.1333, "angle": -12.56, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.2667, "angle": 6.46 }
+				]
+			},
+			"Scissor": {
+				"translate": [
+					{ "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.1333, "x": -2.54, "curve": 0.25, "c3": 0.75 },
+					{ "time": 0.2667 }
+				]
+			}
+		}
+	}
+}
+}

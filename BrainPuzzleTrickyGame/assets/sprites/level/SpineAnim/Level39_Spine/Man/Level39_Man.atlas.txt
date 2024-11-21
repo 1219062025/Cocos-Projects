@@ -1,0 +1,55 @@
+
+Level39_Man.png
+size: 2044,504
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Man
+  rotate: true
+  xy: 966, 88
+  size: 414, 936
+  orig: 643, 936
+  offset: 74, 0
+  index: -1
+Man(1)
+  rotate: true
+  xy: 1904, 140
+  size: 109, 135
+  orig: 112, 136
+  offset: 1, 1
+  index: -1
+Man(2)
+  rotate: true
+  xy: 1904, 29
+  size: 109, 134
+  orig: 112, 136
+  offset: 1, 2
+  index: -1
+Man(3)
+  rotate: true
+  xy: 1904, 251
+  size: 109, 136
+  orig: 112, 136
+  offset: 1, 0
+  index: -1
+Man-2
+  rotate: true
+  xy: 2, 2
+  size: 500, 962
+  orig: 520, 976
+  offset: 20, 0
+  index: -1
+gangling
+  rotate: false
+  xy: 966, 33
+  size: 742, 53
+  orig: 742, 53
+  offset: 0, 0
+  index: -1
+tou
+  rotate: false
+  xy: 1904, 362
+  size: 123, 140
+  orig: 123, 140
+  offset: 0, 0
+  index: -1

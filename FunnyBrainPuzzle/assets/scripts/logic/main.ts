@@ -1,43 +1,43 @@
-import ResAreaControl from './res/resAreaControl';
-import GuideManager from './guide/guideManager';
-import TriggerControl from './trigger/triggerControl';
-import SubscriptionControl from './subscriptions/subscriptionControl';
-import TriggerOffCbManager from './triggerOffCbs/triggerOffCbManager';
-import TriggerManager from './trigger/triggerManager';
+import ResAreaControl from "./res/resAreaControl";
+import GuideManager from "./guide/guideManager";
+import TriggerControl from "./trigger/triggerControl";
+import SubscriptionControl from "./subscriptions/subscriptionControl";
+import TriggerOffCbManager from "./triggerOffCbs/triggerOffCbManager";
+import TriggerManager from "./trigger/triggerManager";
 
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class Main extends cc.Component {
   /** 当前几关 */
-  @property({ type: cc.Integer, tooltip: '该场景是第几关' })
+  @property({ type: cc.Integer, tooltip: "该场景是第几关" })
   levle: number = 1;
 
   /** 目标得分 */
-  @property({ type: cc.Integer, tooltip: '目标得分' })
+  @property({ type: cc.Integer, tooltip: "目标得分" })
   targetScore: number = 0;
 
   /** 最大扣分数 */
-  @property({ type: cc.Integer, tooltip: '最大扣分数，如果关卡不需要扣分填0' })
+  @property({ type: cc.Integer, tooltip: "最大扣分数，如果关卡不需要扣分填0" })
   targetDeductScore: number = 0;
 
   /** 通关限时/s */
-  @property({ type: cc.Integer, tooltip: '通关限时/s' })
+  @property({ type: cc.Integer, tooltip: "通关限时/s" })
   limitedTime: number = 60;
 
   /** 无响应限时/s */
-  @property({ type: cc.Integer, tooltip: '无响应限时/s' })
+  @property({ type: cc.Integer, tooltip: "无响应限时/s" })
   responseTime: number = 15;
 
-  @property({ tooltip: '该关卡是否运行引导' })
+  @property({ tooltip: "该关卡是否运行引导" })
   isRunGuide: boolean = true;
 
   /** 标题Label */
-  @property({ type: cc.Label, tooltip: '标题Label' })
+  @property({ type: cc.Label, tooltip: "标题Label" })
   titleLabel: cc.Label = null;
 
   /** 资源控制脚本 */
-  @property({ type: ResAreaControl, tooltip: '资源控制脚本' })
+  @property({ type: ResAreaControl, tooltip: "资源控制脚本" })
   resArea: ResAreaControl = null;
 
   // /** 所有触发器根节点 */
@@ -45,27 +45,30 @@ export default class Main extends cc.Component {
   // triggerRootNode: cc.Node = null;
 
   /** 触发器控制脚本 */
-  @property({ type: TriggerManager, tooltip: '触发器控制脚本' })
+  @property({ type: TriggerManager, tooltip: "触发器控制脚本" })
   triggerManager: TriggerManager = null;
 
   /** 提示控制脚本 */
-  @property({ type: cc.Node, tooltip: '提示控制脚本' })
+  @property({ type: cc.Node, tooltip: "提示控制脚本" })
   tipsNode: cc.Node = null;
 
   /** 引导控制脚本 */
-  @property({ type: GuideManager, tooltip: '引导控制脚本' })
+  @property({ type: GuideManager, tooltip: "引导控制脚本" })
   guideMgr: GuideManager = null;
 
   /** 成功通关弹窗 */
-  @property({ type: cc.Node, tooltip: '成功通关弹窗' })
+  @property({ type: cc.Node, tooltip: "成功通关弹窗" })
   successPop: cc.Node = null;
 
   /** 通关失败弹窗 */
-  @property({ type: cc.Node, tooltip: '通关失败弹窗' })
+  @property({ type: cc.Node, tooltip: "通关失败弹窗" })
   failPop: cc.Node = null;
 
   /** 操作响应，每次调用都会重置无响应计时responseTime */
   responseFunc: Function = null;
+
+  /** 音频管理 */
+  audioSource: cc.AudioSource = null;
 
   onLoad() {
     gi.loadGameRes().then(() => {
@@ -77,13 +80,15 @@ export default class Main extends cc.Component {
     // 设置当前关卡
     gi.setLevel(this.levle);
 
+    // gi.playBgm();
+
     // 开启2d碰撞系统
     cc.director.getCollisionManager().enabled = true;
 
     // 设置标题
     const lan = gi.getLanguage();
     const title = gi.getLevelInfo().title;
-    this.titleLabel.string = title[lan] || title['default'];
+    this.titleLabel.string = title[lan] || title["default"];
 
     // 初始化资源
     // this.resArea.init();
@@ -97,24 +102,28 @@ export default class Main extends cc.Component {
     TriggerOffCbManager.instance.init(this.levle);
 
     // 监听事件
-    cc.Canvas.instance.node.on(cc.Node.EventType.TOUCH_START, this.onAction, this);
-    gi.Event.on('touchStart', this.onAction, this);
-    gi.Event.on('touchMove', this.onAction, this);
-    gi.Event.on('touchEnd', this.onTouchEnd, this);
-    gi.Event.on('setLanguage', (lan: string) => {
+    cc.Canvas.instance.node.on(
+      cc.Node.EventType.TOUCH_START,
+      this.onAction,
+      this
+    );
+    gi.Event.on("touchStart", this.onAction, this);
+    gi.Event.on("touchMove", this.onAction, this);
+    gi.Event.on("touchEnd", this.onTouchEnd, this);
+    gi.Event.on("setLanguage", (lan: string) => {
       const title = gi.getLevelInfo().title;
-      this.titleLabel.string = title[lan] || title['default'];
+      this.titleLabel.string = title[lan] || title["default"];
     });
     /** 监听得分 */
-    gi.Event.on('score', this.inspectScore, this);
+    gi.Event.on("score", this.inspectScore, this);
     /** 监听扣分 */
-    gi.Event.on('deductScore', this.inspectDeductScore, this);
+    gi.Event.on("deductScore", this.inspectDeductScore, this);
     /** 监听所有资源用完 */
     // gi.Event.on('notHaveRes', this.inspectGameOver, this);
     /** 监听游戏失败事件 */
-    gi.Event.on('gameover', this.showFailPop, this);
+    gi.Event.on("gameover", this.showFailPop, this);
     /** 监听游戏成功事件 */
-    gi.Event.on('clearance', this.showSuccessPop, this);
+    gi.Event.on("clearance", this.showSuccessPop, this);
 
     this.runTimeDetection();
   }
@@ -154,6 +163,8 @@ export default class Main extends cc.Component {
 
     for (const trigger of triggers) {
       if (trigger.canTriggerOff(tags)) {
+        // 触发音效
+        gi.playAudio();
         // 运行触发器
         trigger.showTips();
         trigger.triggerOff(this.resArea.curRes);
@@ -203,17 +214,23 @@ export default class Main extends cc.Component {
     if (gi.isEnd()) return;
 
     gi.deductScore += deductScore;
-    if (this.targetDeductScore !== 0 && this.targetDeductScore === gi.deductScore) {
+    if (
+      this.targetDeductScore !== 0 &&
+      this.targetDeductScore === gi.deductScore
+    ) {
       this.showFailPop();
     }
   }
 
   /** 检测游戏是否通关 */
   inspectGameOver() {
-    console.log('inspectGameOver', gi.score);
+    console.log("inspectGameOver", gi.score);
     if (gi.isEnd()) return;
 
-    if (this.targetDeductScore !== 0 && this.targetDeductScore === gi.deductScore) {
+    if (
+      this.targetDeductScore !== 0 &&
+      this.targetDeductScore === gi.deductScore
+    ) {
       this.showFailPop();
     } else if (this.targetScore === gi.score) {
       this.showSuccessPop();

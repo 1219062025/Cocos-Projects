@@ -1,0 +1,104 @@
+
+Level44_Man.png
+size: 728,1036
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Electric drill(1)
+  rotate: false
+  xy: 588, 526
+  size: 136, 103
+  orig: 136, 103
+  offset: 0, 0
+  index: -1
+Key
+  rotate: false
+  xy: 508, 207
+  size: 57, 27
+  orig: 60, 32
+  offset: 1, 3
+  index: -1
+Man_1
+  rotate: true
+  xy: 2, 13
+  size: 195, 504
+  orig: 196, 584
+  offset: 1, 0
+  index: -1
+Man_3
+  rotate: true
+  xy: 2, 732
+  size: 300, 636
+  orig: 300, 636
+  offset: 0, 0
+  index: -1
+Man_head1
+  rotate: false
+  xy: 638, 106
+  size: 76, 102
+  orig: 76, 102
+  offset: 0, 0
+  index: -1
+Man_head2
+  rotate: false
+  xy: 638, 2
+  size: 76, 102
+  orig: 76, 102
+  offset: 0, 0
+  index: -1
+Photo2
+  rotate: false
+  xy: 640, 917
+  size: 85, 115
+  orig: 88, 116
+  offset: 1, 1
+  index: -1
+Photo3
+  rotate: false
+  xy: 640, 809
+  size: 78, 106
+  orig: 88, 116
+  offset: 4, 4
+  index: -1
+Security A_2
+  rotate: true
+  xy: 2, 434
+  size: 296, 584
+  orig: 296, 584
+  offset: 0, 0
+  index: -1
+Security B_2
+  rotate: true
+  xy: 2, 236
+  size: 196, 568
+  orig: 196, 568
+  offset: 0, 0
+  index: -1
+Torches(1)
+  rotate: true
+  xy: 572, 210
+  size: 128, 150
+  orig: 128, 150
+  offset: 0, 0
+  index: -1
+hand1
+  rotate: false
+  xy: 640, 631
+  size: 77, 176
+  orig: 77, 176
+  offset: 0, 0
+  index: -1
+hand1(1)
+  rotate: true
+  xy: 588, 340
+  size: 184, 128
+  orig: 184, 128
+  offset: 0, 0
+  index: -1
+hand1(2)
+  rotate: true
+  xy: 508, 25
+  size: 180, 128
+  orig: 180, 128
+  offset: 0, 0
+  index: -1

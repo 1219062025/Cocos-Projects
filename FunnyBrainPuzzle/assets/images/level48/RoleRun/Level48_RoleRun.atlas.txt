@@ -1,0 +1,223 @@
+
+Level48_RoleRun.png
+size: 1288,560
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Dog-Wolf-body
+  rotate: true
+  xy: 721, 9
+  size: 180, 92
+  orig: 180, 92
+  offset: 0, 0
+  index: -1
+Dog-Wolf-head
+  rotate: true
+  xy: 1164, 202
+  size: 128, 120
+  orig: 128, 120
+  offset: 0, 0
+  index: -1
+Dog-Wolf2
+  rotate: false
+  xy: 838, 458
+  size: 120, 100
+  orig: 120, 100
+  offset: 0, 0
+  index: -1
+Dog-Wolf3
+  rotate: true
+  xy: 838, 401
+  size: 55, 104
+  orig: 55, 104
+  offset: 0, 0
+  index: -1
+Dog-Wolf4
+  rotate: false
+  xy: 331, 8
+  size: 96, 156
+  orig: 96, 156
+  offset: 0, 0
+  index: -1
+Dog-Wolf5
+  rotate: true
+  xy: 250, 4
+  size: 160, 79
+  orig: 160, 88
+  offset: 0, 0
+  index: -1
+Dog-Wolf8
+  rotate: false
+  xy: 1169, 474
+  size: 112, 84
+  orig: 112, 84
+  offset: 0, 0
+  index: -1
+Dog-Wolf9
+  rotate: false
+  xy: 1015, 2
+  size: 51, 70
+  orig: 64, 96
+  offset: 0, 0
+  index: -1
+Dog2
+  rotate: false
+  xy: 929, 315
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+Dog3
+  rotate: false
+  xy: 960, 502
+  size: 36, 56
+  orig: 36, 56
+  offset: 0, 0
+  index: -1
+Dogbody
+  rotate: true
+  xy: 164, 4
+  size: 160, 84
+  orig: 160, 84
+  offset: 0, 0
+  index: -1
+Dogleg1
+  rotate: false
+  xy: 1184, 16
+  size: 84, 64
+  orig: 84, 64
+  offset: 0, 0
+  index: -1
+Dogleg2
+  rotate: false
+  xy: 838, 231
+  size: 84, 84
+  orig: 84, 84
+  offset: 0, 0
+  index: -1
+Dogleg3
+  rotate: true
+  xy: 1068, 4
+  size: 68, 56
+  orig: 68, 56
+  offset: 0, 0
+  index: -1
+Dogleg4
+  rotate: false
+  xy: 1126, 4
+  size: 56, 68
+  orig: 56, 68
+  offset: 0, 0
+  index: -1
+Line1
+  rotate: true
+  xy: 2, 138
+  size: 420, 64
+  orig: 420, 64
+  offset: 0, 0
+  index: -1
+Reindeer-leg1
+  rotate: false
+  xy: 575, 3
+  size: 144, 186
+  orig: 144, 192
+  offset: 0, 6
+  index: -1
+Reindeer-leg3
+  rotate: true
+  xy: 1015, 237
+  size: 126, 147
+  orig: 130, 152
+  offset: 0, 5
+  index: -1
+Reindeer-leg4
+  rotate: true
+  xy: 1161, 82
+  size: 118, 120
+  orig: 120, 140
+  offset: 0, 20
+  index: -1
+Reindeer1
+  rotate: true
+  xy: 555, 191
+  size: 367, 281
+  orig: 400, 400
+  offset: 33, 105
+  index: -1
+SantaClaus-body
+  rotate: false
+  xy: 815, 11
+  size: 198, 178
+  orig: 280, 240
+  offset: 0, 12
+  index: -1
+SantaClaus-hand1
+  rotate: true
+  xy: 2, 3
+  size: 133, 160
+  orig: 133, 160
+  offset: 0, 0
+  index: -1
+SantaClaus-hand2
+  rotate: true
+  xy: 1015, 463
+  size: 95, 152
+  orig: 100, 152
+  offset: 5, 0
+  index: -1
+SantaClaus-leg1
+  rotate: false
+  xy: 1015, 74
+  size: 141, 82
+  orig: 141, 84
+  offset: 0, 0
+  index: -1
+SantaClaus-leg2
+  rotate: true
+  xy: 1015, 365
+  size: 96, 148
+  orig: 96, 148
+  offset: 0, 0
+  index: -1
+SantaClaus-leg3
+  rotate: false
+  xy: 1015, 158
+  size: 144, 77
+  orig: 144, 80
+  offset: 0, 0
+  index: -1
+SantaClaus-leg4
+  rotate: true
+  xy: 429, 10
+  size: 154, 144
+  orig: 154, 144
+  offset: 0, 0
+  index: -1
+SantaClausRun
+  rotate: false
+  xy: 1169, 332
+  size: 109, 140
+  orig: 120, 160
+  offset: 7, 0
+  index: -1
+SantaClausfly
+  rotate: false
+  xy: 68, 166
+  size: 363, 392
+  orig: 368, 392
+  offset: 5, 0
+  index: -1
+Shadow
+  rotate: true
+  xy: 433, 171
+  size: 387, 120
+  orig: 400, 120
+  offset: 6, 0
+  index: -1
+weijin
+  rotate: false
+  xy: 838, 317
+  size: 89, 82
+  orig: 89, 82
+  offset: 0, 0
+  index: -1

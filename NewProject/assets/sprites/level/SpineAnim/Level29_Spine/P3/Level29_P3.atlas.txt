@@ -1,0 +1,62 @@
+
+Level29_P3.png
+size: 416,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Picture_bMan
+  rotate: true
+  xy: 2, 2
+  size: 280, 212
+  orig: 280, 212
+  offset: 0, 0
+  index: -1
+Picture_bMan-hand-l
+  rotate: true
+  xy: 2, 510
+  size: 194, 288
+  orig: 360, 288
+  offset: 0, 0
+  index: -1
+Picture_bMan-hand-r
+  rotate: false
+  xy: 216, 24
+  size: 151, 258
+  orig: 372, 288
+  offset: 0, 30
+  index: -1
+Picture_bMan-head
+  rotate: true
+  xy: 284, 361
+  size: 112, 128
+  orig: 112, 128
+  offset: 0, 0
+  index: -1
+Picture_bMan-leg
+  rotate: false
+  xy: 2, 284
+  size: 280, 224
+  orig: 280, 224
+  offset: 0, 0
+  index: -1
+Picture_bWoman
+  rotate: true
+  xy: 2, 785
+  size: 236, 408
+  orig: 236, 408
+  offset: 0, 0
+  index: -1
+Picture_bWoman-leg-l
+  rotate: false
+  xy: 312, 475
+  size: 76, 308
+  orig: 84, 308
+  offset: 0, 0
+  index: -1
+Picture_bWoman-leg-r
+  rotate: true
+  xy: 2, 706
+  size: 77, 308
+  orig: 84, 308
+  offset: 0, 0
+  index: -1

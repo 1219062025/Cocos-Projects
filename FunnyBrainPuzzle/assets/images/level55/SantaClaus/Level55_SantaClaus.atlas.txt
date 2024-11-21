@@ -1,0 +1,272 @@
+
+Level55_SantaClaus.png
+size: 864,1044
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Crowbar
+  rotate: true
+  xy: 191, 11
+  size: 71, 119
+  orig: 72, 121
+  offset: 0, 2
+  index: -1
+FX_1
+  rotate: false
+  xy: 380, 517
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_10
+  rotate: false
+  xy: 667, 663
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_11
+  rotate: false
+  xy: 667, 533
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_12
+  rotate: false
+  xy: 604, 127
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_13
+  rotate: false
+  xy: 321, 36
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_14
+  rotate: false
+  xy: 451, 6
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_15
+  rotate: false
+  xy: 734, 262
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_16
+  rotate: false
+  xy: 734, 132
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_2
+  rotate: false
+  xy: 192, 214
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_3
+  rotate: false
+  xy: 191, 84
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_4
+  rotate: false
+  xy: 506, 387
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_5
+  rotate: false
+  xy: 537, 652
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_6
+  rotate: false
+  xy: 537, 522
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_7
+  rotate: false
+  xy: 368, 193
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_8
+  rotate: false
+  xy: 604, 257
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FX_9
+  rotate: false
+  xy: 636, 392
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+FireBox
+  rotate: false
+  xy: 772, 876
+  size: 89, 166
+  orig: 92, 168
+  offset: 1, 1
+  index: -1
+Pickaxe-1
+  rotate: true
+  xy: 368, 647
+  size: 133, 167
+  orig: 136, 168
+  offset: 1, 1
+  index: -1
+Pickaxe-1(1)
+  rotate: false
+  xy: 510, 604
+  size: 24, 41
+  orig: 24, 44
+  offset: 0, 1
+  index: -1
+Pickaxe-1(2)
+  rotate: false
+  xy: 312, 6
+  size: 98, 28
+  orig: 100, 32
+  offset: 1, 4
+  index: -1
+Pickaxe-1（4）
+  rotate: false
+  xy: 88, 2
+  size: 81, 58
+  orig: 92, 60
+  offset: 1, 1
+  index: -1
+Pickaxe-2
+  rotate: false
+  xy: 650, 871
+  size: 120, 171
+  orig: 128, 180
+  offset: 4, 5
+  index: -1
+SantaClaus
+  rotate: false
+  xy: 766, 397
+  size: 68, 134
+  orig: 68, 136
+  offset: 0, 0
+  index: -1
+SantaClaus(1)
+  rotate: true
+  xy: 368, 782
+  size: 260, 280
+  orig: 260, 288
+  offset: 0, 0
+  index: -1
+SantaClaus(2)
+  rotate: true
+  xy: 2, 218
+  size: 124, 188
+  orig: 124, 188
+  offset: 0, 0
+  index: -1
+SantaClaus(3)
+  rotate: false
+  xy: 506, 233
+  size: 96, 152
+  orig: 96, 152
+  offset: 0, 0
+  index: -1
+SantaClaus(4)
+  rotate: true
+  xy: 650, 793
+  size: 76, 156
+  orig: 76, 156
+  offset: 0, 0
+  index: -1
+SantaClaus(5)
+  rotate: false
+  xy: 2, 44
+  size: 84, 172
+  orig: 84, 172
+  offset: 0, 0
+  index: -1
+SantaClaus(6)
+  rotate: false
+  xy: 380, 323
+  size: 124, 192
+  orig: 124, 192
+  offset: 0, 0
+  index: -1
+SantaClaus(7)
+  rotate: true
+  xy: 498, 136
+  size: 95, 72
+  orig: 96, 76
+  offset: 0, 3
+  index: -1
+SantaClaus(8)
+  rotate: false
+  xy: 321, 166
+  size: 31, 42
+  orig: 32, 44
+  offset: 0, 2
+  index: -1
+SantaClaus-8
+  rotate: false
+  xy: 2, 642
+  size: 364, 400
+  orig: 364, 400
+  offset: 0, 0
+  index: -1
+SantaClaus-8(2)
+  rotate: true
+  xy: 581, 2
+  size: 123, 129
+  orig: 148, 132
+  offset: 14, 2
+  index: -1
+SantaClaus-8(3)
+  rotate: true
+  xy: 712, 2
+  size: 123, 129
+  orig: 148, 132
+  offset: 14, 2
+  index: -1
+SantaClaus-9
+  rotate: true
+  xy: 2, 344
+  size: 296, 376
+  orig: 296, 376
+  offset: 0, 0
+  index: -1
+Shovel
+  rotate: false
+  xy: 88, 62
+  size: 101, 154
+  orig: 104, 156
+  offset: 1, 1
+  index: -1
+Sword
+  rotate: true
+  xy: 322, 210
+  size: 132, 44
+  orig: 136, 48
+  offset: 2, 1
+  index: -1

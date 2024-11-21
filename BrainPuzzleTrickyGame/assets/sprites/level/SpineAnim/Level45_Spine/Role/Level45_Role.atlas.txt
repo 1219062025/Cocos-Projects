@@ -1,0 +1,111 @@
+
+Level45_Role.png
+size: 1032,1068
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coat-1
+  rotate: false
+  xy: 898, 730
+  size: 132, 336
+  orig: 132, 336
+  offset: 0, 0
+  index: -1
+Coat-2
+  rotate: true
+  xy: 2, 108
+  size: 224, 446
+  orig: 244, 448
+  offset: 20, 2
+  index: -1
+Coat-3
+  rotate: false
+  xy: 470, 266
+  size: 296, 276
+  orig: 296, 276
+  offset: 0, 0
+  index: -1
+Coat-l-1
+  rotate: true
+  xy: 748, 106
+  size: 76, 280
+  orig: 76, 280
+  offset: 0, 0
+  index: -1
+Coat-l-2
+  rotate: true
+  xy: 652, 552
+  size: 88, 264
+  orig: 88, 264
+  offset: 0, 0
+  index: -1
+Coat-r-1
+  rotate: true
+  xy: 2, 2
+  size: 104, 328
+  orig: 104, 328
+  offset: 0, 0
+  index: -1
+Coat-r-2
+  rotate: true
+  xy: 768, 184
+  size: 124, 224
+  orig: 124, 224
+  offset: 0, 0
+  index: -1
+Desk-1
+  rotate: false
+  xy: 652, 642
+  size: 244, 424
+  orig: 244, 424
+  offset: 0, 0
+  index: -1
+Gas
+  rotate: false
+  xy: 332, 53
+  size: 54, 53
+  orig: 56, 56
+  offset: 1, 2
+  index: -1
+Mummy
+  rotate: false
+  xy: 470, 544
+  size: 180, 522
+  orig: 180, 528
+  offset: 0, 0
+  index: -1
+Picture-3
+  rotate: true
+  xy: 768, 310
+  size: 240, 215
+  orig: 240, 215
+  offset: 0, 0
+  index: -1
+Picturetoufa-3
+  rotate: true
+  xy: 748, 14
+  size: 90, 210
+  orig: 90, 210
+  offset: 0, 0
+  index: -1
+Sheet-1
+  rotate: true
+  xy: 450, 56
+  size: 208, 296
+  orig: 208, 296
+  offset: 0, 0
+  index: -1
+Woman-1
+  rotate: false
+  xy: 2, 334
+  size: 232, 732
+  orig: 232, 732
+  offset: 0, 0
+  index: -1
+Woman-2
+  rotate: false
+  xy: 236, 334
+  size: 232, 732
+  orig: 232, 732
+  offset: 0, 0
+  index: -1

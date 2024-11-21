@@ -1,0 +1,27 @@
+
+SharkSwimming.png
+size: 680,508
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Shark
+  rotate: true
+  xy: 2, 2
+  size: 504, 516
+  orig: 504, 516
+  offset: 0, 0
+  index: -1
+Shark_Fin
+  rotate: true
+  xy: 520, 201
+  size: 83, 51
+  orig: 84, 52
+  offset: 0, 1
+  index: -1
+Shark_Mouth
+  rotate: true
+  xy: 520, 286
+  size: 220, 156
+  orig: 220, 156
+  offset: 0, 0
+  index: -1

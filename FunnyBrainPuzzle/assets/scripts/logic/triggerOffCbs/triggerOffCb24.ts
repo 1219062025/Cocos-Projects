@@ -33,6 +33,7 @@ gi.Event.on("rouse", (node) => {
   runRouseAni();
 });
 
+/** 宝宝哭泣 */
 export function bady(options: gi.TriggerOffCbOptions) {
   gi.Event.emit("sleepiness", 10);
   gi.isClick = false;
@@ -45,6 +46,31 @@ export function bady(options: gi.TriggerOffCbOptions) {
     .repeatForever()
     .start();
   runRouseAni();
+}
+
+/** 空调调节温度 */
+export function airconditioner(options: gi.TriggerOffCbOptions) {
+  gi.isClick = false;
+  /** 空调遥控器界面 */
+  const control = options.nodes[2];
+  const originPos = control.getPosition();
+  control.active = true;
+  control.y -= control.height / 2;
+
+  (cc.tween(control) as cc.Tween)
+    .to(0.1, { y: originPos.y })
+    .call(() => {
+      gi.Event.emit("sleepiness", 20);
+      runRouseAni();
+    })
+    .delay(1)
+    .call(() => {
+      gi.completedAction("8");
+      options.nodes[0].active = false;
+      options.nodes[1].active = true;
+      control.active = false;
+    })
+    .start();
 }
 
 /** 叫醒 */
@@ -151,6 +177,19 @@ export function rouse(options: gi.TriggerOffCbOptions) {
         legMask.active = false;
       })
       .start();
+  } else if (resName === "Hammer-1") {
+    const hammer = options.nodes[9];
+    hammer.active = true;
+    (cc.tween(hammer) as cc.Tween)
+      .to(0.5, { angle: -80 }, { easing: "circOut" })
+      .to(0.2, { angle: 0 }, { easing: "circIn" })
+      .delay(0.3)
+      .call(() => {
+        hammer.active = false;
+        headNode.active = true;
+        gi.Event.emit("gameover");
+      })
+      .start();
   }
 }
 
@@ -190,6 +229,12 @@ var step2 = (cc.tween() as cc.Tween)
   .union()
   .repeat(2)
   .call(() => {
+    if (sleepiness === 0) {
+      gi.Event.emit("showTips", "3");
+      gi.Event.emit("clearance");
+      return;
+    }
+    gi.Event.emit("showTips", "2");
     boy1Node.active = true;
     boy2Node.active = false;
   });

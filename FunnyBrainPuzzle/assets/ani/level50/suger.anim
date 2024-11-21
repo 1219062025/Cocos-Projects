@@ -1,0 +1,371 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "suger",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.875,
+  "sample": 8,
+  "speed": 1.3,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "Suger1": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -11.008,
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 0.25,
+              "value": [
+                -59.23,
+                -28.704,
+                0
+              ]
+            },
+            {
+              "frame": 0.5,
+              "value": [
+                -158.865,
+                -77.228,
+                0
+              ]
+            },
+            {
+              "frame": 0.75,
+              "value": [
+                -262.961,
+                -99.101,
+                0
+              ]
+            },
+            {
+              "frame": 1,
+              "value": [
+                -394.701,
+                -105.172,
+                0
+              ]
+            },
+            {
+              "frame": 1.125,
+              "value": [
+                -433.418,
+                -86.531,
+                0
+              ]
+            }
+          ],
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.25,
+              "value": 15
+            },
+            {
+              "frame": 0.5,
+              "value": 20
+            },
+            {
+              "frame": 0.75,
+              "value": 5
+            },
+            {
+              "frame": 1,
+              "value": -10
+            },
+            {
+              "frame": 1.125,
+              "value": -15
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 1.125,
+              "value": 255
+            },
+            {
+              "frame": 1.375,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "SantaClaus_Siher": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                114,
+                -338
+              ],
+              "motionPath": []
+            },
+            {
+              "frame": 0.25,
+              "value": [
+                148,
+                -325
+              ],
+              "motionPath": []
+            },
+            {
+              "frame": 0.5,
+              "value": [
+                70,
+                -355
+              ],
+              "motionPath": []
+            },
+            {
+              "frame": 0.75,
+              "value": [
+                -108,
+                -427
+              ],
+              "motionPath": [
+                [
+                  -228,
+                  -458,
+                  -171,
+                  -450,
+                  -282,
+                  -466
+                ]
+              ]
+            },
+            {
+              "frame": 1,
+              "value": [
+                -374,
+                -459
+              ],
+              "motionPath": [
+                [
+                  -389,
+                  -276,
+                  -357,
+                  -337,
+                  -421,
+                  -214
+                ]
+              ]
+            }
+          ],
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.25,
+              "value": 15
+            },
+            {
+              "frame": 0.5,
+              "value": 20
+            },
+            {
+              "frame": 0.75,
+              "value": 5
+            },
+            {
+              "frame": 1,
+              "value": -20
+            }
+          ],
+          "active": [
+            {
+              "frame": 0,
+              "value": true
+            },
+            {
+              "frame": 1,
+              "value": false
+            }
+          ]
+        }
+      },
+      "Suger2": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                21.635,
+                -54.842,
+                0
+              ]
+            },
+            {
+              "frame": 0.25,
+              "value": [
+                -13.238,
+                -73.122,
+                0
+              ]
+            },
+            {
+              "frame": 0.5,
+              "value": [
+                -109.311,
+                -117.503,
+                0
+              ]
+            },
+            {
+              "frame": 0.75,
+              "value": [
+                -225.421,
+                -150.765,
+                0
+              ]
+            },
+            {
+              "frame": 1,
+              "value": [
+                -371.941,
+                -164.556,
+                0
+              ]
+            },
+            {
+              "frame": 1.125,
+              "value": [
+                -415.762,
+                -147.661,
+                0
+              ]
+            }
+          ],
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.25,
+              "value": 15
+            },
+            {
+              "frame": 0.5,
+              "value": 20
+            },
+            {
+              "frame": 0.75,
+              "value": 5
+            },
+            {
+              "frame": 1,
+              "value": -10
+            },
+            {
+              "frame": 1.125,
+              "value": -15
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 1.125,
+              "value": 255
+            },
+            {
+              "frame": 1.375,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "SantaClaus_Siher_end": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 1,
+              "value": true
+            }
+          ],
+          "position": [
+            {
+              "frame": 1,
+              "value": [
+                -374,
+                -459
+              ],
+              "motionPath": [
+                [
+                  -421,
+                  -284,
+                  -389,
+                  -344,
+                  -453,
+                  -221
+                ]
+              ]
+            },
+            {
+              "frame": 1.375,
+              "value": [
+                -502,
+                -213
+              ],
+              "motionPath": [
+                [
+                  -580,
+                  -284,
+                  -559,
+                  -231,
+                  -605,
+                  -347
+                ]
+              ]
+            },
+            {
+              "frame": 1.625,
+              "value": [
+                -594,
+                -447
+              ],
+              "motionPath": []
+            },
+            {
+              "frame": 1.875,
+              "value": [
+                -788.659,
+                -453,
+                0
+              ]
+            }
+          ],
+          "angle": [
+            {
+              "frame": 1,
+              "value": -20
+            },
+            {
+              "frame": 1.375,
+              "value": -5
+            },
+            {
+              "frame": 1.625,
+              "value": 0
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

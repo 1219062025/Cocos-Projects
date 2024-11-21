@@ -1,0 +1,27 @@
+
+Level15-Dog-Spine.png
+size: 448,140
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Dog
+  rotate: false
+  xy: 286, 30
+  size: 160, 108
+  orig: 160, 108
+  offset: 0, 0
+  index: -1
+Dog-1
+  rotate: true
+  xy: 144, 6
+  size: 132, 140
+  orig: 132, 140
+  offset: 0, 0
+  index: -1
+Dog-2
+  rotate: false
+  xy: 2, 2
+  size: 140, 136
+  orig: 140, 136
+  offset: 0, 0
+  index: -1

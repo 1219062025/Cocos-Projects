@@ -1,0 +1,27 @@
+
+Level32_Woman.png
+size: 912,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Woman-1
+  rotate: true
+  xy: 2, 2
+  size: 256, 764
+  orig: 256, 764
+  offset: 0, 0
+  index: -1
+Woman-2
+  rotate: false
+  xy: 780, 216
+  size: 128, 292
+  orig: 128, 292
+  offset: 0, 0
+  index: -1
+Woman-2(1)
+  rotate: true
+  xy: 2, 260
+  size: 248, 776
+  orig: 248, 776
+  offset: 0, 0
+  index: -1

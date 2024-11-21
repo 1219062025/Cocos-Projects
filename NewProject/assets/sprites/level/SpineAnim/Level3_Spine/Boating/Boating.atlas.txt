@@ -1,0 +1,118 @@
+
+Boating.png
+size: 544,552
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+man/Lefthand
+  rotate: false
+  xy: 368, 41
+  size: 40, 62
+  orig: 40, 62
+  offset: 0, 0
+  index: -1
+woman/Lefthand
+  rotate: false
+  xy: 368, 41
+  size: 40, 62
+  orig: 40, 62
+  offset: 0, 0
+  index: -1
+man/Lefthand1
+  rotate: true
+  xy: 284, 24
+  size: 79, 82
+  orig: 81, 82
+  offset: 0, 0
+  index: -1
+man/Lefthand2
+  rotate: true
+  xy: 86, 62
+  size: 70, 80
+  orig: 85, 81
+  offset: 15, 0
+  index: -1
+man/Righthand
+  rotate: false
+  xy: 414, 23
+  size: 128, 141
+  orig: 128, 141
+  offset: 0, 0
+  index: -1
+man/body
+  rotate: true
+  xy: 2, 134
+  size: 129, 170
+  orig: 129, 170
+  offset: 0, 0
+  index: -1
+man/head
+  rotate: true
+  xy: 416, 166
+  size: 88, 109
+  orig: 88, 109
+  offset: 0, 0
+  index: -1
+shark/Body
+  rotate: false
+  xy: 2, 265
+  size: 343, 284
+  orig: 343, 284
+  offset: 0, 0
+  index: -1
+shark/Lefthand
+  rotate: false
+  xy: 174, 57
+  size: 108, 77
+  orig: 108, 77
+  offset: 0, 0
+  index: -1
+shark/Righthand
+  rotate: false
+  xy: 174, 136
+  size: 147, 127
+  orig: 147, 127
+  offset: 0, 0
+  index: -1
+woman/Lefthand1
+  rotate: true
+  xy: 2, 53
+  size: 79, 82
+  orig: 81, 82
+  offset: 0, 0
+  index: -1
+woman/Lefthand2
+  rotate: true
+  xy: 86, 2
+  size: 58, 64
+  orig: 85, 81
+  offset: 27, 0
+  index: -1
+woman/Paddle
+  rotate: false
+  xy: 347, 204
+  size: 67, 345
+  orig: 67, 346
+  offset: 0, 0
+  index: -1
+woman/Righthand
+  rotate: false
+  xy: 416, 256
+  size: 126, 134
+  orig: 126, 134
+  offset: 0, 0
+  index: -1
+woman/body
+  rotate: false
+  xy: 416, 392
+  size: 116, 157
+  orig: 116, 157
+  offset: 0, 0
+  index: -1
+woman/head
+  rotate: false
+  xy: 323, 105
+  size: 89, 97
+  orig: 89, 97
+  offset: 0, 0
+  index: -1

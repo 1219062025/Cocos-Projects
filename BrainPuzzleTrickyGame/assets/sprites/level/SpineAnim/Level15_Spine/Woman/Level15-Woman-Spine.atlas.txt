@@ -1,0 +1,55 @@
+
+Level15-Woman-Spine.png
+size: 1028,340
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Lefthand
+  rotate: true
+  xy: 936, 106
+  size: 98, 90
+  orig: 98, 90
+  offset: 0, 0
+  index: -1
+Leftleg
+  rotate: true
+  xy: 2, 2
+  size: 61, 276
+  orig: 68, 276
+  offset: 7, 0
+  index: -1
+Righthand
+  rotate: true
+  xy: 936, 206
+  size: 129, 86
+  orig: 134, 86
+  offset: 0, 0
+  index: -1
+Woman-1
+  rotate: false
+  xy: 802, 27
+  size: 132, 308
+  orig: 132, 308
+  offset: 0, 0
+  index: -1
+Woman-2
+  rotate: false
+  xy: 350, 15
+  size: 224, 320
+  orig: 224, 320
+  offset: 0, 0
+  index: -1
+Woman-3
+  rotate: false
+  xy: 576, 15
+  size: 224, 320
+  orig: 224, 320
+  offset: 0, 0
+  index: -1
+Woman-4
+  rotate: false
+  xy: 2, 65
+  size: 346, 270
+  orig: 346, 270
+  offset: 0, 0
+  index: -1

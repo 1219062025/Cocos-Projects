@@ -1,0 +1,104 @@
+
+Level30_Dog.png
+size: 1468,224
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Dog-1-shadow
+  rotate: false
+  xy: 736, 16
+  size: 96, 40
+  orig: 96, 40
+  offset: 0, 0
+  index: -1
+Dog-3
+  rotate: true
+  xy: 1106, 126
+  size: 96, 152
+  orig: 96, 176
+  offset: 0, 24
+  index: -1
+Dog-6
+  rotate: true
+  xy: 552, 58
+  size: 164, 386
+  orig: 164, 520
+  offset: 0, 134
+  index: -1
+Dog-6-L-hand
+  rotate: true
+  xy: 940, 4
+  size: 68, 224
+  orig: 68, 224
+  offset: 0, 0
+  index: -1
+Dog-6-L-leg  
+  rotate: false
+  xy: 1260, 26
+  size: 60, 196
+  orig: 60, 196
+  offset: 0, 0
+  index: -1
+Dog-6-R-hand
+  rotate: false
+  xy: 1388, 74
+  size: 68, 148
+  orig: 68, 148
+  offset: 0, 0
+  index: -1
+Dog-6-R-leg  
+  rotate: false
+  xy: 1322, 34
+  size: 64, 188
+  orig: 64, 188
+  offset: 0, 0
+  index: -1
+Dog-L-hand-3
+  rotate: true
+  xy: 614, 16
+  size: 40, 120
+  orig: 40, 120
+  offset: 0, 0
+  index: -1
+Dog-L-hand-4
+  rotate: false
+  xy: 1388, 16
+  size: 76, 56
+  orig: 76, 56
+  offset: 0, 0
+  index: -1
+Dog-R-hand-1
+  rotate: false
+  xy: 940, 74
+  size: 164, 148
+  orig: 164, 148
+  offset: 0, 0
+  index: -1
+Dog-R-hand-3
+  rotate: false
+  xy: 1166, 12
+  size: 80, 112
+  orig: 80, 112
+  offset: 0, 0
+  index: -1
+Dog-R-hand-4
+  rotate: false
+  xy: 552, 12
+  size: 60, 44
+  orig: 60, 44
+  offset: 0, 0
+  index: -1
+Ruins
+  rotate: false
+  xy: 2, 2
+  size: 548, 220
+  orig: 548, 220
+  offset: 0, 0
+  index: -1
+qian
+  rotate: false
+  xy: 834, 24
+  size: 60, 32
+  orig: 60, 32
+  offset: 0, 0
+  index: -1

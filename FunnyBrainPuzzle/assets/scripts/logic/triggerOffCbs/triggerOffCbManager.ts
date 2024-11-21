@@ -1,17 +1,23 @@
-import * as triggerOffCb3 from './triggerOffCb3';
-import * as triggerOffCb8 from './triggerOffCb8';
-import * as triggerOffCb12 from './triggerOffCb12';
-import * as triggerOffCb15 from './triggerOffCb15';
-import * as triggerOffCb17 from './triggerOffCb17';
-import * as triggerOffCb18 from './triggerOffCb18';
-import * as triggerOffCb22 from './triggerOffCb22';
-import * as triggerOffCb23 from './triggerOffCb23';
-import * as triggerOffCb24 from './triggerOffCb24';
-import * as triggerOffCb29 from './triggerOffCb29';
+import * as triggerOffCb2 from "./triggerOffCb2";
+import * as triggerOffCb3 from "./triggerOffCb3";
+import * as triggerOffCb8 from "./triggerOffCb8";
+import * as triggerOffCb12 from "./triggerOffCb12";
+import * as triggerOffCb15 from "./triggerOffCb15";
+import * as triggerOffCb17 from "./triggerOffCb17";
+import * as triggerOffCb18 from "./triggerOffCb18";
+import * as triggerOffCb22 from "./triggerOffCb22";
+import * as triggerOffCb23 from "./triggerOffCb23";
+import * as triggerOffCb24 from "./triggerOffCb24";
+import * as triggerOffCb29 from "./triggerOffCb29";
+import * as triggerOffCb48 from "./triggerOffCb48";
+import * as triggerOffCb49 from "./triggerOffCb49";
+import * as triggerOffCb50 from "./triggerOffCb50";
+import * as triggerOffCb55 from "./triggerOffCb55";
 
 const { ccclass, property } = cc._decorator;
 
 const levelsId = {
+  2: triggerOffCb2,
   3: triggerOffCb3,
   8: triggerOffCb8,
   12: triggerOffCb12,
@@ -22,6 +28,10 @@ const levelsId = {
   23: triggerOffCb23,
   24: triggerOffCb24,
   29: triggerOffCb29,
+  48: triggerOffCb48,
+  49: triggerOffCb49,
+  50: triggerOffCb50,
+  55: triggerOffCb55,
 };
 
 /** 触发回调管理器 */
@@ -54,7 +64,7 @@ export default class TriggerOffCbManager {
       }
     }
 
-    gi.Event.emit('initTriggerOffCb');
+    gi.Event.emit("initTriggerOffCb");
   }
 
   /** 调用回调 */

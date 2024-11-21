@@ -11,6 +11,9 @@ declare namespace gi {
   /** 此时页面是否可以操作 */
   var isClick: boolean;
   var initSubcribed: boolean;
+  /** 音频管理组件 */
+  var soundSource: cc.AudioSource;
+  var bgmSource: cc.AudioSource;
 
   /** 记录指定动作已完成 */
   function completedAction(key: string): void;
@@ -47,6 +50,11 @@ declare namespace gi {
 
   /** 获取当前语言 */
   function getLanguage(): string;
+
+  /** 播放音效 */
+  function playAudio(): void;
+  /** 播放BGM */
+  function playBgm(): void;
 
   /** 预制体生成器 */
   function prefabBuilder<T extends cc.Component>(
@@ -151,7 +159,12 @@ declare namespace gi {
      * @param frequency 振动频率
      * @param durtion 振动总时间
      */
-    static shake(options?: { node?: cc.Node; amplitude?: number; frequency?: number; durtion?: number });
+    static shake(options?: {
+      node?: cc.Node;
+      amplitude?: number;
+      frequency?: number;
+      durtion?: number;
+    });
 
     /**
      * 判断两个数组是否有交集
@@ -198,14 +211,22 @@ declare namespace gi {
      * @param {cc.Vec2} from 起始位置
      * @param {cc.Vec2} to 终点位置
      */
-    static fromToPos(from: cc.Vec2, to: cc.Vec2, options: MoveOptions): cc.Tween;
+    static fromToPos(
+      from: cc.Vec2,
+      to: cc.Vec2,
+      options: MoveOptions
+    ): cc.Tween;
 
     /**
      * 得到一个从节点from的位置移动到节点to的位置的缓动
      * @param {cc.Node} from 起始节点
      * @param {cc.Node} to 终点节点
      */
-    static fromToNode(fromNode: cc.Node, toNode: cc.Node, options: MoveOptions): cc.Tween;
+    static fromToNode(
+      fromNode: cc.Node,
+      toNode: cc.Node,
+      options: MoveOptions
+    ): cc.Tween;
 
     /** 销毁附带的节点 */
     static destroyCopyNode(): void;
@@ -265,13 +286,26 @@ declare namespace gi {
   /** 四叉树 */
   class QuadTree {
     /** x、y坐标需要传入中点坐标而不是左下角坐标。maxLen代表一个子树所能容纳的最大数据量 */
-    static createQuadTree<T>(name: string, options: { x: number; y: number; width: number; height: number; maxLen: number; ctx?: cc.Graphics }): void;
+    static createQuadTree<T>(
+      name: string,
+      options: {
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+        maxLen: number;
+        ctx?: cc.Graphics;
+      }
+    ): void;
 
     /** 获取四叉树 */
     static getQuadTree<T>(name: string): QuadTree<T>;
 
     /** 四叉树插入节点，x、y坐标传入节点坐标，data传入该节点保存的数据 */
-    static treeInsert<T>(name: string, options: { x: number; y: number; width: number; height: number; data: T }): void;
+    static treeInsert<T>(
+      name: string,
+      options: { x: number; y: number; width: number; height: number; data: T }
+    ): void;
 
     /** 四叉树搜索节点，x、y坐标传入节点坐标，返回数据数组 */
     static treeSearch<T>(name: string, x: number, y: number): T[];
@@ -324,7 +358,7 @@ declare namespace gi {
       /** 下滑 */
       BOTTOM: 3,
       /** 左滑 */
-      LEFT: 4
+      LEFT: 4,
     };
 
     /**
@@ -335,10 +369,20 @@ declare namespace gi {
      * @param callback 回调函数，接收参数：滑动起始点位置，结束点位置，此次滑动的方向（参考gi.Swipe.Direction）
      * @param target 调用回调函数this值
      */
-    static on(node: cc.Node, options: SwipeOptions, callback: Function, target?: any): void;
+    static on(
+      node: cc.Node,
+      options: SwipeOptions,
+      callback: Function,
+      target?: any
+    ): void;
 
     /** 监听一次节点上的滑动操作，详情参考gi.Swipe.on */
-    static once(node: cc.Node, options: SwipeOptions, callback: Function, target?: any): void;
+    static once(
+      node: cc.Node,
+      options: SwipeOptions,
+      callback: Function,
+      target?: any
+    ): void;
 
     /** 取消监听节点滑动 */
     static off(node: cc.Node);
