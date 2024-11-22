@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "8c72c3aa-b19f-410f-8bae-a20cbceec167",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 118,
+  "height": 74,
+  "platformSettings": {},
+  "subMetas": {
+    "Boxing gloves-1": {
+      "ver": "1.0.4",
+      "uuid": "df95335e-e1c2-4673-a057-f70f3d5b1cbf",
+      "rawTextureUuid": "8c72c3aa-b19f-410f-8bae-a20cbceec167",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0.5,
+      "offsetY": -1,
+      "trimX": 1,
+      "trimY": 2,
+      "width": 117,
+      "height": 72,
+      "rawWidth": 118,
+      "rawHeight": 74,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

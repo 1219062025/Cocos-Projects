@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "48278c44-0cef-4a1a-8da4-26c152113126",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 224,
+  "height": 400,
+  "platformSettings": {},
+  "subMetas": {
+    "Refrigerator-2": {
+      "ver": "1.0.4",
+      "uuid": "300b14f0-7bee-4525-ba5d-c4b78e4037c2",
+      "rawTextureUuid": "48278c44-0cef-4a1a-8da4-26c152113126",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 223,
+      "height": 399,
+      "rawWidth": 224,
+      "rawHeight": 400,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

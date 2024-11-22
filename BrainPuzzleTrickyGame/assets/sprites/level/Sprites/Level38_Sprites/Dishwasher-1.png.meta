@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "abcf157c-b011-460c-843f-2467f58039da",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 424,
+  "height": 296,
+  "platformSettings": {},
+  "subMetas": {
+    "Dishwasher-1": {
+      "ver": "1.0.4",
+      "uuid": "360f62a3-924a-4a4c-9e10-60be924aeef5",
+      "rawTextureUuid": "abcf157c-b011-460c-843f-2467f58039da",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 421,
+      "height": 295,
+      "rawWidth": 424,
+      "rawHeight": 296,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

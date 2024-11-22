@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "6445dfc2-f89e-47c7-bef8-4213ad977af4",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 124,
+  "height": 845,
+  "platformSettings": {},
+  "subMetas": {
+    "StreetLight-1": {
+      "ver": "1.0.4",
+      "uuid": "8d81ca49-03f5-4560-a0f3-b641b26b424a",
+      "rawTextureUuid": "6445dfc2-f89e-47c7-bef8-4213ad977af4",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 12,
+      "offsetY": 21.5,
+      "trimX": 24,
+      "trimY": 0,
+      "width": 100,
+      "height": 802,
+      "rawWidth": 124,
+      "rawHeight": 845,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

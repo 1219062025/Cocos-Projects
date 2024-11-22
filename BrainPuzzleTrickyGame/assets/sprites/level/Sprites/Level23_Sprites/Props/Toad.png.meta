@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "fab1eb31-c0f5-4a18-8635-e859e67b89a9",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 172,
+  "height": 172,
+  "platformSettings": {},
+  "subMetas": {
+    "Toad": {
+      "ver": "1.0.4",
+      "uuid": "9299dacb-643e-4c8c-84df-9ee2d4e75dc2",
+      "rawTextureUuid": "fab1eb31-c0f5-4a18-8635-e859e67b89a9",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": -2,
+      "trimX": 15,
+      "trimY": 32,
+      "width": 141,
+      "height": 112,
+      "rawWidth": 172,
+      "rawHeight": 172,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

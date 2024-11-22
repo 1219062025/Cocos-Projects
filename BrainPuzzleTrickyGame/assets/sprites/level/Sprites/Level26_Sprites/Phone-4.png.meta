@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "344554cd-48a7-4a6d-8d37-fabb6651301b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 56,
+  "height": 68,
+  "platformSettings": {},
+  "subMetas": {
+    "Phone-4": {
+      "ver": "1.0.4",
+      "uuid": "25b9ce88-c97e-41d0-9c07-00b657621a04",
+      "rawTextureUuid": "344554cd-48a7-4a6d-8d37-fabb6651301b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 2,
+      "width": 54,
+      "height": 64,
+      "rawWidth": 56,
+      "rawHeight": 68,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "9e04d8c9-3236-441d-8a58-5ac51adbe7bd",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 68,
+  "height": 248,
+  "platformSettings": {},
+  "subMetas": {
+    "Duster": {
+      "ver": "1.0.4",
+      "uuid": "0f123525-8a0f-4403-bd96-5da6f465f93c",
+      "rawTextureUuid": "9e04d8c9-3236-441d-8a58-5ac51adbe7bd",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 67,
+      "height": 246,
+      "rawWidth": 68,
+      "rawHeight": 248,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

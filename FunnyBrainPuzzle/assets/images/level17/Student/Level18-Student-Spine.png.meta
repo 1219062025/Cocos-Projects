@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "aec4ace3-21df-4d24-9284-66d617f65dd5",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": true,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 324,
+  "height": 1816,
+  "platformSettings": {},
+  "subMetas": {
+    "Level18-Student-Spine": {
+      "ver": "1.0.4",
+      "uuid": "3551597d-d993-4922-9fe8-7ce788d12e11",
+      "rawTextureUuid": "aec4ace3-21df-4d24-9284-66d617f65dd5",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1,
+      "offsetY": 0.5,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 318,
+      "height": 1811,
+      "rawWidth": 324,
+      "rawHeight": 1816,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

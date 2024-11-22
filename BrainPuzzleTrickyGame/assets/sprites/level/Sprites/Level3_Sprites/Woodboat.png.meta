@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "53106e9b-67c9-4021-b925-6e9a336d14a4",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 636,
+  "height": 212,
+  "platformSettings": {},
+  "subMetas": {
+    "Woodboat": {
+      "ver": "1.0.4",
+      "uuid": "64d9deb6-d580-40c2-ac8e-332536601551",
+      "rawTextureUuid": "53106e9b-67c9-4021-b925-6e9a336d14a4",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 635,
+      "height": 212,
+      "rawWidth": 636,
+      "rawHeight": 212,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

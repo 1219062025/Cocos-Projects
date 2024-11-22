@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "eaaba48e-9b37-46f8-9859-51178a4629fa",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 728,
+  "height": 468,
+  "platformSettings": {},
+  "subMetas": {
+    "Motorcycle": {
+      "ver": "1.0.4",
+      "uuid": "67fbd850-34f9-4fde-87f6-24a4ac1659c1",
+      "rawTextureUuid": "eaaba48e-9b37-46f8-9859-51178a4629fa",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 725,
+      "height": 468,
+      "rawWidth": 728,
+      "rawHeight": 468,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

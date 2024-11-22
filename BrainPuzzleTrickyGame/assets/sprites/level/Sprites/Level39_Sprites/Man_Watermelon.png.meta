@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "845b0621-8832-4e22-b402-b1faafa4c666",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 163,
+  "height": 204,
+  "platformSettings": {},
+  "subMetas": {
+    "Man_Watermelon": {
+      "ver": "1.0.4",
+      "uuid": "cb7a64f5-7297-4d7b-96eb-dcb51dec6b80",
+      "rawTextureUuid": "845b0621-8832-4e22-b402-b1faafa4c666",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0.5,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 162,
+      "height": 204,
+      "rawWidth": 163,
+      "rawHeight": 204,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

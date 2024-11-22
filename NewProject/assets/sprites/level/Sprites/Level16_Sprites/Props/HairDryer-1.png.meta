@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "2714996a-f85c-49e4-9e11-623eba7cf62b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 172,
+  "height": 172,
+  "platformSettings": {},
+  "subMetas": {
+    "HairDryer-1": {
+      "ver": "1.0.4",
+      "uuid": "c4643c45-809d-4422-bdfa-2662a5981ac8",
+      "rawTextureUuid": "2714996a-f85c-49e4-9e11-623eba7cf62b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 4,
+      "offsetY": -1.5,
+      "trimX": 22,
+      "trimY": 8,
+      "width": 136,
+      "height": 159,
+      "rawWidth": 172,
+      "rawHeight": 172,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

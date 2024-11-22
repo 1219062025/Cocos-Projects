@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "a34c5a5f-ebce-40d9-9d83-af16e307b2bb",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 516,
+  "height": 220,
+  "platformSettings": {},
+  "subMetas": {
+    "YogaMat-2": {
+      "ver": "1.0.4",
+      "uuid": "77432197-3ee1-4e2a-a506-3ffa59a1c4fe",
+      "rawTextureUuid": "a34c5a5f-ebce-40d9-9d83-af16e307b2bb",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": -0.5,
+      "trimX": 0,
+      "trimY": 2,
+      "width": 515,
+      "height": 217,
+      "rawWidth": 516,
+      "rawHeight": 220,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

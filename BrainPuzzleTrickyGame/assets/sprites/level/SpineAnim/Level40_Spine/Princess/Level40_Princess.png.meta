@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "c91d3355-d0ed-4131-a229-cdb58fd6afea",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 2252,
+  "height": 428,
+  "platformSettings": {},
+  "subMetas": {
+    "Level40_Princess": {
+      "ver": "1.0.4",
+      "uuid": "9ca5a1d1-406a-4ae2-9310-736d770338d3",
+      "rawTextureUuid": "c91d3355-d0ed-4131-a229-cdb58fd6afea",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1.5,
+      "offsetY": -0.5,
+      "trimX": 2,
+      "trimY": 3,
+      "width": 2245,
+      "height": 423,
+      "rawWidth": 2252,
+      "rawHeight": 428,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "b9000052-6a9b-46b9-b955-b546ff8bd940",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 180,
+  "height": 128,
+  "platformSettings": {},
+  "subMetas": {
+    "Deodorant-2": {
+      "ver": "1.0.4",
+      "uuid": "6c6bea0d-9e9c-4bbb-9ce9-7a90bc3df3ef",
+      "rawTextureUuid": "b9000052-6a9b-46b9-b955-b546ff8bd940",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 3,
+      "width": 177,
+      "height": 122,
+      "rawWidth": 180,
+      "rawHeight": 128,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "b3330d5b-0a83-41d5-a3b5-1339dc07614c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 124,
+  "height": 72,
+  "platformSettings": {},
+  "subMetas": {
+    "TreasureChest-2": {
+      "ver": "1.0.4",
+      "uuid": "07c4c2fe-6915-4790-9ab1-4ba364ef80ed",
+      "rawTextureUuid": "b3330d5b-0a83-41d5-a3b5-1339dc07614c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 3,
+      "trimY": 3,
+      "width": 118,
+      "height": 65,
+      "rawWidth": 124,
+      "rawHeight": 72,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

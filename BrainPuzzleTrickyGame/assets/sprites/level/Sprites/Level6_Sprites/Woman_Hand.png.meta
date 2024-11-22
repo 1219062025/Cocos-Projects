@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "942c381e-51ba-4599-83dd-a7b7a036ffa6",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 144,
+  "height": 176,
+  "platformSettings": {},
+  "subMetas": {
+    "Woman_Hand": {
+      "ver": "1.0.4",
+      "uuid": "4299c948-d485-4486-af42-db9eb762b49b",
+      "rawTextureUuid": "942c381e-51ba-4599-83dd-a7b7a036ffa6",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 143,
+      "height": 175,
+      "rawWidth": 144,
+      "rawHeight": 176,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "669e9b7d-8ea0-4621-b883-0d209c40df11",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 52,
+  "height": 92,
+  "platformSettings": {},
+  "subMetas": {
+    "Wrench": {
+      "ver": "1.0.4",
+      "uuid": "36065a96-0d2f-4dd3-9bbb-08c2b8e59711",
+      "rawTextureUuid": "669e9b7d-8ea0-4621-b883-0d209c40df11",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 50,
+      "height": 89,
+      "rawWidth": 52,
+      "rawHeight": 92,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

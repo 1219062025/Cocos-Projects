@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "348a9bf6-f1b2-4e11-bbd2-8a96222203f8",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 236,
+  "height": 284,
+  "platformSettings": {},
+  "subMetas": {
+    "Aerolite-2": {
+      "ver": "1.0.4",
+      "uuid": "8a43d35b-6060-4059-9240-8e45e86b158c",
+      "rawTextureUuid": "348a9bf6-f1b2-4e11-bbd2-8a96222203f8",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 234,
+      "height": 283,
+      "rawWidth": 236,
+      "rawHeight": 284,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

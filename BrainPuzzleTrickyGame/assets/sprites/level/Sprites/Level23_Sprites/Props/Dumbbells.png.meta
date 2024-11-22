@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "02800584-f593-46cc-9331-e2556cb275b3",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 172,
+  "height": 172,
+  "platformSettings": {},
+  "subMetas": {
+    "Dumbbells": {
+      "ver": "1.0.4",
+      "uuid": "3d20fe86-165a-4c47-8720-d18a48b0cc6c",
+      "rawTextureUuid": "02800584-f593-46cc-9331-e2556cb275b3",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": -3,
+      "trimX": 10,
+      "trimY": 22,
+      "width": 151,
+      "height": 134,
+      "rawWidth": 172,
+      "rawHeight": 172,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

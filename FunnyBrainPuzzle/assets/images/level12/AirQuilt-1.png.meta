@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "9dada33c-62d1-491b-8587-f1be70534908",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 252,
+  "height": 144,
+  "platformSettings": {},
+  "subMetas": {
+    "AirQuilt-1": {
+      "ver": "1.0.4",
+      "uuid": "a3a02a41-7fb1-4ba7-a8a7-af7092c324a9",
+      "rawTextureUuid": "9dada33c-62d1-491b-8587-f1be70534908",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 250,
+      "height": 141,
+      "rawWidth": 252,
+      "rawHeight": 144,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

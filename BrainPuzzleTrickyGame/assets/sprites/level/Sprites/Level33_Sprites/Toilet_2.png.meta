@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "ff1ad9de-82ae-445d-ac41-56629cdc0383",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 240,
+  "height": 332,
+  "platformSettings": {},
+  "subMetas": {
+    "Toilet_2": {
+      "ver": "1.0.4",
+      "uuid": "d6420554-4a2f-4e45-99a9-c31c8d69d074",
+      "rawTextureUuid": "ff1ad9de-82ae-445d-ac41-56629cdc0383",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 237,
+      "height": 331,
+      "rawWidth": 240,
+      "rawHeight": 332,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

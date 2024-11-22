@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "c5419050-4709-4723-8a1e-d9ffa64dd43c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 264,
+  "height": 384,
+  "platformSettings": {},
+  "subMetas": {
+    "Man-Chair-1": {
+      "ver": "1.0.4",
+      "uuid": "f8f200d3-a19c-46b4-a49e-2895adedcf0f",
+      "rawTextureUuid": "c5419050-4709-4723-8a1e-d9ffa64dd43c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 264,
+      "height": 382,
+      "rawWidth": 264,
+      "rawHeight": 384,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

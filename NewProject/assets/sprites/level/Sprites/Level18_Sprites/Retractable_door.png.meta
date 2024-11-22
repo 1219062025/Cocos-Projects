@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "b1ccb12e-baff-4997-9765-3bf3a58b8e88",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 508,
+  "height": 396,
+  "platformSettings": {},
+  "subMetas": {
+    "Retractable_door": {
+      "ver": "1.0.4",
+      "uuid": "cbd1a441-87eb-41a9-bdbb-c9a2ac4866f6",
+      "rawTextureUuid": "b1ccb12e-baff-4997-9765-3bf3a58b8e88",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 506,
+      "height": 395,
+      "rawWidth": 508,
+      "rawHeight": 396,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

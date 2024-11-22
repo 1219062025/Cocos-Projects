@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "ea86f4b2-9d2c-45f2-b6c8-cf55eb74e2be",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 696,
+  "height": 184,
+  "platformSettings": {},
+  "subMetas": {
+    "Ironboat": {
+      "ver": "1.0.4",
+      "uuid": "932f30cc-7f3d-41cf-a1e8-6c38327f38d4",
+      "rawTextureUuid": "ea86f4b2-9d2c-45f2-b6c8-cf55eb74e2be",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 695,
+      "height": 184,
+      "rawWidth": 696,
+      "rawHeight": 184,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

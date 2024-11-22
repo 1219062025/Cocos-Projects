@@ -52,5 +52,4 @@ Thumbs.db
 #//////////////////////////
 
 .vscode/
-*.meta
 build

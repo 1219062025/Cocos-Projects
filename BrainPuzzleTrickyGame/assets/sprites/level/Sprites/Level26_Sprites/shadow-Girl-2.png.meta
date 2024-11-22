@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "19b40af6-ff48-4d80-97a1-432b8bbaaf9a",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 200,
+  "height": 68,
+  "platformSettings": {},
+  "subMetas": {
+    "shadow-Girl-2": {
+      "ver": "1.0.4",
+      "uuid": "03b95507-7eb7-45de-9fd1-e231877d4954",
+      "rawTextureUuid": "19b40af6-ff48-4d80-97a1-432b8bbaaf9a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 197,
+      "height": 68,
+      "rawWidth": 200,
+      "rawHeight": 68,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

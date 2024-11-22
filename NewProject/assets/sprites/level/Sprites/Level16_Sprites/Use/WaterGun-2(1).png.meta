@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "0f68538e-61e1-48ca-a0ec-8ac9437a3bac",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 632,
+  "height": 212,
+  "platformSettings": {},
+  "subMetas": {
+    "WaterGun-2(1)": {
+      "ver": "1.0.4",
+      "uuid": "5e2a21d5-b599-419b-8b29-10d2bff8b33e",
+      "rawTextureUuid": "0f68538e-61e1-48ca-a0ec-8ac9437a3bac",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 2,
+      "trimY": 1,
+      "width": 628,
+      "height": 209,
+      "rawWidth": 632,
+      "rawHeight": 212,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

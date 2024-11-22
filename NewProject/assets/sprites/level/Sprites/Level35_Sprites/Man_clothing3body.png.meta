@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "808864fd-170c-418b-8114-1602a79cd9ab",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 402,
+  "height": 882,
+  "platformSettings": {},
+  "subMetas": {
+    "Man_clothing3body": {
+      "ver": "1.0.4",
+      "uuid": "fa468577-cc9e-4b77-b9c5-eb9f639a1f53",
+      "rawTextureUuid": "808864fd-170c-418b-8114-1602a79cd9ab",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -3.5,
+      "offsetY": 16.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 393,
+      "height": 847,
+      "rawWidth": 402,
+      "rawHeight": 882,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

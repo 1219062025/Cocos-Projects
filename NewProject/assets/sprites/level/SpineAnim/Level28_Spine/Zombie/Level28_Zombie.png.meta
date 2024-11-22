@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "483f94be-ed82-465c-846f-63e413cd9989",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 424,
+  "height": 920,
+  "platformSettings": {},
+  "subMetas": {
+    "Level28_Zombie": {
+      "ver": "1.0.4",
+      "uuid": "d5433090-7f89-4383-a3c3-8dd243ddb11a",
+      "rawTextureUuid": "483f94be-ed82-465c-846f-63e413cd9989",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1,
+      "offsetY": 1.5,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 418,
+      "height": 913,
+      "rawWidth": 424,
+      "rawHeight": 920,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

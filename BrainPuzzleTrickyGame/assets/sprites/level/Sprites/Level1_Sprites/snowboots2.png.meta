@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "559ca6a8-f4f0-4313-bf45-8043a87e3077",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 124,
+  "height": 104,
+  "platformSettings": {},
+  "subMetas": {
+    "snowboots2": {
+      "ver": "1.0.4",
+      "uuid": "abe21ce8-850c-41da-ad00-a61258bc7c9c",
+      "rawTextureUuid": "559ca6a8-f4f0-4313-bf45-8043a87e3077",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 122,
+      "height": 104,
+      "rawWidth": 124,
+      "rawHeight": 104,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

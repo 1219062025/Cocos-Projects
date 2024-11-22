@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "6cbcedd9-8f08-44b5-b6af-d90020ff3732",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 72,
+  "height": 176,
+  "platformSettings": {},
+  "subMetas": {
+    "SantaClaus_Suger(4)": {
+      "ver": "1.0.4",
+      "uuid": "46f48658-dfca-4970-acae-0080e3ee806b",
+      "rawTextureUuid": "6cbcedd9-8f08-44b5-b6af-d90020ff3732",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 70,
+      "height": 175,
+      "rawWidth": 72,
+      "rawHeight": 176,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

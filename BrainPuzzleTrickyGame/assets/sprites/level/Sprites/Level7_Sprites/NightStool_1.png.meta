@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "e1e0d54d-aa29-4a97-aaaa-b2ac8484c689",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 112,
+  "height": 220,
+  "platformSettings": {},
+  "subMetas": {
+    "NightStool_1": {
+      "ver": "1.0.4",
+      "uuid": "f5bc9025-a2cd-47ab-8fd0-3b9c3c68028b",
+      "rawTextureUuid": "e1e0d54d-aa29-4a97-aaaa-b2ac8484c689",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 110,
+      "height": 219,
+      "rawWidth": 112,
+      "rawHeight": 220,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

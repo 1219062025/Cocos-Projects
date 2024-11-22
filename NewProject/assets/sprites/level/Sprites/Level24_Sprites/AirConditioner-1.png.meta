@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "2e8b1154-1ba0-4a41-a2c3-788ff2c7e771",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 380,
+  "height": 124,
+  "platformSettings": {},
+  "subMetas": {
+    "AirConditioner-1": {
+      "ver": "1.0.4",
+      "uuid": "e96c5b81-3f94-4cbc-b96b-cc69e1b9267b",
+      "rawTextureUuid": "2e8b1154-1ba0-4a41-a2c3-788ff2c7e771",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 377,
+      "height": 124,
+      "rawWidth": 380,
+      "rawHeight": 124,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

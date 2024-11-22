@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "eede84c3-35f5-4ca6-8fb0-6d80cde6faa1",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 136,
+  "height": 64,
+  "platformSettings": {},
+  "subMetas": {
+    "Radiator-2": {
+      "ver": "1.0.4",
+      "uuid": "a2d7e9b8-c87f-402a-a11a-a7e178680e8a",
+      "rawTextureUuid": "eede84c3-35f5-4ca6-8fb0-6d80cde6faa1",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 8,
+      "trimY": 0,
+      "width": 119,
+      "height": 63,
+      "rawWidth": 136,
+      "rawHeight": 64,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

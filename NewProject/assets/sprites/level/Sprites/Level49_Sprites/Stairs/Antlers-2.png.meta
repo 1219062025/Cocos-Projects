@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "9fe0db19-8edc-4542-9708-ab40d3800f73",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 116,
+  "height": 68,
+  "platformSettings": {},
+  "subMetas": {
+    "Antlers-2": {
+      "ver": "1.0.4",
+      "uuid": "10b287e0-8934-4fcf-a332-352cd32521bb",
+      "rawTextureUuid": "9fe0db19-8edc-4542-9708-ab40d3800f73",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 2,
+      "trimY": 1,
+      "width": 112,
+      "height": 65,
+      "rawWidth": 116,
+      "rawHeight": 68,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

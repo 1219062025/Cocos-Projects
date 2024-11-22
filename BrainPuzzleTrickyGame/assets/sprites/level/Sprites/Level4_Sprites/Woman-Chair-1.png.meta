@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "ab201272-3675-45b6-b559-ccb5898a3ebd",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 288,
+  "height": 424,
+  "platformSettings": {},
+  "subMetas": {
+    "Woman-Chair-1": {
+      "ver": "1.0.4",
+      "uuid": "2efadd22-5bf5-4e80-912f-32a6661f035c",
+      "rawTextureUuid": "ab201272-3675-45b6-b559-ccb5898a3ebd",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 287,
+      "height": 422,
+      "rawWidth": 288,
+      "rawHeight": 424,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "4b12fd07-afbb-4692-850b-621c0ad2cef8",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 500,
+  "height": 780,
+  "platformSettings": {},
+  "subMetas": {
+    "Thief2": {
+      "ver": "1.0.4",
+      "uuid": "83ea91ba-0428-47b4-a153-da6c9ffbb2e8",
+      "rawTextureUuid": "4b12fd07-afbb-4692-850b-621c0ad2cef8",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 25,
+      "trimY": 7,
+      "width": 449,
+      "height": 766,
+      "rawWidth": 500,
+      "rawHeight": 780,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "f8c451a8-8164-470d-8919-9f2ffc64d763",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 292,
+  "height": 588,
+  "platformSettings": {},
+  "subMetas": {
+    "Woman_a-4": {
+      "ver": "1.0.4",
+      "uuid": "3f88270f-4e65-4145-b24a-b71c8122face",
+      "rawTextureUuid": "f8c451a8-8164-470d-8919-9f2ffc64d763",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 288,
+      "height": 585,
+      "rawWidth": 292,
+      "rawHeight": 588,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

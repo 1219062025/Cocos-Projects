@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "495d3d9f-c3bd-4c68-80ee-fa43b6c35c7b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 488,
+  "height": 208,
+  "platformSettings": {},
+  "subMetas": {
+    "DogHouse-2": {
+      "ver": "1.0.4",
+      "uuid": "fb420d95-844e-4658-a56a-8e051264f5c8",
+      "rawTextureUuid": "495d3d9f-c3bd-4c68-80ee-fa43b6c35c7b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 487,
+      "height": 208,
+      "rawWidth": 488,
+      "rawHeight": 208,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

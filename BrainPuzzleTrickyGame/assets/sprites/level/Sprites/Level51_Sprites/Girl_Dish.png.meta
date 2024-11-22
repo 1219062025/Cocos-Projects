@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "ebb4fc91-5ff2-4382-95c5-5c103334a0ac",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 184,
+  "height": 148,
+  "platformSettings": {},
+  "subMetas": {
+    "Girl_Dish": {
+      "ver": "1.0.4",
+      "uuid": "12afd50d-c522-469d-ad65-9b280384d13d",
+      "rawTextureUuid": "ebb4fc91-5ff2-4382-95c5-5c103334a0ac",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 7,
+      "trimY": 3,
+      "width": 170,
+      "height": 142,
+      "rawWidth": 184,
+      "rawHeight": 148,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

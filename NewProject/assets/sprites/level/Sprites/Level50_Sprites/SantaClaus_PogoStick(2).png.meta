@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "b91b5bb4-b91b-49bb-ae07-c90266975fc2",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 140,
+  "height": 264,
+  "platformSettings": {},
+  "subMetas": {
+    "SantaClaus_PogoStick(2)": {
+      "ver": "1.0.4",
+      "uuid": "1512febc-de5f-4e16-8c6d-c3f30df542d8",
+      "rawTextureUuid": "b91b5bb4-b91b-49bb-ae07-c90266975fc2",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 137,
+      "height": 263,
+      "rawWidth": 140,
+      "rawHeight": 264,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "a6ef7af8-4653-4ec1-8219-9f117820587b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 192,
+  "height": 204,
+  "platformSettings": {},
+  "subMetas": {
+    "Soil-marmot": {
+      "ver": "1.0.4",
+      "uuid": "14989c69-9a1b-457d-8cdb-12e182532a15",
+      "rawTextureUuid": "a6ef7af8-4653-4ec1-8219-9f117820587b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 188,
+      "height": 203,
+      "rawWidth": 192,
+      "rawHeight": 204,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

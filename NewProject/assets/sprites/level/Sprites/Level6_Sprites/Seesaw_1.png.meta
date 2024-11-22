@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "1bb66b10-ec09-4f7c-8490-a8b7ee42d312",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 108,
+  "height": 104,
+  "platformSettings": {},
+  "subMetas": {
+    "Seesaw_1": {
+      "ver": "1.0.4",
+      "uuid": "bf00ddf9-d1fd-47d1-bc53-0cd6af0af702",
+      "rawTextureUuid": "1bb66b10-ec09-4f7c-8490-a8b7ee42d312",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 106,
+      "height": 101,
+      "rawWidth": 108,
+      "rawHeight": 104,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

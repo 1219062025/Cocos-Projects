@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "ba6b95c0-dc2d-4acb-93a5-febb1e59d561",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 364,
+  "height": 200,
+  "platformSettings": {},
+  "subMetas": {
+    "Helicopter-1": {
+      "ver": "1.0.4",
+      "uuid": "32cf5beb-63ea-44fa-bb9f-af7ea84cca22",
+      "rawTextureUuid": "ba6b95c0-dc2d-4acb-93a5-febb1e59d561",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 363,
+      "height": 197,
+      "rawWidth": 364,
+      "rawHeight": 200,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

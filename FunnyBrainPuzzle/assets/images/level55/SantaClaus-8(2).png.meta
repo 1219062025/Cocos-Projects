@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "189bf73e-1e78-40cb-8d11-a0804168a6ed",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 148,
+  "height": 132,
+  "platformSettings": {},
+  "subMetas": {
+    "SantaClaus-8(2)": {
+      "ver": "1.0.4",
+      "uuid": "25dc3fb0-df4e-44c8-b2b8-118226228a00",
+      "rawTextureUuid": "189bf73e-1e78-40cb-8d11-a0804168a6ed",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 17,
+      "trimY": 4,
+      "width": 114,
+      "height": 124,
+      "rawWidth": 148,
+      "rawHeight": 132,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

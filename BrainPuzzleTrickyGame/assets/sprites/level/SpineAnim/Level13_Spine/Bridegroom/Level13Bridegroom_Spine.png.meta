@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "00ed27cb-f768-4c27-9961-0d93ceaa297f",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 748,
+  "height": 996,
+  "platformSettings": {},
+  "subMetas": {
+    "Level13Bridegroom_Spine": {
+      "ver": "1.0.4",
+      "uuid": "54a430fe-3418-4974-8838-97583c4cf889",
+      "rawTextureUuid": "00ed27cb-f768-4c27-9961-0d93ceaa297f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 4.5,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 743,
+      "height": 983,
+      "rawWidth": 748,
+      "rawHeight": 996,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "8ab9e8bd-b1a8-4cd2-a4aa-1afffd178a7b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 200,
+  "height": 268,
+  "platformSettings": {},
+  "subMetas": {
+    "PoorGirl2": {
+      "ver": "1.0.4",
+      "uuid": "8db83a63-9271-496e-9ace-49d58d3a78ef",
+      "rawTextureUuid": "8ab9e8bd-b1a8-4cd2-a4aa-1afffd178a7b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 5,
+      "trimY": 1,
+      "width": 190,
+      "height": 265,
+      "rawWidth": 200,
+      "rawHeight": 268,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

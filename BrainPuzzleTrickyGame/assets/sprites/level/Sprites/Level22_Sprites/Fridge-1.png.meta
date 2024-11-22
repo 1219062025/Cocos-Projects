@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "5cb4f00b-29df-4460-8ebc-5e888af2bb6a",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 264,
+  "height": 560,
+  "platformSettings": {},
+  "subMetas": {
+    "Fridge-1": {
+      "ver": "1.0.4",
+      "uuid": "5e4ae8f9-0f3a-4b2d-a817-00ddb4364cbb",
+      "rawTextureUuid": "5cb4f00b-29df-4460-8ebc-5e888af2bb6a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 263,
+      "height": 557,
+      "rawWidth": 264,
+      "rawHeight": 560,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

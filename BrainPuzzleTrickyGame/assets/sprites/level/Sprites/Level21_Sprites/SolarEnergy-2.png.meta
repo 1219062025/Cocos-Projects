@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "9f1596aa-f6a7-4085-9fb3-375923d3f8f2",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 440,
+  "height": 292,
+  "platformSettings": {},
+  "subMetas": {
+    "SolarEnergy-2": {
+      "ver": "1.0.4",
+      "uuid": "5bf75898-32c4-4a9e-977b-13b7538b64f1",
+      "rawTextureUuid": "9f1596aa-f6a7-4085-9fb3-375923d3f8f2",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 438,
+      "height": 289,
+      "rawWidth": 440,
+      "rawHeight": 292,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

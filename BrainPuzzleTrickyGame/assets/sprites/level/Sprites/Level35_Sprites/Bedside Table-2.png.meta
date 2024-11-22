@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "35472169-1dda-4b8e-869f-72587b9440c6",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 190,
+  "height": 66,
+  "platformSettings": {},
+  "subMetas": {
+    "Bedside Table-2": {
+      "ver": "1.0.4",
+      "uuid": "c497a351-a543-4d36-a6ae-72d70320416e",
+      "rawTextureUuid": "35472169-1dda-4b8e-869f-72587b9440c6",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 188,
+      "height": 64,
+      "rawWidth": 190,
+      "rawHeight": 66,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

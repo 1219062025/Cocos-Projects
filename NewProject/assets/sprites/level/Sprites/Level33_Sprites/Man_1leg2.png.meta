@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "88d453ee-6971-429e-9b47-ecc392b87992",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 204,
+  "height": 121,
+  "platformSettings": {},
+  "subMetas": {
+    "Man_1leg2": {
+      "ver": "1.0.4",
+      "uuid": "06b0fcfc-4bcf-42bd-996d-b49b6a731c0d",
+      "rawTextureUuid": "88d453ee-6971-429e-9b47-ecc392b87992",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0.5,
+      "offsetY": 3,
+      "trimX": 17,
+      "trimY": 4,
+      "width": 171,
+      "height": 107,
+      "rawWidth": 204,
+      "rawHeight": 121,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

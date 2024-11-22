@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "32d04536-d6f3-425d-9c0d-25076826173c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 68,
+  "height": 64,
+  "platformSettings": {},
+  "subMetas": {
+    "Shoelace-1": {
+      "ver": "1.0.4",
+      "uuid": "6620bc7a-443b-4000-b239-432e2ccf1172",
+      "rawTextureUuid": "32d04536-d6f3-425d-9c0d-25076826173c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 68,
+      "height": 62,
+      "rawWidth": 68,
+      "rawHeight": 64,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

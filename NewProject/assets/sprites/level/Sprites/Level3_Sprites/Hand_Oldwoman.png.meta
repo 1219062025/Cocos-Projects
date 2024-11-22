@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "a99fd126-7f07-462d-aa7f-6502eed0f8b8",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 400,
+  "height": 400,
+  "platformSettings": {},
+  "subMetas": {
+    "Hand_Oldwoman": {
+      "ver": "1.0.4",
+      "uuid": "1bb34d00-5d2e-4048-9b90-6b1275cd729d",
+      "rawTextureUuid": "a99fd126-7f07-462d-aa7f-6502eed0f8b8",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -18,
+      "offsetY": -17.5,
+      "trimX": 8,
+      "trimY": 57,
+      "width": 348,
+      "height": 321,
+      "rawWidth": 400,
+      "rawHeight": 400,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

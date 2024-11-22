@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "46cfac46-be79-4bdc-9e58-9505ab95949e",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 40,
+  "height": 36,
+  "platformSettings": {},
+  "subMetas": {
+    "Necklace": {
+      "ver": "1.0.4",
+      "uuid": "da4f6eab-1c76-4881-a51a-b3fa089f999a",
+      "rawTextureUuid": "46cfac46-be79-4bdc-9e58-9505ab95949e",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 37,
+      "height": 35,
+      "rawWidth": 40,
+      "rawHeight": 36,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "068a4e50-bfe4-4187-8eee-67834d241676",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 312,
+  "height": 620,
+  "platformSettings": {},
+  "subMetas": {
+    "Bathroom Door-1": {
+      "ver": "1.0.4",
+      "uuid": "7ef5a142-de35-423b-a1f5-adca31466df7",
+      "rawTextureUuid": "068a4e50-bfe4-4187-8eee-67834d241676",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 1.5,
+      "trimX": 1,
+      "trimY": 2,
+      "width": 310,
+      "height": 613,
+      "rawWidth": 312,
+      "rawHeight": 620,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

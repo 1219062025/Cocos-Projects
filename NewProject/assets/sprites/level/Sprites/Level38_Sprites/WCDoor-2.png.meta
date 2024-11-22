@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "1d49e03d-52e5-4aa1-b3a7-ec6fb0e2bb55",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 280,
+  "height": 552,
+  "platformSettings": {},
+  "subMetas": {
+    "WCDoor-2": {
+      "ver": "1.0.4",
+      "uuid": "addc95f1-9f36-4708-973e-71254bbf6cad",
+      "rawTextureUuid": "1d49e03d-52e5-4aa1-b3a7-ec6fb0e2bb55",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 278,
+      "height": 552,
+      "rawWidth": 280,
+      "rawHeight": 552,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

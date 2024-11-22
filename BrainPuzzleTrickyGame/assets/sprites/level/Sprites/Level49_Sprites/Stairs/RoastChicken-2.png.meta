@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "39bdfdf6-9a71-47a2-8d88-98e08c2d14c0",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 140,
+  "height": 64,
+  "platformSettings": {},
+  "subMetas": {
+    "RoastChicken-2": {
+      "ver": "1.0.4",
+      "uuid": "924d0f7e-9685-4e5a-819c-67f9e2b80eb5",
+      "rawTextureUuid": "39bdfdf6-9a71-47a2-8d88-98e08c2d14c0",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 139,
+      "height": 62,
+      "rawWidth": 140,
+      "rawHeight": 64,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

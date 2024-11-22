@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "e66a51fb-92b5-4ea7-b80b-b9fa5a75add4",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 129,
+  "height": 237,
+  "platformSettings": {},
+  "subMetas": {
+    "Mistress_2": {
+      "ver": "1.0.4",
+      "uuid": "6cebf328-50e5-4170-a46d-6728b8728f31",
+      "rawTextureUuid": "e66a51fb-92b5-4ea7-b80b-b9fa5a75add4",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 125,
+      "height": 235,
+      "rawWidth": 129,
+      "rawHeight": 237,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

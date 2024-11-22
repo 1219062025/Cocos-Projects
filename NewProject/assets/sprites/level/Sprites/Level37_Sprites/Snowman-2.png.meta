@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "07e623c4-3d5f-466a-9d9c-a19a82cdf5ac",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 380,
+  "height": 64,
+  "platformSettings": {},
+  "subMetas": {
+    "Snowman-2": {
+      "ver": "1.0.4",
+      "uuid": "fee4d0fa-1ada-46c8-ae18-511ac97d9b69",
+      "rawTextureUuid": "07e623c4-3d5f-466a-9d9c-a19a82cdf5ac",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": -0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 377,
+      "height": 63,
+      "rawWidth": 380,
+      "rawHeight": 64,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

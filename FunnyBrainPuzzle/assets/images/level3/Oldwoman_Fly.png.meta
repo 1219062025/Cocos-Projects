@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "9194627f-372e-4556-8b4c-7d6a5fc83274",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 520,
+  "height": 636,
+  "platformSettings": {},
+  "subMetas": {
+    "Oldwoman_Fly": {
+      "ver": "1.0.4",
+      "uuid": "522e1837-7b98-4d03-a0d9-39cf5258a0bc",
+      "rawTextureUuid": "9194627f-372e-4556-8b4c-7d6a5fc83274",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 6,
+      "trimY": 8,
+      "width": 507,
+      "height": 619,
+      "rawWidth": 520,
+      "rawHeight": 636,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

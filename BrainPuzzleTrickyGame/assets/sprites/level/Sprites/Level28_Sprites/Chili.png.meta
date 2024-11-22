@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "4cb4f5ab-d991-4c37-a534-f7cf87b7e70b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 68,
+  "height": 220,
+  "platformSettings": {},
+  "subMetas": {
+    "Chili": {
+      "ver": "1.0.4",
+      "uuid": "1b09b038-8254-470b-9435-40b2c598ad09",
+      "rawTextureUuid": "4cb4f5ab-d991-4c37-a534-f7cf87b7e70b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 66,
+      "height": 219,
+      "rawWidth": 68,
+      "rawHeight": 220,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

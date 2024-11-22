@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "de29952d-4e99-4c6b-af30-ce7547d0c3c9",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 384,
+  "height": 376,
+  "platformSettings": {},
+  "subMetas": {
+    "Wellhead-3": {
+      "ver": "1.0.4",
+      "uuid": "26ccb900-61d6-401f-ab4e-1946633973fe",
+      "rawTextureUuid": "de29952d-4e99-4c6b-af30-ce7547d0c3c9",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 381,
+      "height": 376,
+      "rawWidth": 384,
+      "rawHeight": 376,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

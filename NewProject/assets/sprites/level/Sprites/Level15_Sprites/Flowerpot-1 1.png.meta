@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "3684e632-36cf-4e5a-8060-b84479658917",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 216,
+  "height": 136,
+  "platformSettings": {},
+  "subMetas": {
+    "Flowerpot-1 1": {
+      "ver": "1.0.4",
+      "uuid": "fb5adbbb-18fa-4983-9633-e5dedc33155b",
+      "rawTextureUuid": "3684e632-36cf-4e5a-8060-b84479658917",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 214,
+      "height": 136,
+      "rawWidth": 216,
+      "rawHeight": 136,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

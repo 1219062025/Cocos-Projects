@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "a707365c-c76a-44ff-973d-cd59bbeec75b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 172,
+  "height": 156,
+  "platformSettings": {},
+  "subMetas": {
+    "Firewood": {
+      "ver": "1.0.4",
+      "uuid": "b5767f5c-18a9-4cb0-8671-073563a995ab",
+      "rawTextureUuid": "a707365c-c76a-44ff-973d-cd59bbeec75b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 172,
+      "height": 155,
+      "rawWidth": 172,
+      "rawHeight": 156,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

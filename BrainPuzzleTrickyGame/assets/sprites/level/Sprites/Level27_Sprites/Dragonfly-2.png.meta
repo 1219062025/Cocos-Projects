@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "824c1fb8-f50a-499d-8393-e4d3a860f225",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 20,
+  "height": 40,
+  "platformSettings": {},
+  "subMetas": {
+    "Dragonfly-2": {
+      "ver": "1.0.4",
+      "uuid": "390d8635-0ef2-4aec-a24a-062607c4f782",
+      "rawTextureUuid": "824c1fb8-f50a-499d-8393-e4d3a860f225",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -1,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 16,
+      "height": 39,
+      "rawWidth": 20,
+      "rawHeight": 40,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

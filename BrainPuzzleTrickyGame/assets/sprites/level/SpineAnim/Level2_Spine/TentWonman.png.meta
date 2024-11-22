@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "d5d3dff1-e003-4170-8155-4a3daef29b12",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 3360,
+  "height": 364,
+  "platformSettings": {},
+  "subMetas": {
+    "TentWonman": {
+      "ver": "1.0.4",
+      "uuid": "4c294dce-f4e1-4845-85f4-6868938a4428",
+      "rawTextureUuid": "d5d3dff1-e003-4170-8155-4a3daef29b12",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": -2.5,
+      "trimX": 2,
+      "trimY": 10,
+      "width": 3355,
+      "height": 349,
+      "rawWidth": 3360,
+      "rawHeight": 364,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

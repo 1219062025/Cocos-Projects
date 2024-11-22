@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "b565152a-8726-4ce5-840d-3a4c6913b113",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 258,
+  "height": 616,
+  "platformSettings": {},
+  "subMetas": {
+    "Glassdoor-2": {
+      "ver": "1.0.4",
+      "uuid": "5cd79ad1-6c0d-4ad2-8420-e7ca843f9255",
+      "rawTextureUuid": "b565152a-8726-4ce5-840d-3a4c6913b113",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 258,
+      "height": 616,
+      "rawWidth": 258,
+      "rawHeight": 616,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

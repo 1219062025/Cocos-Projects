@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "998f90dc-c22d-4ff0-8e73-4bd20ca1f56d",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 128,
+  "height": 156,
+  "platformSettings": {},
+  "subMetas": {
+    "Watchtower-1": {
+      "ver": "1.0.4",
+      "uuid": "1a1d5116-9046-4073-845b-5de9f75940c6",
+      "rawTextureUuid": "998f90dc-c22d-4ff0-8e73-4bd20ca1f56d",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 126,
+      "height": 153,
+      "rawWidth": 128,
+      "rawHeight": 156,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

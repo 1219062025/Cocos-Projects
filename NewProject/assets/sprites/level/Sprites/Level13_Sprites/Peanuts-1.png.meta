@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "d623b05c-20fe-4133-acf4-dd72ead79b07",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 68,
+  "height": 48,
+  "platformSettings": {},
+  "subMetas": {
+    "Peanuts-1": {
+      "ver": "1.0.4",
+      "uuid": "917ec8ad-6812-499f-8304-9c5b4c330a49",
+      "rawTextureUuid": "d623b05c-20fe-4133-acf4-dd72ead79b07",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 67,
+      "height": 45,
+      "rawWidth": 68,
+      "rawHeight": 48,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
