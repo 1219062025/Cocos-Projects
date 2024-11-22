@@ -17,7 +17,7 @@
         "__id__": 2
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [],
     "_prefab": null,
     "_opacity": 255,
@@ -189,7 +189,7 @@
       "array": [
         0,
         0,
-        528.2754963085076,
+        518.7395560128698,
         0,
         0,
         0,

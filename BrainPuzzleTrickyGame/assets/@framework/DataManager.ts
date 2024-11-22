@@ -1,18 +1,11 @@
 import InstanceBase from "./common/InstanceBase";
 import EventManager from "./EventManager";
-
-/** 数据模块 */
-interface DataModule {
-  /** 保存数据 */
-  save(): any;
-  /** 加载数据 */
-  load(data: any): void;
-}
+import { DataModule } from "./types/Data";
 
 /** 本地存储key值 */
 const DataSecretkey = "_Data_";
 
-/** 全局数据管理 */
+/** 全局数据模块管理 */
 class DataManager extends InstanceBase {
   /** 已注册的数据模块 */
   private _moduleMap = new Map<string, DataModule>();

@@ -15,8 +15,8 @@ export default class ScreenManagerV6 extends cc.Component {
 
   onLoad() {
     // 监听屏幕方向变化
-    gi.Event.on('LANDSCAPE', this.landscape, this);
-    gi.Event.on('PORTRAIT', this.portrait, this);
+    gi.Event.on("LANDSCAPE", this.landscape, this);
+    gi.Event.on("PORTRAIT", this.portrait, this);
   }
 
   /** 屏幕方向变为横屏 */
@@ -30,7 +30,11 @@ export default class ScreenManagerV6 extends cc.Component {
     let w = winSize.width / 2 / gameCointainerSize.width;
     gi.scale = Math.min(h, w);
 
-    this.failPop.scale = this.successPop.scale = this.title.scale = this.btn.scale = gi.scale;
+    this.failPop.scale =
+      this.successPop.scale =
+      this.title.scale =
+      this.btn.scale =
+        gi.scale;
 
     const gameWrapRect = this.gameWrap.getBoundingBoxToWorld();
     const titleRect = this.title.getBoundingBoxToWorld();
@@ -56,7 +60,11 @@ export default class ScreenManagerV6 extends cc.Component {
     // this.gameWrap.setContentSize(this.gameWrap.width * gi.scale, this.gameWrap.height * gi.scale);
     // this.title.setContentSize(this.title.width * gi.scale, this.title.height * gi.scale);
     this.btn.setContentSize(424, 152);
-    this.failPop.scale = this.successPop.scale = this.title.scale = this.btn.scale = gi.scale;
+    this.failPop.scale =
+      this.successPop.scale =
+      this.title.scale =
+      this.btn.scale =
+        gi.scale;
 
     const gameWrapPos = cc.v2(0, 0);
     const titlePos = cc.v2(0, 832.051);

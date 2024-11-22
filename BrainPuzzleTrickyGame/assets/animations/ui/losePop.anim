@@ -1,0 +1,349 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "losePop",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.625,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "title_node/smoke2": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -505.5,
+                -1,
+                0
+              ]
+            },
+            {
+              "frame": 0.625,
+              "value": [
+                -385.5,
+                -1,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.625,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "title_node/cloud3": {
+        "props": {
+          "position": [
+            {
+              "frame": 0.25,
+              "value": [
+                -462.5,
+                -98.5,
+                0
+              ]
+            },
+            {
+              "frame": 0.625,
+              "value": [
+                -342.5,
+                -98.5,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.25,
+              "value": 0
+            },
+            {
+              "frame": 0.625,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "title_node/cloud2_bottom": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -244,
+                -99,
+                0
+              ]
+            },
+            {
+              "frame": 0.625,
+              "value": [
+                -124,
+                -99,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.625,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "title_node/cloud2": {
+        "props": {
+          "position": [
+            {
+              "frame": 0.25,
+              "value": [
+                -306.5,
+                -99,
+                0
+              ]
+            },
+            {
+              "frame": 0.625,
+              "value": [
+                -186.5,
+                -99,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.25,
+              "value": 0
+            },
+            {
+              "frame": 0.625,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "title_node/cloud1": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -457,
+                -120.5,
+                0
+              ]
+            },
+            {
+              "frame": 0.625,
+              "value": [
+                -337,
+                -120.5,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.625,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "title_node/cloud3_right": {
+        "props": {
+          "position": [
+            {
+              "frame": 0.25,
+              "value": [
+                462.5,
+                -98.5,
+                0
+              ]
+            },
+            {
+              "frame": 0.625,
+              "value": [
+                342.5,
+                -98.5,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.25,
+              "value": 0
+            },
+            {
+              "frame": 0.625,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "title_node/cloud2_bottom_right": {
+        "props": {
+          "position": [
+            {
+              "frame": 0.125,
+              "value": [
+                244,
+                -99,
+                0
+              ]
+            },
+            {
+              "frame": 0.625,
+              "value": [
+                124,
+                -99,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.125,
+              "value": 0
+            },
+            {
+              "frame": 0.625,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "title_node/cloud2_right": {
+        "props": {
+          "position": [
+            {
+              "frame": 0.375,
+              "value": [
+                306.5,
+                -99,
+                0
+              ]
+            },
+            {
+              "frame": 0.625,
+              "value": [
+                186.5,
+                -99,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.375,
+              "value": 0
+            },
+            {
+              "frame": 0.625,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "title_node/cloud1_right": {
+        "props": {
+          "position": [
+            {
+              "frame": 0.125,
+              "value": [
+                457,
+                -120.5,
+                0
+              ]
+            },
+            {
+              "frame": 0.625,
+              "value": [
+                337,
+                -120.5,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.125,
+              "value": 0
+            },
+            {
+              "frame": 0.625,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "title_node/smoke1": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                32.5,
+                -231,
+                0
+              ]
+            },
+            {
+              "frame": 0.625,
+              "value": [
+                32.5,
+                -171,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.625,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "title_node/round": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.625,
+              "value": 255
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

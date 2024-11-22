@@ -36,7 +36,7 @@ class StorageManager extends InstanceBase {
   }
 
   public init(version: string, encryptionKey: string) {
-    this._storage = localStorage;
+    this._storage = cc.sys.localStorage;
     this._version = version;
     this._encryptionKey = encryptionKey;
   }

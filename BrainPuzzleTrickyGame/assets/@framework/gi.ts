@@ -10,12 +10,10 @@ import _ScreenManager from "./ScreenManager";
 import _StorageManager from "./StorageManager";
 import _UIManager from "./UIManager";
 
-import * as _Layer from "./types/Layer";
-
 export namespace gi {
   /** 全局音频管理 */
   export const AudioManager = _AudioManager;
-  /** 全局数据管理 */
+  /** 全局数据模块管理 */
   export const DataManager = _DataManager;
   /** 全局事件管理 */
   export const EventManager = _EventManager;
@@ -34,10 +32,7 @@ export namespace gi {
   /** 全局UI管理 */
   export const UIManager = _UIManager;
 
-  /** Layer类型声明 */
-  export const Layer = _Layer;
-
-  /** 以自定义配置启动框架 */
+  /** 启动框架，如果不调用该函数，后续使用会出错 */
   export function starup(options?: StartupOptions) {
     const root =
       (options && options.UIManager && options.UIManager.root) ||
@@ -64,8 +59,18 @@ export namespace gi {
   }
 
   interface StartupOptions {
-    UIManager?: { root: cc.Node };
-    StorageManager?: { version?: string; encryptionKey?: string };
-    I18nManager?: { basePath?: string };
+    UIManager?: {
+      /** UI层挂载的根节点，默认为Canvas */
+      root: cc.Node;
+    };
+    StorageManager?: {
+      /** 本地存储数据的版本 */
+      version?: string;
+      encryptionKey?: string;
+    };
+    I18nManager?: {
+      /** 多语言资源放置在resources的目录，默认为'i18n' */
+      basePath?: string;
+    };
   }
 }

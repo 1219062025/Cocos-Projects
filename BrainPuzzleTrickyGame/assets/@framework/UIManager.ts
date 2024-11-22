@@ -55,15 +55,20 @@ class UIManager extends InstanceBase {
     }
 
     element.active = true;
+
+    options && options.callback && options.callback(element, registryInfo);
+
     EventManager.emit(`showUI_${key}`, registryInfo);
   }
 
   /** 隐藏指定UI */
-  public hide(key: string) {
+  public hide(key: string, options?: HideOptions) {
     let element = this._uiMap.get(key);
 
     if (element) {
       element.active = false;
+
+      options && options.callback && options.callback();
 
       const registryInfo = this._uiRegistryMap.get(key);
       EventManager.emit(`hideUI_${key}`, registryInfo);
@@ -85,7 +90,16 @@ type RegisterInfo = {
 };
 
 /** 显示UI时的配置 */
-type ShowOptions = {};
+type ShowOptions = {
+  /** 回调函数 */
+  callback?: Function;
+};
+
+/** 隐藏UI时的配置 */
+type HideOptions = {
+  /** 回调函数 */
+  callback?: Function;
+};
 
 /** 注册UI时的配置 */
 type RegisterOptions = {
