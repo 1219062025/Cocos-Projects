@@ -13,6 +13,7 @@ import * as triggerOffCb48 from "./triggerOffCb48";
 import * as triggerOffCb49 from "./triggerOffCb49";
 import * as triggerOffCb50 from "./triggerOffCb50";
 import * as triggerOffCb55 from "./triggerOffCb55";
+import * as triggerOffCb59 from "./triggerOffCb59";
 
 const { ccclass, property } = cc._decorator;
 
@@ -32,6 +33,7 @@ const levelsId = {
   49: triggerOffCb49,
   50: triggerOffCb50,
   55: triggerOffCb55,
+  59: triggerOffCb59,
 };
 
 /** 触发回调管理器 */

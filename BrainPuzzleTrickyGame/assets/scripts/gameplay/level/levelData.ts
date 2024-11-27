@@ -1,3 +1,4 @@
+import { gi } from "../../../@framework/gi";
 import { DataModule } from "../../../@framework/types/Data";
 
 export default class LevelData implements DataModule {
@@ -5,6 +6,8 @@ export default class LevelData implements DataModule {
 
   constructor(level: number) {
     this._currentLevel = level;
+
+    console.log(gi.I18nManager.language);
   }
 
   save() {

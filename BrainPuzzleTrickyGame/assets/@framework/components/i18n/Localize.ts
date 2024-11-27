@@ -48,7 +48,7 @@ export default class Localized extends cc.Component {
   }
 
   private _updateContent(languageData: Record<string, string>) {
-    const value = languageData[this.key];
+    let value = languageData[this.key];
 
     if (!value) {
       console.warn(
@@ -69,17 +69,13 @@ export default class Localized extends cc.Component {
       if (sprite) {
         const url = `${I18nManager.basePath}/${value}`;
 
-        ResourceManager.loadRes(
-          url,
-          cc.SpriteFrame,
-          (err, res: cc.SpriteFrame) => {
-            if (err) {
-              console.error(`[Localized] Failed to load sprite: ${url}`, err);
-              return;
-            }
+        ResourceManager.loadRes(url, cc.SpriteFrame)
+          .then((res: cc.SpriteFrame) => {
             sprite.spriteFrame = res;
-          }
-        );
+          })
+          .catch((err) => {
+            console.error(`[Localized] Failed to load sprite: ${url}`, err);
+          });
       }
     }
   }

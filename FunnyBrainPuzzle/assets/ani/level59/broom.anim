@@ -1,0 +1,136 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "broom",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 2.5,
+  "sample": 8,
+  "speed": 1.5,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            350,
+            -112
+          ],
+          "motionPath": []
+        },
+        {
+          "frame": 1,
+          "value": [
+            310,
+            -245
+          ],
+          "motionPath": [
+            [
+              241,
+              -327,
+              234,
+              -289,
+              248,
+              -376
+            ]
+          ]
+        },
+        {
+          "frame": 2,
+          "value": [
+            338,
+            -421
+          ],
+          "motionPath": []
+        }
+      ],
+      "angle": [
+        {
+          "frame": 0,
+          "value": -15
+        },
+        {
+          "frame": 0.125,
+          "value": -25
+        },
+        {
+          "frame": 0.25,
+          "value": -15
+        },
+        {
+          "frame": 0.375,
+          "value": -5
+        },
+        {
+          "frame": 0.5,
+          "value": -15
+        },
+        {
+          "frame": 0.625,
+          "value": -25
+        },
+        {
+          "frame": 0.75,
+          "value": -15
+        },
+        {
+          "frame": 0.875,
+          "value": -5
+        },
+        {
+          "frame": 1,
+          "value": -15
+        },
+        {
+          "frame": 1.125,
+          "value": -25
+        },
+        {
+          "frame": 1.25,
+          "value": -15
+        },
+        {
+          "frame": 1.375,
+          "value": -5
+        },
+        {
+          "frame": 1.5,
+          "value": -15
+        },
+        {
+          "frame": 1.625,
+          "value": -25
+        },
+        {
+          "frame": 1.75,
+          "value": -15
+        },
+        {
+          "frame": 1.875,
+          "value": -5
+        },
+        {
+          "frame": 2,
+          "value": -15
+        },
+        {
+          "frame": 2.125,
+          "value": -25
+        },
+        {
+          "frame": 2.25,
+          "value": -15
+        },
+        {
+          "frame": 2.375,
+          "value": -5
+        },
+        {
+          "frame": 2.5,
+          "value": -15
+        }
+      ]
+    }
+  },
+  "events": []
+}

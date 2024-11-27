@@ -44,14 +44,14 @@ class AudioManager extends InstanceBase {
         return;
       }
 
-      ResourceManager.loadRes<cc.AudioClip>(path, cc.AudioClip, (err, clip) => {
-        if (err) {
-          reject(err);
-        } else {
+      ResourceManager.loadRes<cc.AudioClip>(path, cc.AudioClip)
+        .then((clip) => {
           this._audioClipMap.set(path, clip);
           resolve(clip);
-        }
-      });
+        })
+        .catch((err) => {
+          reject(err);
+        });
     });
   }
 

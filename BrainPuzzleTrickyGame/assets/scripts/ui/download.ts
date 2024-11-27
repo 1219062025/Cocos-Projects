@@ -1,3 +1,5 @@
+import { gi } from "../../@framework/gi";
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -5,6 +7,13 @@ export default class DownLoad extends cc.Component {
   scaleTime: number = 0.6;
 
   onLoad() {
+    gi.EventManager.on("orientationChanged", this.adapter, this);
+
+    this.scaleTween();
+  }
+
+  adapter() {
+    this.node.stopAllActions();
     this.scaleTween();
   }
 

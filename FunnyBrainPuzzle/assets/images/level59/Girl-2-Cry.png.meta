@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "c67005d0-26d7-4626-9bf3-e71b1287ccd0",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 284,
+  "height": 440,
+  "platformSettings": {},
+  "subMetas": {
+    "Girl-2-Cry": {
+      "ver": "1.0.4",
+      "uuid": "5baf92aa-4009-41f9-8bb1-3c9db381687f",
+      "rawTextureUuid": "c67005d0-26d7-4626-9bf3-e71b1287ccd0",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 282,
+      "height": 440,
+      "rawWidth": 284,
+      "rawHeight": 440,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

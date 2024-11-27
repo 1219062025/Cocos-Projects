@@ -16,6 +16,7 @@ import * as subscription48 from "./subscription48";
 import * as subscription49 from "./subscription49";
 import * as subscription50 from "./subscription50";
 import * as subscription55 from "./subscription55";
+import * as subscription59 from "./subscription59";
 
 const levelsId = {
   1: subscription1,
@@ -36,6 +37,7 @@ const levelsId = {
   49: subscription49,
   50: subscription50,
   55: subscription55,
+  59: subscription59,
 };
 
 export default class SubscriptionControl {

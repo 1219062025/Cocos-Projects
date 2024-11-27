@@ -1,7 +1,7 @@
 const { ccclass, property } = cc._decorator;
 // import DebugUtil from '../eazax-ccc/DebugUtil';
-import i18nMgr from './i18nMgr';
-import { Language, GetCountryName } from './i18nType';
+import i18nMgr from "./i18nMgr";
+import { Language, GetCountryName } from "./i18nType";
 
 @ccclass
 export default class mainI18n extends cc.Component {
@@ -26,7 +26,7 @@ export default class mainI18n extends cc.Component {
 
   onLoad() {
     // 获取浏览器默认语言首位
-    let curlanguge = window.navigator.language.split('-');
+    let curlanguge = window.navigator.language.split("-");
     for (let i = curlanguge.length - 1; i >= 0; i--) {
       let e = curlanguge[i].toLowerCase();
       if (Language[e]) {
@@ -49,7 +49,7 @@ export default class mainI18n extends cc.Component {
   }
 
   private initShowLanguage() {
-    let canvas = cc.find('Canvas');
+    let canvas = cc.find("Canvas");
     let isMobile = this.isMobile();
     if (!isMobile.device) {
       canvas.on(cc.Node.EventType.TOUCH_START, this.show, this);
@@ -72,14 +72,22 @@ export default class mainI18n extends cc.Component {
     // cc.log(agent)
     let result = {
       device: (function () {
-        if ((/iphone|ipod/.test(agent) && /mobile/.test(agent)) || (/ipad/.test(agent) && /mobile/.test(agent)) || (/android/.test(agent) && /mobile/.test(agent))) {
+        if (
+          (/iphone|ipod/.test(agent) && /mobile/.test(agent)) ||
+          (/ipad/.test(agent) && /mobile/.test(agent)) ||
+          (/android/.test(agent) && /mobile/.test(agent))
+        ) {
           return true;
-        } else if (/windows/.test(agent) || /linux/.test(agent) || /mac/.test(agent)) {
+        } else if (
+          /windows/.test(agent) ||
+          /linux/.test(agent) ||
+          /mac/.test(agent)
+        ) {
           return false;
         } else {
           return true;
         }
-      })()
+      })(),
     };
     // cc.log('device', result);
     return result;
@@ -121,10 +129,10 @@ export default class mainI18n extends cc.Component {
     if (this.i18nNode != null) {
       return;
     }
-    let canvas = cc.find('Canvas');
+    let canvas = cc.find("Canvas");
     // 新建node名为i18n
     let i18n = new cc.Node();
-    i18n.name = 'i18n';
+    i18n.name = "i18n";
     i18n.parent = canvas;
     i18n.setPosition(0, 0);
     i18n.width = 50 * 4 + 80 * 5;
@@ -136,11 +144,11 @@ export default class mainI18n extends cc.Component {
     layout.spacingX = 50;
     // layout.resizeMode = cc.Layout.ResizeMode.CONTAINER;
     // 获取有多少个语言
-    let keySInLanguageArr = Object.keys(Language).filter(e => {
+    let keySInLanguageArr = Object.keys(Language).filter((e) => {
       return e.length > 1;
     });
     // cc.log(keySInLanguageArr[1])
-    keySInLanguageArr.forEach(e => {
+    keySInLanguageArr.forEach((e) => {
       let node = new cc.Node();
       node.name = e;
       node.width = node.height = 80;
@@ -166,10 +174,10 @@ export default class mainI18n extends cc.Component {
     if (this.i18nNode) {
       return;
     }
-    let selectMenu = new cc.Node('i18n');
+    let selectMenu = new cc.Node("i18n");
     this.i18nNode = selectMenu;
 
-    selectMenu.setParent(cc.director.getScene().getChildByName('Canvas'));
+    selectMenu.setParent(cc.director.getScene().getChildByName("Canvas"));
     /** 画蓝色线框 */
     let outline = selectMenu.addComponent(cc.Graphics);
     outline.moveTo(-100, 25);
@@ -193,7 +201,7 @@ export default class mainI18n extends cc.Component {
     widget.alignMode = cc.Widget.AlignMode.ON_WINDOW_RESIZE;
 
     /** "文本输入框"节点，根据输入的文本自动匹配语言 */
-    let EditBoxNode = new cc.Node('EditBox');
+    let EditBoxNode = new cc.Node("EditBox");
     EditBoxNode.setParent(selectMenu);
     EditBoxNode.width = 150;
     EditBoxNode.height = 50;
@@ -205,19 +213,23 @@ export default class mainI18n extends cc.Component {
     // 监听输入完成事件
     var editboxEventHandler = new cc.Component.EventHandler();
     editboxEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
-    editboxEventHandler.component = 'mainI18n';
-    editboxEventHandler.handler = 'onEditDidEnded';
+    editboxEventHandler.component = "mainI18n";
+    editboxEventHandler.handler = "onEditDidEnded";
     EditBoxComponent.editingDidEnded.push(editboxEventHandler);
     // 输入框默认显示的文本
     EditBoxComponent.string = Language[i18nMgr.ins.getLanguage()];
     this.EditBoxComponent = EditBoxComponent;
 
     // "展示当前语言"节点，展示当前选择的语言。挂载到"文本输入框"节点上
-    let Label = new cc.Node('Label');
+    let Label = new cc.Node("Label");
     Label.setParent(EditBoxNode);
     Label.color = cc.color(0, 0, 0, 255); //  字体颜色
     let LabelWidget = Label.addComponent(cc.Widget);
-    LabelWidget.isAlignTop = LabelWidget.isAlignBottom = LabelWidget.isAlignLeft = LabelWidget.isAlignRight = true;
+    LabelWidget.isAlignTop =
+      LabelWidget.isAlignBottom =
+      LabelWidget.isAlignLeft =
+      LabelWidget.isAlignRight =
+        true;
     let LabelComponent: cc.Label = Label.addComponent(cc.Label);
     LabelComponent.fontSize = 30;
     LabelComponent.lineHeight = 30;
@@ -229,7 +241,7 @@ export default class mainI18n extends cc.Component {
     EditBoxComponent.textLabel = LabelComponent;
 
     /** "打开下拉框按钮"节点 */
-    let downSelectMenu = new cc.Node('DownSelectMenu');
+    let downSelectMenu = new cc.Node("DownSelectMenu");
     downSelectMenu.setParent(selectMenu);
     downSelectMenu.width = 50;
     downSelectMenu.height = 50;
@@ -245,9 +257,9 @@ export default class mainI18n extends cc.Component {
 
   /** 生成下拉框的选项菜单 */
   createMenu(parent: cc.Node) {
-    let languages = Object.keys(Language).filter(v => isNaN(Number(v)));
+    let languages = Object.keys(Language).filter((v) => isNaN(Number(v)));
     /** "选项菜单"节点 */
-    let itemContainer = new cc.Node('itemContainer');
+    let itemContainer = new cc.Node("itemContainer");
     this.itemContainer = itemContainer;
     itemContainer.setParent(parent);
     itemContainer.setPosition(0, -25);
@@ -260,7 +272,7 @@ export default class mainI18n extends cc.Component {
     layout.type = cc.Layout.Type.VERTICAL;
 
     /** 根据可切换语言数生成对应选项 */
-    let item = new cc.Node('item');
+    let item = new cc.Node("item");
     item.width = itemContainer.width;
     item.height = 100;
     item.addComponent(cc.Label);
@@ -271,9 +283,9 @@ export default class mainI18n extends cc.Component {
       let label = item1.getComponent(cc.Label);
       let chineseName = GetCountryName(lan);
       if (chineseName == undefined) {
-        chineseName = '未知';
+        chineseName = "未知";
       }
-      let str = lan + '-' + chineseName;
+      let str = lan + "-" + chineseName;
       label.string = str;
 
       // touch start event
@@ -285,7 +297,7 @@ export default class mainI18n extends cc.Component {
   /** 切换语言选项后执行 */
   setString(event: cc.Event.EventTouch) {
     // 清空文本输入框
-    this.EditBoxComponent.string = '';
+    this.EditBoxComponent.string = "";
     // 获取触摸的选项的文本，处理后得到语言简写
     let str = event.target.getComponent(cc.Label).string;
     str = this.removeDashAndFollowing(str);
@@ -297,7 +309,7 @@ export default class mainI18n extends cc.Component {
   }
 
   removeDashAndFollowing(str: string): string {
-    return str.replace(/-.*$/, '');
+    return str.replace(/-.*$/, "");
   }
 
   /**

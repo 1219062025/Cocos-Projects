@@ -12,10 +12,10 @@ class I18nManager extends InstanceBase {
   private _currentLanguage: string;
   /** 语言数据缓存映射 */
   private _languageDataMap = new Map<string, I18nData>();
-  /** 语言数据 */
+  /** 当前语言数据 */
   private _languageData: Record<string, string> = null;
   /** 默认语言 */
-  private _fallbackLanguage: string = "en";
+  private _defaultLanguage: string = "en";
   /** 已注册的Localized组件 */
   private _registeredComponents = new Set<Localized>();
   /** 基础路径 */
@@ -35,9 +35,9 @@ class I18nManager extends InstanceBase {
     super();
   }
 
-  init(basePath?: string) {
+  init(basePath?: string, language?: string) {
     this._basePath = basePath || "i18n";
-    this._currentLanguage = this._fallbackLanguage;
+    this._currentLanguage = language || this._defaultLanguage;
   }
 
   /**
@@ -54,20 +54,19 @@ class I18nManager extends InstanceBase {
         resolve(true);
       }
 
-      ResourceManager.loadRes(url, cc.JsonAsset, (err, res: cc.JsonAsset) => {
-        if (err) {
-          console.error(
-            `[I18nManager] Failed to load language file: ${url}`,
-            err
-          );
-          reject(err);
-        } else {
+      ResourceManager.loadRes(url, cc.JsonAsset)
+        .then((res: cc.JsonAsset) => {
           this._languageData = res.json;
           this._languageDataMap.set(language, res.json);
           this._updateAllLocalized();
           resolve(true);
-        }
-      });
+        })
+        .catch((err) => {
+          console.error(
+            `[I18nManager] Failed to load language file: ${url}; ${err}`
+          );
+          reject(err);
+        });
     });
   }
 

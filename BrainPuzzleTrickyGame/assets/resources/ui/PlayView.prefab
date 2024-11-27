@@ -438,8 +438,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "帮助圣诞老人飞跃楼顶，派送礼物",
-    "_N$string": "帮助圣诞老人飞跃楼顶，派送礼物",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 50,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -1201,6 +1201,7 @@
     "downloadBtn": {
       "__id__": 18
     },
+    "titleText": null,
     "_id": ""
   },
   {

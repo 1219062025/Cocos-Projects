@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "142d9958-e81a-4592-8d3c-6339bba2f5f6",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 1080,
+  "height": 940,
+  "platformSettings": {},
+  "subMetas": {
+    "Skybridge": {
+      "ver": "1.0.4",
+      "uuid": "c7220704-0af4-4125-b83e-81c1dacc68ec",
+      "rawTextureUuid": "142d9958-e81a-4592-8d3c-6339bba2f5f6",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1080,
+      "height": 940,
+      "rawWidth": 1080,
+      "rawHeight": 940,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

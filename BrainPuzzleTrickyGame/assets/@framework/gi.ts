@@ -51,7 +51,9 @@ export namespace gi {
 
     const basePath =
       options && options.I18nManager && options.I18nManager.basePath;
-    I18nManager.init(basePath); // 多语言适配管理初始化
+    const language =
+      options && options.I18nManager && options.I18nManager.language;
+    I18nManager.init(basePath, language); // 多语言适配管理初始化
 
     AudioManager.init(); // 音频管理器初始化
 
@@ -71,6 +73,8 @@ export namespace gi {
     I18nManager?: {
       /** 多语言资源放置在resources的目录，默认为'i18n' */
       basePath?: string;
+      /** 默认语言 */
+      language?: string;
     };
   }
 }

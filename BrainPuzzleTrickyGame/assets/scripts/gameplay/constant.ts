@@ -34,4 +34,29 @@ export default class Constant {
     /** 失败弹窗 */
     LOSE_POP: "ui/LosePop",
   };
+
+  /** 语言缩写 */
+  static LANGUAGE_ABBR = {
+    en: "en", // 英语
+    id: "id", // 印尼语
+    ja: "ja", // 日语
+    ko: "ko", // 韩语
+    ms: "ms", // 马来语
+    th: "th", // 泰语
+    tw: "tw", // 台湾
+    vi: "vi", // 越南语
+
+    // pt: "pt", // 巴西
+    // in: "in", // 印度
+    // hi: "hi", // 印地语
+    // il: "il", // 菲律宾语
+    // tr: "tr", // 土耳其语
+    // ng: "ng", // 尼日利亚
+    // es: "es", // 西班牙语
+    // ru: "ru", // 俄语
+    // ar: "ar", // 阿拉伯语
+    // de: "de", // 德语
+    // fr: "fr", // 法语
+    // mx: "mx", // 墨西哥
+  };
 }

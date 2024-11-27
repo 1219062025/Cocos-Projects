@@ -1,0 +1,90 @@
+
+Level59_GrandpaRun.png
+size: 920,600
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Grandpa-5-Body
+  rotate: false
+  xy: 2, 19
+  size: 273, 168
+  orig: 320, 168
+  offset: 47, 0
+  index: -1
+Grandpa-5-Hand-L
+  rotate: true
+  xy: 277, 4
+  size: 124, 248
+  orig: 124, 248
+  offset: 0, 0
+  index: -1
+Grandpa-5-Hand-R
+  rotate: true
+  xy: 527, 2
+  size: 72, 180
+  orig: 72, 180
+  offset: 0, 0
+  index: -1
+Grandpa-5-Head
+  rotate: false
+  xy: 709, 34
+  size: 124, 100
+  orig: 124, 100
+  offset: 0, 0
+  index: -1
+Grandpa-5-Leg-L
+  rotate: false
+  xy: 2, 189
+  size: 300, 196
+  orig: 300, 196
+  offset: 0, 0
+  index: -1
+Grandpa-5-Leg-R
+  rotate: false
+  xy: 304, 130
+  size: 252, 172
+  orig: 252, 172
+  offset: 0, 0
+  index: -1
+Grandpa-6-Body-Down
+  rotate: false
+  xy: 400, 426
+  size: 316, 172
+  orig: 316, 172
+  offset: 0, 0
+  index: -1
+Grandpa-6-Body-UP
+  rotate: false
+  xy: 2, 387
+  size: 396, 211
+  orig: 448, 248
+  offset: 52, 37
+  index: -1
+Grandpa-6-Hand-L
+  rotate: true
+  xy: 400, 304
+  size: 120, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: -1
+Grandpa-6-Hand-R
+  rotate: false
+  xy: 558, 76
+  size: 131, 226
+  orig: 176, 244
+  offset: 16, 0
+  index: -1
+Grandpa-6-Leg-L
+  rotate: true
+  xy: 718, 338
+  size: 260, 200
+  orig: 260, 200
+  offset: 0, 0
+  index: -1
+Grandpa-6-Leg-R
+  rotate: false
+  xy: 691, 136
+  size: 224, 200
+  orig: 224, 200
+  offset: 0, 0
+  index: -1

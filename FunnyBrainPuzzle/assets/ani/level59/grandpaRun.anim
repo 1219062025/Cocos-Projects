@@ -1,0 +1,133 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "grandpaRun",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 2.25,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            272.487,
+            -513.707,
+            0
+          ]
+        },
+        {
+          "frame": 0.625,
+          "value": [
+            -541.585,
+            -277.747,
+            0
+          ]
+        },
+        {
+          "frame": 1.125,
+          "value": [
+            506.539,
+            -46.532,
+            0
+          ]
+        },
+        {
+          "frame": 1.625,
+          "value": [
+            -336.044,
+            257.98,
+            0
+          ]
+        },
+        {
+          "frame": 2.25,
+          "value": [
+            311.413,
+            325.978,
+            0
+          ]
+        }
+      ],
+      "scale": [
+        {
+          "frame": 0,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1,
+            "y": 1
+          }
+        },
+        {
+          "frame": 0.5,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1,
+            "y": 1
+          }
+        },
+        {
+          "frame": 0.625,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": -1,
+            "y": 1
+          }
+        },
+        {
+          "frame": 1,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": -1,
+            "y": 1
+          }
+        },
+        {
+          "frame": 1.125,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1,
+            "y": 1
+          }
+        },
+        {
+          "frame": 1.5,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0.9,
+            "y": 0.9
+          }
+        },
+        {
+          "frame": 1.625,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": -0.8,
+            "y": 0.8
+          }
+        },
+        {
+          "frame": 2.25,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": -0.6,
+            "y": 0.6
+          }
+        }
+      ],
+      "opacity": [
+        {
+          "frame": 1.625,
+          "value": 255
+        },
+        {
+          "frame": 2.25,
+          "value": 0
+        }
+      ]
+    }
+  },
+  "events": []
+}
