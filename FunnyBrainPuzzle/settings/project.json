@@ -8,6 +8,16 @@
     ]
   ],
   "excluded-modules": [
+    "EditBox",
+    "Native Socket",
+    "PageView",
+    "PageViewIndicator",
+    "ProgressBar",
+    "StudioComponent",
+    "Toggle",
+    "TiledMap",
+    "VideoPlayer",
+    "WebView",
     "3D",
     "3D Primitive",
     "3D Physics/cannon.js",
@@ -37,6 +47,5 @@
       "enable": false
     }
   },
-  "migrate-history": [],
-  "start-scene": "current"
+  "migrate-history": []
 }

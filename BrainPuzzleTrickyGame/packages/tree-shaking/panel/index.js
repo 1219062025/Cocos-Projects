@@ -1,37 +1,62 @@
-// panel/index.js, this filename needs to match the one registered in package.json
+const fs = require("fs");
+const path = require("path");
+
 Editor.Panel.extend({
-  // css style for panel
-  style: `
-    :host { margin: 5px; }
-    h2 { color: #f90; }
-  `,
+  // 挂载css文件
+  style: fs.readFileSync(
+    Editor.url("packages://tree-shaking/panel/index.css", "utf8")
+  ),
 
-  // html template for panel
-  template: `
-    <h2>tree-shaking</h2>
-    <hr />
-    <div>State: <span id="label">--</span></div>
-    <hr />
-    <ui-button id="btn">Send To Main</ui-button>
-  `,
+  // 挂载html文件
+  template: fs.readFileSync(
+    Editor.url("packages://tree-shaking/panel/index.html", "utf8")
+  ),
 
-  // element and variable binding
-  $: {
-    btn: '#btn',
-    label: '#label',
-  },
+  ready() {
+    this.plugins = new window.Vue({
+      /** 挂载节点 */
+      el: this.shadowRoot,
 
-  // method executed when template and styles are successfully loaded and initialized
-  ready () {
-    this.$btn.addEventListener('confirm', () => {
-      Editor.Ipc.sendToMain('tree-shaking:clicked');
+      data: function () {
+        return {
+          level: 1,
+        };
+      },
+
+      created() {
+        const levelInputJson = window.localStorage.getItem("level");
+
+        if (levelInputJson) {
+          this.level = JSON.parse(levelInputJson);
+          Editor.Ipc.sendToMain("tree-shaking:set-level", this.level);
+        }
+      },
+
+      methods: {
+        onInputChange(e) {
+          let input = e.currentTarget;
+
+          this.level = input.value;
+        },
+
+        save() {
+          window.localStorage.setItem("level", JSON.stringify(this.level));
+          Editor.Ipc.sendToMain("tree-shaking:set-level", this.level);
+        },
+      },
     });
   },
 
-  // register your ipc messages here
   messages: {
-    'tree-shaking:hello' (event) {
-      this.$label.innerText = 'Hello!';
-    }
-  }
+    "save-level": function (event) {
+      const levelInputJson = window.localStorage.getItem("level");
+
+      if (levelInputJson) {
+        Editor.Ipc.sendToMain(
+          "tree-shaking:set-level",
+          JSON.parse(levelInputJson)
+        );
+      }
+    },
+  },
 });

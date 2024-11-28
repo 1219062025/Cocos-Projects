@@ -8,11 +8,15 @@
     ]
   ],
   "excluded-modules": [
+    "Dynamic Atlas",
     "EditBox",
-    "Physics",
+    "Native Socket",
     "PageView",
     "PageViewIndicator",
-    "ParticleSystem",
+    "ProgressBar",
+    "Slider",
+    "ScrollBar",
+    "ScrollView",
     "StudioComponent",
     "Toggle",
     "TiledMap",

@@ -5,11 +5,8 @@
   "author": "Cocos Creator",
   "main": "main.js",
   "main-menu": {
-    "i18n:MAIN_MENU.package.title/tree-shaking/open": {
-      "message": "tree-shaking:open"
-    },
-    "i18n:MAIN_MENU.package.title/tree-shaking/hello": {
-      "message": "tree-shaking:say-hello"
+    "i18n:MAIN_MENU.package.title/tree-shaking/打开面板": {
+      "message": "tree-shaking:open-panel"
     }
   },
   "panel": {

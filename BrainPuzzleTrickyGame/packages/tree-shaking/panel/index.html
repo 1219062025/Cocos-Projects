@@ -1,0 +1,8 @@
+<div style="margin-top: 30px; display: flex; align-items: center;">
+  <span style="margin-right: 30px;">需要构建的关卡:</span>
+  <ui-input :value="level" @confirm="onInputChange"></ui-input>
+</div>
+
+<hr />
+
+<div style="margin-top: 30px; display: flex; justify-content: center;"><ui-button @confirm="save">保存</ui-button></div>
