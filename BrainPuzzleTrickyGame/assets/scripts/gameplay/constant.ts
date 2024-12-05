@@ -12,6 +12,9 @@ export default class Constant {
 
   /** 数据模块key值 */
   static DATA_MODULE = {
+    /** 全局数据 */
+    GLOBAL: "GlobalData",
+    /** 关卡数据 */
     LEVEL: "LevelData",
   };
 
@@ -33,6 +36,12 @@ export default class Constant {
     VICTORY_POP: "ui/VictoryPop",
     /** 失败弹窗 */
     LOSE_POP: "ui/LosePop",
+  };
+
+  /** 拖拽物类型 */
+  static DRAG_OBJECT_TYPE = {
+    /** 可交互物 */
+    INTERACTABLE: 0,
   };
 
   /** 语言缩写 */

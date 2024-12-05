@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "907f9465-1763-4fa2-b552-74c0f494d15c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 220,
+  "height": 420,
+  "platformSettings": {},
+  "subMetas": {
+    "BadEndA_Woman2": {
+      "ver": "1.0.4",
+      "uuid": "b28fcc35-0e50-4d98-8b70-2af69a2b9006",
+      "rawTextureUuid": "907f9465-1763-4fa2-b552-74c0f494d15c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 6,
+      "trimY": 9,
+      "width": 208,
+      "height": 402,
+      "rawWidth": 220,
+      "rawHeight": 420,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

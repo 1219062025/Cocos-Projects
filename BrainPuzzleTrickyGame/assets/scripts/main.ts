@@ -1,7 +1,8 @@
 import { gi } from "../@framework/gi";
 import { LayerType } from "../@framework/types/Layer";
-import Constant from "./gameplay/constant";
-import LevelData from "./gameplay/level/levelData";
+import Constant from "./gameplay/Constant";
+import LevelData from "./data/level/LevelData";
+import GlobalData from "./data/GlobalData";
 
 const { ccclass, property, executeInEditMode } = cc._decorator;
 
@@ -27,9 +28,14 @@ export default class Main extends cc.Component {
       gi.I18nManager.switchLanguage(lan);
     }
 
+    // 初始化全局数据
+    const globalData = new GlobalData();
+    gi.DataManager.register(Constant.DATA_MODULE.GLOBAL, globalData);
+
     // 初始化关卡数据
     const levelData = new LevelData(this.level);
     gi.DataManager.register(Constant.DATA_MODULE.LEVEL, levelData);
+
     gi.DataManager.loadAllData();
 
     // 注册过关弹窗UI

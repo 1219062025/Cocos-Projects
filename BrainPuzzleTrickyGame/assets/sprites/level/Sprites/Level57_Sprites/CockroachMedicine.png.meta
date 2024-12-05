@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "de57eb6c-f8da-40db-a404-546e6177d004",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 48,
+  "height": 47,
+  "platformSettings": {},
+  "subMetas": {
+    "CockroachMedicine": {
+      "ver": "1.0.4",
+      "uuid": "bed48997-6e59-4a4e-be93-47babeca03ac",
+      "rawTextureUuid": "de57eb6c-f8da-40db-a404-546e6177d004",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 48,
+      "height": 47,
+      "rawWidth": 48,
+      "rawHeight": 47,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

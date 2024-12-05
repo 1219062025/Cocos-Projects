@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
+// 关于自定义项目构建流程的相关文档：https://docs.cocos.com/creator/2.3/manual/zh/publish/custom-project-build-template.html
+
 /** 需要构建的关卡，除了这个关卡外其他关卡的预制体、图片纹理、相关json配置都要删除掉以压缩包体积 */
 var level = 0;
 

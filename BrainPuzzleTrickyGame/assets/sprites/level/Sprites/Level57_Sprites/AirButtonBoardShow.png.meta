@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "6fd6f931-1fcf-4624-9b5e-932da2c11c8b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 360,
+  "height": 388,
+  "platformSettings": {},
+  "subMetas": {
+    "AirButtonBoardShow": {
+      "ver": "1.0.4",
+      "uuid": "a44f9cc2-e511-4f48-a2ee-38383684b7f2",
+      "rawTextureUuid": "6fd6f931-1fcf-4624-9b5e-932da2c11c8b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 9,
+      "width": 358,
+      "height": 369,
+      "rawWidth": 360,
+      "rawHeight": 388,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

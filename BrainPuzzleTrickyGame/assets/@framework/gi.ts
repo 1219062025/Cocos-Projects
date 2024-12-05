@@ -9,6 +9,7 @@ import _ResourceManager from "./ResourceManager";
 import _ScreenManager from "./ScreenManager";
 import _StorageManager from "./StorageManager";
 import _UIManager from "./UIManager";
+import _Utils from "./Utils";
 
 export namespace gi {
   /** 全局音频管理 */
@@ -31,6 +32,8 @@ export namespace gi {
   export const StorageManager = _StorageManager;
   /** 全局UI管理 */
   export const UIManager = _UIManager;
+  /** 工具函数 */
+  export const Utils = _Utils;
 
   /** 启动框架，如果不调用该函数，后续使用会出错 */
   export function starup(options?: StartupOptions) {

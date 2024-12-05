@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "3b251f13-5d40-4c6b-a2fb-947dc7c6c318",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 48,
+  "height": 48,
+  "platformSettings": {},
+  "subMetas": {
+    "AirButtonBoard1": {
+      "ver": "1.0.4",
+      "uuid": "ae0c44f6-a6a2-4725-b0c1-e22cd8472b6d",
+      "rawTextureUuid": "3b251f13-5d40-4c6b-a2fb-947dc7c6c318",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 48,
+      "height": 48,
+      "rawWidth": 48,
+      "rawHeight": 48,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

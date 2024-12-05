@@ -11,7 +11,7 @@ export default class ResControl extends cc.Component {
   })
   tags: number[] = [0];
 
-  @property({ tooltip: "选中该资源时是否直接使用而不是随机选取     " })
+  @property({ tooltip: "选中该资源时是否直接使用而不是随机选取" })
   unique: boolean = false;
 
   /** 是否可以重复使用 */

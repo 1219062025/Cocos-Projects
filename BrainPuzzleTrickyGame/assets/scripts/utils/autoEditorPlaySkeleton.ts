@@ -2,18 +2,18 @@ const { ccclass, property, executeInEditMode } = cc._decorator;
 
 @ccclass
 @executeInEditMode
-export default class NewClass extends cc.Component {
+export default class AutoEditorPlaySkeleton extends cc.Component {
   onLoad() {
     if (CC_EDITOR) {
       // 重写update方法 达到在编辑模式下 自动播放动画的功能
-      sp.Skeleton.prototype['update'] = function (dt) {
+      sp.Skeleton.prototype["update"] = function (dt) {
         if (CC_EDITOR) {
-          cc['engine']._animatingInEditMode = 1;
-          cc['engine'].animatingInEditMode = 1;
+          cc["engine"]._animatingInEditMode = 1;
+          cc["engine"].animatingInEditMode = 1;
         }
         if (this.paused) return;
 
-        dt *= this.timeScale * sp['timeScale'];
+        dt *= this.timeScale * sp["timeScale"];
 
         if (this.isAnimationCached()) {
           // Cache mode and has animation queue.

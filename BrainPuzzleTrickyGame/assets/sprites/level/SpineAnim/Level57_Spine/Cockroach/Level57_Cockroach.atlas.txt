@@ -1,0 +1,55 @@
+
+Level57_Cockroach.png
+size: 1900,688
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Bg_door1
+  rotate: true
+  xy: 784, 97
+  size: 282, 882
+  orig: 294, 888
+  offset: 3, 2
+  index: -1
+Bg_door1(1)
+  rotate: true
+  xy: 784, 7
+  size: 88, 882
+  orig: 88, 885
+  offset: 0, 0
+  index: -1
+Ending_girl
+  rotate: false
+  xy: 1668, 129
+  size: 193, 352
+  orig: 200, 360
+  offset: 3, 4
+  index: -1
+Ending_hand
+  rotate: true
+  xy: 2, 8
+  size: 675, 780
+  orig: 675, 780
+  offset: 0, 0
+  index: -1
+Flamethrower2
+  rotate: true
+  xy: 1668, 2
+  size: 125, 162
+  orig: 144, 168
+  offset: 9, 3
+  index: -1
+WomanSecond1
+  rotate: true
+  xy: 784, 381
+  size: 302, 533
+  orig: 320, 560
+  offset: 11, 17
+  index: -1
+WomanSecond2
+  rotate: true
+  xy: 1319, 483
+  size: 200, 578
+  orig: 200, 580
+  offset: 0, 2
+  index: -1

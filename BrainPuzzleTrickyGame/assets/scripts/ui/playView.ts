@@ -1,6 +1,8 @@
 import { gi } from "../../@framework/gi";
-import Constant from "../gameplay/constant";
-import LevelData from "../gameplay/level/levelData";
+import Constant from "../gameplay/Constant";
+import LevelData from "../data/level/LevelData";
+import GlobalData from "../data/GlobalData";
+import StarupLevel from "../gameplay/StarupLevel";
 
 const { ccclass, property } = cc._decorator;
 
@@ -15,9 +17,6 @@ export default class PlayView extends cc.Component {
   @property({ type: cc.Node })
   downloadBtn: cc.Node = null;
 
-  @property()
-  titleText: cc.Label = null;
-
   onLoad() {
     // 屏幕适配
     this.adapter(gi.ScreenManager.getOrientation());
@@ -28,27 +27,26 @@ export default class PlayView extends cc.Component {
       Constant.DATA_MODULE.LEVEL
     );
 
+    // 设置游戏视窗
+    const globalData = gi.DataManager.getModule<GlobalData>(
+      Constant.DATA_MODULE.GLOBAL
+    );
+    globalData.setGameView(this.wrap);
+
     // 加载关卡场景
     gi.ResourceManager.loadRes(
       `${Constant.LEVEL_PREFIX.PATH}${levelData.getCurrentLevel()}`,
       cc.Prefab
     )
       .then((levelPrefab: cc.Prefab) => {
-        this.node.getChildByName("wrap").addChild(cc.instantiate(levelPrefab));
+        const root = cc.instantiate(levelPrefab);
+        root.addComponent(StarupLevel);
+        this.node.getChildByName("wrap").addChild(root);
       })
       .catch((err) => {
         console.error(`[GAME] Error loading level preform, game exits, ${err}`);
         return;
       });
-
-    this.scheduleOnce(() => {
-      gi.ResourceManager.loadRes(
-        `${Constant.LEVEL_PREFIX.PATH}${levelData.getCurrentLevel()}`,
-        cc.Prefab
-      ).then((levelPrefab: cc.Prefab) => {
-        console.log("二次加载完成");
-      });
-    }, 2);
   }
 
   /** 根据屏幕方向适配游戏窗口内的节点位置以及缩放 */
