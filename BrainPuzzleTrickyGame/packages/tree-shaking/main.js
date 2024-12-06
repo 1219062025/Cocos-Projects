@@ -86,12 +86,57 @@ async function onBeforeBuildFinish(options, callback) {
   callback();
 }
 
-/** 构建完全结束时触发，根据setting.js文件找到其他关卡预制体资源的json文件所在目录并进行删除 */
+/** 构建完全结束时触发，根据setting.js文件找到其他关卡预制体资源的json文件所在目录并进行删除；删除project.js文件下其他关卡的脚本代码以压缩project.js体积 */
 function onBuildFinish(options, callback) {
   if (level === 0) {
     callback();
   }
 
+  customProject();
+  customSetting();
+
+  callback();
+}
+
+/** 自定义project.js */
+function customProject() {
+  const url = `../../build${level}/web-mobile/src/project.js`;
+  const projectUrl = path.resolve(__dirname, url);
+
+  const strRegex = new RegExp(
+    `n\\.levelContext(?!${level})\\d+=(\\{.*?\\}),cc\\.`,
+    "g"
+  );
+
+  // const strRegex1 = new RegExp(`LevelContext(?!${level})\\d+:\\[.*?\\],`, "g");
+
+  // 读取文件内容
+  fs.readFile(projectUrl, "utf8", (err, data) => {
+    if (err) {
+      Editor.error("Error reading the file:", err);
+      return;
+    }
+
+    // 使用正则删除匹配的字符
+    let updatedContent = data.replace(strRegex, (match, p1) => {
+      // 将捕获组 p1（即 {.*?} 部分）替换成{}
+      return match.replace(p1, "{}");
+    });
+
+    // 将更新后的内容覆盖写入原文件
+    fs.writeFile(projectUrl, updatedContent, "utf8", (writeErr) => {
+      if (writeErr) {
+        Editor.error("Error writing to the file:", writeErr);
+        return;
+      }
+
+      Editor.log("File successfully updated!");
+    });
+  });
+}
+
+/** 自定义setting.js */
+function customSetting() {
   const url = `../../build${level}/web-mobile/src/settings.js`;
   const settingUrl = path.resolve(__dirname, url);
   // 获取构建完成后setting.js文件里面的window._CCSettings对象
@@ -140,8 +185,6 @@ function onBuildFinish(options, callback) {
       }
     }
   }
-
-  callback();
 }
 
 /** 递归删除指定目录下指定扩展名的文件 */

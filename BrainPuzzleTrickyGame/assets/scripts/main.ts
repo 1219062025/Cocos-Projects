@@ -29,7 +29,7 @@ export default class Main extends cc.Component {
     }
 
     // 初始化全局数据
-    const globalData = new GlobalData();
+    const globalData = new GlobalData(this.debug);
     gi.DataManager.register(Constant.DATA_MODULE.GLOBAL, globalData);
 
     // 初始化关卡数据

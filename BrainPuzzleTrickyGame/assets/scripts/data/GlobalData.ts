@@ -4,17 +4,27 @@ import { DataModule } from "../../@framework/types/Data";
 export default class GlobalData implements DataModule {
   /** 游戏视窗节点 */
   private _gameView: cc.Node;
+  /** 是否是debug模式 */
+  private _debug: boolean;
 
-  constructor() {}
+  constructor(debug: boolean) {
+    this._debug = debug;
+  }
 
   save() {
     return {
       gameView: this._gameView,
+      debug: this._debug,
     };
   }
 
   load(data: any): void {
     this._gameView = data.gameView;
+    this._debug = data.debug;
+  }
+
+  isDebug(): boolean {
+    return this._debug;
   }
 
   /** 获取游戏视窗节点 */

@@ -1,4 +1,5 @@
 import { gi } from "../../../../@framework/gi";
+import context from "../../context/ContextManager";
 import Command from "./Command";
 
 const { ccclass, property, menu } = cc._decorator;
@@ -30,17 +31,7 @@ export class FunctionCommand extends Command {
   //   return cc.Enum(dynamicEnum);
   // }
 
-  async start() {
-    console.log(await import("../../../LevelScript57"));
-    // gi.ResourceManager.loadRes(`test`, cc.TextAsset)
-    //   .then((asset: cc.TextAsset) => {
-    //     console.log(asset);
-    //     // const selectedValue = Variables.VariableOptions[this.selectedVariable];
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+  execute() {
+    context.callFunction("jump");
   }
-
-  execute() {}
 }
