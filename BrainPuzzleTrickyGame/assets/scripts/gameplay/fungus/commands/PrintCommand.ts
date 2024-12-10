@@ -9,5 +9,7 @@ export class PrintCommand extends Command {
 
   execute() {
     console.log(this.message);
+
+    return Promise.resolve();
   }
 }

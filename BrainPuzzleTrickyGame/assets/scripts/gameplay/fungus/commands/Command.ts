@@ -19,5 +19,8 @@ export default abstract class Command extends cc.Component {
     manager.register(this);
   }
 
-  abstract execute(): void;
+  /** 执行命令 */
+  execute(): Promise<void> {
+    return Promise.resolve(); // 默认同步操作，直接返回已解析的 Promise
+  }
 }

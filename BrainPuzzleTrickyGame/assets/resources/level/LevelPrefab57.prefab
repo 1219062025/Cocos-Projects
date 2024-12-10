@@ -9600,7 +9600,8 @@
     },
     "_enabled": true,
     "tags": [
-      "1"
+      "1",
+      "jhuih"
     ],
     "priority": 0,
     "_id": ""
@@ -9613,7 +9614,11 @@
       "__id__": 268
     },
     "_enabled": true,
-    "expression": "${2}",
+    "expressions": [
+      "${2}",
+      "${1} && ${2}",
+      "${1}"
+    ],
     "_id": ""
   },
   {
@@ -9647,6 +9652,7 @@
     },
     "_enabled": true,
     "id": "2",
+    "index": 0,
     "_id": ""
   },
   {

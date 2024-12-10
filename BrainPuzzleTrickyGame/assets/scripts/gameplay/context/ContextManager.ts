@@ -5,9 +5,9 @@ import { levelContext57 } from "./LevelContext57";
 /** 关卡上下文 */
 export interface LevelContext {
   /** 关卡变量 */
-  variables: Record<string, any>;
+  variables?: Record<string, any>;
   /** 关卡函数 */
-  functions: Record<string, (...args: any[]) => any>;
+  functions?: Record<string, (...args: any[]) => any>;
 }
 
 /** 上下文管理器 */
@@ -71,6 +71,15 @@ class ContextManager extends InstanceBase {
       return this._currentContext.functions[name](...args);
     }
     throw new Error(`Function '${name}' not found in current context.`);
+  }
+
+  /** 获取所有关卡函数 */
+  public getFunctions() {
+    if (this._currentContext && this._currentContext.functions) {
+      return this._currentContext.functions;
+    } else {
+      return {};
+    }
   }
 
   /** 工具函数：解析嵌套属性路径 */

@@ -22,15 +22,34 @@ export default class CommandManager extends cc.Component {
     return this.commands.get(id) || null;
   }
 
-  /** 执行命令 */
-  executeCommand(id: string) {
+  /** 执行命令，并返回一个 Promise */
+  executeCommand(id: string): Promise<void> {
     const command = this.getCommand(id);
-    if (command) {
-      return command.execute();
-    } else {
-      console.warn(
-        `[CommandManager] Command ID '${id}' not found on node '${this.node.name}'.`
-      );
-    }
+    return new Promise((resolve, reject) => {
+      if (command) {
+        command
+          .execute()
+          .then(() => {
+            resolve(); // 命令执行完成
+          })
+          .catch((error) => {
+            reject(error); // 命令执行失败
+          });
+      } else {
+        reject(new Error(`Command ID '${id}' not found`));
+      }
+    });
   }
+
+  // /** 执行命令 */
+  // executeCommand(id: string) {
+  //   const command = this.getCommand(id);
+  //   if (command) {
+  //     return command.execute();
+  //   } else {
+  //     console.warn(
+  //       `[CommandManager] Command ID '${id}' not found on node '${this.node.name}'.`
+  //     );
+  //   }
+  // }
 }

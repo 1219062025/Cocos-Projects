@@ -1,15 +1,19 @@
+import context from "../context/ContextManager";
 import CommandManager from "./commands/CommandManager";
 import { ExpressionEvaluator } from "./ExpressionEvaluator";
 
-const { ccclass, property, menu, disallowMultiple, requireComponent } =
-  cc._decorator;
+const { ccclass, property, menu, disallowMultiple } = cc._decorator;
 
 @ccclass
 @disallowMultiple
 @menu("Fungus/BranchController")
 export default class BranchController extends cc.Component {
-  @property({ displayName: "分支选择表达式", tooltip: "分支表达式" })
-  expression: string = "";
+  @property({
+    type: [cc.String],
+    displayName: "分支选择表达式",
+    tooltip: "分支表达式",
+  })
+  expressions: string[] = [];
 
   /** 表达式解析器 */
   private _evaluator: ExpressionEvaluator;
@@ -19,21 +23,17 @@ export default class BranchController extends cc.Component {
   onLoad(): void {
     this._manager = this.node.getComponent(CommandManager);
     this._evaluator = new ExpressionEvaluator(
-      (name) => 2, // 从全局变量管理器解析变量
+      (name) => context.getVariable(name), // 从上下文管理器解析变量
       (id) => this._manager.executeCommand(id) // 执行命令
     );
   }
 
-  executeBranch() {
+  async executeBranch() {
     try {
-      if (!this._manager) {
-        console.error(
-          `[BranchController] CommandManager not found on node '${this.node.name}'.`
-        );
-        return;
+      for (const expr of this.expressions) {
+        // 等待每个命令解析并执行完成后再继续下一个命令
+        await this._evaluator.evaluate(expr);
       }
-
-      this._evaluator.evaluate(this.expression);
     } catch (error) {
       console.error(
         `[BranchController] Failed to execute branch: ${error.message}`
