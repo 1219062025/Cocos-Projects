@@ -6,6 +6,7 @@ import GlobalData from "./data/GlobalData";
 
 const { ccclass, property, executeInEditMode } = cc._decorator;
 
+/** 游戏入口，处理全局框架、UI、数据 */
 @ccclass
 export default class Main extends cc.Component {
   /** 当前关卡是第几关 */

@@ -13,6 +13,19 @@ declare module "jsep" {
       [key: string]: baseTypes | Expression | Array<baseTypes | Expression>;
     }
 
+    export interface IfExpression extends Expression {
+      type: "IfExpression";
+      condition: string;
+    }
+
+    export interface ElseExpression extends Expression {
+      type: "ElseExpression";
+    }
+
+    export interface EndIfExpression extends Expression {
+      type: "EndIfExpression";
+    }
+
     export interface CommandExpression extends Expression {
       type: "CommandExpression";
       value: string;
@@ -114,7 +127,13 @@ declare module "jsep" {
       | "UnaryExpression"
       | "BinaryExpression"
       | "ConditionalExpression"
-      | "ArrayExpression";
+      | "ArrayExpression"
+      | "IfExpression"
+      | "ElseExpression"
+      | "EndIfExpression"
+      | "CommandExpression"
+      | "VariableExpression"
+      | "AssignmentExpression";
 
     export type CoreExpression =
       | ArrayExpression
@@ -127,7 +146,13 @@ declare module "jsep" {
       | Literal
       | MemberExpression
       | ThisExpression
-      | UnaryExpression;
+      | UnaryExpression
+      | IfExpression
+      | ElseExpression
+      | EndIfExpression
+      | CommandExpression
+      | VariableExpression
+      | AssignmentExpression;
 
     export type PossibleExpression = Expression | undefined;
     export interface HookScope {

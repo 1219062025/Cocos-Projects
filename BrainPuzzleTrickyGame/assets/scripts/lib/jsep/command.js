@@ -3,7 +3,6 @@ const plugin = {
   init(jsep) {
     const regex = /^\$\{([^\}]*)\}/; // 匹配 ${} 结构
 
-    // jsep.addIdentifierChar("$");
     jsep.hooks.add("gobble-token", function gobbleCommand(env) {
       const match = this.expr.slice(this.index).match(regex);
 

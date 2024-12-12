@@ -1,7 +1,7 @@
 const plugin = {
   name: "variable",
   init(jsep) {
-    const regex = /^\{\{([^\}\}]*)\}/; // 匹配 {{}} 结构
+    const regex = /^\{\{([^\}\}]*)\}\}/; // 匹配 {{}} 结构
 
     jsep.hooks.add("gobble-token", function gobbleVariable(env) {
       const match = this.expr.slice(this.index).match(regex);

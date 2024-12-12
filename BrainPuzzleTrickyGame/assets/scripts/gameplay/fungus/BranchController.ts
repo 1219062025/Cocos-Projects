@@ -1,8 +1,13 @@
 import context from "../context/ContextManager";
 import CommandManager from "./commands/CommandManager";
-import { ExpressionEvaluator } from "./ExpressionEvaluator";
+import ExpressionEvaluator from "./ExpressionEvaluator";
 
 const { ccclass, property, menu, disallowMultiple } = cc._decorator;
+
+interface IfElseStack {
+  type: "if" | "else";
+  active: boolean;
+}
 
 @ccclass
 @disallowMultiple
@@ -10,34 +15,94 @@ const { ccclass, property, menu, disallowMultiple } = cc._decorator;
 export default class BranchController extends cc.Component {
   @property({
     type: [cc.String],
-    displayName: "分支选择表达式",
     tooltip: "分支表达式",
   })
   expressions: string[] = [];
 
   /** 表达式解析器 */
-  private _evaluator: ExpressionEvaluator;
+  private _evaluator: typeof ExpressionEvaluator;
   /** 命令管理器 */
   private _manager: CommandManager;
 
   onLoad(): void {
     this._manager = this.node.getComponent(CommandManager);
-    this._evaluator = new ExpressionEvaluator(
+
+    this._evaluator = ExpressionEvaluator;
+    this._evaluator.install(
       (name) => context.getVariable(name), // 从上下文管理器解析变量
       (id) => this._manager.executeCommand(id) // 执行命令
     );
   }
 
   async executeBranch() {
-    try {
-      for (const expr of this.expressions) {
-        // 等待每个命令解析并执行完成后再继续下一个命令
-        await this._evaluator.evaluate(expr);
+    let i = 0;
+    const stack: IfElseStack[] = [];
+
+    while (i < this.expressions.length) {
+      const expression = this.expressions[i];
+      const ast = this._evaluator.jsepAST(expression);
+
+      switch (ast.type) {
+        case "IfExpression":
+          const result = await this._evaluator.evaluate(ast);
+          stack.push({ type: "if", active: this.isActive(stack) && result });
+
+          break;
+
+        case "ElseExpression":
+          console.log(ast);
+          if (stack.length > 0 && stack[stack.length - 1].type === "if") {
+            const lastIf = stack.pop();
+            stack.push({
+              type: "else",
+              active: this.isActive(stack) && !lastIf.active, // 激活 else 块
+            });
+          } else {
+            throw new Error("Unexpected 'else' without matching 'if'");
+          }
+
+          break;
+
+        case "EndIfExpression":
+          console.log(ast);
+          if (
+            stack.length > 0 &&
+            (stack[stack.length - 1].type === "if" ||
+              stack[stack.length - 1].type === "else")
+          ) {
+            stack.pop(); // 弹出当前 if-else 块
+          } else {
+            throw new Error(
+              "Unexpected 'endif' without matching 'if' or 'else'"
+            );
+          }
+
+          break;
+
+        default:
+          if (this.isActive(stack)) {
+            await this._evaluator.evaluate(ast);
+          }
       }
-    } catch (error) {
-      console.error(
-        `[BranchController] Failed to execute branch: ${error.message}`
-      );
+      i++;
     }
+    if (stack.length > 0) {
+      // 调用endif前，要么只有一个if，要么if-else的数量要匹配
+      /**
+       * 如果if完想接着if，那就要两个endif，例如：
+       * {if {{player.hp}} === 1}
+       * ${2}
+       * {if {{player.hp}} === 0 && ${3} }
+       * ${4}
+       * {endif}
+       * {endif}
+       */
+      throw new Error("Unmatched 'if' or 'else' block");
+    }
+  }
+
+  private isActive(stack: IfElseStack[]): boolean {
+    // 栈顶层状态决定当前块是否激活
+    return stack.every((frame) => frame.active);
   }
 }

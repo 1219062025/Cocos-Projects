@@ -6,6 +6,7 @@ import StarupLevel from "../gameplay/StarupLevel";
 
 const { ccclass, property } = cc._decorator;
 
+/** 游戏视窗，处理视窗UI以及加载游戏场景 */
 @ccclass
 export default class PlayView extends cc.Component {
   @property({ type: cc.Node })

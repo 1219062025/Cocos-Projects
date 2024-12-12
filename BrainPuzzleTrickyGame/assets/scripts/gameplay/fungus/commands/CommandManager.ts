@@ -29,8 +29,8 @@ export default class CommandManager extends cc.Component {
       if (command) {
         command
           .execute()
-          .then(() => {
-            resolve(); // 命令执行完成
+          .then((value) => {
+            resolve(value); // 命令执行完成
           })
           .catch((error) => {
             reject(error); // 命令执行失败
@@ -40,16 +40,4 @@ export default class CommandManager extends cc.Component {
       }
     });
   }
-
-  // /** 执行命令 */
-  // executeCommand(id: string) {
-  //   const command = this.getCommand(id);
-  //   if (command) {
-  //     return command.execute();
-  //   } else {
-  //     console.warn(
-  //       `[CommandManager] Command ID '${id}' not found on node '${this.node.name}'.`
-  //     );
-  //   }
-  // }
 }

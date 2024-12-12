@@ -1,16 +1,21 @@
 import jsep from "jsep";
+import InstanceBase from "../../../@framework/common/InstanceBase";
 
 type VariableResolver = (name: string) => any; // 动态变量解析器
 type CommandExecutor = (id: string) => any; // 动态命令执行器
 
 /** 表达式解析器 */
-export class ExpressionEvaluator {
-  /**  动态变量解析器 */
+class ExpressionEvaluator extends InstanceBase {
+  /** 动态变量解析器 */
   private variableResolver: VariableResolver;
   /** 动态命令执行器 */
   private commandExecutor: CommandExecutor;
 
-  constructor(
+  constructor() {
+    super();
+  }
+
+  install(
     variableResolver: VariableResolver,
     commandExecutor: CommandExecutor
   ) {
@@ -18,20 +23,25 @@ export class ExpressionEvaluator {
     this.commandExecutor = commandExecutor;
   }
 
-  evaluate(expression: string): Promise<any> {
+  /** 解析表达式成AST */
+  jsepAST(expression: string) {
+    try {
+      const ast = jsep(expression); // 解析为 AST
+      return ast;
+    } catch (error) {
+      console.error(
+        `[ExpressionEvaluator] Error evaluating expression: ${expression}`,
+        error
+      );
+    }
+  }
+
+  /** 解析AST */
+  evaluate(ast: jsep.Expression): Promise<any> {
+    console.log(ast);
     return new Promise((resolve, reject) => {
-      try {
-        const ast = jsep(expression); // 解析为 AST
-        console.log(ast);
-        // 递归解析 AST 节点
-        resolve(this.evaluateNode(ast));
-      } catch (error) {
-        console.error(
-          `[ExpressionEvaluator] Error evaluating expression: ${expression}`,
-          error
-        );
-        reject(error);
-      }
+      // 递归解析 AST 节点
+      resolve(this.evaluateNode(ast));
     });
   }
 
@@ -40,10 +50,16 @@ export class ExpressionEvaluator {
     switch (node.type) {
       case "Literal":
         return (node as jsep.Literal).value;
+      case "IfExpression":
+        return this.evaluateIf(node as jsep.IfExpression);
+      case "ElseExpression":
+        return null;
+      case "EndIfExpression":
+        return null;
       case "CommandExpression":
         return this.evaluateCommand(node as jsep.CommandExpression);
       case "VariableExpression":
-        return this.variableResolver((node as jsep.VariableExpression).value);
+        return this.evaluateVariable(node as jsep.VariableExpression);
       case "BinaryExpression":
         return this.evaluateBinary(node as jsep.BinaryExpression);
       case "AssignmentExpression":
@@ -58,6 +74,11 @@ export class ExpressionEvaluator {
     }
   }
 
+  /** 解析If */
+  private evaluateIf(node: jsep.IfExpression): any {
+    return this.evaluateNode(jsep(node.condition));
+  }
+
   /** 解析命令 */
   private evaluateCommand(node: jsep.CommandExpression): any {
     if (!this.commandExecutor) {
@@ -67,6 +88,19 @@ export class ExpressionEvaluator {
     const commandId = node.value;
     if (typeof commandId === "string") {
       return this.commandExecutor(commandId);
+    }
+    return null;
+  }
+
+  /** 解析变量 */
+  private evaluateVariable(node: jsep.VariableExpression) {
+    if (!this.variableResolver) {
+      console.error("[ExpressionEvaluator] does not exist VariableResolver");
+      return null;
+    }
+    const name = node.value;
+    if (typeof name === "string") {
+      return this.variableResolver(name);
     }
     return null;
   }
@@ -116,37 +150,35 @@ export class ExpressionEvaluator {
       case "=":
         return (left = right);
       case "*=":
-        return (left *= right);
-      case "*":
-        return left * right;
+        return (left = left * right);
       case "**=":
-        return (left **= right);
+        return (left = left ** right);
       case "/=":
-        return (left /= right);
+        return (left = left / right);
       case "%=":
-        return (left %= right);
+        return (left = left % right);
       case "+=":
-        return (left += right);
+        return (left = left + right);
       case "-=":
-        return (left -= right);
+        return (left = left - right);
       case "<<=":
-        return (left <<= right);
+        return (left = left << right);
       case ">>=":
-        return (left >>= right);
+        return (left = left >> right);
       case ">>>=":
-        return (left >>>= right);
+        return (left = left >>> right);
       case "&=":
-        return (left &= right);
+        return (left = left & right);
       case "^=":
-        return (left ^= right);
+        return (left = left ^ right);
       case "|=":
-        return (left |= right);
+        return (left = left | right);
       case "||=":
-        return (left ||= right);
+        return (left = !left ? right : left);
       case "&&=":
-        return (left &&= right);
+        return (left = left ? right : left);
       case "??=":
-        return (left ??= right);
+        return (left = left == null ? right : left);
       default:
         console.warn(
           `[ExpressionEvaluator] Unsupported assignment operator: ${node.operator}`
@@ -163,3 +195,5 @@ export class ExpressionEvaluator {
       : this.evaluateNode(node.alternate);
   }
 }
+
+export default ExpressionEvaluator.instance();

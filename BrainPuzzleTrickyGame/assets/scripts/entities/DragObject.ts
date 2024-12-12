@@ -50,6 +50,7 @@ export default class DragObject extends cc.Component {
     draggable.dragMoveCallback = this.onDragMove.bind(this);
     draggable.dragEndCallback = this.onDragEnd.bind(this);
 
+    // 没什么特别意义，只是方便控制台打印时观察，删掉这行也不会影响逻辑
     this.name = this.node.name;
   }
 

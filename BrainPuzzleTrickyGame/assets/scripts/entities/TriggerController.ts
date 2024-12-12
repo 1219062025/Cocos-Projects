@@ -22,6 +22,7 @@ export default class TriggerController extends cc.Component {
     // 注册触发器到管理器
     InteractiveManager.registerTrigger(this);
 
+    // 没什么特别意义，只是方便控制台打印时观察，删掉这行也不会影响逻辑
     this.name = this.node.name;
   }
 

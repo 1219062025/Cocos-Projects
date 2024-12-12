@@ -19,17 +19,19 @@ class InteractiveManager extends InstanceBase {
     super();
   }
 
+  /** 触发trigger */
   executeTrigger(trigger: TriggerControl) {
     trigger.execute();
   }
 
+  /** 接受一个拖拽物，判断此时拖拽物是否能够触发某个trigger */
   checkTrigger(object: DragObject): TriggerControl | null {
-    // 不存在映射关系返回null
+    // 该拖拽物不存在映射关系返回null
     if (!this._objectToTriggers.has(object)) return null;
 
     const triggers = this._objectToTriggers.get(object);
 
-    // 不存在映射的触发器
+    // 该拖拽物不存在映射的触发器返回null
     if (triggers.length === 0) return null;
 
     const validTriggers = triggers.filter((trigger) => {

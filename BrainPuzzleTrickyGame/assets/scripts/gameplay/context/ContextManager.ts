@@ -1,6 +1,5 @@
 import InstanceBase from "../../../@framework/common/InstanceBase";
-import { levelContext50 } from "./LevelContext50";
-import { levelContext57 } from "./LevelContext57";
+import AllLevelContext from "./export_context";
 
 /** 关卡上下文 */
 export interface LevelContext {
@@ -17,6 +16,10 @@ class ContextManager extends InstanceBase {
 
   constructor() {
     super();
+  }
+
+  init(level: number) {
+    this.loadContext(AllLevelContext[`${level}`][`levelContext${level}`]);
   }
 
   /** 注册新的上下文 */
@@ -96,8 +99,5 @@ class ContextManager extends InstanceBase {
 }
 
 const context = ContextManager.instance();
-
-context.loadContext(levelContext50);
-context.loadContext(levelContext57);
 
 export default context;
