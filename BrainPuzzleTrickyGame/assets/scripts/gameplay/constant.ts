@@ -4,6 +4,21 @@ export default class Constant {
   /** 游戏版本 */
   static GAME_VERSION = "1.0.0";
 
+  /** 事件名 */
+  static EVENT = {
+    /** 拖拽事件 */
+    DRAG: {
+      /** 拖拽开始 */
+      DRAG_START: "DragStart",
+      /** 拖拽移动 */
+      DRAG_MOVE: "DragMove",
+      /** 拖拽结束 */
+      DRAG_END: "DragEnd",
+    },
+    /** 显示Tips UI */
+    SHOW_TIPS: "ShowTips",
+  };
+
   /** 关卡相关的常量前缀 */
   static LEVEL_PREFIX = {
     KEY: "level",
@@ -28,6 +43,12 @@ export default class Constant {
     LOSE_POP: "LosePop",
   };
 
+  /** 配置文件路径 */
+  static CONFIG_PATH = {
+    INTERACTIVE_LAN: "configs/InteractiveLanguage/level_",
+    GUIDE_LAN: "configs/GuideLanguage/level_tips_",
+  };
+
   /** UI预制体路径 */
   static UI_PREFAB_URL = {
     /** 游戏窗口UI */
@@ -36,24 +57,73 @@ export default class Constant {
     VICTORY_POP: "ui/VictoryPop",
     /** 失败弹窗 */
     LOSE_POP: "ui/LosePop",
+    /** 提示弹窗 */
+    TIPS: "ui/Tips",
   };
 
   /** 拖拽物类型 */
   static DRAG_OBJECT_TYPE = {
     /** 可交互物 */
     INTERACTABLE: 0,
+    /** 普通拖拽物 */
+    DRAG: 1,
   };
 
-  /** 语言缩写 */
-  static LANGUAGE_ABBR = {
-    en: "en", // 英语
-    id: "id", // 印尼语
-    ja: "ja", // 日语
-    ko: "ko", // 韩语
-    ms: "ms", // 马来语
-    th: "th", // 泰语
-    tw: "tw", // 台湾
-    vi: "vi", // 越南语
+  /** 提示类型 */
+  static TIPS_TYPE = {
+    /** 交互成功提示 */
+    INTERACTIVE: 0,
+    /** 引导提示 */
+    GUIDE: 1,
+  };
+
+  /** 语言 */
+  static LANGUAGE: Record<string, { abbr: string; full: string }> = {
+    /** 中文 */
+    zh: {
+      abbr: "zh",
+      full: "Chinese",
+    },
+    /** 英语 */
+    en: {
+      abbr: "en",
+      full: "English",
+    },
+    /** 印尼语 */
+    id: {
+      abbr: "id",
+      full: "Indonesia",
+    },
+    /** 日语 */
+    ja: {
+      abbr: "ja",
+      full: "Japanese",
+    },
+    /** 韩语 */
+    ko: {
+      abbr: "ko",
+      full: "Korean",
+    },
+    /** 马来语 */
+    ms: {
+      abbr: "ms",
+      full: "Malay",
+    },
+    /** 泰语 */
+    th: {
+      abbr: "th",
+      full: "Thailand",
+    },
+    /** 台湾 */
+    tw: {
+      abbr: "tw",
+      full: "Chinese_tw",
+    },
+    /** 越南语 */
+    vi: {
+      abbr: "vi",
+      full: "Vietnamese",
+    },
 
     // pt: "pt", // 巴西
     // in: "in", // 印度

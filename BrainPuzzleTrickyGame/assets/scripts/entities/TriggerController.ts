@@ -1,7 +1,13 @@
 import BranchController from "../gameplay/fungus/BranchController";
-import InteractiveManager from "../gameplay/InteractiveManager";
+import InteractiveManager from "../gameplay/interactive/InteractiveManager";
 
 const { ccclass, property, menu, requireComponent } = cc._decorator;
+
+/** 触发次数归零后的行为类型 */
+const DepletionBehavior = {
+  DESTORY: 0,
+  IDLE: 1,
+};
 
 @ccclass
 @menu("Interactive/TriggerController")
@@ -14,8 +20,26 @@ export default class TriggerController extends cc.Component {
   })
   tags: string[] = [];
 
+  @property({
+    displayName: "触发次数",
+    tooltip: "触发器能被触发的次数，设置为-1相当于可无限触发",
+    step: 1,
+    min: -1,
+  })
+  repeat: number = 1;
+
+  @property({
+    type: cc.Enum(DepletionBehavior),
+    displayName: "触发次数归零后的行为",
+    tooltip: "DESTORY：销毁触发器\nIDLE：空闲",
+  })
+  depletionBehavior: number = DepletionBehavior.DESTORY;
+
   /** 触发器的优先级，触发时先触发优先级高的触发器 */
-  @property({ tooltip: "触发器的优先级，触发时先触发优先级高的触发器" })
+  @property({
+    tooltip: "触发器的优先级，触发时先触发优先级高的触发器",
+    step: 1,
+  })
   priority: number = 0;
 
   onLoad() {
@@ -27,10 +51,35 @@ export default class TriggerController extends cc.Component {
   }
 
   execute() {
+    if (this.repeat < -1) return false;
+
+    if (this.repeat === 0) {
+      this.switchBehavior();
+      return false;
+    }
+
     const branch = this.node.getComponent(BranchController);
 
     if (branch) {
       branch.executeBranch();
+    }
+
+    this.repeat = this.repeat === -1 ? -1 : this.repeat - 1;
+
+    if (this.repeat === 0) {
+      this.switchBehavior();
+    }
+
+    return true;
+  }
+
+  private switchBehavior() {
+    switch (this.depletionBehavior) {
+      case DepletionBehavior.DESTORY:
+        this.node.destroy();
+        break;
+      case DepletionBehavior.IDLE:
+        break;
     }
   }
 }

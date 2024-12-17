@@ -1,8 +1,9 @@
-import context from "../context/ContextManager";
+import ContextManager from "../context/ContextManager";
 import CommandManager from "./commands/CommandManager";
 import ExpressionEvaluator from "./ExpressionEvaluator";
 
-const { ccclass, property, menu, disallowMultiple } = cc._decorator;
+const { ccclass, property, menu, disallowMultiple, executionOrder } =
+  cc._decorator;
 
 interface IfElseStack {
   type: "if" | "else";
@@ -11,6 +12,7 @@ interface IfElseStack {
 
 @ccclass
 @disallowMultiple
+@executionOrder(10)
 @menu("Fungus/BranchController")
 export default class BranchController extends cc.Component {
   @property({
@@ -19,19 +21,32 @@ export default class BranchController extends cc.Component {
   })
   expressions: string[] = [];
 
-  /** 表达式解析器 */
-  private _evaluator: typeof ExpressionEvaluator;
+  @property({ tooltip: "是否立即执行" })
+  immediately: boolean = false;
+
   /** 命令管理器 */
   private _manager: CommandManager;
 
-  onLoad(): void {
+  /** 表达式解析器 */
+  private _evaluator: ExpressionEvaluator;
+  public get evaluator() {
+    return this._evaluator;
+  }
+
+  onLoad() {
     this._manager = this.node.getComponent(CommandManager);
 
-    this._evaluator = ExpressionEvaluator;
-    this._evaluator.install(
-      (name) => context.getVariable(name), // 从上下文管理器解析变量
+    this._evaluator = new ExpressionEvaluator(
+      (path, value) => ContextManager.setVariable(path, value), // 上下文管理器设置变量
+      (name) => ContextManager.getVariable(name), // 从上下文管理器解析变量
       (id) => this._manager.executeCommand(id) // 执行命令
     );
+
+    if (this.immediately) {
+      this.scheduleOnce(() => {
+        this.executeBranch();
+      });
+    }
   }
 
   async executeBranch() {
@@ -50,7 +65,6 @@ export default class BranchController extends cc.Component {
           break;
 
         case "ElseExpression":
-          console.log(ast);
           if (stack.length > 0 && stack[stack.length - 1].type === "if") {
             const lastIf = stack.pop();
             stack.push({
@@ -64,7 +78,6 @@ export default class BranchController extends cc.Component {
           break;
 
         case "EndIfExpression":
-          console.log(ast);
           if (
             stack.length > 0 &&
             (stack[stack.length - 1].type === "if" ||

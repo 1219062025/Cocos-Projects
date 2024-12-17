@@ -14,7 +14,7 @@
   {
     "__type__": "cc.Node",
     "_name": "PlayView",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": null,
     "_children": [
       {
@@ -89,7 +89,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Bg",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 1
     },
@@ -228,7 +228,7 @@
   {
     "__type__": "cc.Node",
     "_name": "TopBar",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 1
     },
@@ -292,7 +292,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Title_Bg",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 6
     },
@@ -360,7 +360,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Title_Text",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 7
     },
@@ -542,7 +542,7 @@
   {
     "__type__": "cc.Node",
     "_name": "wrap",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 1
     },
@@ -637,7 +637,7 @@
   {
     "__type__": "cc.Node",
     "_name": "DownLoad_node",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 1
     },
@@ -705,7 +705,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Download",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 18
     },

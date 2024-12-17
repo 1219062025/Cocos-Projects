@@ -1,6 +1,8 @@
-import context from "../../context/ContextManager";
+import ContextManager from "../../context/ContextManager";
+import BranchController from "../BranchController";
 import ExpressionEvaluator from "../ExpressionEvaluator";
 import Command from "./Command";
+import CommandManager from "./CommandManager";
 const { ccclass, property, menu } = cc._decorator;
 
 const VariableType = {
@@ -41,7 +43,7 @@ const Vec2Operations = {
 };
 
 @ccclass
-@menu("Fungus/Command/SetVariableCommand")
+@menu("Fungus/Command/Set | SetVariableCommand")
 export class SetVariableCommand extends Command {
   @property({ tooltip: '当前关卡上下文中的变量，例如"player.hp"、"step"' })
   variablePath: string = "";
@@ -106,11 +108,29 @@ export class SetVariableCommand extends Command {
   })
   vec2Y: string = "";
 
+  private _evaluator: ExpressionEvaluator;
+
+  start() {
+    const branchController = this.node.getComponent(BranchController);
+
+    if (branchController && branchController.evaluator) {
+      this._evaluator = branchController.evaluator;
+    } else {
+      const manager = this.node.getComponent(CommandManager);
+
+      this._evaluator = new ExpressionEvaluator(
+        (path, value) => ContextManager.setVariable(path, value), // 上下文管理器设置变量
+        (name) => ContextManager.getVariable(name), // 从上下文管理器解析变量
+        (id) => manager.executeCommand(id) // 执行命令
+      );
+    }
+  }
+
   async execute() {
     try {
       let result: any;
       let operationFn: Function;
-      const currentVariable = context.getVariable(this.variablePath);
+      const currentVariable = ContextManager.getVariable(this.variablePath);
 
       if (!currentVariable) {
         throw new Error(
@@ -122,18 +142,14 @@ export class SetVariableCommand extends Command {
         // 设置string值
         case VariableType.String:
           result = String(
-            await ExpressionEvaluator.evaluate(
-              ExpressionEvaluator.jsepAST(this.value)
-            )
+            await this._evaluator.evaluate(this._evaluator.jsepAST(this.value))
           );
           break;
 
         // 设置number值
         case VariableType.Number:
           const number = Number(
-            await ExpressionEvaluator.evaluate(
-              ExpressionEvaluator.jsepAST(this.value)
-            )
+            await this._evaluator.evaluate(this._evaluator.jsepAST(this.value))
           );
           operationFn = NumberOperations[OperationType[this.operation]];
           result = operationFn(currentVariable, number);
@@ -142,9 +158,7 @@ export class SetVariableCommand extends Command {
         // 设置boolean值
         case VariableType.Boolean:
           result = Boolean(
-            await ExpressionEvaluator.evaluate(
-              ExpressionEvaluator.jsepAST(this.value)
-            )
+            await this._evaluator.evaluate(this._evaluator.jsepAST(this.value))
           );
           break;
 
@@ -164,14 +178,10 @@ export class SetVariableCommand extends Command {
             throw new Error(`currentVariable not cc.Vec2`);
           }
           const x = Number(
-            await ExpressionEvaluator.evaluate(
-              ExpressionEvaluator.jsepAST(this.vec2X)
-            )
+            await this._evaluator.evaluate(this._evaluator.jsepAST(this.vec2X))
           );
           const y = Number(
-            await ExpressionEvaluator.evaluate(
-              ExpressionEvaluator.jsepAST(this.vec2Y)
-            )
+            await this._evaluator.evaluate(this._evaluator.jsepAST(this.vec2Y))
           );
           const vec2 = cc.v2(x, y);
           operationFn = Vec2Operations[OperationType[this.operation]];
@@ -182,7 +192,7 @@ export class SetVariableCommand extends Command {
           throw new Error(`Unsupported variable type: ${this.variableType}`);
       }
 
-      context.setVariable(this.variablePath, result);
+      ContextManager.setVariable(this.variablePath, result);
     } catch (error) {
       throw new Error(error.message);
     }

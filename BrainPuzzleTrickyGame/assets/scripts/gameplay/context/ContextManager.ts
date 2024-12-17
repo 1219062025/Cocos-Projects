@@ -1,4 +1,6 @@
 import InstanceBase from "../../../@framework/common/InstanceBase";
+import DragObject from "../../entities/DragObject";
+import TriggerController from "../../entities/TriggerController";
 import AllLevelContext from "./export_context";
 
 /** 关卡上下文 */
@@ -6,7 +8,16 @@ export interface LevelContext {
   /** 关卡变量 */
   variables?: Record<string, any>;
   /** 关卡函数 */
-  functions?: Record<string, (...args: any[]) => any>;
+  functions?: Record<string, (options: CallOptions) => any>;
+}
+
+interface CallOptions {
+  /** 触发了触发器的拖拽物 */
+  object: DragObject;
+  /** 被触发的触发器 */
+  trigger: TriggerController;
+  /** 节点参数数组 */
+  nodes: cc.Node[];
 }
 
 /** 上下文管理器 */
@@ -65,13 +76,13 @@ class ContextManager extends InstanceBase {
   }
 
   /** 调用当前关卡函数 */
-  public callFunction(name: string, ...args: any[]) {
+  public callFunction(name: string, options: CallOptions) {
     if (
       this._currentContext &&
       this._currentContext.functions &&
       Object.prototype.hasOwnProperty.call(this._currentContext.functions, name)
     ) {
-      return this._currentContext.functions[name](...args);
+      return this._currentContext.functions[name](options);
     }
     throw new Error(`Function '${name}' not found in current context.`);
   }
@@ -98,6 +109,5 @@ class ContextManager extends InstanceBase {
   }
 }
 
-const context = ContextManager.instance();
-
-export default context;
+/** 上下文管理器 */
+export default ContextManager.instance();

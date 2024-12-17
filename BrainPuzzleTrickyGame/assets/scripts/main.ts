@@ -25,7 +25,7 @@ export default class Main extends cc.Component {
 
     // 设置语言
     const lan = this.getDefaultLanguage();
-    if (lan && !this.debug) {
+    if (lan) {
       gi.I18nManager.switchLanguage(lan);
     }
 
@@ -65,13 +65,13 @@ export default class Main extends cc.Component {
     let curlanguge = window.navigator.language.split("-");
     for (let i = curlanguge.length - 1; i >= 0; i--) {
       let e = curlanguge[i].toLowerCase();
-      if (Constant.LANGUAGE_ABBR[e]) {
+      if (Constant.LANGUAGE[e]) {
         return e;
       }
     }
 
-    if (Constant.LANGUAGE_ABBR[cc.sys.language]) {
-      return Constant.LANGUAGE_ABBR[cc.sys.language];
+    if (Constant.LANGUAGE[cc.sys.language]) {
+      return Constant.LANGUAGE[cc.sys.language].abbr;
     }
   }
 }

@@ -2,7 +2,7 @@ import Command from "./Command";
 const { ccclass, property, menu } = cc._decorator;
 
 @ccclass
-@menu("Fungus/Command/SetActiveCommand")
+@menu("Fungus/Command/Set | SetActiveCommand")
 export class SetActiveCommand extends Command {
   @property({ tooltip: "节点是否设为活跃" })
   activeState: boolean = false;

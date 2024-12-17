@@ -1,10 +1,16 @@
 import { gi } from "../../@framework/gi";
 import GlobalData from "../data/GlobalData";
 import Constant from "../gameplay/Constant";
-import InteractiveManager from "../gameplay/InteractiveManager";
+import InteractiveManager from "../gameplay/interactive/InteractiveManager";
 import Draggable from "../utils/Draggable";
 
 const { ccclass, property, menu } = cc._decorator;
+
+/** 触发次数归零后的行为类型 */
+const DepletionBehavior = {
+  DESTORY: 0,
+  RESET: 1,
+};
 
 /** 场景中可拖拽物 */
 @ccclass
@@ -13,7 +19,7 @@ export default class DragObject extends cc.Component {
   @property({
     type: cc.Enum(Constant.DRAG_OBJECT_TYPE),
     displayName: "拖拽物类型",
-    tooltip: "INTERACTABLE：可交互物",
+    tooltip: "INTERACTABLE：可交互物\nDRAG：普通拖拽物",
   })
   type: number = Constant.DRAG_OBJECT_TYPE.INTERACTABLE;
 
@@ -27,14 +33,104 @@ export default class DragObject extends cc.Component {
   })
   tags: string[] = [];
 
-  /** 原始位置 */
-  private _originalPosition: cc.Vec2 = cc.v2(0, 0);
-  /** 原始父节点 */
-  private _originalParent: cc.Node = null;
-  /** 原始zIndex */
-  private _originalSiblingIndex: number = 0;
+  @property({
+    displayName: "触发次数",
+    tooltip: "拖拽物能触发触发器的次数，设置为-1相当于可无限触发",
+    visible() {
+      return this.type === Constant.DRAG_OBJECT_TYPE.INTERACTABLE;
+    },
+    step: 1,
+    min: -1,
+  })
+  repeat: number = 1;
+
+  @property({
+    type: cc.Enum(DepletionBehavior),
+    displayName: "触发次数归零后的行为",
+    tooltip: "DESTORY：销毁拖拽物\nRESET：恢复原位",
+    visible() {
+      return this.type === Constant.DRAG_OBJECT_TYPE.INTERACTABLE;
+    },
+  })
+  depletionBehavior: number = DepletionBehavior.DESTORY;
+
+  @property({
+    type: cc.Node,
+    displayName: "占位节点",
+    tooltip: "拖拽开始时替代当前节点进行拖动",
+  })
+  dragPlaceholder: cc.Node = null;
+
+  @property({
+    displayName: "所属组",
+    tooltip:
+      "可选，所属组的Key，如果组不存在会自动创建\n加入组后选中拖拽物前会按照组规则排序",
+  })
+  group: string = "";
+
+  @property({
+    displayName: "优先级",
+    tooltip: "拖拽物的优先级，优先选中级别高的拖拽物，仅对同组拖拽物生效",
+    step: 1,
+  })
+  priority: number = 0;
+
+  /** 拖拽前原始状态 */
+  private _originalState: {
+    /** 原始位置 */
+    position: cc.Vec2;
+    /** 原始父节点 */
+    parent: cc.Node;
+    /** 原始层级 */
+    siblingIndex: number;
+  } = {
+    position: cc.v2(0, 0),
+    parent: null,
+    siblingIndex: 0,
+  };
 
   onLoad() {
+    // 注册拖拽物到管理器
+    InteractiveManager.registerObject(this);
+
+    if (this.group) {
+      InteractiveManager.joinGroup(this.group, this);
+      this.mountTouchEvent();
+    } else {
+      // 挂载拖拽控制
+      this.mountDragScript();
+    }
+
+    // 初始化拖动占位节点
+    if (this.dragPlaceholder) {
+      this.dragPlaceholder.active = false;
+    }
+
+    // 没什么特别意义，只是方便控制台打印时观察，删掉这行也不会影响逻辑
+    this.name = this.node.name;
+  }
+
+  onDestroy() {
+    if (this.group) {
+      this.unmountTouchEvent();
+    }
+  }
+
+  private mountTouchEvent() {
+    this.node.on(cc.Node.EventType.TOUCH_START, this.onDragStart, this);
+    this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onDragMove, this);
+    this.node.on(cc.Node.EventType.TOUCH_END, this.onDragEnd, this);
+    this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onDragEnd, this);
+  }
+
+  private unmountTouchEvent() {
+    this.node.off(cc.Node.EventType.TOUCH_START, this.onDragStart, this);
+    this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onDragMove, this);
+    this.node.off(cc.Node.EventType.TOUCH_END, this.onDragEnd, this);
+    this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onDragEnd, this);
+  }
+
+  private mountDragScript() {
     let draggable = this.node.getComponent(Draggable);
 
     // 为拖拽物添加拖拽功能
@@ -42,69 +138,156 @@ export default class DragObject extends cc.Component {
       draggable = this.addComponent(Draggable);
     }
 
-    // 注册拖拽物到管理器
-    InteractiveManager.registerObject(this);
-
     // 设置 Draggable 回调
-    draggable.dragStartCallback = this.onDragStart.bind(this);
-    draggable.dragMoveCallback = this.onDragMove.bind(this);
-    draggable.dragEndCallback = this.onDragEnd.bind(this);
+    draggable.dragStartCallback = this.handleDragStart.bind(this);
+    draggable.dragMoveCallback = this.handleDragMove.bind(this);
+    draggable.dragEndCallback = this.handleDragEnd.bind(this);
+  }
 
-    // 没什么特别意义，只是方便控制台打印时观察，删掉这行也不会影响逻辑
-    this.name = this.node.name;
+  private onDragStart(event: cc.Event.EventTouch) {
+    gi.EventManager.emit(Constant.EVENT.DRAG.DRAG_START, event);
+
+    // 阻止事件继续传播，避免只是想拖拽却触发了同一个位置的触摸开始事件
+    event.stopPropagation();
+  }
+
+  private onDragMove(event: cc.Event.EventTouch) {
+    gi.EventManager.emit(Constant.EVENT.DRAG.DRAG_MOVE, event);
+
+    event.stopPropagation();
+  }
+
+  private onDragEnd(event: cc.Event.EventTouch) {
+    gi.EventManager.emit(Constant.EVENT.DRAG.DRAG_END, event);
+
+    // 阻止事件继续传播，避免只是想结束拖拽却触发了同一个位置的触摸结束事件
+    event.stopPropagation();
   }
 
   /** 拖拽物开始拖拽时的回调 */
-  private onDragStart(node: cc.Node, event: cc.Event.EventTouch) {
-    // 记录拖拽物的初始位置和层级
-    this._originalPosition = node.getPosition();
-    this._originalParent = node.parent;
-    this._originalSiblingIndex = node.getSiblingIndex();
+  public handleDragStart(node: cc.Node, event: cc.Event.EventTouch) {
+    // 记录拖拽物的原始位置和层级
+    this._originalState.position = node.getPosition();
+    this._originalState.parent = node.parent;
+    this._originalState.siblingIndex = node.getSiblingIndex();
 
     // 设置拖拽物节点的父节点为游戏视窗节点，将拖拽物设置到顶层显示
     const globalData = gi.DataManager.getModule<GlobalData>(
       Constant.DATA_MODULE.GLOBAL
     );
 
-    this.node.setParent(globalData.getGameView());
-    const worldPos = this.node.convertToWorldSpaceAR(cc.v2(0, 0));
-    this.node.setPosition(this.node.parent.convertToNodeSpaceAR(worldPos));
+    this.updatePlaceholderState(true);
+
+    const placeholder = this.dragPlaceholder || this.node;
+    placeholder.setParent(globalData.getGameView());
+    placeholder.setPosition(
+      placeholder.parent.convertToNodeSpaceAR(event.getLocation())
+    );
 
     // 阻止事件继续传播，避免只是想拖拽却触发了同一个位置的触摸开始事件
     event.stopPropagation();
   }
 
   /** 拖拽物移动时的回调 */
-  private onDragMove(node: cc.Node, event: cc.Event.EventTouch) {
+  public handleDragMove(node: cc.Node, event: cc.Event.EventTouch) {
+    if (this.dragPlaceholder) {
+      const touchPos = this.dragPlaceholder.parent.convertToNodeSpaceAR(
+        event.getLocation()
+      );
+      this.dragPlaceholder.setPosition(touchPos);
+    }
+
+    // 阻止事件继续传播，避免只是想拖拽却触发了同一个位置的触摸开始事件
     event.stopPropagation();
   }
 
   /** 拖拽物结束拖拽时的回调 */
-  private onDragEnd(node: cc.Node, event: cc.Event.EventTouch) {
-    const trigger = InteractiveManager.checkTrigger(this);
-
-    if (trigger) {
-      InteractiveManager.executeTrigger(trigger);
+  public handleDragEnd(node: cc.Node, event: cc.Event.EventTouch) {
+    if (this.type === Constant.DRAG_OBJECT_TYPE.INTERACTABLE) {
+      this.onInteractive(node, event);
     } else {
       this.reset();
     }
 
-    // 阻止事件继续传播，避免只是想结束拖拽却触发了同一个位置的触摸结束事件
+    // 阻止事件继续传播，避免只是想拖拽却触发了同一个位置的触摸开始事件
     event.stopPropagation();
   }
 
+  /** 处理交互物 */
+  private onInteractive(node: cc.Node, event: cc.Event.EventTouch) {
+    if (this.repeat < -1) return;
+
+    if (this.repeat === 0) {
+      return this.switchBehavior();
+    }
+
+    const trigger = InteractiveManager.checkTrigger(this);
+
+    if (trigger) {
+      const state = InteractiveManager.executeTrigger(this, trigger);
+
+      if (state === true) {
+        this.repeat = this.repeat === -1 ? -1 : this.repeat - 1;
+
+        if (this.repeat === 0) {
+          return this.switchBehavior();
+        }
+      }
+    }
+
+    this.reset();
+  }
+
+  /** 选择行为 */
+  private switchBehavior() {
+    switch (this.depletionBehavior) {
+      case DepletionBehavior.DESTORY:
+        this.updatePlaceholderState(false);
+        this.node.destroy();
+        break;
+      case DepletionBehavior.RESET:
+        this.reset();
+        break;
+    }
+  }
+
   /** 恢复原位 */
-  reset() {
-    (cc.tween(this.node) as cc.Tween)
-      .to(0.2, { position: this._originalPosition })
+  private reset() {
+    const placeholder = this.dragPlaceholder || this.node;
+
+    (cc.tween(placeholder) as cc.Tween)
+      .to(0.2, { position: this._originalState.position })
       .call(() => {
         // 恢复原位置
-        this.node.setPosition(this._originalPosition);
+        this.node.setPosition(this._originalState.position);
         // 恢复原父节点
-        this.node.setParent(this._originalParent);
+        this.node.setParent(this._originalState.parent);
         // 恢复原层级
-        this.node.setSiblingIndex(this._originalSiblingIndex);
+        this.node.setSiblingIndex(this._originalState.siblingIndex);
+
+        this.updatePlaceholderState(false);
       })
       .start();
+  }
+
+  /** 更新占位节点的状态 */
+  private updatePlaceholderState(state: boolean) {
+    if (!this.dragPlaceholder) return;
+
+    if (state) {
+      // 设置占位节点的初始状态与原节点一致
+      this.dragPlaceholder.setParent(this._originalState.parent);
+      this.dragPlaceholder.setPosition(this._originalState.position);
+      this.dragPlaceholder.setSiblingIndex(this._originalState.siblingIndex);
+      // 隐藏原节点
+      this.node.opacity = 0;
+      // 显示拖动占位节点
+      this.dragPlaceholder.active = true;
+    } else {
+      // 隐藏占位节点
+      this.dragPlaceholder.active = false;
+      // 恢复原节点显示
+      this.node.opacity = 255;
+    }
   }
 }

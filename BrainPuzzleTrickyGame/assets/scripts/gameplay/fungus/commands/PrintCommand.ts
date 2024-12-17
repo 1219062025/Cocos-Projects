@@ -2,7 +2,7 @@ import Command from "./Command";
 const { ccclass, property, menu } = cc._decorator;
 
 @ccclass
-@menu("Fungus/Command/PrintCommand")
+@menu("Fungus/Command/Scripting | PrintCommand")
 export class PrintCommand extends Command {
   @property
   message: string = "";

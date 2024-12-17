@@ -1,25 +1,37 @@
-const { ccclass, property } = cc._decorator;
+const { ccclass, property, disallowMultiple } = cc._decorator;
+
+type DragCallback = (node: cc.Node, event: cc.Event.EventTouch) => void;
 
 /** 拖拽控制脚本 */
 @ccclass
+@disallowMultiple
 export default class Draggable extends cc.Component {
   /** 拖拽开始回调 */
-  dragStartCallback: Function = null;
+  dragStartCallback: DragCallback = null;
 
   /** 拖拽移动回调 */
-  dragMoveCallback: Function = null;
+  dragMoveCallback: DragCallback = null;
 
   /** 拖拽结束回调 */
-  dragEndCallback: Function = null;
+  dragEndCallback: DragCallback = null;
 
   /** 是否拖拽中 */
   private _isDragging: boolean = false;
 
-  onLoad() {
+  disable: boolean = false;
+
+  onEnable() {
     this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
     this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
     this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
     this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
+  }
+
+  onDisable() {
+    this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+    this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+    this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+    this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
   }
 
   onTouchStart(event: cc.Event.EventTouch) {
@@ -43,6 +55,7 @@ export default class Draggable extends cc.Component {
 
   onTouchEnd(event: cc.Event.EventTouch) {
     this._isDragging = false;
+
     if (this.dragEndCallback) {
       this.dragEndCallback(this.node, event);
     }

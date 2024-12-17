@@ -13,13 +13,11 @@ export default class GlobalData implements DataModule {
 
   save() {
     return {
-      gameView: this._gameView,
       debug: this._debug,
     };
   }
 
   load(data: any): void {
-    this._gameView = data.gameView;
     this._debug = data.debug;
   }
 
@@ -35,6 +33,5 @@ export default class GlobalData implements DataModule {
   /** 设置游戏视窗 */
   setGameView(view: cc.Node) {
     this._gameView = view;
-    gi.EventManager.emit("global:updated");
   }
 }

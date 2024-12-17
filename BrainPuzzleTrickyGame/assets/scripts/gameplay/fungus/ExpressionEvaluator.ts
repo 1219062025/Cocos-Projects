@@ -1,24 +1,24 @@
 import jsep from "jsep";
-import InstanceBase from "../../../@framework/common/InstanceBase";
 
+type VariableAssignment = (path: string, value: any) => any; // 动态变量赋值器
 type VariableResolver = (name: string) => any; // 动态变量解析器
 type CommandExecutor = (id: string) => any; // 动态命令执行器
 
 /** 表达式解析器 */
-class ExpressionEvaluator extends InstanceBase {
+export default class ExpressionEvaluator {
+  /** 动态变量赋值器 */
+  private variableAssignment: VariableAssignment;
   /** 动态变量解析器 */
   private variableResolver: VariableResolver;
   /** 动态命令执行器 */
   private commandExecutor: CommandExecutor;
 
-  constructor() {
-    super();
-  }
-
-  install(
+  constructor(
+    variableAssignment: VariableAssignment,
     variableResolver: VariableResolver,
     commandExecutor: CommandExecutor
   ) {
+    this.variableAssignment = variableAssignment;
     this.variableResolver = variableResolver;
     this.commandExecutor = commandExecutor;
   }
@@ -38,7 +38,6 @@ class ExpressionEvaluator extends InstanceBase {
 
   /** 解析AST */
   evaluate(ast: jsep.Expression): Promise<any> {
-    console.log(ast);
     return new Promise((resolve, reject) => {
       // 递归解析 AST 节点
       resolve(this.evaluateNode(ast));
@@ -144,47 +143,76 @@ class ExpressionEvaluator extends InstanceBase {
 
   /** 解析分配运算符 */
   private evaluateAssignment(node: jsep.AssignmentExpression): any {
+    // @ts-nocheck
+    const leftType =
+      (node.left.right && node.left.right["type"]) || node.left["type"];
+    // @ts-nocheck
+    const leftValue =
+      (node.left.right && node.left.right["value"]) || node.left["value"];
+
     let left = this.evaluateNode(node.left);
     let right = this.evaluateNode(node.right);
+
     switch (node.operator) {
       case "=":
-        return (left = right);
+        left = right;
+        break;
       case "*=":
-        return (left = left * right);
+        left = left * right;
+        break;
       case "**=":
-        return (left = left ** right);
+        left = left ** right;
+        break;
       case "/=":
-        return (left = left / right);
+        left = left / right;
+        break;
       case "%=":
-        return (left = left % right);
+        left = left % right;
+        break;
       case "+=":
-        return (left = left + right);
+        left = left + right;
+        break;
       case "-=":
-        return (left = left - right);
+        left = left - right;
+        break;
       case "<<=":
-        return (left = left << right);
+        left = left << right;
+        break;
       case ">>=":
-        return (left = left >> right);
+        left = left >> right;
+        break;
       case ">>>=":
-        return (left = left >>> right);
+        left = left >>> right;
+        break;
       case "&=":
-        return (left = left & right);
+        left = left & right;
+        break;
       case "^=":
-        return (left = left ^ right);
+        left = left ^ right;
+        break;
       case "|=":
-        return (left = left | right);
+        left = left | right;
+        break;
       case "||=":
-        return (left = !left ? right : left);
+        left = !left ? right : left;
+        break;
       case "&&=":
-        return (left = left ? right : left);
+        left = left ? right : left;
+        break;
       case "??=":
-        return (left = left == null ? right : left);
+        left = left == null ? right : left;
+        break;
       default:
         console.warn(
           `[ExpressionEvaluator] Unsupported assignment operator: ${node.operator}`
         );
         return null;
     }
+
+    if (leftType === "VariableExpression") {
+      this.variableAssignment(leftValue, left);
+    }
+    return left;
   }
 
   /** 解析条件表达式 */
@@ -195,5 +223,3 @@ class ExpressionEvaluator extends InstanceBase {
       : this.evaluateNode(node.alternate);
   }
 }
-
-export default ExpressionEvaluator.instance();

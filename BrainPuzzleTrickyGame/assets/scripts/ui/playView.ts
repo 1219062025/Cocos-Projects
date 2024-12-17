@@ -18,15 +18,10 @@ export default class PlayView extends cc.Component {
   @property({ type: cc.Node })
   downloadBtn: cc.Node = null;
 
-  onLoad() {
+  async onLoad() {
     // 屏幕适配
     this.adapter(gi.ScreenManager.getOrientation());
     gi.EventManager.on("orientationChanged", this.adapter, this);
-
-    // 获取关卡数据
-    const levelData = gi.DataManager.getModule<LevelData>(
-      Constant.DATA_MODULE.LEVEL
-    );
 
     // 设置游戏视窗
     const globalData = gi.DataManager.getModule<GlobalData>(
@@ -34,20 +29,49 @@ export default class PlayView extends cc.Component {
     );
     globalData.setGameView(this.wrap);
 
-    // 加载关卡场景
-    gi.ResourceManager.loadRes(
-      `${Constant.LEVEL_PREFIX.PATH}${levelData.getCurrentLevel()}`,
-      cc.Prefab
-    )
-      .then((levelPrefab: cc.Prefab) => {
-        const root = cc.instantiate(levelPrefab);
-        root.addComponent(StarupLevel);
-        this.node.getChildByName("wrap").addChild(root);
-      })
-      .catch((err) => {
-        console.error(`[GAME] Error loading level preform, game exits, ${err}`);
-        return;
-      });
+    this.wrap.addChild(await this.loadTipsPrefab(), 2);
+    this.wrap.addChild(await this.loadLevelPrefab(), 1);
+  }
+
+  /** 加载关卡预制体 */
+  loadLevelPrefab(): Promise<cc.Node> {
+    return new Promise((resolve, reject) => {
+      // 获取关卡数据
+      const levelData = gi.DataManager.getModule<LevelData>(
+        Constant.DATA_MODULE.LEVEL
+      );
+
+      // 加载关卡场景
+      gi.ResourceManager.loadRes(
+        `${Constant.LEVEL_PREFIX.PATH}${levelData.getCurrentLevel()}`,
+        cc.Prefab
+      )
+        .then((levelPrefab: cc.Prefab) => {
+          const root = cc.instantiate(levelPrefab);
+          root.addComponent(StarupLevel);
+          resolve(root);
+        })
+        .catch((err) => {
+          console.error(
+            `[GAME] Error loading level preform, game exits, ${err}`
+          );
+          reject(err);
+        });
+    });
+  }
+
+  /** 加载提示弹窗预制体 */
+  loadTipsPrefab(): Promise<cc.Node> {
+    return new Promise((resolve, reject) => {
+      gi.ResourceManager.loadRes(Constant.UI_PREFAB_URL.TIPS, cc.Prefab)
+        .then((tipsPrefab: cc.Prefab) => {
+          const node = cc.instantiate(tipsPrefab);
+          resolve(node);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 
   /** 根据屏幕方向适配游戏窗口内的节点位置以及缩放 */

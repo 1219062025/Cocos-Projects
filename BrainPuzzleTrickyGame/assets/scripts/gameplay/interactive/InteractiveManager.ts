@@ -1,31 +1,40 @@
-import InstanceBase from "../../@framework/common/InstanceBase";
-import { gi } from "../../@framework/gi";
-import DragObject from "../entities/DragObject";
-import TriggerControl from "../entities/TriggerController";
-import Constant from "./Constant";
+import InstanceBase from "../../../@framework/common/InstanceBase";
+import { gi } from "../../../@framework/gi";
+import LevelData from "../../data/level/LevelData";
+import DragObject from "../../entities/DragObject";
+import TriggerController from "../../entities/TriggerController";
+import Constant from "../Constant";
+import DragObjectGroup from "./DragObjectGroup";
 
 /** 场景交互管理器 */
 class InteractiveManager extends InstanceBase {
   /** 拖拽物集合 */
   private _objects: DragObject[] = [];
   /** 触发器集合 */
-  private _triggers: TriggerControl[] = [];
+  private _triggers: TriggerController[] = [];
   /** 拖拽物映射表 */
-  private _objectToTriggers = new Map<DragObject, TriggerControl[]>([]);
+  private _objectToTriggers = new Map<DragObject, TriggerController[]>([]);
   /** 触发器映射表 */
-  private _triggerToObjects = new Map<TriggerControl, DragObject[]>([]);
+  private _triggerToObjects = new Map<TriggerController, DragObject[]>([]);
+  /** 拖拽物组 */
+  private _groups = new Map<string, DragObjectGroup>([]);
 
   constructor() {
     super();
   }
 
   /** 触发trigger */
-  executeTrigger(trigger: TriggerControl) {
-    trigger.execute();
+  executeTrigger(object: DragObject, trigger: TriggerController) {
+    const levelData = gi.DataManager.getModule<LevelData>(
+      Constant.DATA_MODULE.LEVEL
+    );
+    levelData.setLastInteractive(object, trigger);
+
+    return trigger.execute();
   }
 
   /** 接受一个拖拽物，判断此时拖拽物是否能够触发某个trigger */
-  checkTrigger(object: DragObject): TriggerControl | null {
+  checkTrigger(object: DragObject): TriggerController | null {
     // 该拖拽物不存在映射关系返回null
     if (!this._objectToTriggers.has(object)) return null;
 
@@ -78,7 +87,7 @@ class InteractiveManager extends InstanceBase {
   }
 
   /** 建立映射链接 */
-  link(object: DragObject, trigger: TriggerControl) {
+  link(object: DragObject, trigger: TriggerController) {
     // 映射到_objectToTriggers
     if (!this._objectToTriggers.has(object)) {
       this._objectToTriggers.set(object, []);
@@ -95,7 +104,7 @@ class InteractiveManager extends InstanceBase {
   }
 
   /** 断开映射链接 */
-  unlink(object: DragObject, trigger: TriggerControl) {
+  unlink(object: DragObject, trigger: TriggerController) {
     // 断开_objectToTriggers映射
     if (this._objectToTriggers.has(object)) {
       const triggers = this._objectToTriggers.get(object);
@@ -120,7 +129,7 @@ class InteractiveManager extends InstanceBase {
   }
 
   /** 断开TriggerControl所有的映射 */
-  private unlinkTrigger(trigger: TriggerControl) {
+  private unlinkTrigger(trigger: TriggerController) {
     // 断开_triggerToObjects映射
     if (this._triggerToObjects.has(trigger)) {
       this._triggerToObjects.delete(trigger);
@@ -138,13 +147,13 @@ class InteractiveManager extends InstanceBase {
   }
 
   /** 注册触发器 */
-  registerTrigger(trigger: TriggerControl) {
+  registerTrigger(trigger: TriggerController) {
     if (!this._triggers.includes(trigger)) {
       // 将新的触发器添加到数组中
       this._triggers.push(trigger);
     } else {
       console.warn(
-        `TriggerControl ${trigger.node.name} is already registered.`
+        `TriggerController ${trigger.node.name} is already registered.`
       );
     }
   }
@@ -167,7 +176,7 @@ class InteractiveManager extends InstanceBase {
   }
 
   /** 注销触发器 */
-  unregisterTrigger(trigger: TriggerControl) {
+  unregisterTrigger(trigger: TriggerController) {
     const index = this._triggers.indexOf(trigger);
     if (index !== -1) {
       if (this._triggerToObjects.has(trigger)) {
@@ -179,8 +188,19 @@ class InteractiveManager extends InstanceBase {
       // 从数组中移除
       this._triggers.splice(index, 1);
     } else {
-      console.warn(`TriggerControl ${trigger.node.name} is not registered.`);
+      console.warn(`TriggerController ${trigger.node.name} is not registered.`);
     }
+  }
+
+  /** 将指定拖拽物加入指定组 */
+  joinGroup(key: string, object: DragObject) {
+    if (!this._groups.has(key)) {
+      this._groups.set(key, new DragObjectGroup(key));
+    }
+
+    const group = this._groups.get(key);
+
+    group.add(object);
   }
 
   /** 获取所有注册的拖拽物 */
@@ -189,7 +209,7 @@ class InteractiveManager extends InstanceBase {
   }
 
   /** 获取所有注册的触发器 */
-  getAllTriggers(): TriggerControl[] {
+  getAllTriggers(): TriggerController[] {
     return this._triggers;
   }
 
