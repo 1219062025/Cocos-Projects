@@ -69,11 +69,11 @@ async function onBeforeBuildFinish(options, callback) {
       const assetUrl = Editor.assetdb.uuidToUrl(asset);
 
       const tipsRegex = new RegExp(
-        `db:\/\/assets\/resources\/configs\/TipsLanguage\/level_tips_(?!${level})(\\d+).json`
+        `db:\/\/assets\/resources\/configs\/GuideLanguage\/level_tips_(?!${level})(\\d+).json`
       );
 
       const levelRegex = new RegExp(
-        `db:\/\/assets\/resources\/configs\/LevelLanguage\/level_(?!${level})(\\d+).json`
+        `db:\/\/assets\/resources\/configs\/VoiceLanguage\/level_(?!${level})(\\d+).json`
       );
 
       if (!tipsRegex.test(assetUrl) && !levelRegex.test(assetUrl)) continue;

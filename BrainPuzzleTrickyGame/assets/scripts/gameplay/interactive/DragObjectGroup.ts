@@ -36,6 +36,11 @@ export default class DragObjectGroup {
   }
 
   private onDragMove(event: cc.Event.EventTouch) {
+    const touchPos = this._currentObject.node.parent.convertToNodeSpaceAR(
+      event.getLocation()
+    );
+    this._currentObject.node.setPosition(touchPos);
+
     this._currentObject.handleDragMove(this._currentObject.node, event);
   }
 
@@ -46,5 +51,10 @@ export default class DragObjectGroup {
 
   public add(object: DragObject) {
     this._dragObjects.push(object);
+
+    object.node.on(cc.Node.EventType.TOUCH_START, this.onDragStart, this);
+    object.node.on(cc.Node.EventType.TOUCH_MOVE, this.onDragMove, this);
+    object.node.on(cc.Node.EventType.TOUCH_END, this.onDragEnd, this);
+    object.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onDragEnd, this);
   }
 }

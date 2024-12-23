@@ -33,7 +33,7 @@ export default class Tips extends cc.Component {
   text: cc.Label = null;
 
   /** 交互语言配置 */
-  private _interactiveLanguage: LanguageConfig;
+  private _voiceLanguage: LanguageConfig;
 
   /** 提示语言配置 */
   private _guideLanguage: LanguageConfig;
@@ -46,9 +46,9 @@ export default class Tips extends cc.Component {
     let languageConfig: LanguageConfig;
 
     switch (type) {
-      case Constant.TIPS_TYPE.INTERACTIVE:
-        this._interactiveLanguage = await this.getInteractiveLanguage();
-        languageConfig = this._interactiveLanguage;
+      case Constant.TIPS_TYPE.VOICE:
+        this._voiceLanguage = await this.getVoiceLanguage();
+        languageConfig = this._voiceLanguage;
         break;
       case Constant.TIPS_TYPE.GUIDE:
         this._guideLanguage = await this.getGuideLanguage();
@@ -60,8 +60,6 @@ export default class Tips extends cc.Component {
 
     const full = Constant.LANGUAGE[gi.I18nManager.language].full;
     const text = languageConfig[id][full];
-
-    console.log(text);
 
     this.node.stopAllActions();
     (cc.tween(this.node) as cc.Tween)
@@ -75,9 +73,9 @@ export default class Tips extends cc.Component {
       .start();
   }
 
-  getInteractiveLanguage(): Promise<LanguageConfig> {
+  getVoiceLanguage(): Promise<LanguageConfig> {
     return new Promise((resolve, reject) => {
-      if (this._interactiveLanguage) resolve(this._interactiveLanguage);
+      if (this._voiceLanguage) resolve(this._voiceLanguage);
 
       // 获取关卡数据
       const levelData = gi.DataManager.getModule<LevelData>(
@@ -85,7 +83,7 @@ export default class Tips extends cc.Component {
       );
 
       gi.ResourceManager.loadRes(
-        `${Constant.CONFIG_PATH.INTERACTIVE_LAN}${levelData.getCurrentLevel()}`,
+        `${Constant.CONFIG_PATH.VOICE_LAN}${levelData.getCurrentLevel()}`,
         cc.JsonAsset
       )
         .then((jsonAsset: cc.JsonAsset) => {

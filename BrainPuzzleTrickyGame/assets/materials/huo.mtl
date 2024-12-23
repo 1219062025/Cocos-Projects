@@ -1,0 +1,36 @@
+{
+  "__type__": "cc.Material",
+  "_name": "huo",
+  "_objFlags": 0,
+  "_native": "",
+  "_effectAsset": {
+    "__uuid__": "829a282c-b049-4019-bd38-5ace8d8a6417"
+  },
+  "_techniqueIndex": 1,
+  "_techniqueData": {
+    "0": {
+      "props": {
+        "tintColor": {
+          "__type__": "cc.Color",
+          "r": 127,
+          "g": 127,
+          "b": 127,
+          "a": 127
+        },
+        "mainTiling_Offset": {
+          "__type__": "cc.Vec4",
+          "x": 1,
+          "y": 1,
+          "z": 0,
+          "w": 0
+        },
+        "mainTexture": {
+          "__uuid__": "e55be7c2-e179-4abf-8778-2534eeb7105d"
+        }
+      },
+      "defines": {
+        "OUTPUT_TO_GAMMA": false
+      }
+    }
+  }
+}

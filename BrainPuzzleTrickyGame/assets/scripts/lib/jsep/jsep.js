@@ -1175,12 +1175,14 @@ var ternary = {
 };
 
 // Add default plugins:
-
 jsep.plugins.register(ternary);
+
+// Add customize plugins:
 jsep.plugins.register(require("./assignment.js"));
 jsep.plugins.register(require("./command.js"));
 jsep.plugins.register(require("./variable.js"));
 jsep.plugins.register(require("./if_else.js"));
+jsep.plugins.register(require("./wait.js"));
 
 export default jsep;
 // export { Jsep, jsep as default };

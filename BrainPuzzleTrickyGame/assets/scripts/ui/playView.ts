@@ -29,8 +29,9 @@ export default class PlayView extends cc.Component {
     );
     globalData.setGameView(this.wrap);
 
+    // 先挂载Tips，因为Tips里面需要监听showTips事件，如果先挂载关卡预制体，并且里面立即执行的分支表达式里面发送了showTips事件就没法被Tips监听到了。
     this.wrap.addChild(await this.loadTipsPrefab(), 2);
-    this.wrap.addChild(await this.loadLevelPrefab(), 1);
+    this.wrap.addChild(await this.loadLevelPrefab(), 0);
   }
 
   /** 加载关卡预制体 */

@@ -6,6 +6,13 @@ import GlobalData from "./data/GlobalData";
 
 const { ccclass, property, executeInEditMode } = cc._decorator;
 
+const keys = Object.keys(Constant.LANGUAGE);
+
+const LanguageOptions = keys.reduce((acc, key, index) => {
+  acc[key] = index;
+  return acc;
+}, {});
+
 /** 游戏入口，处理全局框架、UI、数据 */
 @ccclass
 export default class Main extends cc.Component {
@@ -15,6 +22,15 @@ export default class Main extends cc.Component {
 
   @property
   debug: boolean = false;
+
+  @property({
+    type: cc.Enum(LanguageOptions),
+    displayName: "默认语言",
+    visible() {
+      return this.debug;
+    },
+  })
+  language: number = 0;
 
   async onLoad() {
     // 启动游戏框架
@@ -61,6 +77,10 @@ export default class Main extends cc.Component {
 
   /** 获取默认语言 */
   getDefaultLanguage() {
+    if (this.debug) {
+      return Constant.LANGUAGE[keys[this.language]].abbr;
+    }
+
     // 获取浏览器默认语言首位
     let curlanguge = window.navigator.language.split("-");
     for (let i = curlanguge.length - 1; i >= 0; i--) {

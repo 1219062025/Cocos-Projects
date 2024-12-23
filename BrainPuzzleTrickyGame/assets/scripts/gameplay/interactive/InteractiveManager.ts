@@ -8,6 +8,8 @@ import DragObjectGroup from "./DragObjectGroup";
 
 /** 场景交互管理器 */
 class InteractiveManager extends InstanceBase {
+  /** 是否已经根据匹配标签自动建立拖拽物与触发器的映射关系 */
+  private _isCreated = false;
   /** 拖拽物集合 */
   private _objects: DragObject[] = [];
   /** 触发器集合 */
@@ -84,6 +86,8 @@ class InteractiveManager extends InstanceBase {
         }
       }
     }
+
+    this._isCreated = true;
   }
 
   /** 建立映射链接 */
@@ -141,6 +145,17 @@ class InteractiveManager extends InstanceBase {
     if (!this._objects.includes(object)) {
       // 将新的拖拽物添加到数组中
       this._objects.push(object);
+
+      // 初始active为false的拖拽物不在createMappingByTags内映射
+      if (this._isCreated) {
+        const triggers = this.getAllTriggers();
+        for (let j = 0; j < triggers.length; j++) {
+          const trigger = triggers[j];
+          if (gi.Utils.hasIntersection(object.tags, trigger.tags)) {
+            this.link(object, trigger);
+          }
+        }
+      }
     } else {
       console.warn(`DragObject ${object.node.name} is already registered.`);
     }
@@ -151,6 +166,17 @@ class InteractiveManager extends InstanceBase {
     if (!this._triggers.includes(trigger)) {
       // 将新的触发器添加到数组中
       this._triggers.push(trigger);
+
+      // 初始active为false的触发器不在createMappingByTags内映射
+      if (this._isCreated) {
+        const objects = this.getAllObjects();
+        for (let j = 0; j < objects.length; j++) {
+          const object = objects[j];
+          if (gi.Utils.hasIntersection(object.tags, trigger.tags)) {
+            this.link(object, trigger);
+          }
+        }
+      }
     } else {
       console.warn(
         `TriggerController ${trigger.node.name} is already registered.`

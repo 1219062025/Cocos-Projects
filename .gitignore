@@ -14,6 +14,8 @@ native
 
 npm-debug.log
 node_modules/
+cocos-pnp-main/
+playable-ads-adapter/
 
 #/////////////////////////////////////////////////////////////////////////////
 # Logs and databases

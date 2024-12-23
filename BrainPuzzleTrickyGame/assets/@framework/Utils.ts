@@ -21,6 +21,35 @@ class Utils extends InstanceBase {
       array.splice(index, 1);
     }
   }
+
+  /**
+   * 防抖函数
+   * @param func 要执行的函数
+   * @param wait 等待时间
+   * @returns 返回一个新的函数
+   */
+  debounce(func: Function, wait: number): Function {
+    let timeout: number | null = null;
+    return function () {
+      const context = this;
+      const args = arguments;
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func.apply(context, args);
+      }, wait);
+    };
+  }
+
+  /**
+   * 等待一段时间
+   * @param {number} delay 等待时间
+   * @param {boolean} ms 单位是否是毫秒
+   */
+  wait(delay: number, ms: boolean = false) {
+    return new Promise((resolve) =>
+      setTimeout(resolve, ms ? delay : delay * 1000)
+    );
+  }
 }
 
 export default Utils.instance();

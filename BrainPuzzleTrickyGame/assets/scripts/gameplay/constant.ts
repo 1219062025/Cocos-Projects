@@ -17,6 +17,10 @@ export default class Constant {
     },
     /** 显示Tips UI */
     SHOW_TIPS: "ShowTips",
+    /** 游戏失败 */
+    LOSE: "Lose",
+    /** 游戏过关 */
+    VICTORY: "Victory",
   };
 
   /** 关卡相关的常量前缀 */
@@ -45,7 +49,7 @@ export default class Constant {
 
   /** 配置文件路径 */
   static CONFIG_PATH = {
-    INTERACTIVE_LAN: "configs/InteractiveLanguage/level_",
+    VOICE_LAN: "configs/VoiceLanguage/level_",
     GUIDE_LAN: "configs/GuideLanguage/level_tips_",
   };
 
@@ -71,8 +75,8 @@ export default class Constant {
 
   /** 提示类型 */
   static TIPS_TYPE = {
-    /** 交互成功提示 */
-    INTERACTIVE: 0,
+    /** 语音提示 */
+    VOICE: 0,
     /** 引导提示 */
     GUIDE: 1,
   };
@@ -92,7 +96,7 @@ export default class Constant {
     /** 印尼语 */
     id: {
       abbr: "id",
-      full: "Indonesia",
+      full: "Indonasia",
     },
     /** 日语 */
     ja: {

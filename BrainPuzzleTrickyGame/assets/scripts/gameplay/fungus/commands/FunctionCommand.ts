@@ -16,22 +16,18 @@ export class FunctionCommand extends Command {
   @property({ type: [cc.Node] })
   nodes: cc.Node[] = [];
 
-  execute() {
-    const levelData = gi.DataManager.getModule<LevelData>(
-      Constant.DATA_MODULE.LEVEL
-    );
-    const lastInteractive = levelData.lastInteractive;
-
+  async execute() {
     const options = {
-      object: (lastInteractive && lastInteractive.object) || null,
-      trigger: (lastInteractive && lastInteractive.trigger) || null,
       nodes: this.nodes,
     };
 
     if (this.funcName) {
-      return Promise.resolve(
-        ContextManager.callFunction(this.funcName, options)
-      );
+      const result = await ContextManager.callFunction(this.funcName, options);
+      if (result instanceof Promise) {
+        return result;
+      } else {
+        return Promise.resolve(result);
+      }
     } else {
       return Promise.resolve();
     }

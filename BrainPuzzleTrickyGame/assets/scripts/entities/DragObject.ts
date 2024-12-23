@@ -7,10 +7,10 @@ import Draggable from "../utils/Draggable";
 const { ccclass, property, menu } = cc._decorator;
 
 /** 触发次数归零后的行为类型 */
-const DepletionBehavior = {
-  DESTORY: 0,
-  RESET: 1,
-};
+enum DepletionBehavior {
+  DESTORY,
+  RESET,
+}
 
 /** 场景中可拖拽物 */
 @ccclass
@@ -95,7 +95,6 @@ export default class DragObject extends cc.Component {
 
     if (this.group) {
       InteractiveManager.joinGroup(this.group, this);
-      this.mountTouchEvent();
     } else {
       // 挂载拖拽控制
       this.mountDragScript();
@@ -110,26 +109,6 @@ export default class DragObject extends cc.Component {
     this.name = this.node.name;
   }
 
-  onDestroy() {
-    if (this.group) {
-      this.unmountTouchEvent();
-    }
-  }
-
-  private mountTouchEvent() {
-    this.node.on(cc.Node.EventType.TOUCH_START, this.onDragStart, this);
-    this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onDragMove, this);
-    this.node.on(cc.Node.EventType.TOUCH_END, this.onDragEnd, this);
-    this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onDragEnd, this);
-  }
-
-  private unmountTouchEvent() {
-    this.node.off(cc.Node.EventType.TOUCH_START, this.onDragStart, this);
-    this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onDragMove, this);
-    this.node.off(cc.Node.EventType.TOUCH_END, this.onDragEnd, this);
-    this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onDragEnd, this);
-  }
-
   private mountDragScript() {
     let draggable = this.node.getComponent(Draggable);
 
@@ -142,26 +121,6 @@ export default class DragObject extends cc.Component {
     draggable.dragStartCallback = this.handleDragStart.bind(this);
     draggable.dragMoveCallback = this.handleDragMove.bind(this);
     draggable.dragEndCallback = this.handleDragEnd.bind(this);
-  }
-
-  private onDragStart(event: cc.Event.EventTouch) {
-    gi.EventManager.emit(Constant.EVENT.DRAG.DRAG_START, event);
-
-    // 阻止事件继续传播，避免只是想拖拽却触发了同一个位置的触摸开始事件
-    event.stopPropagation();
-  }
-
-  private onDragMove(event: cc.Event.EventTouch) {
-    gi.EventManager.emit(Constant.EVENT.DRAG.DRAG_MOVE, event);
-
-    event.stopPropagation();
-  }
-
-  private onDragEnd(event: cc.Event.EventTouch) {
-    gi.EventManager.emit(Constant.EVENT.DRAG.DRAG_END, event);
-
-    // 阻止事件继续传播，避免只是想结束拖拽却触发了同一个位置的触摸结束事件
-    event.stopPropagation();
   }
 
   /** 拖拽物开始拖拽时的回调 */

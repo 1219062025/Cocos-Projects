@@ -4,10 +4,10 @@ import InteractiveManager from "../gameplay/interactive/InteractiveManager";
 const { ccclass, property, menu, requireComponent } = cc._decorator;
 
 /** 触发次数归零后的行为类型 */
-const DepletionBehavior = {
-  DESTORY: 0,
-  IDLE: 1,
-};
+enum DepletionBehavior {
+  /** 空闲 */
+  IDLE,
+}
 
 @ccclass
 @menu("Interactive/TriggerController")
@@ -31,9 +31,9 @@ export default class TriggerController extends cc.Component {
   @property({
     type: cc.Enum(DepletionBehavior),
     displayName: "触发次数归零后的行为",
-    tooltip: "DESTORY：销毁触发器\nIDLE：空闲",
+    tooltip: "IDLE：空闲",
   })
-  depletionBehavior: number = DepletionBehavior.DESTORY;
+  depletionBehavior: number = DepletionBehavior.IDLE;
 
   /** 触发器的优先级，触发时先触发优先级高的触发器 */
   @property({
@@ -75,9 +75,6 @@ export default class TriggerController extends cc.Component {
 
   private switchBehavior() {
     switch (this.depletionBehavior) {
-      case DepletionBehavior.DESTORY:
-        this.node.destroy();
-        break;
       case DepletionBehavior.IDLE:
         break;
     }

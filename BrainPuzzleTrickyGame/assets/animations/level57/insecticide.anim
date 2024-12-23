@@ -1,0 +1,97 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "insecticide",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.625,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "paths": {
+      "Insecticide1": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.25,
+              "value": 5
+            },
+            {
+              "frame": 0.5,
+              "value": -5
+            },
+            {
+              "frame": 0.625,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "Insecticide2": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": -21.647
+            },
+            {
+              "frame": 0.25,
+              "value": -16.647
+            },
+            {
+              "frame": 0.5,
+              "value": -26.647
+            },
+            {
+              "frame": 0.625,
+              "value": -21.647
+            }
+          ]
+        }
+      },
+      "Insecticide_partical": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": 12.628
+            },
+            {
+              "frame": 0.25,
+              "value": 17.628
+            },
+            {
+              "frame": 0.5,
+              "value": 7.628
+            },
+            {
+              "frame": 0.625,
+              "value": 12.628
+            }
+          ]
+        }
+      }
+    },
+    "props": {
+      "angle": [
+        {
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "frame": 0.25,
+          "value": 5
+        },
+        {
+          "frame": 0.625,
+          "value": 0
+        }
+      ]
+    }
+  },
+  "events": []
+}

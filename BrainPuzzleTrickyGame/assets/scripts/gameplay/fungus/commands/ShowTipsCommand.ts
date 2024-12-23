@@ -12,9 +12,9 @@ export class ShowTipsCommand extends Command {
   @property({
     type: cc.Enum(Constant.TIPS_TYPE),
     displayName: "提示类型",
-    tooltip: "INTERACTIVE：交互成功提示\nGUIDE：引导提示",
+    tooltip: "VOICE：语音提示\nGUIDE：引导提示",
   })
-  type: number = Constant.TIPS_TYPE.INTERACTIVE;
+  type: number = Constant.TIPS_TYPE.VOICE;
 
   execute() {
     // 发送事件

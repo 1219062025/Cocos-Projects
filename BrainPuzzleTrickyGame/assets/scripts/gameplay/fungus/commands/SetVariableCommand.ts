@@ -5,22 +5,22 @@ import Command from "./Command";
 import CommandManager from "./CommandManager";
 const { ccclass, property, menu } = cc._decorator;
 
-const VariableType = {
-  String: 0,
-  Number: 1,
-  Boolean: 2,
-  Node: 3,
-  Skeleton: 4,
-  Vec2: 5,
-};
+enum VariableType {
+  String,
+  Number,
+  Boolean,
+  Node,
+  Skeleton,
+  Vec2,
+}
 
-const OperationType = {
-  "=": 0,
-  "+=": 1,
-  "-=": 2,
-  "*=": 3,
-  "/=": 4,
-};
+enum OperationType {
+  "=",
+  "+=",
+  "-=",
+  "*=",
+  "/=",
+}
 
 const NumberOperations = {
   "=": (currentValue: any, newValue: any) => newValue,
@@ -116,12 +116,10 @@ export class SetVariableCommand extends Command {
     if (branchController && branchController.evaluator) {
       this._evaluator = branchController.evaluator;
     } else {
-      const manager = this.node.getComponent(CommandManager);
-
       this._evaluator = new ExpressionEvaluator(
         (path, value) => ContextManager.setVariable(path, value), // 上下文管理器设置变量
         (name) => ContextManager.getVariable(name), // 从上下文管理器解析变量
-        (id) => manager.executeCommand(id) // 执行命令
+        (id) => CommandManager.executeCommand(id, this.node) // 执行命令
       );
     }
   }
@@ -132,7 +130,7 @@ export class SetVariableCommand extends Command {
       let operationFn: Function;
       const currentVariable = ContextManager.getVariable(this.variablePath);
 
-      if (!currentVariable) {
+      if (currentVariable === undefined) {
         throw new Error(
           `Variable '${this.variablePath}' not found in current context.Please check the command with ID ${this.id} on node ${this.node.name}`
         );

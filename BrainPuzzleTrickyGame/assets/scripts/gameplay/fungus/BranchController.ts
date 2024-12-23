@@ -24,9 +24,6 @@ export default class BranchController extends cc.Component {
   @property({ tooltip: "是否立即执行" })
   immediately: boolean = false;
 
-  /** 命令管理器 */
-  private _manager: CommandManager;
-
   /** 表达式解析器 */
   private _evaluator: ExpressionEvaluator;
   public get evaluator() {
@@ -34,12 +31,10 @@ export default class BranchController extends cc.Component {
   }
 
   onLoad() {
-    this._manager = this.node.getComponent(CommandManager);
-
     this._evaluator = new ExpressionEvaluator(
       (path, value) => ContextManager.setVariable(path, value), // 上下文管理器设置变量
       (name) => ContextManager.getVariable(name), // 从上下文管理器解析变量
-      (id) => this._manager.executeCommand(id) // 执行命令
+      (id) => CommandManager.executeCommand(id, this.node) // 执行命令
     );
 
     if (this.immediately) {
@@ -55,6 +50,7 @@ export default class BranchController extends cc.Component {
 
     while (i < this.expressions.length) {
       const expression = this.expressions[i];
+      if (expression === "") continue;
       const ast = this._evaluator.jsepAST(expression);
 
       switch (ast.type) {
@@ -92,6 +88,12 @@ export default class BranchController extends cc.Component {
 
           break;
 
+        case "WaitExpression":
+          await new Promise((resolve) =>
+            this.scheduleOnce(resolve, ast.delay as number)
+          );
+          break;
+
         default:
           if (this.isActive(stack)) {
             await this._evaluator.evaluate(ast);
@@ -100,7 +102,7 @@ export default class BranchController extends cc.Component {
       i++;
     }
     if (stack.length > 0) {
-      // 调用endif前，要么只有一个if，要么if-else的数量要匹配
+      // 调用endif前，要么只有if，要么if-else的数量要匹配
       /**
        * 如果if完想接着if，那就要两个endif，例如：
        * {if {{player.hp}} === 1}

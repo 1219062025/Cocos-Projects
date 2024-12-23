@@ -38,10 +38,12 @@ export default class ExpressionEvaluator {
 
   /** 解析AST */
   evaluate(ast: jsep.Expression): Promise<any> {
-    return new Promise((resolve, reject) => {
-      // 递归解析 AST 节点
-      resolve(this.evaluateNode(ast));
-    });
+    // return new Promise((resolve, reject) => {
+    //   // 递归解析 AST 节点
+    //   resolve(this.evaluateNode(ast));
+    // });
+
+    return this.evaluateNode(ast);
   }
 
   /** 开始解析ast节点 */
@@ -54,6 +56,8 @@ export default class ExpressionEvaluator {
       case "ElseExpression":
         return null;
       case "EndIfExpression":
+        return null;
+      case "WaitExpression":
         return null;
       case "CommandExpression":
         return this.evaluateCommand(node as jsep.CommandExpression);

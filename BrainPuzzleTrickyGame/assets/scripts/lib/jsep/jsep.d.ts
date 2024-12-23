@@ -26,6 +26,11 @@ declare module "jsep" {
       type: "EndIfExpression";
     }
 
+    export interface WaitExpression extends Expression {
+      type: "WaitExpression";
+      delay: number;
+    }
+
     export interface CommandExpression extends Expression {
       type: "CommandExpression";
       value: string;
@@ -131,6 +136,7 @@ declare module "jsep" {
       | "IfExpression"
       | "ElseExpression"
       | "EndIfExpression"
+      | "WaitExpression"
       | "CommandExpression"
       | "VariableExpression"
       | "AssignmentExpression";
@@ -150,6 +156,7 @@ declare module "jsep" {
       | IfExpression
       | ElseExpression
       | EndIfExpression
+      | WaitExpression
       | CommandExpression
       | VariableExpression
       | AssignmentExpression;
