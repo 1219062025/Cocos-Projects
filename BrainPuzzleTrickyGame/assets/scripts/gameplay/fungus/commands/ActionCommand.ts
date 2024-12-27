@@ -3,7 +3,8 @@ import Command from "./Command";
 const { ccclass, property, menu } = cc._decorator;
 
 enum ActionOptions {
-  CLICK,
+  CLICK_END,
+  CLICK_START,
   DOUBLE_CLICK,
   UP,
   BOTTOM,
@@ -22,9 +23,9 @@ export class ActionCommand extends Command {
   @property({
     type: cc.Enum(ActionOptions),
     tooltip:
-      "CLICK：单击\nDOUBLE_CLICK：双击\nUP：上滑\nBOTTOM：下滑\nLEFT：左滑\nRIGHT：右滑",
+      "CLICK_END：单击（触摸结束）\nCLICK_START：单击（触摸开始）\nDOUBLE_CLICK：双击\nUP：上滑\nBOTTOM：下滑\nLEFT：左滑\nRIGHT：右滑",
   })
-  type: number = ActionOptions.CLICK;
+  type: number = ActionOptions.CLICK_END;
 
   @property({
     type: cc.Enum(OperateOptions),
@@ -50,10 +51,10 @@ export class ActionCommand extends Command {
 
   @property({
     displayName: "单击阈值",
-    tooltip: "单击事件的阈值，用于判断是否为单击还是拖动，单位像素",
+    tooltip: "单击（触摸结束）事件的阈值，用于判断是否为单击还是拖动，单位像素",
     min: 1,
     visible() {
-      return this._valid(this.type, ActionOptions.CLICK);
+      return this._valid(this.type, ActionOptions.CLICK_END);
     },
   })
   clickThreshold: number = 10; // 默认单击阈值
@@ -74,7 +75,8 @@ export class ActionCommand extends Command {
     visible() {
       return this._valid(
         this.type,
-        ActionOptions.CLICK,
+        ActionOptions.CLICK_END,
+        ActionOptions.CLICK_START,
         ActionOptions.DOUBLE_CLICK
       );
     },
@@ -87,7 +89,8 @@ export class ActionCommand extends Command {
     visible() {
       return this._valid(
         this.type,
-        ActionOptions.CLICK,
+        ActionOptions.CLICK_END,
+        ActionOptions.CLICK_START,
         ActionOptions.DOUBLE_CLICK
       );
     },
@@ -102,8 +105,11 @@ export class ActionCommand extends Command {
 
   execute() {
     switch (this.type) {
-      case ActionOptions.CLICK:
-        this._listenClickEvent();
+      case ActionOptions.CLICK_END:
+        this._listenClickEndEvent();
+        break;
+      case ActionOptions.CLICK_START:
+        this._listenClickStartEvent();
         break;
       case ActionOptions.DOUBLE_CLICK:
         this._listenDoubleClickEvent();
@@ -118,8 +124,8 @@ export class ActionCommand extends Command {
     return Promise.resolve();
   }
 
-  /** 单击事件的监听 */
-  private _listenClickEvent() {
+  /** 单击（触摸结束）事件的监听 */
+  private _listenClickEndEvent() {
     let startTouchPosition: cc.Vec2;
 
     const StartEvent = (event: cc.Event.EventTouch) => {
@@ -147,6 +153,23 @@ export class ActionCommand extends Command {
       this.useCapture
     );
     this.node.on(cc.Node.EventType.TOUCH_END, EndEvent, this, this.useCapture);
+  }
+
+  /** 单击（触摸开始）事件的监听 */
+  private _listenClickStartEvent() {
+    const StartEvent = (event: cc.Event.EventTouch) => {
+      this._off(StartEvent, null, null);
+      this._onEventTriggered();
+
+      if (this.stopPropagation) event.stopPropagation();
+    };
+
+    this.node.on(
+      cc.Node.EventType.TOUCH_START,
+      StartEvent,
+      this,
+      this.useCapture
+    );
   }
 
   /** 双击事件的监听 */
@@ -180,8 +203,14 @@ export class ActionCommand extends Command {
     const EndEvent = (event: cc.Event.EventTouch) => {
       endTouchPosition = event.getLocation();
 
-      const deltaX = endTouchPosition.x - startTouchPosition.x;
-      const deltaY = endTouchPosition.y - startTouchPosition.y;
+      let deltaX: number;
+      let deltaY: number;
+      try {
+        deltaX = endTouchPosition.x - startTouchPosition.x;
+        deltaY = endTouchPosition.y - startTouchPosition.y;
+      } catch (e) {
+        console.log(e);
+      }
 
       // 水平滑动
       if (Math.abs(deltaX) > Math.abs(deltaY)) {
@@ -226,7 +255,7 @@ export class ActionCommand extends Command {
 
   private _onEventTriggered() {
     // 事件触发后可以执行其他操作
-    console.log("事件已触发: ", this.type);
+    // console.log("事件已触发: ", this.type);
 
     if (this.expressions) {
       const branch = this.node.getComponent(BranchController);

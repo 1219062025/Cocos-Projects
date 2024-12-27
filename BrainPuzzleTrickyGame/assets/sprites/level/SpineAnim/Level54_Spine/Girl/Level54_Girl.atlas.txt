@@ -1,0 +1,139 @@
+
+Level54_Girl.png
+size: 1112,300
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Coat-A
+  rotate: false
+  xy: 660, 11
+  size: 144, 145
+  orig: 144, 176
+  offset: 0, 16
+  index: -1
+CoatB
+  rotate: true
+  xy: 456, 2
+  size: 152, 132
+  orig: 152, 132
+  offset: 0, 0
+  index: -1
+CoatB-L
+  rotate: false
+  xy: 590, 5
+  size: 68, 173
+  orig: 68, 176
+  offset: 0, 3
+  index: -1
+CoatB-R
+  rotate: true
+  xy: 880, 221
+  size: 75, 190
+  orig: 75, 190
+  offset: 0, 0
+  index: -1
+Girl-1
+  rotate: true
+  xy: 2, 6
+  size: 148, 452
+  orig: 148, 452
+  offset: 0, 0
+  index: -1
+Girl-2-Calf-L
+  rotate: true
+  xy: 880, 175
+  size: 44, 168
+  orig: 44, 168
+  offset: 0, 0
+  index: -1
+Girl-2-Calf-R
+  rotate: true
+  xy: 690, 158
+  size: 48, 180
+  orig: 48, 180
+  offset: 0, 0
+  index: -1
+Girl-2-Hand-L
+  rotate: false
+  xy: 1032, 7
+  size: 52, 80
+  orig: 52, 80
+  offset: 0, 0
+  index: -1
+Girl-2-Hand-R
+  rotate: false
+  xy: 1032, 89
+  size: 52, 84
+  orig: 52, 84
+  offset: 0, 0
+  index: -1
+Girl-2-Skirt
+  rotate: false
+  xy: 806, 36
+  size: 116, 120
+  orig: 116, 120
+  offset: 0, 0
+  index: -1
+Girl-2-Sleeve-L
+  rotate: true
+  xy: 924, 2
+  size: 45, 46
+  orig: 45, 48
+  offset: 0, 0
+  index: -1
+Girl-2-Sleeve-R
+  rotate: true
+  xy: 1050, 177
+  size: 41, 58
+  orig: 41, 58
+  offset: 0, 0
+  index: -1
+Girl-2-Thigh-L
+  rotate: false
+  xy: 982, 53
+  size: 48, 120
+  orig: 48, 120
+  offset: 0, 0
+  index: -1
+Girl-2-Thigh-R
+  rotate: false
+  xy: 924, 49
+  size: 56, 124
+  orig: 56, 124
+  offset: 0, 0
+  index: -1
+Girl-2-Torso
+  rotate: true
+  xy: 508, 180
+  size: 116, 180
+  orig: 116, 180
+  offset: 0, 0
+  index: -1
+Girl-2-arm-L
+  rotate: false
+  xy: 1072, 220
+  size: 32, 76
+  orig: 32, 76
+  offset: 0, 0
+  index: -1
+Girl-2-arm-R
+  rotate: true
+  xy: 806, 2
+  size: 32, 114
+  orig: 32, 116
+  offset: 0, 0
+  index: -1
+Girl-4
+  rotate: true
+  xy: 2, 156
+  size: 140, 504
+  orig: 140, 504
+  offset: 0, 0
+  index: -1
+Girl-4-Calf-L
+  rotate: true
+  xy: 690, 208
+  size: 88, 188
+  orig: 88, 188
+  offset: 0, 0
+  index: -1

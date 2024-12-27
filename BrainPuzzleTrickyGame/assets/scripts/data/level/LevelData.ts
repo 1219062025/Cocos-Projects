@@ -21,14 +21,10 @@ export default class LevelData implements DataModule {
   }
 
   save() {
-    return {
-      currentLevel: this._currentLevel,
-    };
+    return {};
   }
 
-  load(data: any): void {
-    this._currentLevel = data.currentLevel;
-  }
+  load(data: any): void {}
 
   /** 获取当前关卡 */
   getCurrentLevel(): number {

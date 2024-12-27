@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "57b26199-2a13-49d0-a8dd-cfc7809aa524",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 144,
+  "height": 148,
+  "platformSettings": {},
+  "subMetas": {
+    "Bike-2-Wheel ": {
+      "ver": "1.0.4",
+      "uuid": "35a67c57-f977-4cb0-9896-548eb1ac129b",
+      "rawTextureUuid": "57b26199-2a13-49d0-a8dd-cfc7809aa524",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 144,
+      "height": 146,
+      "rawWidth": 144,
+      "rawHeight": 148,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

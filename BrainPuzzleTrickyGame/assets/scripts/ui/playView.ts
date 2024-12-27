@@ -3,6 +3,7 @@ import Constant from "../gameplay/Constant";
 import LevelData from "../data/level/LevelData";
 import GlobalData from "../data/GlobalData";
 import StarupLevel from "../gameplay/StarupLevel";
+import I18TextManager from "../gameplay/I18TextManager";
 
 const { ccclass, property } = cc._decorator;
 
@@ -18,16 +19,24 @@ export default class PlayView extends cc.Component {
   @property({ type: cc.Node })
   downloadBtn: cc.Node = null;
 
+  @property({ type: cc.Label })
+  titleLabel: cc.Label = null;
+
   async onLoad() {
     // 屏幕适配
     this.adapter(gi.ScreenManager.getOrientation());
     gi.EventManager.on("orientationChanged", this.adapter, this);
 
-    // 设置游戏视窗
-    const globalData = gi.DataManager.getModule<GlobalData>(
-      Constant.DATA_MODULE.GLOBAL
+    this.initGameView();
+
+    // 初始化多语言文本管理器
+    await I18TextManager.init();
+
+    /** 设置关卡标题 */
+    this.titleLabel.string = I18TextManager.getText(
+      "1000",
+      Constant.TIPS_TYPE.VOICE
     );
-    globalData.setGameView(this.wrap);
 
     // 先挂载Tips，因为Tips里面需要监听showTips事件，如果先挂载关卡预制体，并且里面立即执行的分支表达式里面发送了showTips事件就没法被Tips监听到了。
     this.wrap.addChild(await this.loadTipsPrefab(), 2);
@@ -111,5 +120,62 @@ export default class PlayView extends cc.Component {
   updateBgSize() {
     this.node.setContentSize(cc.winSize);
     this.node.getChildByName("Bg").getComponent(cc.Widget).updateAlignment();
+  }
+
+  /** 初始化游戏窗口 */
+  private initGameView() {
+    // 设置游戏视窗
+    const globalData = gi.DataManager.getModule<GlobalData>(
+      Constant.DATA_MODULE.GLOBAL
+    );
+    globalData.setGameView(this.wrap);
+
+    const onTouchStart = (event: cc.Event.EventTouch) => {
+      if (globalData.isTouchEnabled()) {
+        gi.EventManager.emit(Constant.EVENT.GAME_TOUCH_START, event);
+      } else {
+        event.stopPropagation();
+      }
+    };
+
+    const onTouchMove = (event: cc.Event.EventTouch) => {
+      if (globalData.isTouchEnabled()) {
+        gi.EventManager.emit(Constant.EVENT.GAME_TOUCH_MOVE, event);
+      } else {
+        event.stopPropagation();
+      }
+    };
+
+    const onTouchCancel = (event: cc.Event.EventTouch) => {
+      if (globalData.isTouchEnabled()) {
+        gi.EventManager.emit(Constant.EVENT.GAME_TOUCH_CANCEL, event);
+      } else {
+        event.stopPropagation();
+      }
+    };
+
+    const onTouchEnd = (event: cc.Event.EventTouch) => {
+      if (globalData.isTouchEnabled()) {
+        gi.EventManager.emit(Constant.EVENT.GAME_TOUCH_END, event);
+      } else {
+        event.stopPropagation();
+      }
+    };
+
+    globalData
+      .getGameView()
+      .on(cc.Node.EventType.TOUCH_START, onTouchStart, this, true);
+
+    globalData
+      .getGameView()
+      .on(cc.Node.EventType.TOUCH_MOVE, onTouchMove, this, true);
+
+    globalData
+      .getGameView()
+      .on(cc.Node.EventType.TOUCH_CANCEL, onTouchCancel, this, true);
+
+    globalData
+      .getGameView()
+      .on(cc.Node.EventType.TOUCH_END, onTouchEnd, this, true);
   }
 }

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "8e614c3e-39e0-450e-9d8a-8ad59342a500",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 100,
+  "height": 48,
+  "platformSettings": {},
+  "subMetas": {
+    "HempRope-1": {
+      "ver": "1.0.4",
+      "uuid": "a040a4c7-93b7-468f-adf8-0117df3ba95b",
+      "rawTextureUuid": "8e614c3e-39e0-450e-9d8a-8ad59342a500",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 0,
+      "width": 96,
+      "height": 48,
+      "rawWidth": 100,
+      "rawHeight": 48,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

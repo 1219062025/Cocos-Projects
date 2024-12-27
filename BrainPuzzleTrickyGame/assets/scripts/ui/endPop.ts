@@ -1,5 +1,7 @@
 import { gi } from "../../@framework/gi";
 import View from "../../@framework/modules/View";
+import GlobalData from "../data/GlobalData";
+import Constant from "../gameplay/Constant";
 
 const { ccclass, property } = cc._decorator;
 
@@ -13,11 +15,27 @@ export default class EndPop extends View {
   }
 
   open() {
+    const globalData = gi.DataManager.getModule<GlobalData>(
+      Constant.DATA_MODULE.GLOBAL
+    );
+
+    if (globalData.isEnd()) {
+      return;
+    }
+
     gi.EventManager.on("orientationChanged", this.adapter, this);
 
     this.adapter(gi.ScreenManager.getOrientation());
 
     this.fadeIn();
+
+    if (this.isLose) {
+      globalData.lose();
+      gi.EventManager.emit(Constant.EVENT.GAME_LOSE);
+    } else {
+      globalData.victory();
+      gi.EventManager.emit(Constant.EVENT.GAME_VICTORY);
+    }
   }
 
   adapter(orientation: string) {

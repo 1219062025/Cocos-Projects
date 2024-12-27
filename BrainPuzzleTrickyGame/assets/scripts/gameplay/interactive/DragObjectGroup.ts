@@ -15,9 +15,9 @@ export default class DragObjectGroup {
   constructor(key: string) {
     this.key = key;
 
-    gi.EventManager.on(Constant.EVENT.DRAG.DRAG_START, this.onDragStart, this);
-    gi.EventManager.on(Constant.EVENT.DRAG.DRAG_MOVE, this.onDragMove, this);
-    gi.EventManager.on(Constant.EVENT.DRAG.DRAG_END, this.onDragEnd, this);
+    gi.EventManager.on(Constant.EVENT.DRAG_START, this.onDragStart, this);
+    gi.EventManager.on(Constant.EVENT.DRAG_MOVE, this.onDragMove, this);
+    gi.EventManager.on(Constant.EVENT.DRAG_END, this.onDragEnd, this);
   }
 
   private getHightPriorityObject() {

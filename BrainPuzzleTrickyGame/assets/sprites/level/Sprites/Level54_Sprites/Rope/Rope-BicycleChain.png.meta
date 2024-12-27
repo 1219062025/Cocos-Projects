@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "aecfa461-3214-4b52-8f87-b63f8ca09bd3",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 36,
+  "height": 72,
+  "platformSettings": {},
+  "subMetas": {
+    "Rope-BicycleChain": {
+      "ver": "1.0.4",
+      "uuid": "869a5711-0524-432b-9d54-23dd3793cb29",
+      "rawTextureUuid": "aecfa461-3214-4b52-8f87-b63f8ca09bd3",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 34,
+      "height": 72,
+      "rawWidth": 36,
+      "rawHeight": 72,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

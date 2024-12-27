@@ -20,24 +20,23 @@ export const levelContext57: LevelContext = {
   },
   functions: {
     start: (options) => {
-      const variable = levelContext57.variables as Variables;
+      const v = levelContext57.variables as Variables;
 
-      variable.insecticide = options.nodes[0];
+      v.insecticide = options.nodes[0];
     },
     /** 杀虫 */
     insecticideAnimate: (options) => {
       return new Promise(async (resolve) => {
-        const variable = levelContext57.variables as Variables;
+        const v = levelContext57.variables as Variables;
 
-        const animation = variable.insecticide.getComponent(cc.Animation);
+        const animation = v.insecticide.getComponent(cc.Animation);
         const worldPos = options.trigger.node.convertToWorldSpaceAR(
           cc.v2(0, 0)
         );
-        const targetPos =
-          variable.insecticide.parent.convertToNodeSpaceAR(worldPos);
+        const targetPos = v.insecticide.parent.convertToNodeSpaceAR(worldPos);
 
-        variable.insecticide.setPosition(targetPos); // 杀虫剂定位到蟑螂堆
-        variable.insecticide.active = true;
+        v.insecticide.setPosition(targetPos); // 杀虫剂定位到蟑螂堆
+        v.insecticide.active = true;
         options.object.node.active = false; // 执行动画时不要显示出杀虫剂拖拽物
 
         animation.play();
@@ -45,7 +44,7 @@ export const levelContext57: LevelContext = {
         await wait(2); // 动画持续两秒
 
         animation.stop();
-        variable.insecticide.active = false;
+        v.insecticide.active = false;
         options.object.node && (options.object.node.active = true);
 
         options.nodes[0].active = false; // 隐藏蟑螂堆
@@ -54,7 +53,7 @@ export const levelContext57: LevelContext = {
       });
     },
     moutWoman: (options) => {
-      const variable = levelContext57.variables as Variables;
+      const v = levelContext57.variables as Variables;
 
       console.log(options.object.node.name);
     },

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "4039d776-f19b-4299-a81a-ab7f339014ee",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 32,
+  "height": 116,
+  "platformSettings": {},
+  "subMetas": {
+    "Girl-2-arm-R": {
+      "ver": "1.0.4",
+      "uuid": "eb47a220-99e6-41ac-b3eb-505caf9d71a8",
+      "rawTextureUuid": "4039d776-f19b-4299-a81a-ab7f339014ee",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 29,
+      "height": 114,
+      "rawWidth": 32,
+      "rawHeight": 116,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

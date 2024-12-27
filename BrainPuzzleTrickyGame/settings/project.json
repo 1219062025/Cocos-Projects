@@ -11,6 +11,7 @@
     "Dynamic Atlas",
     "EditBox",
     "Native Socket",
+    "Physics",
     "PageView",
     "PageViewIndicator",
     "ProgressBar",
@@ -49,6 +50,5 @@
       "enable": false
     }
   },
-  "migrate-history": [],
-  "start-scene": "current"
+  "migrate-history": []
 }

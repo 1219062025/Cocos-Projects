@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "da731bd0-4324-46ce-aa5a-a87d03d66e6c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 104,
+  "height": 64,
+  "platformSettings": {},
+  "subMetas": {
+    "Girl-2-Sleeve": {
+      "ver": "1.0.4",
+      "uuid": "c91c4c26-a2f7-4e6f-9fe8-9843254ee6a1",
+      "rawTextureUuid": "da731bd0-4324-46ce-aa5a-a87d03d66e6c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 104,
+      "height": 61,
+      "rawWidth": 104,
+      "rawHeight": 64,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

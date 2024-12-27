@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "18654d5f-2bb7-49b9-9168-99e2a7b87055",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 116,
+  "height": 120,
+  "platformSettings": {},
+  "subMetas": {
+    "Girl-2-Skirt": {
+      "ver": "1.0.4",
+      "uuid": "1575a80c-3006-4417-98c2-83a5217bc3ec",
+      "rawTextureUuid": "18654d5f-2bb7-49b9-9168-99e2a7b87055",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 114,
+      "height": 119,
+      "rawWidth": 116,
+      "rawHeight": 120,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -75,6 +75,8 @@ export default class DragObject extends cc.Component {
   })
   priority: number = 0;
 
+  isDragging: boolean = false;
+
   /** 拖拽前原始状态 */
   private _originalState: {
     /** 原始位置 */
@@ -97,7 +99,9 @@ export default class DragObject extends cc.Component {
       InteractiveManager.joinGroup(this.group, this);
     } else {
       // 挂载拖拽控制
-      this.mountDragScript();
+      this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+      this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+      this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
     }
 
     // 初始化拖动占位节点
@@ -105,31 +109,48 @@ export default class DragObject extends cc.Component {
       this.dragPlaceholder.active = false;
     }
 
+    // 记录拖拽物的原始位置和层级
+    this._originalState.position = this.node.getPosition();
+    this._originalState.parent = this.node.parent;
+    this._originalState.siblingIndex = this.node.getSiblingIndex();
+
     // 没什么特别意义，只是方便控制台打印时观察，删掉这行也不会影响逻辑
     this.name = this.node.name;
   }
 
-  private mountDragScript() {
-    let draggable = this.node.getComponent(Draggable);
+  onDisable() {
+    this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+    this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
+    this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+  }
 
-    // 为拖拽物添加拖拽功能
-    if (!draggable) {
-      draggable = this.addComponent(Draggable);
+  private onTouchStart(event: cc.Event.EventTouch) {
+    if (this.isDragging) {
+      return event.stopPropagation();
     }
 
-    // 设置 Draggable 回调
-    draggable.dragStartCallback = this.handleDragStart.bind(this);
-    draggable.dragMoveCallback = this.handleDragMove.bind(this);
-    draggable.dragEndCallback = this.handleDragEnd.bind(this);
+    this.handleDragStart(this.node, event);
+  }
+
+  private onTouchMove(event: cc.Event.EventTouch) {
+    if (!this.isDragging) {
+      return event.stopPropagation();
+    }
+
+    this.handleDragMove(this.node, event);
+  }
+
+  private onTouchEnd(event: cc.Event.EventTouch) {
+    if (!this.isDragging) {
+      return event.stopPropagation();
+    }
+
+    this.handleDragEnd(this.node, event);
   }
 
   /** 拖拽物开始拖拽时的回调 */
   public handleDragStart(node: cc.Node, event: cc.Event.EventTouch) {
-    // 记录拖拽物的原始位置和层级
-    this._originalState.position = node.getPosition();
-    this._originalState.parent = node.parent;
-    this._originalState.siblingIndex = node.getSiblingIndex();
-
+    this.isDragging = true;
     // 设置拖拽物节点的父节点为游戏视窗节点，将拖拽物设置到顶层显示
     const globalData = gi.DataManager.getModule<GlobalData>(
       Constant.DATA_MODULE.GLOBAL
@@ -149,6 +170,9 @@ export default class DragObject extends cc.Component {
 
   /** 拖拽物移动时的回调 */
   public handleDragMove(node: cc.Node, event: cc.Event.EventTouch) {
+    const touchPos = node.parent.convertToNodeSpaceAR(event.getLocation());
+    node.setPosition(touchPos);
+
     if (this.dragPlaceholder) {
       const touchPos = this.dragPlaceholder.parent.convertToNodeSpaceAR(
         event.getLocation()
@@ -202,6 +226,7 @@ export default class DragObject extends cc.Component {
     switch (this.depletionBehavior) {
       case DepletionBehavior.DESTORY:
         this.updatePlaceholderState(false);
+        InteractiveManager.unregisterObject(this);
         this.node.destroy();
         break;
       case DepletionBehavior.RESET:
@@ -214,8 +239,14 @@ export default class DragObject extends cc.Component {
   private reset() {
     const placeholder = this.dragPlaceholder || this.node;
 
+    const targetPos = placeholder.parent.convertToNodeSpaceAR(
+      this._originalState.parent.convertToWorldSpaceAR(
+        this._originalState.position
+      )
+    );
+
     (cc.tween(placeholder) as cc.Tween)
-      .to(0.2, { position: this._originalState.position })
+      .to(0.2, { position: targetPos })
       .call(() => {
         // 恢复原位置
         this.node.setPosition(this._originalState.position);
@@ -225,6 +256,8 @@ export default class DragObject extends cc.Component {
         this.node.setSiblingIndex(this._originalState.siblingIndex);
 
         this.updatePlaceholderState(false);
+
+        this.isDragging = false;
       })
       .start();
   }

@@ -3,24 +3,47 @@ export default class Constant {
   static GAME_NAME = "BrainPuzzleTrickyGame";
   /** 游戏版本 */
   static GAME_VERSION = "1.0.0";
+  /** 游戏倒计时60秒后结束 */
+  static GAME_COUNTDOWN = 60;
+  /** 游戏从第一次触摸后，15秒内没有下一次响应就会结束 */
+  static GAME_RESPONSE_TIME = 15;
+
+  /** 游戏状态 */
+  static GAME_STATUS = {
+    /** 游戏中 */
+    PLAYING: 0,
+    /** 游戏胜利 */
+    VICTORY: 1,
+    /** 游戏失败 */
+    LOSE: 2,
+  };
 
   /** 事件名 */
   static EVENT = {
-    /** 拖拽事件 */
-    DRAG: {
-      /** 拖拽开始 */
-      DRAG_START: "DragStart",
-      /** 拖拽移动 */
-      DRAG_MOVE: "DragMove",
-      /** 拖拽结束 */
-      DRAG_END: "DragEnd",
-    },
+    /** 拖拽开始 */
+    DRAG_START: "DragStart",
+    /** 拖拽移动 */
+    DRAG_MOVE: "DragMove",
+    /** 拖拽结束 */
+    DRAG_END: "DragEnd",
     /** 显示Tips UI */
     SHOW_TIPS: "ShowTips",
     /** 游戏失败 */
-    LOSE: "Lose",
+    GAME_LOSE: "Lose",
     /** 游戏过关 */
-    VICTORY: "Victory",
+    GAME_VICTORY: "Victory",
+    /** 游戏视窗触发 触摸 */
+    GAME_TOUCH_START: "GameTouchStart",
+    /** 游戏视窗触发 触摸移动 */
+    GAME_TOUCH_MOVE: "GameTouchMove",
+    /** 游戏视窗触发 目标节点内触摸结束 */
+    GAME_TOUCH_END: "GameTouchEnd",
+    /** 游戏视窗触发 目标节点外触摸结束 */
+    GAME_TOUCH_CANCEL: "GameTouchCancel",
+    /** 禁用游戏窗口触摸 */
+    DISABLE_TOUCH: "DisableTouch",
+    /** 启用游戏窗口触摸 */
+    ENABLE_TOUCH: "EnableTouch",
   };
 
   /** 关卡相关的常量前缀 */
@@ -128,6 +151,11 @@ export default class Constant {
       abbr: "vi",
       full: "Vietnamese",
     },
+    /** 俄语 */
+    ru: {
+      abbr: "ru",
+      full: "Russian",
+    },
 
     // pt: "pt", // 巴西
     // in: "in", // 印度
@@ -136,7 +164,6 @@ export default class Constant {
     // tr: "tr", // 土耳其语
     // ng: "ng", // 尼日利亚
     // es: "es", // 西班牙语
-    // ru: "ru", // 俄语
     // ar: "ar", // 阿拉伯语
     // de: "de", // 德语
     // fr: "fr", // 法语

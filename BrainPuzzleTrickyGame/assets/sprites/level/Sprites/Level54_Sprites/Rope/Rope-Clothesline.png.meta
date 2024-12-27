@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "937525b2-cda5-4983-b2ea-318dbe520910",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 28,
+  "height": 72,
+  "platformSettings": {},
+  "subMetas": {
+    "Rope-Clothesline": {
+      "ver": "1.0.4",
+      "uuid": "c2baea97-6628-400f-8746-6512ef815ecc",
+      "rawTextureUuid": "937525b2-cda5-4983-b2ea-318dbe520910",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 25,
+      "height": 72,
+      "rawWidth": 28,
+      "rawHeight": 72,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

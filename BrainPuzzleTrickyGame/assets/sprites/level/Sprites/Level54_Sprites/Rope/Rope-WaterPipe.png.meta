@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "9068270e-d26f-479d-9526-f6c59ff6cfed",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 32,
+  "height": 72,
+  "platformSettings": {},
+  "subMetas": {
+    "Rope-WaterPipe": {
+      "ver": "1.0.4",
+      "uuid": "bb9a67ff-6b56-4b08-a229-9bd66becd676",
+      "rawTextureUuid": "9068270e-d26f-479d-9526-f6c59ff6cfed",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 29,
+      "height": 72,
+      "rawWidth": 32,
+      "rawHeight": 72,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

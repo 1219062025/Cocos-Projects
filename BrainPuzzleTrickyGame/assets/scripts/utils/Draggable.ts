@@ -15,7 +15,6 @@ export default class Draggable extends cc.Component {
   /** 拖拽结束回调 */
   dragEndCallback: DragCallback = null;
 
-  /** 是否拖拽中 */
   private _isDragging: boolean = false;
 
   disable: boolean = false;
@@ -24,14 +23,12 @@ export default class Draggable extends cc.Component {
     this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
     this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
     this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
-    this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
   }
 
   onDisable() {
     this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
     this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
     this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
-    this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
   }
 
   onTouchStart(event: cc.Event.EventTouch) {

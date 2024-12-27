@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "2ad8573d-f3d7-44bc-b0aa-4068060df9ea",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 48,
+  "height": 180,
+  "platformSettings": {},
+  "subMetas": {
+    "Girl-2-Calf-R": {
+      "ver": "1.0.4",
+      "uuid": "d2db1da6-01e8-4be3-91fc-743581672063",
+      "rawTextureUuid": "2ad8573d-f3d7-44bc-b0aa-4068060df9ea",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 47,
+      "height": 179,
+      "rawWidth": 48,
+      "rawHeight": 180,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
