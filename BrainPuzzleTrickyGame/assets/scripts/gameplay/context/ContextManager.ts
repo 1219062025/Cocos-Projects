@@ -21,6 +21,8 @@ interface CallOptions {
   trigger?: TriggerController;
   /** 节点参数数组 */
   nodes?: cc.Node[];
+  /** 命令挂载的节点 */
+  target?: cc.Node;
   /** 其他参数 */
   [key: string]: any;
 }

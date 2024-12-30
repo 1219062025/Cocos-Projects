@@ -20,6 +20,9 @@ export default class Main extends cc.Component {
   @property({ type: cc.Integer, tooltip: "启动的关卡" })
   level: number = 1;
 
+  @property({ tooltip: "一步跳转模式" })
+  oneStepMode: boolean = false;
+
   @property
   debug: boolean = false;
 
@@ -73,6 +76,34 @@ export default class Main extends cc.Component {
       Constant.UI_PREFAB_URL.PLAYVIEW
     );
     gi.UIManager.show(Constant.UI_PREFAB.PLAYVIEW);
+
+    this.checkOneStepMode();
+  }
+
+  /** 检查是否开启一步跳转（点击屏幕任何位置头跳转商店） */
+  checkOneStepMode() {
+    if (this.oneStepMode) {
+      const canvas = cc.Canvas.instance.node;
+      const mask = new cc.Node("MASK");
+      const widget = mask.addComponent(cc.Widget);
+      mask.setContentSize(cc.winSize);
+
+      gi.EventManager.on(Constant.EVENT.VIEW_RESIZE, () => {
+        console.log(cc.winSize.width, cc.winSize.height);
+        mask.setContentSize(cc.winSize);
+        widget.updateAlignment();
+      });
+
+      mask.on(
+        cc.Node.EventType.TOUCH_END,
+        () => {
+          //@ts-ignore
+          linkToStore();
+        },
+        this
+      );
+      canvas.addChild(mask, 10);
+    }
   }
 
   /** 获取默认语言 */

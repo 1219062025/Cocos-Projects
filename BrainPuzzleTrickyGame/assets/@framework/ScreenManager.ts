@@ -39,6 +39,7 @@ class ScreenManager extends InstanceBase {
 
       this.adapter();
     }
+    EventManager.emit("viewResize", this._currentOrientation);
   }
 
   /** 更改屏幕适配模式 */

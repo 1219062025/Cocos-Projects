@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "fd8d07e1-1af6-4b0c-a0b6-563a965207f4",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 72,
+  "height": 40,
+  "platformSettings": {},
+  "subMetas": {
+    "PalmPrint": {
+      "ver": "1.0.4",
+      "uuid": "9af7270a-2936-4297-a2eb-7cfd93c3f822",
+      "rawTextureUuid": "fd8d07e1-1af6-4b0c-a0b6-563a965207f4",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 0,
+      "width": 70,
+      "height": 40,
+      "rawWidth": 72,
+      "rawHeight": 40,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

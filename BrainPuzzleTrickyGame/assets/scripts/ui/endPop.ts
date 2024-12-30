@@ -23,7 +23,7 @@ export default class EndPop extends View {
       return;
     }
 
-    gi.EventManager.on("orientationChanged", this.adapter, this);
+    gi.EventManager.on(Constant.EVENT.ORIENTATION_CHANGED, this.adapter, this);
 
     this.adapter(gi.ScreenManager.getOrientation());
 

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "264f7c6e-aaf1-44f4-a217-520a1b4ec962",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 140,
+  "height": 180,
+  "platformSettings": {},
+  "subMetas": {
+    "AirVent-1": {
+      "ver": "1.0.4",
+      "uuid": "fef4924c-e590-4833-8466-09d0f036fcb2",
+      "rawTextureUuid": "264f7c6e-aaf1-44f4-a217-520a1b4ec962",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 140,
+      "height": 177,
+      "rawWidth": 140,
+      "rawHeight": 180,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

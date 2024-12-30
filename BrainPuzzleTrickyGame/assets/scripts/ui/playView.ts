@@ -25,7 +25,7 @@ export default class PlayView extends cc.Component {
   async onLoad() {
     // 屏幕适配
     this.adapter(gi.ScreenManager.getOrientation());
-    gi.EventManager.on("orientationChanged", this.adapter, this);
+    gi.EventManager.on(Constant.EVENT.ORIENTATION_CHANGED, this.adapter, this);
 
     this.initGameView();
 

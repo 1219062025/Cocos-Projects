@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "cbd41c16-ef26-42d7-adf5-8c8adac224c9",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 76,
+  "height": 108,
+  "platformSettings": {},
+  "subMetas": {
+    "Stockings-3": {
+      "ver": "1.0.4",
+      "uuid": "754920dc-02c9-4cff-8eaa-385ae677fe34",
+      "rawTextureUuid": "cbd41c16-ef26-42d7-adf5-8c8adac224c9",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 76,
+      "height": 108,
+      "rawWidth": 76,
+      "rawHeight": 108,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

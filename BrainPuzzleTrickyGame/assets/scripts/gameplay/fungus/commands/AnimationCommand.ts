@@ -146,6 +146,7 @@ export class AnimationCommand extends Command {
       const options = {
         object: (lastInteractive && lastInteractive.object) || null,
         trigger: (lastInteractive && lastInteractive.trigger) || null,
+        target: this.node,
         event,
       };
 

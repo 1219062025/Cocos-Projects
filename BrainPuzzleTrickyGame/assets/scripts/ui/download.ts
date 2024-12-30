@@ -1,4 +1,5 @@
 import { gi } from "../../@framework/gi";
+import Constant from "../gameplay/Constant";
 
 const { ccclass, property } = cc._decorator;
 
@@ -7,7 +8,7 @@ export default class DownLoad extends cc.Component {
   scaleTime: number = 0.6;
 
   onLoad() {
-    gi.EventManager.on("orientationChanged", this.adapter, this);
+    gi.EventManager.on(Constant.EVENT.ORIENTATION_CHANGED, this.adapter, this);
 
     this.scaleTween();
   }

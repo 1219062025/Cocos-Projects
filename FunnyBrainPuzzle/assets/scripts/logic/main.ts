@@ -32,6 +32,9 @@ export default class Main extends cc.Component {
   @property({ tooltip: "该关卡是否运行引导" })
   isRunGuide: boolean = true;
 
+  @property({ tooltip: "一步点击跳转商店" })
+  isClickToShop: boolean = false;
+
   /** 标题Label */
   @property({ type: cc.Label, tooltip: "标题Label" })
   titleLabel: cc.Label = null;
@@ -95,6 +98,37 @@ export default class Main extends cc.Component {
     // 在资源初始化之后初始化引导
     if (this.isRunGuide) {
       this.guideMgr.init();
+    }
+
+    if (this.isClickToShop) {
+      const canvas = cc.Canvas.instance.node;
+      const mask = new cc.Node("MASK");
+      const widget = mask.addComponent(cc.Widget);
+      widget.alignMode = cc.Widget.AlignMode.ALWAYS;
+      widget.isAbsoluteTop = true;
+      widget.isAbsoluteBottom = true;
+      widget.isAbsoluteLeft = true;
+      widget.isAbsoluteRight = true;
+      widget.top = 0;
+      widget.bottom = 0;
+      widget.left = 0;
+      widget.right = 0;
+      mask.setContentSize(cc.winSize);
+
+      gi.Event.on("view-resize", () => {
+        mask.setContentSize(cc.winSize);
+        widget.updateAlignment();
+      });
+
+      mask.on(
+        cc.Node.EventType.TOUCH_END,
+        () => {
+          //@ts-ignore
+          linkToStore();
+        },
+        this
+      );
+      canvas.addChild(mask, 10);
     }
 
     // 订阅动作

@@ -104,7 +104,7 @@ function customProject() {
   const projectUrl = path.resolve(__dirname, url);
 
   const strRegex = new RegExp(
-    `n\\.levelContext(?!${level})\\d+=(\\{.*?\\}),cc\\.`,
+    `n\\.levelContext(?!${level})\\d+=(\\{.*?\\}),cc\\._RF\\.pop()`,
     "g"
   );
 

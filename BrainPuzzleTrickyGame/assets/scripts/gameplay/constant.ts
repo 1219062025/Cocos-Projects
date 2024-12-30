@@ -44,6 +44,10 @@ export default class Constant {
     DISABLE_TOUCH: "DisableTouch",
     /** 启用游戏窗口触摸 */
     ENABLE_TOUCH: "EnableTouch",
+    /** Screen管理器发出屏幕尺寸发生变更事件 */
+    VIEW_RESIZE: "viewResize",
+    /** Screen管理器发出屏幕方向发生变更事件 */
+    ORIENTATION_CHANGED: "orientationChanged",
   };
 
   /** 关卡相关的常量前缀 */

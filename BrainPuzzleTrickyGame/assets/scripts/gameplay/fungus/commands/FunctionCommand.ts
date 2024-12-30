@@ -19,6 +19,7 @@ export class FunctionCommand extends Command {
   async execute() {
     const options = {
       nodes: this.nodes,
+      target: this.node,
     };
 
     if (this.funcName) {
