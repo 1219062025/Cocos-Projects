@@ -7,6 +7,8 @@ export default class Constant {
   static GAME_COUNTDOWN = 60;
   /** 游戏从第一次触摸后，15秒内没有下一次响应就会结束 */
   static GAME_RESPONSE_TIME = 15;
+  /** 引导器每隔5秒钟没有触发触摸就会运行 */
+  static GUIDING_INTERVAL = 5;
 
   /** 游戏状态 */
   static GAME_STATUS = {
@@ -20,14 +22,28 @@ export default class Constant {
 
   /** 事件名 */
   static EVENT = {
+    /** 开始引导 */
+    START_GUIDE: "startGuide",
+    /** 完成某个引导器 */
+    COMPLETE_GUIDE: "completeGuide",
     /** 拖拽开始 */
     DRAG_START: "DragStart",
     /** 拖拽移动 */
     DRAG_MOVE: "DragMove",
     /** 拖拽结束 */
     DRAG_END: "DragEnd",
-    /** 显示Tips UI */
-    SHOW_TIPS: "ShowTips",
+    /** 显示Tips Voice */
+    SHOW_VOICE: "ShowVoice",
+    /** 显示Tips Guide */
+    SHOW_GUIDE: "ShowGuide",
+    /** 隐藏Tips Guide */
+    HIDE_TIPS: "HideTips",
+    /** 仅隐藏Voice Tips Guide */
+    HIDE_VOICE: "HideVoice",
+    /** 仅隐藏Guide Tips Guide */
+    HIDE_GUIDE: "HideGuide",
+    /** 倒计时 */
+    COUNT_DOWN: "CountDown",
     /** 游戏失败 */
     GAME_LOSE: "Lose",
     /** 游戏过关 */
@@ -64,6 +80,12 @@ export default class Constant {
     LEVEL: "LevelData",
   };
 
+  /** 配置文件路径 */
+  static CONFIG_PATH = {
+    VOICE_LAN: "configs/VoiceLanguage/level_",
+    GUIDE_LAN: "configs/GuideLanguage/level_tips_",
+  };
+
   /** UI预制体key值 */
   static UI_PREFAB = {
     /** 游戏窗口UI */
@@ -72,12 +94,10 @@ export default class Constant {
     VICTORY_POP: "VictoryPop",
     /** 失败弹窗 */
     LOSE_POP: "LosePop",
-  };
-
-  /** 配置文件路径 */
-  static CONFIG_PATH = {
-    VOICE_LAN: "configs/VoiceLanguage/level_",
-    GUIDE_LAN: "configs/GuideLanguage/level_tips_",
+    /** 失败弹窗 */
+    TIPS: "Tips",
+    /** 引导手指 */
+    HAND: "Hand",
   };
 
   /** UI预制体路径 */
@@ -90,6 +110,20 @@ export default class Constant {
     LOSE_POP: "ui/LosePop",
     /** 提示弹窗 */
     TIPS: "ui/Tips",
+    /** 引导手指 */
+    HAND: "ui/Hand",
+  };
+
+  /** 音乐路径 */
+  static MUSIC_PATH = {
+    /** 背景音乐 */
+    BGM: "audio/bgm",
+  };
+
+  /** 音效路径 */
+  static SOUND_PATH = {
+    /** 交互音效 */
+    INTERACTIVE: "audio/Interactive",
   };
 
   /** 拖拽物类型 */

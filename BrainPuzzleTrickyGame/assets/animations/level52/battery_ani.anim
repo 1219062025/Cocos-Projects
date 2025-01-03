@@ -1,0 +1,77 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "battery_ani",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.625,
+  "sample": 8,
+  "speed": 0.8,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            399.12799999999993,
+            219.471,
+            0
+          ]
+        },
+        {
+          "frame": 0.125,
+          "value": [
+            399.128,
+            206.787,
+            0
+          ]
+        },
+        {
+          "frame": 0.25,
+          "value": [
+            399.128,
+            208.113,
+            0
+          ]
+        },
+        {
+          "frame": 0.5,
+          "value": [
+            399.128,
+            206.787,
+            0
+          ]
+        }
+      ],
+      "opacity": [
+        {
+          "frame": 0.375,
+          "value": 255
+        },
+        {
+          "frame": 0.625,
+          "value": 0
+        }
+      ],
+      "angle": [
+        {
+          "frame": 0.125,
+          "value": 0
+        },
+        {
+          "frame": 0.25,
+          "value": 4
+        },
+        {
+          "frame": 0.375,
+          "value": -4
+        },
+        {
+          "frame": 0.5,
+          "value": 0
+        }
+      ]
+    }
+  },
+  "events": []
+}

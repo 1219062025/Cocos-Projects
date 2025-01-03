@@ -18,7 +18,16 @@ export class ShowTipsCommand extends Command {
 
   execute() {
     // 发送事件
-    gi.EventManager.emit(Constant.EVENT.SHOW_TIPS, this.tid, this.type);
+    switch (this.type) {
+      case Constant.TIPS_TYPE.VOICE:
+        gi.EventManager.emit(Constant.EVENT.SHOW_VOICE, this.tid);
+        break;
+      case Constant.TIPS_TYPE.GUIDE:
+        gi.EventManager.emit(Constant.EVENT.SHOW_GUIDE, this.tid);
+        break;
+      default:
+        break;
+    }
 
     return Promise.resolve();
   }

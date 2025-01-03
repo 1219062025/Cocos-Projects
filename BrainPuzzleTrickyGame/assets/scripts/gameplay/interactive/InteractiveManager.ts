@@ -219,12 +219,12 @@ class InteractiveManager extends InstanceBase {
   }
 
   /** 将指定拖拽物加入指定组 */
-  joinGroup(key: string, object: DragObject) {
-    if (!this._groups.has(key)) {
-      this._groups.set(key, new DragObjectGroup(key));
+  joinGroup(gid: string, object: DragObject) {
+    if (!this._groups.has(gid)) {
+      this._groups.set(gid, new DragObjectGroup(gid));
     }
 
-    const group = this._groups.get(key);
+    const group = this._groups.get(gid);
 
     group.add(object);
   }

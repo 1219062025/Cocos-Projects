@@ -145,6 +145,7 @@ export default class ExpressionEvaluator {
     }
   }
 
+  /** 使用SetVariableCommand命令替代，或者不要在同行存在命令时解析分配运算符，因为命令通过evaluateNode函数返回出来的是一个Promise。 */
   /** 解析分配运算符 */
   private evaluateAssignment(node: jsep.AssignmentExpression): any {
     // @ts-nocheck

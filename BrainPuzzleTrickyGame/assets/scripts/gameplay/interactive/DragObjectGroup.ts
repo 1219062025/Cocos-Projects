@@ -5,15 +5,15 @@ import Constant from "../Constant";
 /** 拖拽物组 */
 export default class DragObjectGroup {
   /** 唯一标识 */
-  public key: string = "";
+  public id: string = "";
 
   /** 拖拽物数组 */
   private _dragObjects: DragObject[] = [];
   /** 当前组里选中的拖拽物 */
   private _currentObject: DragObject;
 
-  constructor(key: string) {
-    this.key = key;
+  constructor(id: string) {
+    this.id = id;
 
     gi.EventManager.on(Constant.EVENT.DRAG_START, this.onDragStart, this);
     gi.EventManager.on(Constant.EVENT.DRAG_MOVE, this.onDragMove, this);
@@ -22,7 +22,7 @@ export default class DragObjectGroup {
 
   private getHightPriorityObject() {
     if (this._dragObjects.length === 0) {
-      throw new Error(`The length of Group ${this.key} is 0`);
+      throw new Error(`The length of Group ${this.id} is 0`);
     }
     // 对组内的对象按照优先级排序
     return this._dragObjects.sort((a, b) => b.priority - a.priority)[0];

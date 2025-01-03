@@ -62,11 +62,11 @@ export default class DragObject extends cc.Component {
   dragPlaceholder: cc.Node = null;
 
   @property({
-    displayName: "所属组",
+    displayName: "所属组ID",
     tooltip:
-      "可选，所属组的Key，如果组不存在会自动创建\n加入组后选中拖拽物前会按照组规则排序",
+      "可选，所属组的ID，如果组不存在会自动创建\n加入组后选中拖拽物前会按照组规则排序",
   })
-  group: string = "";
+  gid: string = "";
 
   @property({
     displayName: "优先级",
@@ -95,8 +95,8 @@ export default class DragObject extends cc.Component {
     // 注册拖拽物到管理器
     InteractiveManager.registerObject(this);
 
-    if (this.group) {
-      InteractiveManager.joinGroup(this.group, this);
+    if (this.gid) {
+      InteractiveManager.joinGroup(this.gid, this);
     } else {
       // 挂载拖拽控制
       this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
@@ -192,7 +192,7 @@ export default class DragObject extends cc.Component {
       this.reset();
     }
 
-    // 阻止事件继续传播，避免只是想拖拽却触发了同一个位置的触摸开始事件
+    // 阻止事件继续传播，避免只是想放开拖拽却触发了同一个位置的触摸结束事件
     event.stopPropagation();
   }
 
@@ -230,6 +230,7 @@ export default class DragObject extends cc.Component {
         this.node.destroy();
         break;
       case DepletionBehavior.RESET:
+        InteractiveManager.unregisterObject(this);
         this.reset();
         break;
     }

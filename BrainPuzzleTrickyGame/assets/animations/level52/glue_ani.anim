@@ -1,0 +1,71 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "glue_ani",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1,
+  "sample": 8,
+  "speed": 0.7,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            107.272,
+            -183.932,
+            0
+          ]
+        },
+        {
+          "frame": 0.25,
+          "value": [
+            -139.611,
+            -183.932,
+            0
+          ]
+        },
+        {
+          "frame": 0.5,
+          "value": [
+            -129.804,
+            -81.478,
+            0
+          ]
+        },
+        {
+          "frame": 0.75,
+          "value": [
+            -4.136,
+            -96.395,
+            0
+          ]
+        },
+        {
+          "frame": 1,
+          "value": [
+            104.486,
+            -97.237,
+            0
+          ]
+        }
+      ],
+      "opacity": [
+        {
+          "frame": 0,
+          "value": 255
+        },
+        {
+          "frame": 0.875,
+          "value": 255
+        },
+        {
+          "frame": 1,
+          "value": 0
+        }
+      ]
+    }
+  },
+  "events": []
+}

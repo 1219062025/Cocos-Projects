@@ -17,15 +17,22 @@ export default class PlayView extends cc.Component {
   topBar: cc.Node = null;
 
   @property({ type: cc.Node })
+  countDownNode: cc.Node = null;
+
+  @property({ type: cc.Node })
   downloadBtn: cc.Node = null;
 
   @property({ type: cc.Label })
   titleLabel: cc.Label = null;
 
+  @property({ type: cc.Label })
+  countDownText: cc.Label = null;
+
   async onLoad() {
     // 屏幕适配
     this.adapter(gi.ScreenManager.getOrientation());
     gi.EventManager.on(Constant.EVENT.ORIENTATION_CHANGED, this.adapter, this);
+    gi.EventManager.on(Constant.EVENT.COUNT_DOWN, this.onCountDown, this);
 
     this.initGameView();
 
@@ -41,6 +48,17 @@ export default class PlayView extends cc.Component {
     // 先挂载Tips，因为Tips里面需要监听showTips事件，如果先挂载关卡预制体，并且里面立即执行的分支表达式里面发送了showTips事件就没法被Tips监听到了。
     this.wrap.addChild(await this.loadTipsPrefab(), 2);
     this.wrap.addChild(await this.loadLevelPrefab(), 0);
+
+    /** 加载bgm */
+    gi.AudioManager.playMusic(Constant.MUSIC_PATH.BGM, true);
+  }
+
+  onCountDown(time: number) {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    this.countDownText.string = `${minutes}:${
+      seconds < 10 ? "0" : ""
+    }${seconds}`;
   }
 
   /** 加载关卡预制体 */
@@ -96,7 +114,10 @@ export default class PlayView extends cc.Component {
 
     if (orientation === "Landscape") {
       // 切换为横屏后需要手动适配主要节点的位置以及缩放
-      this.topBar.scale = this.downloadBtn.scale = scaleMin;
+      this.topBar.scale =
+        this.countDownNode.scale =
+        this.downloadBtn.scale =
+          scaleMin;
       // wrap在不同屏幕下锚定高度为当前窗口实际高度的百分之80
       this.wrap.scale = (cc.winSize.height * 0.8) / this.wrap.height;
 
@@ -104,15 +125,23 @@ export default class PlayView extends cc.Component {
       this.topBar.setPosition(
         cc.v2(-cc.winSize.width / 4, cc.winSize.height / 6)
       );
+      this.countDownNode.setPosition(
+        cc.v2(cc.winSize.width / 5, cc.winSize.height / 2.33)
+      );
       this.downloadBtn.setPosition(
         cc.v2(-cc.winSize.width / 4, -cc.winSize.height / 6)
       );
     } else {
       // 由于在编辑器中是竖屏状态下放置节点的，所以切换回竖屏只需要把编辑器里的节点位置、缩放直接设置上去就可以了
-      this.wrap.scale = this.topBar.scale = this.downloadBtn.scale = 1;
+      this.wrap.scale =
+        this.topBar.scale =
+        this.countDownNode.scale =
+        this.downloadBtn.scale =
+          1;
 
       this.wrap.setPosition(0, 0);
-      this.topBar.setPosition(0, 824.765);
+      this.topBar.setPosition(0, 841.486);
+      this.countDownNode.setPosition(0, 742.927);
       this.downloadBtn.setPosition(0, -836.853);
     }
   }

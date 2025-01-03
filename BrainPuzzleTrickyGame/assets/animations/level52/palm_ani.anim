@@ -1,0 +1,141 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "palm_ani",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 2.125,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "1": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.125,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "2": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.625,
+              "value": 0
+            },
+            {
+              "frame": 0.75,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "3": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 1,
+              "value": 0
+            },
+            {
+              "frame": 1.125,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "4": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 1.375,
+              "value": 0
+            },
+            {
+              "frame": 1.5,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "5": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 1.5,
+              "value": 0
+            },
+            {
+              "frame": 1.625,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "6": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 1.625,
+              "value": 0
+            },
+            {
+              "frame": 1.75,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "7": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 1.75,
+              "value": 0
+            },
+            {
+              "frame": 1.875,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "8": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 1.875,
+              "value": 0
+            },
+            {
+              "frame": 2,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "9": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 2,
+              "value": 0
+            },
+            {
+              "frame": 2.125,
+              "value": 255
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

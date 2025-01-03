@@ -1,3 +1,5 @@
+import { gi } from "../../../../@framework/gi";
+import Constant from "../../Constant";
 import BranchController from "../BranchController";
 import Command from "./Command";
 const { ccclass, property, menu } = cc._decorator;
@@ -256,6 +258,8 @@ export class ActionCommand extends Command {
   private _onEventTriggered() {
     // 事件触发后可以执行其他操作
     // console.log("事件已触发: ", this.type);
+
+    gi.AudioManager.playSound(Constant.SOUND_PATH.INTERACTIVE);
 
     if (this.expressions) {
       const branch = this.node.getComponent(BranchController);

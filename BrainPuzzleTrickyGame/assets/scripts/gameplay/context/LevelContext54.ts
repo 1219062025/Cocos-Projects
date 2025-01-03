@@ -28,6 +28,8 @@ export const levelContext54: LevelContext = {
       v.girlSpine1 = options.nodes[0].getComponent(sp.Skeleton);
       v.girlSpine2 = options.nodes[1].getComponent(sp.Skeleton);
       v.rope = options.nodes[2];
+
+      gi.EventManager.emit(Constant.EVENT.START_GUIDE);
     },
     slideDown: (options) => {
       return new Promise(async (resolve) => {
@@ -80,11 +82,7 @@ export const levelContext54: LevelContext = {
               if (v.partCount === 11) {
                 levelContext54.functions.done(options);
               } else {
-                gi.EventManager.emit(
-                  Constant.EVENT.SHOW_TIPS,
-                  "1",
-                  Constant.TIPS_TYPE.VOICE
-                );
+                gi.EventManager.emit(Constant.EVENT.SHOW_VOICE, "1");
                 gi.EventManager.emit(Constant.EVENT.ENABLE_TOUCH);
               }
             }
@@ -123,11 +121,7 @@ export const levelContext54: LevelContext = {
 
     done: (options) => {
       const v = levelContext54.variables as Variables;
-      gi.EventManager.emit(
-        Constant.EVENT.SHOW_TIPS,
-        "2",
-        Constant.TIPS_TYPE.VOICE
-      );
+      gi.EventManager.emit(Constant.EVENT.SHOW_VOICE, "2");
 
       CommandManager.executeCommand(
         "4-setActive",
@@ -141,11 +135,7 @@ export const levelContext54: LevelContext = {
           "overthrow",
           cc.find("trigger", v.girlSpine2.node)
         );
-        gi.EventManager.emit(
-          Constant.EVENT.SHOW_TIPS,
-          "3",
-          Constant.TIPS_TYPE.VOICE
-        );
+        gi.EventManager.emit(Constant.EVENT.SHOW_VOICE, "3");
         v.girlSpine1.setAnimation(0, "Girl-4(2)", true);
 
         CommandManager.executeCommand(
@@ -154,11 +144,7 @@ export const levelContext54: LevelContext = {
         );
 
         await wait(2);
-        gi.EventManager.emit(
-          Constant.EVENT.SHOW_TIPS,
-          "5",
-          Constant.TIPS_TYPE.VOICE
-        );
+        gi.EventManager.emit(Constant.EVENT.SHOW_VOICE, "5");
         await wait(2);
 
         gi.UIManager.show(Constant.UI_PREFAB.VICTORY_POP);
@@ -183,11 +169,7 @@ export const levelContext54: LevelContext = {
           cc.find("trigger", v.girlSpine2.node)
         );
 
-        gi.EventManager.emit(
-          Constant.EVENT.SHOW_TIPS,
-          "4",
-          Constant.TIPS_TYPE.VOICE
-        );
+        gi.EventManager.emit(Constant.EVENT.SHOW_VOICE, "4");
 
         await wait(1);
 
@@ -205,12 +187,6 @@ export const levelContext54: LevelContext = {
     },
     showGirlB: (options) => {
       levelContext54.functions.showGirl({ skin: "B" });
-    },
-    lose: () => {
-      gi.UIManager.show(Constant.UI_PREFAB.LOSE_POP);
-    },
-    victory: () => {
-      gi.UIManager.show(Constant.UI_PREFAB.VICTORY_POP);
     },
   },
 };

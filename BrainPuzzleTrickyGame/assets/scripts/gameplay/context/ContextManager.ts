@@ -54,13 +54,14 @@ class ContextManager extends InstanceBase {
   public getVariable(path: string): any {
     if (this._currentContext) {
       const keys = path.split(".");
-      return keys.reduce((acc, key) => {
+      const result = keys.reduce((acc, key) => {
         if (acc && key in acc) {
           return acc[key];
         } else {
           return undefined;
         }
       }, this._currentContext.variables);
+      return result;
     }
     throw new Error(`No active context to get variable '${path}'.`);
   }

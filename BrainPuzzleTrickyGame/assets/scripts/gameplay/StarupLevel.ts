@@ -3,6 +3,7 @@ import GlobalData from "../data/GlobalData";
 import LevelData from "../data/level/LevelData";
 import Constant from "./Constant";
 import ContextManager from "./context/ContextManager";
+import GuideManager from "./guide/GuideManager";
 import InteractiveManager from "./interactive/InteractiveManager";
 
 const { ccclass, property } = cc._decorator;
@@ -22,6 +23,9 @@ export default class StarupLevel extends cc.Component {
     const globalData = gi.DataManager.getModule<GlobalData>(
       Constant.DATA_MODULE.GLOBAL
     );
+
+    // 初始化引导器
+    GuideManager.init();
 
     // 初始化关卡上下文
     ContextManager.init(levelData.getCurrentLevel());
@@ -44,6 +48,7 @@ export default class StarupLevel extends cc.Component {
         this.checkGameEnd(globalData);
       } else {
         countdown--;
+        gi.EventManager.emit(Constant.EVENT.COUNT_DOWN, countdown);
       }
     };
 

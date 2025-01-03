@@ -1,3 +1,5 @@
+import { gi } from "../../@framework/gi";
+import Constant from "../gameplay/Constant";
 import BranchController from "../gameplay/fungus/BranchController";
 import InteractiveManager from "../gameplay/interactive/InteractiveManager";
 
@@ -70,12 +72,15 @@ export default class TriggerController extends cc.Component {
       this.switchBehavior();
     }
 
+    gi.AudioManager.playSound(Constant.SOUND_PATH.INTERACTIVE);
+
     return true;
   }
 
   private switchBehavior() {
     switch (this.depletionBehavior) {
       case DepletionBehavior.IDLE:
+        InteractiveManager.unregisterTrigger(this);
         break;
     }
   }
