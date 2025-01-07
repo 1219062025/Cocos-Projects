@@ -20,7 +20,7 @@ export default class Tips extends cc.Component {
     gi.EventManager.on(Constant.EVENT.HIDE_GUIDE, this.hideGuide, this);
   }
 
-  showVoice(id: string) {
+  private showVoice(id: string) {
     this._isVoice = true;
     this._isGuide = false;
 
@@ -38,7 +38,7 @@ export default class Tips extends cc.Component {
       .start();
   }
 
-  showGuide(id: string) {
+  private showGuide(id: string) {
     this._isGuide = true;
     this._isVoice = false;
 
@@ -54,21 +54,21 @@ export default class Tips extends cc.Component {
       .start();
   }
 
-  hideGuide() {
+  private hideGuide() {
     if (this._isGuide) {
       this.node.stopAllActions();
       (cc.tween(this.node) as cc.Tween).to(0.2, { opacity: 0 }).start();
     }
   }
 
-  hideVoice() {
+  private hideVoice() {
     if (this._isVoice) {
       this.node.stopAllActions();
       (cc.tween(this.node) as cc.Tween).to(0.2, { opacity: 0 }).start();
     }
   }
 
-  hideTips() {
+  private hideTips() {
     this.node.stopAllActions();
     (cc.tween(this.node) as cc.Tween).to(0.2, { opacity: 0 }).start();
   }

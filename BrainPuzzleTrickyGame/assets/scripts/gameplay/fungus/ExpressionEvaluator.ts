@@ -38,16 +38,12 @@ export default class ExpressionEvaluator {
 
   /** 解析AST */
   evaluate(ast: jsep.Expression): Promise<any> {
-    // return new Promise((resolve, reject) => {
-    //   // 递归解析 AST 节点
-    //   resolve(this.evaluateNode(ast));
-    // });
-
+    // 递归解析 AST 节点
     return this.evaluateNode(ast);
   }
 
   /** 开始解析ast节点 */
-  private evaluateNode(node: jsep.Expression): any {
+  private evaluateNode(node: jsep.Expression) {
     switch (node.type) {
       case "Literal":
         return (node as jsep.Literal).value;
@@ -58,7 +54,7 @@ export default class ExpressionEvaluator {
       case "EndIfExpression":
         return null;
       case "WaitExpression":
-        return null;
+        return this.evaluateWait(node as jsep.WaitExpression);
       case "CommandExpression":
         return this.evaluateCommand(node as jsep.CommandExpression);
       case "VariableExpression":
@@ -78,12 +74,19 @@ export default class ExpressionEvaluator {
   }
 
   /** 解析If */
-  private evaluateIf(node: jsep.IfExpression): any {
-    return this.evaluateNode(jsep(node.condition));
+  private async evaluateIf(node: jsep.IfExpression) {
+    return await this.evaluateNode(jsep(node.condition));
+  }
+
+  /** 解析Wait */
+  private async evaluateWait(node: jsep.WaitExpression) {
+    return await new Promise((resolve) => {
+      setTimeout(resolve, node.delay * 1000);
+    });
   }
 
   /** 解析命令 */
-  private evaluateCommand(node: jsep.CommandExpression): any {
+  private evaluateCommand(node: jsep.CommandExpression) {
     if (!this.commandExecutor) {
       console.error("[ExpressionEvaluator] does not exist CommandExecutor");
       return null;
@@ -109,9 +112,9 @@ export default class ExpressionEvaluator {
   }
 
   /** 解析二元运算符 */
-  private evaluateBinary(node: jsep.BinaryExpression): any {
-    const left = this.evaluateNode(node.left);
-    const right = this.evaluateNode(node.right);
+  private async evaluateBinary(node: jsep.BinaryExpression) {
+    const left = await this.evaluateNode(node.left);
+    const right = await this.evaluateNode(node.right);
     switch (node.operator) {
       case "+":
         return left + right;
@@ -145,9 +148,8 @@ export default class ExpressionEvaluator {
     }
   }
 
-  /** 使用SetVariableCommand命令替代，或者不要在同行存在命令时解析分配运算符，因为命令通过evaluateNode函数返回出来的是一个Promise。 */
   /** 解析分配运算符 */
-  private evaluateAssignment(node: jsep.AssignmentExpression): any {
+  private async evaluateAssignment(node: jsep.AssignmentExpression) {
     // @ts-nocheck
     const leftType =
       (node.left.right && node.left.right["type"]) || node.left["type"];
@@ -155,8 +157,8 @@ export default class ExpressionEvaluator {
     const leftValue =
       (node.left.right && node.left.right["value"]) || node.left["value"];
 
-    let left = this.evaluateNode(node.left);
-    let right = this.evaluateNode(node.right);
+    let left = await this.evaluateNode(node.left);
+    let right = await this.evaluateNode(node.right);
 
     switch (node.operator) {
       case "=":
@@ -214,17 +216,19 @@ export default class ExpressionEvaluator {
         return null;
     }
 
+    // 如果分配符的分配对象是上下文中的变量的话，需要手动调用variableAssignment分配
     if (leftType === "VariableExpression") {
-      this.variableAssignment(leftValue, left);
+      const variablePath = leftValue;
+      this.variableAssignment(variablePath, left);
     }
     return left;
   }
 
   /** 解析条件表达式 */
-  private evaluateConditional(node: jsep.ConditionalExpression): any {
-    const test = this.evaluateNode(node.test);
+  private async evaluateConditional(node: jsep.ConditionalExpression) {
+    const test = await this.evaluateNode(node.test);
     return test
-      ? this.evaluateNode(node.consequent)
-      : this.evaluateNode(node.alternate);
+      ? await this.evaluateNode(node.consequent)
+      : await this.evaluateNode(node.alternate);
   }
 }

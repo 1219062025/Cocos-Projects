@@ -88,12 +88,6 @@ export default class BranchController extends cc.Component {
 
           break;
 
-        case "WaitExpression":
-          await new Promise((resolve) =>
-            this.scheduleOnce(resolve, ast.delay as number)
-          );
-          break;
-
         default:
           if (this.isActive(stack)) {
             await this._evaluator.evaluate(ast);

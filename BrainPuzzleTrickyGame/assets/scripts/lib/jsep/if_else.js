@@ -1,7 +1,7 @@
 const plugin = {
   name: "if_else",
   init(jsep) {
-    const regexIf = /^\{if\s+((?<=if\s).*(?=\}))\}/; // 匹配 {if condition}
+    const regexIf = /^\{if\s+((?<=if\s).*(?=\}))\}/; // 贪婪匹配 {if condition}
     const regexElse = /^\{else\}/; // 匹配 {else}
     const regexEndif = /^\{endif\}/; // 匹配 {endif}
 

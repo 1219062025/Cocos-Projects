@@ -53,7 +53,7 @@ class InteractiveManager extends InstanceBase {
 
       /** 碰撞器 */
       const collider = trigger.getComponent(cc.BoxCollider);
-      /** 光标世界坐标，按照光标位置判断，而不是拖拽物节点的包围框 */
+      /** 拖拽物世界坐标(等同于触摸点当前世界坐标)，按照触摸点位置判断，而不是拖拽物节点的包围框 */
       const position = object.node.convertToWorldSpaceAR(cc.v2(0, 0));
 
       // @ts-ignore

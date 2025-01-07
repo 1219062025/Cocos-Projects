@@ -89,7 +89,6 @@ export default class Main extends cc.Component {
       mask.setContentSize(cc.winSize);
 
       gi.EventManager.on(Constant.EVENT.VIEW_RESIZE, () => {
-        console.log(cc.winSize.width, cc.winSize.height);
         mask.setContentSize(cc.winSize);
         widget.updateAlignment();
       });

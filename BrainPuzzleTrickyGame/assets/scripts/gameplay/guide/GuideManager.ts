@@ -43,22 +43,6 @@ class GuideManager extends InstanceBase {
     );
   }
 
-  onGameTouchStart() {
-    this._timeout && clearTimeout(this._timeout);
-    if (this._currentGuide) {
-      this._currentGuide.pause();
-      this._currentGuide = null;
-    }
-  }
-
-  onGameTouchEnd() {
-    this._timeout && clearTimeout(this._timeout);
-    this._timeout = setTimeout(
-      this.startGuide.bind(this),
-      Constant.GUIDING_INTERVAL * 1000
-    );
-  }
-
   /** 注册引导器 */
   register(guide: Guide) {
     if (!this._guides.has(guide.id)) {
@@ -107,6 +91,22 @@ class GuideManager extends InstanceBase {
     });
 
     return highestPriorityGuide;
+  }
+
+  private onGameTouchStart() {
+    this._timeout && clearTimeout(this._timeout);
+    if (this._currentGuide) {
+      this._currentGuide.pause();
+      this._currentGuide = null;
+    }
+  }
+
+  private onGameTouchEnd() {
+    this._timeout && clearTimeout(this._timeout);
+    this._timeout = setTimeout(
+      this.startGuide.bind(this),
+      Constant.GUIDING_INTERVAL * 1000
+    );
   }
 }
 
