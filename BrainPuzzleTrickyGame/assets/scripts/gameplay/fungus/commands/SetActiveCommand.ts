@@ -4,6 +4,9 @@ const { ccclass, property, menu } = cc._decorator;
 @ccclass
 @menu("Fungus/Command/Set | SetActiveCommand")
 export class SetActiveCommand extends Command {
+  @property({ override: true })
+  id: string = "setActive-";
+
   @property({
     type: [cc.Node],
     displayName: "显示节点",

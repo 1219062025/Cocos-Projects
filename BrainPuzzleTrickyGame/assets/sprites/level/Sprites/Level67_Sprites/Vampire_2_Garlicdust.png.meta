@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "57845ae6-df17-4a57-8410-9a86c7ee11f3",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 144,
+  "height": 144,
+  "platformSettings": {},
+  "subMetas": {
+    "Vampire_2_Garlicdust": {
+      "ver": "1.0.4",
+      "uuid": "d67fed85-082f-4106-be1c-4ca7ed5583ec",
+      "rawTextureUuid": "57845ae6-df17-4a57-8410-9a86c7ee11f3",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 5,
+      "trimY": 15,
+      "width": 134,
+      "height": 114,
+      "rawWidth": 144,
+      "rawHeight": 144,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

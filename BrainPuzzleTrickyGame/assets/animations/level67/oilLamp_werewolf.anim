@@ -1,0 +1,52 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "oilLamp_werewolf",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.375,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            -423,
+            -108
+          ],
+          "motionPath": [
+            [
+              -256,
+              106,
+              -359,
+              37,
+              -156,
+              174
+            ]
+          ]
+        },
+        {
+          "frame": 0.375,
+          "value": [
+            -18,
+            166
+          ],
+          "motionPath": []
+        }
+      ],
+      "angle": [
+        {
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "frame": 0.375,
+          "value": -720
+        }
+      ]
+    }
+  },
+  "events": []
+}

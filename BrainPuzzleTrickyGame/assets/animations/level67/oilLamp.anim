@@ -1,0 +1,73 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "oilLamp",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.625,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            -467,
+            174
+          ],
+          "motionPath": [
+            [
+              -339,
+              458,
+              -439,
+              348,
+              -245,
+              561
+            ]
+          ]
+        },
+        {
+          "frame": 0.375,
+          "value": [
+            -77,
+            601
+          ],
+          "motionPath": [
+            [
+              -308,
+              806,
+              -174,
+              738,
+              -451,
+              878
+            ]
+          ]
+        },
+        {
+          "frame": 0.625,
+          "value": [
+            -631,
+            881
+          ],
+          "motionPath": []
+        }
+      ],
+      "angle": [
+        {
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "frame": 0.375,
+          "value": -360
+        },
+        {
+          "frame": 0.625,
+          "value": -720
+        }
+      ]
+    }
+  },
+  "events": []
+}

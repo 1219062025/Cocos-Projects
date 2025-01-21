@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "4c660b9d-053b-4af3-a8e4-58ba148a384c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 480,
+  "height": 960,
+  "platformSettings": {},
+  "subMetas": {
+    "Werewolf_1": {
+      "ver": "1.0.4",
+      "uuid": "87a003f0-f85b-410f-ad72-f48cb4fa0434",
+      "rawTextureUuid": "4c660b9d-053b-4af3-a8e4-58ba148a384c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 29,
+      "trimY": 9,
+      "width": 421,
+      "height": 941,
+      "rawWidth": 480,
+      "rawHeight": 960,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -47,7 +47,7 @@ class InteractiveManager extends InstanceBase {
 
     const validTriggers = triggers.filter((trigger) => {
       // 触发器所在节点未激活，不纳入
-      if (!cc.isValid(trigger.node) || !trigger.node.active) {
+      if (!cc.isValid(trigger.node) || !trigger.node.activeInHierarchy) {
         return false;
       }
 

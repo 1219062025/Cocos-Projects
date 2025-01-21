@@ -22,6 +22,9 @@ enum OperateOptions {
 @ccclass
 @menu("Fungus/Command/Event | ActionCommand")
 export class ActionCommand extends Command {
+  @property({ override: true })
+  id: string = "action-";
+
   @property({
     type: cc.Enum(ActionOptions),
     tooltip:

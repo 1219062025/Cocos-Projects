@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "0e30a98f-7030-47d8-a9e1-4bc5bc12c3a4",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 860,
+  "height": 960,
+  "platformSettings": {},
+  "subMetas": {
+    "Vampire_2_Garlic2": {
+      "ver": "1.0.4",
+      "uuid": "f0d4cbce-f1f5-4537-b3fe-52eef4fa0d64",
+      "rawTextureUuid": "0e30a98f-7030-47d8-a9e1-4bc5bc12c3a4",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 3,
+      "trimY": 10,
+      "width": 853,
+      "height": 940,
+      "rawWidth": 860,
+      "rawHeight": 960,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

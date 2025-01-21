@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "a169f16c-e858-475e-a964-353dcd0f63f4",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 280,
+  "height": 240,
+  "platformSettings": {},
+  "subMetas": {
+    "Werewolf_2_OilLamp": {
+      "ver": "1.0.4",
+      "uuid": "dbb6703c-2fe2-4b02-86ae-becae54d358c",
+      "rawTextureUuid": "a169f16c-e858-475e-a964-353dcd0f63f4",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 12,
+      "trimY": 8,
+      "width": 255,
+      "height": 223,
+      "rawWidth": 280,
+      "rawHeight": 240,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

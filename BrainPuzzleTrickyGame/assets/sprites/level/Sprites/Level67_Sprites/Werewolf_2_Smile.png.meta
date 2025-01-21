@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "e51c3ddd-5b5e-4b49-8f8a-82df15e46e44",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 279,
+  "height": 240,
+  "platformSettings": {},
+  "subMetas": {
+    "Werewolf_2_Smile": {
+      "ver": "1.0.4",
+      "uuid": "389a1fae-04d3-41ad-b98e-f0439d973190",
+      "rawTextureUuid": "e51c3ddd-5b5e-4b49-8f8a-82df15e46e44",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 12,
+      "trimY": 8,
+      "width": 255,
+      "height": 223,
+      "rawWidth": 279,
+      "rawHeight": 240,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

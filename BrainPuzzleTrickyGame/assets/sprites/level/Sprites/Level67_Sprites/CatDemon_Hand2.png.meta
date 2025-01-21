@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "9f21d12e-0c3f-4123-a8ca-a9b30abaffa5",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 188,
+  "height": 120,
+  "platformSettings": {},
+  "subMetas": {
+    "CatDemon_Hand2": {
+      "ver": "1.0.4",
+      "uuid": "15b0f353-4fa9-4b5b-b27e-cc3ddf7a024a",
+      "rawTextureUuid": "9f21d12e-0c3f-4123-a8ca-a9b30abaffa5",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 7,
+      "trimY": 8,
+      "width": 173,
+      "height": 104,
+      "rawWidth": 188,
+      "rawHeight": 120,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

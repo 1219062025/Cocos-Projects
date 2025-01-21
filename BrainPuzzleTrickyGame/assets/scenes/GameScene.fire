@@ -171,7 +171,7 @@
       "array": [
         0,
         0,
-        519.6152422706632,
+        473.715895870088,
         0,
         0,
         0,
@@ -282,7 +282,7 @@
       "__id__": 2
     },
     "_enabled": true,
-    "level": 32,
+    "level": 38,
     "oneStepMode": false,
     "debug": true,
     "language": 0,

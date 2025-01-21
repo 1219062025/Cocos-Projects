@@ -11,7 +11,7 @@ export interface LevelContext {
   /** 关卡变量 */
   variables?: Record<string, any>;
   /** 关卡函数 */
-  functions?: Record<string, (options: CallOptions) => any>;
+  functions?: Record<string, (options: CallOptions, ...args) => any>;
 }
 
 interface CallOptions {

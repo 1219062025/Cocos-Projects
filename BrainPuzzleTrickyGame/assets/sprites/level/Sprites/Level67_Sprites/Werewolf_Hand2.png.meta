@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "8863e760-a620-412e-8b20-b013c32602da",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 120,
+  "height": 184,
+  "platformSettings": {},
+  "subMetas": {
+    "Werewolf_Hand2": {
+      "ver": "1.0.4",
+      "uuid": "60aec022-2815-4dc7-893b-0032fcf6b384",
+      "rawTextureUuid": "8863e760-a620-412e-8b20-b013c32602da",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 8,
+      "trimY": 9,
+      "width": 103,
+      "height": 166,
+      "rawWidth": 120,
+      "rawHeight": 184,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

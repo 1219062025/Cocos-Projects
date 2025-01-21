@@ -77,6 +77,9 @@ export default class DragObject extends cc.Component {
 
   isDragging: boolean = false;
 
+  /** 是否禁用 */
+  disable: boolean = false;
+
   /** 拖拽前原始状态 */
   private _originalState: {
     /** 原始位置 */
@@ -125,7 +128,7 @@ export default class DragObject extends cc.Component {
   }
 
   private onTouchStart(event: cc.Event.EventTouch) {
-    if (this.isDragging) {
+    if (this.isDragging || this.disable) {
       return event.stopPropagation();
     }
 
@@ -133,7 +136,7 @@ export default class DragObject extends cc.Component {
   }
 
   private onTouchMove(event: cc.Event.EventTouch) {
-    if (!this.isDragging) {
+    if (!this.isDragging || this.disable) {
       return event.stopPropagation();
     }
 
@@ -141,7 +144,7 @@ export default class DragObject extends cc.Component {
   }
 
   private onTouchEnd(event: cc.Event.EventTouch) {
-    if (!this.isDragging) {
+    if (!this.isDragging || this.disable) {
       return event.stopPropagation();
     }
 

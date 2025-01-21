@@ -80,7 +80,7 @@ export default class Main extends cc.Component {
     this.checkOneStepMode();
   }
 
-  /** 检查是否开启一步跳转（点击屏幕任何位置头跳转商店） */
+  /** 检查是否开启一步跳转（点击屏幕任何位置跳转商店） */
   checkOneStepMode() {
     if (this.oneStepMode) {
       const canvas = cc.Canvas.instance.node;

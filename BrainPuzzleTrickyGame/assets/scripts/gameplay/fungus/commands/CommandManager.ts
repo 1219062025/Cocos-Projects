@@ -54,6 +54,7 @@ class CommandManager extends InstanceBase {
     if (command) {
       return command.execute();
     } else {
+      console.log(`Command ${id} does not exist on node ${command}`);
       throw new Error(
         `Command ${id} does not exist on node ${command.node.name}`
       );

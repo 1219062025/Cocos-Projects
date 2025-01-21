@@ -6,6 +6,9 @@ const { ccclass, property, menu } = cc._decorator;
 @ccclass
 @menu("Fungus/Command/Scripting | ShowTipsCommand")
 export class ShowTipsCommand extends Command {
+  @property({ override: true })
+  id: string = "showTips-";
+
   @property({ displayName: "提示ID" })
   tid: string = "";
 

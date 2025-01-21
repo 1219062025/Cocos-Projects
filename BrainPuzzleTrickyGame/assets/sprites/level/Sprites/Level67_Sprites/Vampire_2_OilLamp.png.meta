@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "7f5c2a63-fdca-40bc-b747-29de6116e968",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 560,
+  "height": 766,
+  "platformSettings": {},
+  "subMetas": {
+    "Vampire_2_OilLamp": {
+      "ver": "1.0.4",
+      "uuid": "247a800d-05c4-4b92-9a83-427713cf1138",
+      "rawTextureUuid": "7f5c2a63-fdca-40bc-b747-29de6116e968",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 7,
+      "offsetY": -9.5,
+      "trimX": 19,
+      "trimY": 19,
+      "width": 536,
+      "height": 747,
+      "rawWidth": 560,
+      "rawHeight": 766,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -189,7 +189,7 @@
       "array": [
         0,
         0,
-        534.2750564388109,
+        493.63448015713004,
         0,
         0,
         0,
@@ -4085,6 +4085,7 @@
     "unique": true,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "ddFcj1xURAsK9oiG0GlTcX"
   },
   {
@@ -5627,6 +5628,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 1,
+    "displayNode": null,
     "_id": "5ehk0Hf/JHZ4drBy/3RP/K"
   },
   {
@@ -5740,6 +5742,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 2,
+    "displayNode": null,
     "_id": "b33JbiYNdGpbRwHBM6J9Bp"
   },
   {
@@ -5853,6 +5856,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 3,
+    "displayNode": null,
     "_id": "f7MRmhCwtBJaWJkZ6G5MW0"
   },
   {
@@ -5966,6 +5970,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 4,
+    "displayNode": null,
     "_id": "a4vNp8b4ROboD/X38gqR/B"
   },
   {
@@ -6079,6 +6084,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 5,
+    "displayNode": null,
     "_id": "868p7yXbxA2LokoBZPHd8i"
   },
   {
@@ -6192,6 +6198,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 6,
+    "displayNode": null,
     "_id": "f6vT+hl7RL+a+DwJHxn7L+"
   },
   {
@@ -6305,6 +6312,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 7,
+    "displayNode": null,
     "_id": "73WmmBRNJNhbCHYvTmMQiI"
   },
   {
@@ -6418,6 +6426,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 8,
+    "displayNode": null,
     "_id": "23/mYq3chOapjSYnjy1h2K"
   },
   {
@@ -6531,6 +6540,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 9,
+    "displayNode": null,
     "_id": "6cD/6HwgBMYq12n4fzW3m5"
   },
   {
@@ -6644,6 +6654,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 10,
+    "displayNode": null,
     "_id": "f5DvGL4x5HNIDgC1VnYuLn"
   },
   {
@@ -12538,6 +12549,7 @@
     "limitedTime": 60,
     "responseTime": 15,
     "isRunGuide": true,
+    "isClickToShop": true,
     "titleLabel": {
       "__id__": 9
     },

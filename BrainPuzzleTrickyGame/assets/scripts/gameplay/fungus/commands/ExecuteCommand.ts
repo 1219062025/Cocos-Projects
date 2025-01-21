@@ -5,6 +5,9 @@ const { ccclass, property, menu } = cc._decorator;
 @ccclass
 @menu("Fungus/Command/Execute | ExecuteCommand")
 export class ExecuteCommand extends Command {
+  @property({ override: true })
+  id: string = "execute-";
+
   @property({ type: cc.Node, displayName: "目标节点" })
   target: cc.Node = null;
 

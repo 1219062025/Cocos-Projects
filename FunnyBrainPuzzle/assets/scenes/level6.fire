@@ -189,7 +189,7 @@
       "array": [
         0,
         0,
-        534.2750564388109,
+        493.63448015713004,
         0,
         0,
         0,
@@ -13319,6 +13319,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "0avwE6MkVCzZDx0Rj5cZqg"
   },
   {
@@ -13432,6 +13433,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "e9E9guJZRM8JAigYP0Xh5b"
   },
   {
@@ -13545,6 +13547,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "fewUcYxpFDHYmUST5GIvW2"
   },
   {
@@ -13658,6 +13661,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "e5gmSI1yRH16gxHr9rNWbE"
   },
   {
@@ -13771,6 +13775,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "f9LjrYaE9LMo0BlfQT1PBc"
   },
   {
@@ -13884,6 +13889,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "83h7W2biNPs7QNWNGsH37x"
   },
   {
@@ -13997,6 +14003,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "fd1U1IhBlElIFzFbJO/C2c"
   },
   {
@@ -14110,6 +14117,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "f8eBv//H9Kk5W2wRv3EpU7"
   },
   {
@@ -14223,6 +14231,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "c0rfr3YTlOJIijByZGWoxW"
   },
   {
@@ -14336,6 +14345,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "caDOc2+6ZBEZ3uyOHAyXLR"
   },
   {
@@ -14449,6 +14459,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "a1n7LjrJNC/aVqNIunHaJC"
   },
   {
@@ -14562,6 +14573,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "d6UmrlGKtMwJ+8AC7N37DI"
   },
   {
@@ -14675,6 +14687,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "6ffaeaj4NPbK2nINXDqUlt"
   },
   {
@@ -14788,6 +14801,7 @@
     "unique": false,
     "isRepeatUse": false,
     "siblingIndex": 0,
+    "displayNode": null,
     "_id": "85QT4G/oRFZIzVwKahLmJh"
   },
   {
@@ -19045,6 +19059,7 @@
     "limitedTime": 60,
     "responseTime": 15,
     "isRunGuide": true,
+    "isClickToShop": true,
     "titleLabel": {
       "__id__": 9
     },

@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "11a393ad-6a01-4d75-96b5-da1584380be9",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 200,
+  "height": 88,
+  "platformSettings": {},
+  "subMetas": {
+    "CatDemon_clothe2": {
+      "ver": "1.0.4",
+      "uuid": "6aedd753-a512-4edb-8c51-5c419ba42ba8",
+      "rawTextureUuid": "11a393ad-6a01-4d75-96b5-da1584380be9",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 3,
+      "trimY": 4,
+      "width": 193,
+      "height": 79,
+      "rawWidth": 200,
+      "rawHeight": 88,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

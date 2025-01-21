@@ -89,6 +89,7 @@ export const levelContext32: LevelContext = {
         await wait(2);
 
         gi.EventManager.emit(Constant.EVENT.START_GUIDE);
+        resolve(true);
       });
     },
     doneKeyPoint: (options) => {
@@ -100,8 +101,6 @@ export const levelContext32: LevelContext = {
         v.women_trigger.active = true;
         gi.EventManager.emit(Constant.EVENT.SHOW_VOICE, "15");
       }
-
-      // console.log(v.keyPoints[v.curPoint].des, "完成");
     },
     garbageGuide: (options) => {
       if (options.object.node.name === "Garbage0") {
