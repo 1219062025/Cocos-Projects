@@ -1,0 +1,46 @@
+{
+  "version": "1.3.10",
+  "name": "playable-ads-adapter",
+  "description": "i18n:playable-ads-adapter.description",
+  "main": "./main.js",
+  "devDependencies": {
+    "@rollup/plugin-alias": "^4.0.2",
+    "@rollup/plugin-commonjs": "^23.0.0",
+    "@rollup/plugin-json": "^5.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-replace": "^5.0.0",
+    "@rollup/plugin-terser": "^0.1.0",
+    "@rollup/plugin-typescript": "^9.0.2",
+    "@types/fs-extra": "^11.0.4",
+    "@types/mime-types": "^2.1.1",
+    "@types/node": "^18.8.4",
+    "is-builtin-module": "^3.2.0",
+    "rollup": "^2.79.1",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-delete": "^2.1.0",
+    "typescript": "^4.8.4",
+    "uglify-js": "^3.17.4"
+  },
+  "author": "ppgee",
+  "scripts": {
+    "clear": "rm -rf dist/",
+    "watch": "rollup -c -w",
+    "build": "rollup -c",
+    "build:2x": "pnpm clear && pnpm build --environment BUILD_VERSION:2x",
+    "watch:2x": "pnpm clear && pnpm watch --environment BUILD_VERSION:2x",
+    "build:3x": "pnpm clear && pnpm build --environment BUILD_VERSION:3x",
+    "watch:3x": "pnpm clear && pnpm watch --environment BUILD_VERSION:3x",
+    "package": "sh ./scripts/package.sh"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.1.2",
+    "axios": "^1.1.3",
+    "cheerio": "1.0.0-rc.12",
+    "fs-extra": "^11.3.0",
+    "jszip": "^3.10.1",
+    "mime-types": "^2.1.35",
+    "node-cmd": "^5.0.0",
+    "playable-adapter-core": "workspace:*",
+    "vue": "^3.5.13"
+  }
+}

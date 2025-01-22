@@ -1,0 +1,48 @@
+{
+  "package_version": 2,
+  "name": "playable-ads-adapter",
+  "description": "i18n:playable-ads-adapter.description",
+  "main": "./main.js",
+  "editor": ">=3.3.0",
+  "author": "ppgee",
+  "panels": {
+    "default": {
+      "title": "打包试玩工具",
+      "type": "dockable",
+      "main": "./panel",
+      "size": {
+        "min-width": 400,
+        "min-height": 300,
+        "width": 1024,
+        "height": 600
+      }
+    }
+  },
+  "contributions": {
+    "builder": "./main.js",
+    "menu": [
+      {
+        "path": "playable-adapter",
+        "label": "i18n:build",
+        "message": "adapter-build"
+      },
+      {
+        "path": "playable-adapter",
+        "label": "i18n:打包试玩工具",
+        "message": "open-panel"
+      }
+    ],
+    "messages": {
+      "adapter-build": {
+        "methods": [
+          "builder3x"
+        ]
+      },
+      "open-panel": {
+        "methods": [
+          "openPanel"
+        ]
+      }
+    }
+  }
+}

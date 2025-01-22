@@ -1,0 +1,160 @@
+* {
+  box-sizing: border-box;
+}
+
+.scroll-view {
+  overflow: auto;
+  height: 100vh;
+  padding-bottom: 100px;
+}
+
+/* 表单块 */
+.form-block {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* 表单项前缀 */
+.form-prefix {
+  display: inline-flex;
+  justify-content: flex-end;
+  width: 15%;
+  min-width: 55px;
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+/* 表单项内容 */
+.form-content {
+  width: 90%;
+}
+
+/* 复选框 */
+.checkBox {
+  width: 220px;
+}
+
+.input-ui {
+  width: 60%;
+}
+
+/* 表单项内容 */
+.form-content-column {
+  display: inline-flex;
+  flex-direction: column;
+  width: 85%;
+}
+
+.flex {
+  display: inline-flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-column {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+/* 主轴居中 */
+.justify-center {
+  justify-content: center;
+}
+
+/* 次轴居中 */
+.items-center {
+  align-items: center;
+}
+
+/* 强制文本一行显示 */
+.no-wrap {
+  white-space: nowrap;
+}
+
+/* 外边距 */
+.margin-10 {
+  margin: 10px;
+}
+
+/* 外边距 */
+.margin-5 {
+  margin: 5px;
+}
+
+/* 上下外边距 */
+.margin-y-10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* 左右外边距 */
+.margin-x-10 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* 上外边距 */
+.margin-t-10 {
+  margin-top: 10px;
+}
+
+/* 下外边距 */
+.margin-b-5 {
+  margin-bottom: 5px;
+}
+
+/* 下外边距 */
+.margin-b-10 {
+  margin-bottom: 10px;
+}
+
+/* 右外边距 */
+.margin-r-20 {
+  margin-right: 20px;
+}
+
+/* 右外边距 */
+.margin-r-10 {
+  margin-right: 10px;
+}
+
+/* 左外边距 */
+.margin-l-10 {
+  margin-left: 10px;
+}
+
+.h-20 {
+  height: 20px;
+}
+
+.progress {
+  width: 80%;
+}
+
+.products {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  min-height: 200px;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.active {
+  color: #a6ff00 !important;
+}
+
+.packageBtn {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  height: 40px;
+}
