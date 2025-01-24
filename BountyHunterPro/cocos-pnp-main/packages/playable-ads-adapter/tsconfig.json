@@ -15,5 +15,5 @@
       "~types/*": ["./@types/*"]
     }
   },
-  "include": ["panel/**/*.ts", "src/**/*.ts", "@types/*.ts"]
+  "include": ["src/**/*.ts", "@types/*.ts"]
 }

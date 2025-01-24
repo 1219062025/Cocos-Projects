@@ -149,7 +149,6 @@ export const exportSingleFile = async (
 ) => {
   const { channel, transformHTML, transform } = options;
 
-  console.info(`【${channel}】adaptation started`);
   const singleHtml = readToPath(singleFilePath, "utf-8");
   const targetPath = join(getGlobalProjectBuildPath(), `${channel}.html`);
 
@@ -176,7 +175,6 @@ export const exportSingleFile = async (
 export const exportZipFromPkg = async (options: TBuilderOptions) => {
   const { channel, transformHTML, transform } = options;
 
-  console.info(`【${channel}】adaptation started`);
   // Copy the folder.
   const originPkgPath = getOriginPkgPath();
   const projectBuildPath = getGlobalProjectBuildPath();
@@ -220,7 +218,6 @@ export const exportDirZipFromSingleFile = async (
     compDiff,
   } = options;
 
-  console.info(`【${channel}】adaptation started`);
   // Copy the folder.
   const singleHtmlPath = singleFilePath;
   const projectBuildPath = getGlobalProjectBuildPath();

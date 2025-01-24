@@ -36,6 +36,7 @@ type TChannel =
   | "AppLovin"
   | "Facebook"
   | "Google"
+  | "Bigo"
   | "IronSource"
   | "Liftoff"
   | "Mintegral"

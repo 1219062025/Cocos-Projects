@@ -20,8 +20,8 @@ const is2xBuilder = builderVersion === "2x";
 export default {
   input: {
     main: `src/main${builderVersion}.ts`, // 根据版本选择不同的入口文件
+    "panel/index": "src/panel/scripts/index.ts", // 打包面板
     ...(is2xBuilder ? {} : { hooks: `src/hooks.ts` }), // 3x版本才需要hooks
-    "panel/index": "panel/scripts/index.ts",
   },
   output: {
     dir: outputDir, // 输出目录
@@ -76,8 +76,9 @@ export default {
         },
         // 复制i18n文件
         { src: "i18n/**/*", dest: `${outputDir}/i18n` },
-        { src: "panel/template", dest: `${outputDir}/panel` },
-        { src: "panel/style", dest: `${outputDir}/panel` },
+        { src: "src/panel/template", dest: `${outputDir}/panel` },
+        { src: "src/panel/style", dest: `${outputDir}/panel` },
+        { src: "src/panel/products", dest: `${outputDir}/panel` },
       ],
       verbose: true,
     }),

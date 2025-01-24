@@ -1,12 +1,10 @@
-import {
-  TChannel,
-  TChannelPkgOptions,
-} from '@/typings'
-import { genChannelsPkg as baseGenChannelsPkg, TMode } from './base'
+import { TChannel, TChannelPkgOptions } from "@/typings";
+import { genChannelsPkg as baseGenChannelsPkg, TMode } from "./base";
 import {
   export2xAppLovin,
   export2xFacebook,
   export2xGoogle,
+  export2xBigo,
   export2xIronSource,
   export2xLiftoff,
   export2xMintegral,
@@ -15,12 +13,15 @@ import {
   export2xRubeex,
   export2xTiktok,
   export2xUnity,
-} from '@/channels'
+} from "@/channels";
 
-const channelExports: { [key in TChannel]: (options: TChannelPkgOptions) => Promise<void> } = {
+const channelExports: {
+  [key in TChannel]: (options: TChannelPkgOptions) => Promise<void>;
+} = {
   AppLovin: export2xAppLovin,
   Facebook: export2xFacebook,
   Google: export2xGoogle,
+  Bigo: export2xBigo,
   IronSource: export2xIronSource,
   Liftoff: export2xLiftoff,
   Mintegral: export2xMintegral,
@@ -29,8 +30,11 @@ const channelExports: { [key in TChannel]: (options: TChannelPkgOptions) => Prom
   Rubeex: export2xRubeex,
   Tiktok: export2xTiktok,
   Unity: export2xUnity,
-}
+};
 
-export const genChannelsPkg = (options: TChannelPkgOptions, mode?: TMode): Promise<void> => {
-  return baseGenChannelsPkg(channelExports, options, mode ?? 'parallel')
-}
+export const genChannelsPkg = (
+  options: TChannelPkgOptions,
+  mode?: TMode
+): Promise<void> => {
+  return baseGenChannelsPkg(channelExports, options, mode ?? "parallel");
+};

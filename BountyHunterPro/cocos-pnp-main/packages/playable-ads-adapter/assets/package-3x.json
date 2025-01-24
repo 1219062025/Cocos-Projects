@@ -23,21 +23,11 @@
     "menu": [
       {
         "path": "playable-adapter",
-        "label": "i18n:build",
-        "message": "adapter-build"
-      },
-      {
-        "path": "playable-adapter",
         "label": "i18n:打包试玩工具",
         "message": "open-panel"
       }
     ],
     "messages": {
-      "adapter-build": {
-        "methods": [
-          "builder3x"
-        ]
-      },
       "open-panel": {
         "methods": [
           "openPanel"

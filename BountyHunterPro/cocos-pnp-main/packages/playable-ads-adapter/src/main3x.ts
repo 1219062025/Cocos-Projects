@@ -2,7 +2,6 @@ import { builder3x } from "@/extensions/builder/3x";
 import { BUILDER_NAME } from "@/extensions/constants";
 
 export const methods: { [key: string]: (...opts: unknown[]) => unknown } = {
-  builder3x,
   openPanel() {
     Editor.Panel.open(BUILDER_NAME);
   },

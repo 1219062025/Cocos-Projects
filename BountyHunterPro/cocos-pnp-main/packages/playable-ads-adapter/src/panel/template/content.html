@@ -1,0 +1,153 @@
+<div class="content">
+  <div class="scroll-view">
+    <div style="height: auto">{{text}}</div>
+
+    <!-- 操作 -->
+    <div class="form-block">
+      <div class="form-prefix">操作:</div>
+      <div class="form-content">
+        <ui-button class="h-20" @confirm="removeConfig">清空配置缓存并刷新面板</ui-button>
+      </div>
+    </div>
+
+    <!-- 是否跳过构建 -->
+    <div class="form-block">
+      <div class="form-prefix">跳过构建:</div>
+      <div class="form-content">
+        <ui-checkbox class="checkBox" :class="{ active: config.skipBuild }"
+          @confirm="config.skipBuild = !config.skipBuild" :value="config.skipBuild"></ui-checkbox>
+      </div>
+    </div>
+
+    <!-- 构建平台选择 -->
+    <div class="form-block">
+      <div class="form-prefix">构建平台:</div>
+      <div class="form-content">
+        <ui-checkbox class="checkBox" :class="{ active: config.buildPlatform === item }"
+          v-for="(item, index) in buildPlatform" @change="onCheckBuildPlatform" :id="item"
+          :value="config.buildPlatform === item">{{item}}</ui-checkbox>
+      </div>
+    </div>
+
+    <!-- 屏幕方向 -->
+    <div class="form-block">
+      <div class="form-prefix">屏幕方向:</div>
+      <div class="form-content">
+        <ui-checkbox class="checkBox" :class="{ active: config.orientation === item }"
+          v-for="(item, index) in orientations" @change="onCheckOrientation" :id="item"
+          :value="config.orientation === item">{{item}}</ui-checkbox>
+      </div>
+    </div>
+
+    <!-- 渠道选择 -->
+    <div class="form-block">
+      <div class="form-prefix">渠道:</div>
+      <div class="form-content">
+        <ui-checkbox class="checkBox" :class="{ active: config.exportChannels.has(item) }"
+          v-for="(item, index) in exportChannels" @change="onCheckPlatforms" :id="item"
+          :value="config.exportChannels.has(item)">{{item}}</ui-checkbox>
+      </div>
+    </div>
+
+    <!-- Tiktok支持的语言 -->
+    <div class="form-block" v-if="showLanguagesOptions">
+      <div class="form-prefix">Tiktok支持语言:</div>
+      <div class="form-content">
+        <ui-checkbox class="checkBox" :class="{ active: config.tiktok_languages.has(item.abbr) }"
+          v-for="(item, index) in languagesOptions" @confirm="onCheckLanguages" :id="item.abbr"
+          :value="config.tiktok_languages.has(item.abbr)">
+          {{item.label}}-{{item.abbr}}
+        </ui-checkbox>
+      </div>
+    </div>
+
+    <!-- MTG支持的语言 -->
+    <div class="form-block" v-if="showMTGLanguagesOptions">
+      <div class="form-prefix">MTG支持语言:</div>
+      <div class="form-content">
+        <ui-checkbox class="checkBox" :class="{ active: config.mtg_languages.has(item.abbr) }"
+          v-for="(item, index) in mtg_languagesOptions" @confirm="onCheckMTGLanguages" :id="item.abbr"
+          :value="config.mtg_languages.has(item.abbr)">
+          {{item.label}}-{{item.abbr}}
+        </ui-checkbox>
+      </div>
+    </div>
+
+    <div class="form-block">
+      <div class="form-prefix">选择产品模板:</div>
+      <div class="form-content products">
+        <ui-checkbox class="checkBox" v-for="(item, index) in products" :class="{ active: config.product === item }"
+          :value="config.product === item" :id="item" @confirm="onCheckProduct">{{item}}</ui-checkbox>
+      </div>
+    </div>
+
+    <!-- 替换产品URL -->
+    <div class="form-block" v-if="showReplaceUrl">
+      <div class="form-prefix">Unity替换产品URL:</div>
+      <div class="form-content">
+        <ui-checkbox class="checkBox" @confirm="onCheckReplaceUrl" :value="config.replaceUrl"></ui-checkbox>
+      </div>
+    </div>
+
+    <!-- 是否开启tinypng压缩 -->
+    <div class="form-block">
+      <div class="form-prefix">tinypng压缩图片:</div>
+      <div class="form-content">
+        <ui-checkbox class="checkBox" :class="{ active: config.tinify }" @confirm="config.tinify = !config.tinify"
+          :value="config.tinify"></ui-checkbox>
+      </div>
+    </div>
+
+    <!-- tinypng 密钥 -->
+    <div class="form-block">
+      <div class="form-prefix">tinypng密钥:</div>
+      <div class="form-content flex">
+        <ui-input class="input-ui h-20" :value="config.tinifyApiKey"
+          @confirm="(event) => config.tinifyApiKey = event.target.value"></ui-input>
+      </div>
+    </div>
+
+    <!-- 项目构建包的路径 -->
+    <div class="form-block">
+      <div class="form-prefix">项目的构建路径:</div>
+      <div class="form-content flex">
+        <ui-input id="in-url" class="input-ui h-20" :value="config.input" @confirm="onInputChange"></ui-input>
+        <ui-button id="in-btn" class="margin-x-10 h-20" @confirm="onSelectFolder">选择目录</ui-button>
+        <ui-button id="in-btn" class="h-20" @confirm="onOpenResourceWin">打开当前路径</ui-button>
+      </div>
+    </div>
+
+    <!-- 打包后输出路径 -->
+    <div class="form-block">
+      <div class="form-prefix">试玩打包后输出路径:</div>
+      <div class="form-content flex">
+        <ui-input id="out-url" class="input-ui h-20" :value="config.output" @confirm="onInputChange"></ui-input>
+        <ui-button id="out-btn" class="margin-x-10 h-20" @confirm="onSelectFolder">选择目录</ui-button>
+        <ui-button id="out-btn" class="h-20" @confirm="onOpenResourceWin">打开当前路径</ui-button>
+      </div>
+    </div>
+
+    <!-- 进度条 -->
+    <div class="form-block">
+      <div class="flex-column items-center" style="width: 100%">
+        <div style="font-size: 15px">
+          <span v-if="!isPackage">未开始，</span>
+          <span v-if="isPackage && progress !== 100">打包中，</span>
+          <span v-if="progress === 100">已完成，</span>
+          进度:
+          <span style="display: inline-block; width: 38px">{{progress}}%</span>
+        </div>
+        <ui-progress :value="progress" class="tiny label progress" :success="progress === 100"></ui-progress>
+        <div style="font-size: 10px">{{tips}}</div>
+      </div>
+    </div>
+
+    <div class="package-btn-wrap">
+      <!-- 构建并适配按钮 -->
+      <ui-button id="buildAdapterBtn" class="package-btn margin green" @confirm="onClickBuild">构建并适配</ui-button>
+
+      <!-- 仅适配按钮 -->
+      <ui-button id="onlyAdapterBtn" class="package-btn margin green" @confirm="onClickBuild">仅适配</ui-button>
+    </div>
+  </div>
+</div>

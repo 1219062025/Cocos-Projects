@@ -1,12 +1,13 @@
 import { shell } from "electron";
 import { IBuildTaskOption, Platform } from "~types/packages/builder/@types";
 import { run } from "node-cmd";
-import { BUILDER_NAME } from "@/extensions/constants";
+import { ADAPTER_RC_PATH, BUILDER_NAME } from "@/extensions/constants";
 import {
   checkOSPlatform,
   getAdapterConfig,
   getRCSkipBuild,
   getRealPath,
+  writeToPath,
 } from "@/extensions/utils";
 import { exec3xAdapter } from "playable-adapter-core";
 import workPath from "../worker/3x?worker";
@@ -68,8 +69,10 @@ const runBuilder = (buildPlatform: TPlatform) => {
 export const initBuildStartEvent = async (
   options: Partial<IBuildTaskOption>
 ) => {
-  console.log(`${BUILDER_NAME} 进行预构建处理`);
-  console.log(`${BUILDER_NAME} 跳过预构建处理`);
+  const isSkipBuild = getRCSkipBuild();
+  console.log(
+    `${BUILDER_NAME} ${isSkipBuild ? "跳过预构建处理" : "进行预构建处理"}`
+  );
 };
 
 export const initBuildFinishedEvent = (options: Partial<IBuildTaskOption>) => {
@@ -107,7 +110,7 @@ export const initBuildFinishedEvent = (options: Partial<IBuildTaskOption>) => {
     try {
       setupWorker(params, handleExportFinished, handleExportError);
     } catch (error) {
-      console.log("不支持Worker，将开启主线程适配");
+      console.log("Worker子线程适配失败，将开启主线程适配；", error);
 
       await exec3xAdapter(params, {
         mode: "serial",
@@ -117,8 +120,17 @@ export const initBuildFinishedEvent = (options: Partial<IBuildTaskOption>) => {
   });
 };
 
-export const builder3x = async () => {
+export const builder3x = async (config: TPanelAdapterRC) => {
   try {
+    // 根据面板选项 写入.adapterrc配置
+    const adapterrc = {
+      skipBuild: config.skipBuild,
+      tinify: config.tinify,
+      tinifyApiKey: config.tinifyApiKey,
+    };
+    const adapterrcPath = join(Editor.Project.path, ADAPTER_RC_PATH);
+    writeToPath(adapterrcPath, JSON.stringify(adapterrc));
+
     // 初始化 start
     const { buildPlatform, projectRootPath, projectBuildPath } =
       getAdapterConfig();
@@ -130,14 +142,13 @@ export const builder3x = async () => {
     await initBuildStartEvent({
       platform: buildPlatform,
     });
-    console.log(isSkipBuild);
     if (!isSkipBuild) {
       await runBuilder(buildPlatform);
     }
     await initBuildFinishedEvent({
       platform: buildPlatform,
     });
-    // shell.openPath(buildPath);
+    shell.openPath(buildPath);
     console.log("构建完成");
   } catch (error) {
     console.error(error);

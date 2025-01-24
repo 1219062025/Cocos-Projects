@@ -41,6 +41,7 @@ type TChannel =
   | "AppLovin"
   | "Facebook"
   | "Google"
+  | "Bigo"
   | "IronSource"
   | "Liftoff"
   | "Mintegral"
@@ -458,6 +459,33 @@ type TChannelRC = {
   sdkScript: string;
 };
 
+interface TPanelAdapterRC {
+  /** 配置-是否跳过构建流程 */
+  skipBuild: boolean;
+  /** 配置-Cocos构建平台值 */
+  buildPlatform: string;
+  /** 配置-渠道列表 */
+  exportChannels: Set<string>;
+  /** 配置-方向 */
+  orientation: string;
+  /** 配置-Tikok支持语言 */
+  tiktok_languages: Set<string>;
+  /** 配置-MTG支持语言 */
+  mtg_languages: Set<string>;
+  /** 配置-产品模板 */
+  product: string;
+  /** 配置-是否需要替换对应产品的URL */
+  replaceUrl: boolean;
+  /** 配置-是否开启 tinypng 压缩 */
+  tinify: boolean;
+  /** 配置-tinypng 密钥 */
+  tinifyApiKey: string;
+  /** 配置-项目构建后的路径 */
+  input: string;
+  /** 配置-项目打包后的输出路径 */
+  output: string;
+}
+
 type TAdapterRC = {
   buildPlatform?: Platform;
   skipBuild?: boolean;
@@ -484,4 +512,3 @@ type TWorkerMsg = {
   finished: boolean;
   msg: string;
 };
-
