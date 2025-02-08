@@ -476,7 +476,11 @@ interface TPanelAdapterRC {
   product: string;
   /** 配置-是否需要替换对应产品的URL */
   replaceUrl: boolean;
-  /** 配置-是否开启 tinypng 压缩 */
+  /** 配置-是否开启自定义插屏 */
+  enableSplash: boolean;
+  /** 配置-是否开启Pako压缩 */
+  isZip: boolean;
+  /** 配置-是否开启tinypng压缩 */
   tinify: boolean;
   /** 配置-tinypng 密钥 */
   tinifyApiKey: string;

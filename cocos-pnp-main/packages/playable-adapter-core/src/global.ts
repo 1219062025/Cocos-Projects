@@ -31,7 +31,7 @@ export const getGlobalBuildConfig = () => {
   return global.__playable_ads_adapter_global__.buildConfig;
 };
 
-/** 获取cocos构建输出绝对路径，类似E:\Project\Cocos-Projects\test3x\build */
+/** 获取cocos构建输出绝对路径，类似E:\Project\Cocos-Projects\ProjectName\build */
 export const getGlobalProjectBuildPath = () => {
   const buildPath = getRealPath(
     global.__playable_ads_adapter_global__.buildFolderPath

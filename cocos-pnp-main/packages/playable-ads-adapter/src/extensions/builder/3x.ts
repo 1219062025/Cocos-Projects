@@ -80,7 +80,7 @@ export const initBuildFinishedEvent = (options: Partial<IBuildTaskOption>) => {
     const { projectRootPath, projectBuildPath, adapterBuildConfig } =
       getAdapterConfig();
 
-    /** cocos构建输出绝对路径，类似E:\Project\Cocos-Projects\test3x\build */
+    /** cocos构建输出绝对路径，类似E:\Project\Cocos-Projects\ProjectName\build */
     const buildFolderPath = join(projectRootPath, projectBuildPath);
 
     console.info(`${BUILDER_NAME} 开始适配，导出平台 ${options.platform}`);
@@ -124,7 +124,12 @@ export const builder3x = async (config: TPanelAdapterRC) => {
   try {
     // 根据面板选项 写入.adapterrc配置
     const adapterrc = {
+      buildPlatform: config.buildPlatform,
       skipBuild: config.skipBuild,
+      exportChannels: Array.from(config.exportChannels),
+      orientation: config.orientation,
+      enableSplash: config.enableSplash,
+      isZip: config.isZip,
       tinify: config.tinify,
       tinifyApiKey: config.tinifyApiKey,
     };

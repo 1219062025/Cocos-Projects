@@ -7,7 +7,7 @@ export const getAdapterRCJson = (): TAdapterRC | null => {
   return getGlobalBuildConfig();
 };
 
-/** 获取最终构建产物的绝对路径，类似E:\Project\Cocos-Projects\test3x\build\web-mobile */
+/** 获取最终构建产物的绝对路径，类似E:\Project\Cocos-Projects\ProjectName\build\web-mobile */
 export const getOriginPkgPath = () => {
   let configJson: Partial<TAdapterRC> = getAdapterRCJson() || {};
   const buildPlatform = configJson.buildPlatform || "web-mobile";

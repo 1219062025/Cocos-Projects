@@ -96,8 +96,6 @@ const component: Component = {
 
       config.value.orientation = isChecked ? checkbox.id : "";
 
-      console.log(config.value.orientation);
-
       saveConfig();
     }
 
@@ -186,8 +184,6 @@ const component: Component = {
 
     /** 点击打开路径按钮触发 */
     function onOpenResourceWin(event: any) {
-      console.log(config.value.input, config.value.output);
-
       const btn = event.target;
 
       switch (btn.id) {
@@ -204,7 +200,6 @@ const component: Component = {
 
     /** 开始打包 */
     function onClickBuild(event: any) {
-      console.log(config.value);
       if (config.value.exportChannels.size == 0) {
         Editor.Dialog.error("请选择渠道！", {
           title: "警告",

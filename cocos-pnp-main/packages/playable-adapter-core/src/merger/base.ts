@@ -245,10 +245,10 @@ const paddingAllResToMapped = async (options: {
 
 export const genSingleFile = async (options: TOptions) => {
   const { singleFilePath, injectsCode } = options;
-  /** 最终构建产物的绝对路径，类似E:\Project\Cocos-Projects\test3x\build\web-mobile */
+  /** 最终构建产物的绝对路径，类似E:\Project\Cocos-Projects\ProjectName\build\web-mobile */
   const originPkgPath = getOriginPkgPath();
 
-  /** 最终构建产物index.html的绝对路径，类似E:\Project\Cocos-Projects\test3x\build\web-mobile\index.html */
+  /** 最终构建产物index.html的绝对路径，类似E:\Project\Cocos-Projects\ProjectName\build\web-mobile\index.html */
   const htmlPath = join(originPkgPath, "/index.html");
   const htmlStr = readToPath(htmlPath, "utf-8");
 

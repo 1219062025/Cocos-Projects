@@ -7,7 +7,6 @@ import { readToPath } from "./base";
 export const readAdapterRCFile = (): TAdapterRC | null => {
   const projectRootPath = Editor.Project.path;
   const adapterRCJsonPath = `${projectRootPath}${ADAPTER_RC_PATH}`;
-
   if (existsSync(adapterRCJsonPath)) {
     return <TAdapterRC>JSON.parse(readToPath(adapterRCJsonPath));
   }
@@ -24,13 +23,13 @@ export const getAdapterConfig = () => {
     adapterBuildConfig?.buildPlatform ?? "web-mobile";
 
   return {
-    /** cocos项目绝对路径，类似E:\Project\Cocos-Projects\test3x */
+    /** cocos项目绝对路径，类似E:\Project\Cocos-Projects\ProjectName */
     projectRootPath,
     /** cocos构建输出相对路径，类似/build */
     projectBuildPath,
     /** cocos构建输出目标平台，类似web-mobile */
     buildPlatform,
-    /** 最终构建产物的绝对路径，类似E:\Project\Cocos-Projects\test3x\build\web-mobile */
+    /** 最终构建产物的绝对路径，类似E:\Project\Cocos-Projects\ProjectName\build\web-mobile */
     originPkgPath: join(projectRootPath, projectBuildPath, buildPlatform),
     /** .adapterrc配置选项，默认有一个选项buildPlatform（默认值为web-mobile） */
     adapterBuildConfig,

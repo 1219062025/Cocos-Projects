@@ -13,7 +13,7 @@ import del from "rollup-plugin-delete";
 
 const appName = pkgJson.name;
 const appVersion = pkgJson.version;
-const outputDir = `../../../../test3x/extensions/${appName}`;
+const outputDir = `../../../PlayableAdsAdapter/extensions/${appName}`;
 const builderVersion = process.env.BUILD_VERSION || "2x"; // 构建版本：2x 或 3x
 const is2xBuilder = builderVersion === "2x";
 

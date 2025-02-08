@@ -98,7 +98,7 @@ export const getResourceMapper = async (options: {
   /** 指定目录及其所有子目录中的所有文件绝对路径字符串数组 */
   const resFiles = getAllFilesFormDir(dirPath);
   for (let index = 0; index < resFiles.length; index++) {
-    /** 文件绝对路径，类似E:\Project\Cocos-Projects\test3x\build\web-mobile\index.html */
+    /** 文件绝对路径，类似E:\Project\Cocos-Projects\ProjectName\build\web-mobile\index.html */
     const filePath = resFiles[index];
     /** 文件扩展名 */
     const fileExtname = extname(filePath);
@@ -113,7 +113,7 @@ export const getResourceMapper = async (options: {
       continue;
     }
 
-    // 先得到指定目录dirPath的绝对路径的反斜杠格式，类似E:/Project/Cocos-Projects/test3x/build/web-mobile/
+    // 先得到指定目录dirPath的绝对路径的反斜杠格式，类似E:/Project/Cocos-Projects/ProjectName/build/web-mobile/
     const readPkgPath = getRealPath(`${dirPath}/`);
     // 得到文件相对于指定目录dirPath的绝对路径的反斜杠格式，类似index.html、cocos-js/meshopt_decoder.wasm-ebbcb6df.js
     const objKey = getRealPath(filePath).replace(readPkgPath, "");

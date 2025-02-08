@@ -22,6 +22,8 @@ const store = reactive({
     mtg_languages: new Set(["en"]),
     product: "",
     replaceUrl: true,
+    enableSplash: true,
+    isZip: true,
     tinify: false,
     tinifyApiKey: "KNshdGvKnVgJ76SSVxf8lvztVCC4d8c1",
     input: join(Editor.Project.path, "build", "web-mobile"),

@@ -10,15 +10,6 @@
       </div>
     </div>
 
-    <!-- 是否跳过构建 -->
-    <div class="form-block">
-      <div class="form-prefix">跳过构建:</div>
-      <div class="form-content">
-        <ui-checkbox class="checkBox" :class="{ active: config.skipBuild }"
-          @confirm="config.skipBuild = !config.skipBuild" :value="config.skipBuild"></ui-checkbox>
-      </div>
-    </div>
-
     <!-- 构建平台选择 -->
     <div class="form-block">
       <div class="form-prefix">构建平台:</div>
@@ -86,6 +77,24 @@
       <div class="form-prefix">Unity替换产品URL:</div>
       <div class="form-content">
         <ui-checkbox class="checkBox" @confirm="onCheckReplaceUrl" :value="config.replaceUrl"></ui-checkbox>
+      </div>
+    </div>
+
+    <!-- 是否开启自定义插屏 -->
+    <div class="form-block">
+      <div class="form-prefix">开启自定义插屏:</div>
+      <div class="form-content">
+        <ui-checkbox class="checkBox" :class="{ active: config.enableSplash }"
+          @confirm="config.enableSplash = !config.enableSplash" :value="config.enableSplash"></ui-checkbox>
+      </div>
+    </div>
+
+    <!-- 是否开启Pako压缩 -->
+    <div class="form-block">
+      <div class="form-prefix">开启Pako压缩:</div>
+      <div class="form-content">
+        <ui-checkbox class="checkBox" :class="{ active: config.isZip }" @confirm="config.isZip = !config.isZip"
+          :value="config.isZip"></ui-checkbox>
       </div>
     </div>
 
