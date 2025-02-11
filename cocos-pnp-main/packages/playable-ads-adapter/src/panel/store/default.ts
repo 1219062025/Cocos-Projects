@@ -4,7 +4,7 @@ import { join } from "path";
 import { getFileNameList } from "@/extensions/utils";
 
 const store = reactive({
-  /** 可玩广告打包配置 */
+  /** 可玩广告适配配置 */
   config: reactive<TPanelAdapterRC>({
     skipBuild: false,
     buildPlatform: "web-mobile",
@@ -30,13 +30,13 @@ const store = reactive({
     output: join(Editor.Project.path, "build", "web-mobile", "dist"),
   }),
 
-  /** 打包信息提示 */
+  /** 适配信息提示 */
   tips: ref(""),
 
-  /** 打包进度 */
+  /** 适配进度 */
   progress: ref(0),
 
-  /** 是否处于打包中 */
+  /** 是否处于适配中 */
   isPackage: ref(false),
 
   /** 平台列表 */

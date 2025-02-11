@@ -8,12 +8,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "typeRoots": [
-      "node_modules/@types",
-    ],
+    "typeRoots": ["node_modules/@types", "/@types"],
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "~types/*": ["./@types/*"]
     }
   },
   "include": ["src/**/*.ts"]

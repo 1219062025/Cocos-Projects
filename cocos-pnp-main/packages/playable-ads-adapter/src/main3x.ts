@@ -1,4 +1,3 @@
-import { builder3x } from "@/extensions/builder/3x";
 import { BUILDER_NAME } from "@/extensions/constants";
 
 export const methods: { [key: string]: (...opts: unknown[]) => unknown } = {
@@ -22,9 +21,3 @@ export function load() {
 export function unload() {
   console.log(`${BUILDER_NAME} is unloaded`);
 }
-
-export const configs = {
-  "*": {
-    hooks: "./hooks",
-  },
-};

@@ -73,7 +73,7 @@ export const initBuildFinishedEvent = async (
       Editor[event.split(":")[1] as ConsoleMethodName](msg);
     });
   } catch (error) {
-    console.log("不支持Worker，将开启主线程适配");
+    console.log("Worker子线程适配失败，将开启主线程适配；", error);
 
     await exec2xAdapter(params, {
       mode: "serial",

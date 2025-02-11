@@ -1,7 +1,5 @@
 <div class="content">
   <div class="scroll-view">
-    <div style="height: auto">{{text}}</div>
-
     <!-- 操作 -->
     <div class="form-block">
       <div class="form-prefix">操作:</div>
@@ -153,10 +151,13 @@
 
     <div class="package-btn-wrap">
       <!-- 构建并适配按钮 -->
-      <ui-button id="buildAdapterBtn" class="package-btn margin green" @confirm="onClickBuild">构建并适配</ui-button>
+      <ui-button :disabled="isPackage" id="buildAdapterBtn" class="package-btn margin"
+        :class="[isPackage ? 'red' : 'green']" @confirm="onClickBuild"><span
+          class="package-text">构建并适配</span></ui-button>
 
       <!-- 仅适配按钮 -->
-      <ui-button id="onlyAdapterBtn" class="package-btn margin green" @confirm="onClickBuild">仅适配</ui-button>
+      <ui-button :disabled="isPackage" id="onlyAdapterBtn" class="package-btn margin"
+        :class="[isPackage ? 'red' : 'green']" @confirm="onClickBuild"><span class="package-text">仅适配</span></ui-button>
     </div>
   </div>
 </div>

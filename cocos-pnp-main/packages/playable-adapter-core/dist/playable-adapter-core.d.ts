@@ -66,9 +66,9 @@ type TAdapterRC = {
   isZip?: boolean;
 };
 
-type TMode = 'parallel' | 'serial';
+declare type TMode = "parallel" | "serial";
 
-type TOptions = {
+declare type TOptions = {
     buildFolderPath: string;
     adapterBuildConfig?: TAdapterRC | null;
 };

@@ -32,6 +32,16 @@
         "methods": [
           "openPanel"
         ]
+      },
+      "package-finished": {
+        "methods": [
+          "default.packageFinished"
+        ]
+      },
+      "on-progress": {
+        "methods": [
+          "default.onProgress"
+        ]
       }
     }
   }

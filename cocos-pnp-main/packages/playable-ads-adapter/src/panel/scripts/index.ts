@@ -2,6 +2,8 @@ import { readFileSync } from "fs-extra";
 import { join } from "path";
 import { createApp, App } from "vue";
 import contentComponent from "./content";
+import store from "../store/default";
+import { on } from "events";
 
 const panelDataMap = new WeakMap<any, App>();
 
@@ -14,7 +16,14 @@ module.exports = Editor.Panel.define({
   $: {
     app: "#app",
   },
-  methods: {},
+  methods: {
+    packageFinished() {
+      store.isPackage.value = false;
+    },
+    onProgress(progress: number, tips?: string) {
+      store.progress.value = progress;
+    },
+  },
   ready() {
     if (this.$.app) {
       const app = createApp({});

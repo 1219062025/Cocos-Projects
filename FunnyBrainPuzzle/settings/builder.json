@@ -1,26 +1,26 @@
 {
   "title": "FunnyBrainPuzzle",
   "packageName": "org.cocos2d.demo",
-  "startScene": "237e3da6-8a8e-4614-88d7-1690853effed",
+  "startScene": "eda44fb3-1f00-4445-ad48-12714d579c2c",
   "excludeScenes": [
     "f572dc5c-73e6-481f-845d-4fef93e27eab",
     "2ed277a2-955c-4091-96c8-47723a19ec7a",
     "29594a56-2d1e-4325-820e-e19de0839daa",
     "8ef48183-c2fc-4d37-bb1b-9c81883dc2fd",
-    "36da9f96-b36d-49dd-9fa3-9dd438829ad2",
     "06ac0830-8779-452e-8f17-1f7f94e98fd8",
     "58d5e2bc-5ee2-422b-b66b-14b92c82eecb",
     "2f1f3e45-bb65-4bd6-a1fe-683e1379287b",
     "12acb804-4bf1-40fc-a0fd-8a88b04095e4",
-    "eda44fb3-1f00-4445-ad48-12714d579c2c",
     "25252104-4e6b-42c3-a1ac-8dde9ba1085b",
     "ead20fe7-e5bc-4b0f-8012-0d1b43f44636",
     "789ddf98-f3b0-40ce-afb1-1198da4d2a74",
     "b230745f-500e-45ee-97fd-9f6e945f48c9",
     "edf29073-3192-4dca-a3b9-874e14fe6c41",
     "d442a633-ec3d-4f92-9f1d-db4332f5cfe2",
+    "237e3da6-8a8e-4614-88d7-1690853effed",
+    "591aaa6c-bac2-4c05-8360-02b02531717e",
     "dfb436dc-3476-4016-9235-4ac86f510e56",
-    "591aaa6c-bac2-4c05-8360-02b02531717e"
+    "36da9f96-b36d-49dd-9fa3-9dd438829ad2"
   ],
   "includeSDKBox": false,
   "orientation": {

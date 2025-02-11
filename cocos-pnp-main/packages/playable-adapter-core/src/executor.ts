@@ -21,7 +21,7 @@ export const exec2xAdapter = async (
   try {
     const { success, msg } = await execTinify();
     if (!success) {
-      console.warn(`${msg}，aborting the image compression process`);
+      console.warn(`${msg}，tinify终止图像压缩`);
     }
   } catch (error) {
     console.error(error);
@@ -49,7 +49,7 @@ export const exec3xAdapter = async (
   try {
     const { success, msg } = await execTinify();
     if (!success) {
-      console.warn(`${msg}，aborting the image compression process`);
+      console.warn(`${msg}，tinify终止图像压缩`);
     }
   } catch (error) {
     console.error(error);

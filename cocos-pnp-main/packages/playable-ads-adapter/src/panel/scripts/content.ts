@@ -31,15 +31,6 @@ const component: Component = {
     //#endregion
 
     //#region ---------------created-----------------
-    const text = ref("");
-
-    function log(content: any) {
-      if (typeof content === "object") {
-        text.value = JSON.stringify(content, null, 2);
-      } else {
-        text.value = content;
-      }
-    }
     loadConfig();
     //#endregion
 
@@ -274,7 +265,6 @@ const component: Component = {
 
     //#region ---------------setup return-----------------
     return {
-      text,
       showLanguagesOptions,
       showMTGLanguagesOptions,
       showReplaceUrl,

@@ -14313,7 +14313,7 @@
     "limitedTime": 60,
     "responseTime": 15,
     "isRunGuide": true,
-    "isClickToShop": false,
+    "isClickToShop": true,
     "titleLabel": {
       "__id__": 9
     },

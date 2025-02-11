@@ -20,7 +20,7 @@ const setupWorker = (
 ) => {
   const { Worker } = require("worker_threads");
 
-  console.log("支持Worker，将开启子线程适配");
+  console.log("尝试开启Worker子线程适配");
   const worker = new Worker(workPath, {
     workerData: params,
   });
@@ -52,14 +52,12 @@ const runBuilder = (buildPlatform: TPlatform) => {
       reject(`不支持${platform}平台构建`);
     }
 
-    const processRef = run(
-      `${cocosBuilderPath} --project ${Editor.Project.path} --build "platform=${buildPlatform}"`,
-      (err, data, stderr) => {
-        console.log(err, data, stderr);
-        resolve();
-      }
-    );
-    //listen to the python terminal output
+    const command = `${cocosBuilderPath} --project ${Editor.Project.path} --build "platform=${buildPlatform};"`;
+
+    const processRef = run(command, (err, data, stderr) => {
+      resolve();
+    });
+    // 输出执行构建命令时的日志
     processRef.stdout.on("data", (data: string) => {
       console.log(data);
     });
@@ -80,7 +78,7 @@ export const initBuildFinishedEvent = (options: Partial<IBuildTaskOption>) => {
     const { projectRootPath, projectBuildPath, adapterBuildConfig } =
       getAdapterConfig();
 
-    /** cocos构建输出绝对路径，类似E:\Project\Cocos-Projects\ProjectName\build */
+    /** cocos构建输出绝对路径，类似 E:\Project\Cocos-Projects\ProjectName\build */
     const buildFolderPath = join(projectRootPath, projectBuildPath);
 
     console.info(`${BUILDER_NAME} 开始适配，导出平台 ${options.platform}`);
@@ -92,6 +90,7 @@ export const initBuildFinishedEvent = (options: Partial<IBuildTaskOption>) => {
       console.log(
         `${BUILDER_NAME} 适配完成，共耗时${((end - start) / 1000).toFixed(0)}秒`
       );
+      Editor.Message.send(BUILDER_NAME, "package-finished");
       resolve(true);
     };
     const handleExportError = (err: string) => {
@@ -110,7 +109,8 @@ export const initBuildFinishedEvent = (options: Partial<IBuildTaskOption>) => {
     try {
       setupWorker(params, handleExportFinished, handleExportError);
     } catch (error) {
-      console.log("Worker子线程适配失败，将开启主线程适配；", error);
+      console.log("error：", error);
+      console.log("Worker子线程适配失败，将开启主线程适配；");
 
       await exec3xAdapter(params, {
         mode: "serial",
@@ -120,27 +120,40 @@ export const initBuildFinishedEvent = (options: Partial<IBuildTaskOption>) => {
   });
 };
 
+/** 根据面板选项 写入.adapterrc配置 */
+export const writeConfigToAdapterRC = (config: TPanelAdapterRC) => {
+  const adapterrc = {
+    buildPlatform: config.buildPlatform,
+    skipBuild: config.skipBuild,
+    exportChannels: Array.from(config.exportChannels),
+    orientation: config.orientation,
+    enableSplash: config.enableSplash,
+    isZip: config.isZip,
+    tinify: config.tinify,
+    tinifyApiKey: config.tinifyApiKey,
+  };
+  const adapterrcPath = join(Editor.Project.path, ADAPTER_RC_PATH);
+  writeToPath(adapterrcPath, JSON.stringify(adapterrc));
+};
+
 export const builder3x = async (config: TPanelAdapterRC) => {
   try {
-    // 根据面板选项 写入.adapterrc配置
-    const adapterrc = {
-      buildPlatform: config.buildPlatform,
-      skipBuild: config.skipBuild,
-      exportChannels: Array.from(config.exportChannels),
-      orientation: config.orientation,
-      enableSplash: config.enableSplash,
-      isZip: config.isZip,
-      tinify: config.tinify,
-      tinifyApiKey: config.tinifyApiKey,
-    };
-    const adapterrcPath = join(Editor.Project.path, ADAPTER_RC_PATH);
-    writeToPath(adapterrcPath, JSON.stringify(adapterrc));
+    writeConfigToAdapterRC(config);
 
     // 初始化 start
     const { buildPlatform, projectRootPath, projectBuildPath } =
       getAdapterConfig();
     // 初始化 end
     console.log(`开始构建项目，导出${buildPlatform}包`);
+
+    // 重置适配进度条为0
+    Editor.Message.send(
+      BUILDER_NAME,
+      "on-progress",
+      0,
+      `开始构建项目，导出${buildPlatform}包`
+    );
+
     const isSkipBuild = getRCSkipBuild();
     const buildPath = join(projectRootPath, projectBuildPath);
 
@@ -150,6 +163,13 @@ export const builder3x = async (config: TPanelAdapterRC) => {
     if (!isSkipBuild) {
       await runBuilder(buildPlatform);
     }
+    Editor.Message.send(
+      BUILDER_NAME,
+      "on-progress",
+      20,
+      !isSkipBuild ? "构建完成，开始适配" : "跳过构建，开始适配"
+    );
+
     await initBuildFinishedEvent({
       platform: buildPlatform,
     });

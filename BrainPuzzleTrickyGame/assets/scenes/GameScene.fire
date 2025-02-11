@@ -282,9 +282,9 @@
       "__id__": 2
     },
     "_enabled": true,
-    "level": 38,
+    "level": 32,
     "oneStepMode": false,
-    "debug": true,
+    "debug": false,
     "language": 0,
     "_id": "fbDrcjyhtEJJlcUU5T9nL5"
   }
