@@ -5,6 +5,7 @@ import * as levelContext52 from "./LevelContext52";
 import * as levelContext54 from "./LevelContext54";
 import * as levelContext57 from "./LevelContext57";
 import * as levelContext67 from "./LevelContext67";
+import * as LevelContext72 from "./LevelContext72";
 
 export default {
   32: levelContext32,
@@ -14,4 +15,5 @@ export default {
   54: levelContext54,
   57: levelContext57,
   67: levelContext67,
+  72: LevelContext72,
 };

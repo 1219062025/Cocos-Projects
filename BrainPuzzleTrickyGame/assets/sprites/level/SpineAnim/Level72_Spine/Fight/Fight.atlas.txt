@@ -1,0 +1,118 @@
+
+Fight.png
+size: 1776,1128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+A_FX1
+  rotate: false
+  xy: 1050, 543
+  size: 515, 583
+  orig: 516, 584
+  offset: 0, 1
+  index: -1
+A_FX2
+  rotate: true
+  xy: 2, 2
+  size: 522, 600
+  orig: 524, 600
+  offset: 1, 0
+  index: -1
+B_FX1
+  rotate: true
+  xy: 604, 9
+  size: 515, 583
+  orig: 516, 584
+  offset: 0, 1
+  index: -1
+B_FX2
+  rotate: false
+  xy: 2, 526
+  size: 522, 600
+  orig: 524, 600
+  offset: 1, 0
+  index: -1
+C_FX1
+  rotate: true
+  xy: 1189, 26
+  size: 515, 583
+  orig: 516, 584
+  offset: 0, 1
+  index: -1
+C_FX2
+  rotate: false
+  xy: 526, 526
+  size: 522, 600
+  orig: 524, 600
+  offset: 1, 0
+  index: -1
+jida
+  rotate: false
+  xy: 1567, 1028
+  size: 98, 98
+  orig: 98, 98
+  offset: 0, 0
+  index: -1
+shitou
+  rotate: false
+  xy: 1721, 965
+  size: 42, 41
+  orig: 42, 41
+  offset: 0, 0
+  index: -1
+xian1
+  rotate: false
+  xy: 1667, 1068
+  size: 98, 58
+  orig: 103, 61
+  offset: 3, 2
+  index: -1
+xian2
+  rotate: false
+  xy: 1667, 988
+  size: 52, 39
+  orig: 55, 42
+  offset: 2, 2
+  index: -1
+xiezi1
+  rotate: true
+  xy: 1732, 1008
+  size: 58, 36
+  orig: 58, 37
+  offset: 0, 0
+  index: -1
+xiezi2
+  rotate: false
+  xy: 1667, 1029
+  size: 63, 37
+  orig: 63, 38
+  offset: 0, 0
+  index: -1
+xingxing1
+  rotate: true
+  xy: 1567, 988
+  size: 38, 39
+  orig: 45, 40
+  offset: 0, 1
+  index: -1
+xingxing2
+  rotate: false
+  xy: 1608, 990
+  size: 41, 36
+  orig: 45, 40
+  offset: 2, 0
+  index: -1
+xingxing3
+  rotate: false
+  xy: 1608, 952
+  size: 41, 36
+  orig: 45, 40
+  offset: 2, 0
+  index: -1
+xingxing4
+  rotate: false
+  xy: 1567, 954
+  size: 37, 32
+  orig: 38, 33
+  offset: 1, 1
+  index: -1

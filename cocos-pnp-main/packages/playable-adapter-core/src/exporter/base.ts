@@ -19,6 +19,7 @@ import {
 } from "@/utils";
 import { deflate } from "pako";
 import { jszipCode } from "@/helpers/injects";
+const zipper = require("zip-local");
 
 const FILE_MAX_SIZE = MAX_ZIP_SIZE * 0.8;
 
@@ -142,7 +143,7 @@ const fillCodeToHTML = ($: CheerioAPI, options: TBuilderOptions) => {
   }
 };
 
-/** 导出单文件html */
+/** 导出单文件html，导出路径类似E:\Project\Cocos-Projects\ProjectName\build\Tiktok\index.html */
 export const exportSingleFile = async (
   singleFilePath: string,
   options: TBuilderOptions
@@ -150,7 +151,9 @@ export const exportSingleFile = async (
   const { channel, transformHTML, transform } = options;
 
   const singleHtml = readToPath(singleFilePath, "utf-8");
-  const targetPath = join(getGlobalProjectBuildPath(), `${channel}.html`);
+  const targetDirPath = join(getGlobalProjectBuildPath(), `${channel}`);
+  const targetPath = join(targetDirPath, "index.html");
+  mkdirSync(targetDirPath, { recursive: true });
 
   // Replace global variables.
   let $ = load(singleHtml);
@@ -202,6 +205,11 @@ export const exportZipFromPkg = async (options: TBuilderOptions) => {
     await transform(destPath);
   }
 
+  zipper.sync
+    .zip(destPath)
+    .compress()
+    .save(join(destPath, `${channel}.zip`));
+
   console.info(`【${channel}】adaptation completed`);
 };
 
@@ -218,12 +226,12 @@ export const exportDirZipFromSingleFile = async (
     compDiff,
   } = options;
 
-  // Copy the folder.
+  // 复制文件夹。
   const singleHtmlPath = singleFilePath;
   const projectBuildPath = getGlobalProjectBuildPath();
   const destPath = join(projectBuildPath, channel);
 
-  // Empty the contents of the folder first.
+  // 先清空文件夹中的内容。
   rmSync(destPath);
 
   // HTML file path.
@@ -266,6 +274,11 @@ export const exportDirZipFromSingleFile = async (
   if (transform) {
     await transform(destPath);
   }
+
+  zipper.sync
+    .zip(destPath)
+    .compress()
+    .save(join(destPath, `${channel}.zip`));
 
   console.info(`【${channel}】adaptation completed`);
 };

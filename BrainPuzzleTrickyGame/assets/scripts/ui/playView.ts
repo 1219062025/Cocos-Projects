@@ -28,10 +28,23 @@ export default class PlayView extends cc.Component {
   @property({ type: cc.Label })
   countDownText: cc.Label = null;
 
+  wrapOriPos: cc.Vec2 = null;
+  topBarOriPos: cc.Vec2 = null;
+  countDownNodeOriPos: cc.Vec2 = null;
+  downloadBtnOriPos: cc.Vec2 = null;
+
   async onLoad() {
+    // 记录关键UI节点的原始位置
+    this.wrapOriPos = this.wrap.getPosition();
+    this.topBarOriPos = this.topBar.getPosition();
+    this.countDownNodeOriPos = this.countDownNode.getPosition();
+    this.downloadBtnOriPos = this.downloadBtn.getPosition();
+
     // 屏幕适配
     this.adapter(gi.ScreenManager.getOrientation());
-    gi.EventManager.on(Constant.EVENT.ORIENTATION_CHANGED, this.adapter, this);
+    gi.EventManager.on(Constant.EVENT.VIEW_RESIZE, this.adapter, this);
+
+    // 倒计时
     gi.EventManager.on(Constant.EVENT.COUNT_DOWN, this.onCountDown, this);
 
     this.initGameView();
@@ -105,20 +118,24 @@ export default class PlayView extends cc.Component {
   /** 根据屏幕方向适配游戏窗口内的节点位置以及缩放 */
   adapter(orientation: string) {
     this.updateBgSize();
+    const ratio = cc.winSize.width / cc.winSize.height;
 
-    const designWidth = cc.Canvas.instance.designResolution.width;
-    const designHeight = cc.Canvas.instance.designResolution.height;
-    let scaleX = cc.winSize.width / designHeight;
-    let scaleY = cc.winSize.height / designWidth;
-    const scaleMin = Math.min(scaleX, scaleY);
+    if (ratio > 1) {
+      // 当ratio大于1时，设置为横屏状态，否则是竖屏状态
 
-    if (orientation === "Landscape") {
       // 切换为横屏后需要手动适配主要节点的位置以及缩放
+      const designWidth = cc.Canvas.instance.designResolution.width;
+      const designHeight = cc.Canvas.instance.designResolution.height;
+      let scaleX = cc.winSize.width / designHeight;
+      let scaleY = cc.winSize.height / designWidth;
+      const scaleMin = Math.min(scaleX, scaleY);
+
       this.topBar.scale =
         this.countDownNode.scale =
         this.downloadBtn.scale =
           scaleMin;
-      // wrap在不同屏幕下锚定高度为当前窗口实际高度的百分之80
+
+      // 横屏时，wrap在不同屏幕下锚定高度为当前窗口实际高度的百分之80
       this.wrap.scale = (cc.winSize.height * 0.8) / this.wrap.height;
 
       this.wrap.setPosition(cc.v2(cc.winSize.width / 5, 0));
@@ -131,18 +148,34 @@ export default class PlayView extends cc.Component {
       this.downloadBtn.setPosition(
         cc.v2(-cc.winSize.width / 4, -cc.winSize.height / 6)
       );
-    } else {
-      // 由于在编辑器中是竖屏状态下放置节点的，所以切换回竖屏只需要把编辑器里的节点位置、缩放直接设置上去就可以了
+    } else if (ratio > 0.6 && ratio < 1) {
+      // 此时UI会有一部分超出屏幕，所以需要特殊设置UI的位置以及缩放
+
+      // 0.76、0.6不是什么精确的界限，只是通过手动调节后观察到的值，有需要可以改成其他的。当ratio大于0.76时，UI的缩放比例设置为0.6，否则设置为ratio / 1
+      const scale = ratio > 0.76 ? 0.6 : ratio / 1;
+      this.wrap.scale =
+        this.topBar.scale =
+        this.countDownNode.scale =
+        this.downloadBtn.scale =
+          scale;
+
+      const scaleVec = cc.v2(0, scale);
+      this.wrap.setPosition(this.wrapOriPos.scale(scaleVec));
+      this.topBar.setPosition(this.topBarOriPos.scale(scaleVec));
+      this.countDownNode.setPosition(this.countDownNodeOriPos.scale(scaleVec));
+      this.downloadBtn.setPosition(this.downloadBtnOriPos.scale(scaleVec));
+    } else if (ratio < 0.6) {
+      // ratio < 0.6时，UI能够很好的覆盖整个屏幕。所以这种情况下只需要把编辑器里的节点位置、缩放直接设置上去就可以了
       this.wrap.scale =
         this.topBar.scale =
         this.countDownNode.scale =
         this.downloadBtn.scale =
           1;
 
-      this.wrap.setPosition(0, 0);
-      this.topBar.setPosition(0, 841.486);
-      this.countDownNode.setPosition(0, 742.927);
-      this.downloadBtn.setPosition(0, -836.853);
+      this.wrap.setPosition(this.wrapOriPos);
+      this.topBar.setPosition(this.topBarOriPos);
+      this.countDownNode.setPosition(this.countDownNodeOriPos);
+      this.downloadBtn.setPosition(this.downloadBtnOriPos);
     }
   }
 

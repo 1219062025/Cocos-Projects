@@ -1,0 +1,59 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "C_Repairman",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.875,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0.375,
+          "value": [
+            119.768,
+            -255,
+            0
+          ]
+        },
+        {
+          "frame": 0.625,
+          "value": [
+            -34.388,
+            -318.215,
+            0
+          ]
+        },
+        {
+          "frame": 0.875,
+          "value": [
+            -192.518,
+            -418.692,
+            0
+          ]
+        }
+      ],
+      "scale": [
+        {
+          "frame": 0.375,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0.8,
+            "y": 0.8
+          }
+        },
+        {
+          "frame": 0.625,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1,
+            "y": 1
+          }
+        }
+      ]
+    }
+  },
+  "events": []
+}

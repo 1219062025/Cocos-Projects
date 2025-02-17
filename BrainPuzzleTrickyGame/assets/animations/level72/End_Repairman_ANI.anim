@@ -1,0 +1,187 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "End_Repairman_ANI",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 3.75,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "A_Door_1_Wrap": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            }
+          ]
+        }
+      },
+      "A_Door_3_Wrap": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": true
+            }
+          ]
+        }
+      },
+      "P_Killer_1": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": true
+            },
+            {
+              "frame": 0.5,
+              "value": false
+            }
+          ],
+          "position": [
+            {
+              "frame": 0.25,
+              "value": [
+                333.132,
+                4.095,
+                0
+              ]
+            },
+            {
+              "frame": 0.5,
+              "value": [
+                -23.839,
+                4.095,
+                0
+              ]
+            }
+          ]
+        }
+      },
+      "P_Killer_2": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 0.5,
+              "value": true
+            },
+            {
+              "frame": 2,
+              "value": false
+            },
+            {
+              "frame": 3.75,
+              "value": true
+            }
+          ],
+          "position": [
+            {
+              "frame": 0.5,
+              "value": [
+                -23.839,
+                4.095,
+                0
+              ]
+            },
+            {
+              "frame": 0.75,
+              "value": [
+                -23.839,
+                -147.183,
+                0
+              ]
+            }
+          ]
+        }
+      },
+      "P_Repairman_": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": true
+            },
+            {
+              "frame": 2,
+              "value": false
+            }
+          ],
+          "position": [
+            {
+              "frame": 1,
+              "value": [
+                -979.183,
+                -542.377,
+                0
+              ]
+            },
+            {
+              "frame": 1.375,
+              "value": [
+                -389.995,
+                -542.377,
+                0
+              ]
+            }
+          ]
+        }
+      },
+      "P_Butcher_": {
+        "props": {
+          "active": [],
+          "position": []
+        }
+      },
+      "Fight_End_Killer": {
+        "props": {
+          "active": []
+        }
+      },
+      "End_Killer": {
+        "props": {
+          "active": []
+        }
+      },
+      "Fight_End_Repairman": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 2,
+              "value": true
+            },
+            {
+              "frame": 3.75,
+              "value": false
+            }
+          ]
+        }
+      },
+      "End_Repairman": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            },
+            {
+              "frame": 3.75,
+              "value": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

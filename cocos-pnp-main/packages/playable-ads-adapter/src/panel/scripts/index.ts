@@ -20,9 +20,6 @@ module.exports = Editor.Panel.define({
     packageFinished() {
       store.isPackage.value = false;
     },
-    onProgress(progress: number, tips?: string) {
-      store.progress.value = progress;
-    },
   },
   ready() {
     if (this.$.app) {

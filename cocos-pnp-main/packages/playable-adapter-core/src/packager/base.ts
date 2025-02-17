@@ -26,7 +26,6 @@ const serialGen = async (params: TGenParams) => {
 
     for (let index = 0; index < channelKeys.length; index++) {
       const key = channelKeys[index];
-      console.log(key, options);
       await channelExports[key](options);
     }
 
