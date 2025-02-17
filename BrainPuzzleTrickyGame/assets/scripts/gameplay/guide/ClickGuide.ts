@@ -28,6 +28,7 @@ export default class ClickGuide extends Guide {
     if (!cc.isValid(this.target)) return false;
 
     if (!this.target.active) return false;
+    if (!this.target.activeInHierarchy) return false;
 
     return true;
   }
@@ -59,7 +60,11 @@ export default class ClickGuide extends Guide {
       globalData.getGameView().addChild(this._hand);
     }
 
-    this._hand.setPosition(this.target.getPosition());
+    const targetPos = this._hand.parent.convertToNodeSpaceAR(
+      this.target.convertToWorldSpaceAR(cc.v2(0, 0))
+    );
+
+    this._hand.setPosition(targetPos);
     this._hand.active = true;
 
     gi.EventManager.emit(Constant.EVENT.SHOW_GUIDE, this.tid);

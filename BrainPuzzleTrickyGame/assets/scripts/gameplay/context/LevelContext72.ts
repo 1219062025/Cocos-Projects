@@ -19,7 +19,7 @@ interface Variables {
 
 export const levelContext72: LevelContext = {
   variables: {
-    step: 1,
+    step: 0,
     helper: 0,
     actList: [],
     transitionMask: null,
@@ -35,6 +35,10 @@ export const levelContext72: LevelContext = {
         v.transitionMask = transitionMask;
         v.eyeOutSideArea = eyeOutSideArea;
 
+        gi.EventManager.emit(Constant.EVENT.DISABLE_TOUCH);
+        gi.EventManager.emit(Constant.EVENT.SHOW_VOICE, "0");
+        gi.EventManager.emit(Constant.EVENT.START_GUIDE);
+        gi.EventManager.emit(Constant.EVENT.ENABLE_TOUCH);
         resolve(true);
       });
     },
@@ -49,7 +53,7 @@ export const levelContext72: LevelContext = {
     nextAct: (options) => {
       return new Promise(async (resolve) => {
         const v = levelContext72.variables as Variables;
-        if (v.step === 6) resolve(true);
+        if (v.step > 6) resolve(true);
 
         const curAct = v.actList[v.step];
         const nextAct = v.actList[v.step + 1];
@@ -57,6 +61,8 @@ export const levelContext72: LevelContext = {
         curAct.active = false;
         nextAct.active = true;
         v.step++;
+
+        v.eyeOutSideArea.children.forEach((item) => (item.active = false));
 
         switch (v.step) {
           case 1:
@@ -78,7 +84,7 @@ export const levelContext72: LevelContext = {
             gi.EventManager.emit(Constant.EVENT.SHOW_VOICE, "18");
             break;
         }
-
+        v.eyeOutSideArea.children[v.step].active = true;
         v.eyeOutSideArea.active = true;
 
         resolve(true);
@@ -94,26 +100,35 @@ export const levelContext72: LevelContext = {
 
         const curAct = v.actList[v.step];
 
-        curAct.getChildByName("Out_Side").active = true;
-
         switch (v.step) {
           case 0:
             f.startAni(options);
+            gi.EventManager.emit(Constant.EVENT.COMPLETE_GUIDE, "0");
             break;
           case 1:
+            gi.EventManager.emit(Constant.EVENT.COMPLETE_GUIDE, "1");
             break;
           case 2:
             curAct.getChildByName("Button_Group").active = true;
+            gi.EventManager.emit(Constant.EVENT.COMPLETE_GUIDE, "3");
             break;
           case 3:
+            gi.EventManager.emit(Constant.EVENT.COMPLETE_GUIDE, "4");
             break;
           case 4:
+            gi.EventManager.emit(Constant.EVENT.COMPLETE_GUIDE, "7");
             break;
           case 5:
+            gi.EventManager.emit(Constant.EVENT.COMPLETE_GUIDE, "8");
             break;
           case 6:
             curAct.getChildByName("Button_Group").active = true;
+            gi.EventManager.emit(Constant.EVENT.COMPLETE_GUIDE, "9");
             break;
+        }
+
+        if (v.step !== 0) {
+          curAct.getChildByName("Out_Side").active = true;
         }
 
         resolve(true);
@@ -184,8 +199,16 @@ export const levelContext72: LevelContext = {
       const v = levelContext72.variables as Variables;
       const f = levelContext72.functions;
 
+      gi.EventManager.emit(Constant.EVENT.DISABLE_TOUCH);
+
       const ani = v.actList[0].getComponent(cc.Animation);
-      ani.play("End_Act");
+      ani.play("Start_Act");
+      ani.once("finished", async () => {
+        gi.EventManager.emit(Constant.EVENT.SHOW_VOICE, "25");
+        await wait(2.5);
+        f.nextAct(options);
+        gi.EventManager.emit(Constant.EVENT.ENABLE_TOUCH);
+      });
     },
     /** 第一幕开门，后面依此类推 */
     yes1: (options) => {

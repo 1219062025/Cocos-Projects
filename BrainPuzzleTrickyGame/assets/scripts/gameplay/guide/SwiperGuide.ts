@@ -46,6 +46,7 @@ export default class SwiperGuide extends Guide {
     if (!cc.isValid(this.target)) return false;
 
     if (!this.target.active) return false;
+    if (!this.target.activeInHierarchy) return false;
 
     return true;
   }
@@ -78,20 +79,24 @@ export default class SwiperGuide extends Guide {
       globalData.getGameView().addChild(this._hand);
     }
 
-    let targetPos = this.target.getPosition();
+    let targetPosStart = this._hand.parent.convertToNodeSpaceAR(
+      this.target.convertToWorldSpaceAR(cc.v2(0, 0))
+    );
+
+    let targetPosEnd;
     if (this.type === SwiperType.UP) {
-      targetPos = targetPos.add(cc.v2(0, this.distance));
+      targetPosEnd = targetPosStart.add(cc.v2(0, this.distance));
     } else if (this.type === SwiperType.BOTTOM) {
-      targetPos = targetPos.add(cc.v2(0, -this.distance));
+      targetPosEnd = targetPosStart.add(cc.v2(0, -this.distance));
     } else if (this.type === SwiperType.RIGHT) {
-      targetPos = targetPos.add(cc.v2(this.distance, 0));
+      targetPosEnd = targetPosStart.add(cc.v2(this.distance, 0));
     } else if (this.type === SwiperType.LEFT) {
-      targetPos = targetPos.add(cc.v2(-this.distance, 0));
+      targetPosEnd = targetPosStart.add(cc.v2(-this.distance, 0));
     }
 
     gi.EventManager.emit(Constant.EVENT.SHOW_GUIDE, this.tid);
 
-    this.fromToPos(this.target.getPosition(), targetPos)
+    this.fromToPos(targetPosStart, targetPosEnd)
       .union()
       .repeatForever()
       .start();

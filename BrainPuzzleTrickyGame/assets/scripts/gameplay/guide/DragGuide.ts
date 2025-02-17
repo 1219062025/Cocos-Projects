@@ -47,6 +47,7 @@ export default class DragGuide extends Guide {
     if (!cc.isValid(this.target)) return false;
 
     if (!this.target.active) return false;
+    if (!this.target.activeInHierarchy) return false;
 
     if (!cc.isValid(this.object)) return false;
 

@@ -71,7 +71,6 @@ class GuideManager extends InstanceBase {
       info.guide.pause();
       info.isCompleted = true;
     }
-
     this._currentGuide = null;
   }
 
