@@ -190,6 +190,26 @@
             }
           ]
         }
+      },
+      "A_Door_1": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": false
+            }
+          ]
+        }
+      },
+      "A_Door_3": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": true
+            }
+          ]
+        }
       }
     }
   },

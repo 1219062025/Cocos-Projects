@@ -3,7 +3,7 @@
   "_name": "Start_Act",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 7.75,
+  "_duration": 7.5,
   "sample": 8,
   "speed": 1,
   "wrapMode": 1,
@@ -319,34 +319,32 @@
       },
       "Mask": {
         "props": {
-          "opacity": [
+          "width": [
             {
-              "frame": 2,
-              "value": 0
+              "frame": 3.375,
+              "value": 1800
             },
             {
-              "frame": 4,
-              "value": 255
+              "frame": 3.875,
+              "value": 1280
             },
             {
               "frame": 4.25,
+              "value": 1800
+            }
+          ],
+          "height": [
+            {
+              "frame": 3.375,
+              "value": 1800
+            },
+            {
+              "frame": 3.875,
               "value": 0
             },
             {
-              "frame": 7.125,
-              "value": 0
-            },
-            {
-              "frame": 7.375,
-              "value": 255
-            },
-            {
-              "frame": 7.5,
-              "value": 255
-            },
-            {
-              "frame": 7.75,
-              "value": 0
+              "frame": 4.25,
+              "value": 1800
             }
           ]
         }
@@ -370,24 +368,6 @@
                 0
               ]
             }
-          ],
-          "scale": [
-            {
-              "frame": 5.5,
-              "value": {
-                "__type__": "cc.Vec2",
-                "x": -1,
-                "y": 1
-              }
-            },
-            {
-              "frame": 6.5,
-              "value": {
-                "__type__": "cc.Vec2",
-                "x": -1.5,
-                "y": 1.5
-              }
-            }
           ]
         }
       },
@@ -409,6 +389,24 @@
                 0,
                 0
               ]
+            }
+          ]
+        }
+      },
+      "Mask/New Sprite(Splash)": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 3.375,
+              "value": 125
+            },
+            {
+              "frame": 3.875,
+              "value": 255
+            },
+            {
+              "frame": 4.25,
+              "value": 125
             }
           ]
         }

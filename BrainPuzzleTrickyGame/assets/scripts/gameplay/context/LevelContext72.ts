@@ -64,6 +64,7 @@ export const levelContext72: LevelContext = {
 
         v.eyeOutSideArea.children.forEach((item) => (item.active = false));
 
+        gi.EventManager.emit(Constant.EVENT.DISABLE_TOUCH);
         switch (v.step) {
           case 1:
             gi.EventManager.emit(Constant.EVENT.SHOW_VOICE, "1");
@@ -86,6 +87,9 @@ export const levelContext72: LevelContext = {
         }
         v.eyeOutSideArea.children[v.step].active = true;
         v.eyeOutSideArea.active = true;
+
+        await wait(2);
+        gi.EventManager.emit(Constant.EVENT.ENABLE_TOUCH);
 
         resolve(true);
       });
