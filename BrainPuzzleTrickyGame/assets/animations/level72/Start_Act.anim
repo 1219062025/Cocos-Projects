@@ -410,6 +410,28 @@
             }
           ]
         }
+      },
+      "Out_Side/F_Killer/F_BadGuy_1": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": true
+            },
+            {
+              "frame": 4.625,
+              "value": false
+            },
+            {
+              "frame": 5,
+              "value": true
+            },
+            {
+              "frame": 5.25,
+              "value": false
+            }
+          ]
+        }
       }
     }
   },

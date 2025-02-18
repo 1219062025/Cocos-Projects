@@ -171,7 +171,7 @@
       "array": [
         0,
         0,
-        391.52467239217106,
+        391.6870521553807,
         0,
         0,
         0,
@@ -284,7 +284,7 @@
     "_enabled": true,
     "level": 72,
     "oneStepMode": false,
-    "debug": true,
+    "debug": false,
     "language": 0,
     "_id": "fbDrcjyhtEJJlcUU5T9nL5"
   }
