@@ -14,7 +14,7 @@
   {
     "__type__": "cc.Node",
     "_name": "PlayView",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": null,
     "_children": [
       {
@@ -30,17 +30,17 @@
         "__id__": 24
       },
       {
-        "__id__": 27
+        "__id__": 28
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 43
+        "__id__": 44
       }
     ],
     "_prefab": {
-      "__id__": 44
+      "__id__": 45
     },
     "_opacity": 255,
     "_color": {
@@ -92,7 +92,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Bg",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 1
     },
@@ -231,7 +231,7 @@
   {
     "__type__": "cc.Node",
     "_name": "TopBar",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 1
     },
@@ -295,7 +295,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Title_Bg",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 6
     },
@@ -363,7 +363,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Title_Text",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 7
     },
@@ -545,7 +545,7 @@
   {
     "__type__": "cc.Node",
     "_name": "CountDown_node",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 1
     },
@@ -612,7 +612,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Icon",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 15
     },
@@ -719,7 +719,7 @@
   {
     "__type__": "cc.Node",
     "_name": "Time",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 15
     },
@@ -858,7 +858,7 @@
   {
     "__type__": "cc.Node",
     "_name": "wrap",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 1
     },
@@ -867,10 +867,13 @@
     "_components": [
       {
         "__id__": 25
+      },
+      {
+        "__id__": 26
       }
     ],
     "_prefab": {
-      "__id__": 26
+      "__id__": 27
     },
     "_opacity": 255,
     "_color": {
@@ -940,6 +943,33 @@
     "_id": ""
   },
   {
+    "__type__": "cc.Widget",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 24
+    },
+    "_enabled": true,
+    "alignMode": 1,
+    "_target": null,
+    "_alignFlags": 0,
+    "_left": 0,
+    "_right": 0,
+    "_top": 484,
+    "_bottom": 484,
+    "_verticalCenter": 0,
+    "_horizontalCenter": 0,
+    "_isAbsLeft": true,
+    "_isAbsRight": true,
+    "_isAbsTop": true,
+    "_isAbsBottom": true,
+    "_isAbsHorizontalCenter": true,
+    "_isAbsVerticalCenter": true,
+    "_originalWidth": 0,
+    "_originalHeight": 1432,
+    "_id": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -953,23 +983,23 @@
   {
     "__type__": "cc.Node",
     "_name": "DownLoad_node",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 1
     },
     "_children": [
       {
-        "__id__": 28
+        "__id__": 29
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 41
+        "__id__": 42
       }
     ],
     "_prefab": {
-      "__id__": 42
+      "__id__": 43
     },
     "_opacity": 255,
     "_color": {
@@ -1021,23 +1051,23 @@
   {
     "__type__": "cc.Node",
     "_name": "Download",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
-      "__id__": 27
+      "__id__": 28
     },
     "_children": [
       {
-        "__id__": 29
+        "__id__": 30
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 38
+        "__id__": 39
       }
     ],
     "_prefab": {
-      "__id__": 40
+      "__id__": 41
     },
     "_opacity": 255,
     "_color": {
@@ -1089,26 +1119,26 @@
   {
     "__type__": "cc.Node",
     "_name": "Background",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
-      "__id__": 28
+      "__id__": 29
     },
     "_children": [
       {
-        "__id__": 30
+        "__id__": 31
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 35
+        "__id__": 36
       },
       {
-        "__id__": 36
+        "__id__": 37
       }
     ],
     "_prefab": {
-      "__id__": 37
+      "__id__": 38
     },
     "_opacity": 255,
     "_color": {
@@ -1160,25 +1190,25 @@
   {
     "__type__": "cc.Node",
     "_name": "Label",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
-      "__id__": 29
+      "__id__": 30
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 31
-      },
-      {
         "__id__": 32
       },
       {
         "__id__": 33
+      },
+      {
+        "__id__": 34
       }
     ],
     "_prefab": {
-      "__id__": 34
+      "__id__": 35
     },
     "_opacity": 255,
     "_color": {
@@ -1232,7 +1262,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 30
+      "__id__": 31
     },
     "_enabled": true,
     "_materials": [
@@ -1264,7 +1294,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 30
+      "__id__": 31
     },
     "_enabled": true,
     "_color": {
@@ -1282,7 +1312,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 30
+      "__id__": 31
     },
     "_enabled": true,
     "key": "DOWNLOAD",
@@ -1305,7 +1335,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 29
+      "__id__": 30
     },
     "_enabled": true,
     "_materials": [
@@ -1337,7 +1367,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 29
+      "__id__": 30
     },
     "_enabled": true,
     "alignMode": 0,
@@ -1375,7 +1405,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 28
+      "__id__": 29
     },
     "_enabled": true,
     "_normalMaterial": {
@@ -1386,7 +1416,7 @@
     "zoomScale": 1.2,
     "clickEvents": [
       {
-        "__id__": 39
+        "__id__": 40
       }
     ],
     "_N$interactable": true,
@@ -1454,14 +1484,14 @@
       "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
     },
     "_N$target": {
-      "__id__": 29
+      "__id__": 30
     },
     "_id": ""
   },
   {
     "__type__": "cc.ClickEvent",
     "target": {
-      "__id__": 27
+      "__id__": 28
     },
     "component": "",
     "_componentId": "1c4f63FDfxB97XWexEJgLDi",
@@ -1484,7 +1514,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 27
+      "__id__": 28
     },
     "_enabled": true,
     "_id": ""
@@ -1518,7 +1548,7 @@
       "__id__": 15
     },
     "downloadBtn": {
-      "__id__": 27
+      "__id__": 28
     },
     "titleLabel": {
       "__id__": 9

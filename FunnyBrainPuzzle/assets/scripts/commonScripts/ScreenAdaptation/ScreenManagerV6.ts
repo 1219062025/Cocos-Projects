@@ -27,6 +27,7 @@ export default class ScreenManagerV6 extends cc.Component {
     this.failPopOriPos = this.failPop.getPosition();
 
     gi.Event.on("view-resize", this.adapter, this);
+    this.adapter();
   }
 
   adapter() {

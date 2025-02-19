@@ -12,6 +12,7 @@ export default class ScreenAdapter extends cc.Component {
   }
 
   protected init() {
+    this.adapt();
     // 设置游戏窗口变化的回调（仅 Web 平台有效）
     cc.view.setResizeCallback(() => this.onResize());
   }
@@ -20,7 +21,7 @@ export default class ScreenAdapter extends cc.Component {
     // 由于 setResizeCallback 只能设置一个回调
     // 使用事件系统发送一个特定事件，让其他组件也可以监听到窗口变化
     this.adapt();
-    gi.Event.emit('view-resize');
+    gi.Event.emit("view-resize");
   }
 
   /**
@@ -42,7 +43,7 @@ export default class ScreenAdapter extends cc.Component {
     const canvas = cc.Canvas.instance;
     canvas.fitHeight = true;
     canvas.fitWidth = false;
-    gi.Event.emit('LANDSCAPE');
+    gi.Event.emit("LANDSCAPE");
   }
 
   /**
@@ -52,6 +53,6 @@ export default class ScreenAdapter extends cc.Component {
     const canvas = cc.Canvas.instance;
     canvas.fitHeight = false;
     canvas.fitWidth = true;
-    gi.Event.emit('PORTRAIT');
+    gi.Event.emit("PORTRAIT");
   }
 }
